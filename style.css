@@ -1,0 +1,128 @@
+/* General styles */
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-image: url(backimg/bg1.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  
+  /* Button styles */
+  
+  button {
+    border: none;
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #3e8e41;
+  }
+  
+  /* Main menu styles */
+  
+  #main-menu {
+    display: block;
+  }
+  
+  /* Setting styles */
+  
+  #setting {
+    display: none;
+  }
+  
+  /* Select stage styles */
+  
+  #select-stage {
+    display: none;
+  }
+  
+  .stage-btn {
+    margin: 10px;
+  }
+  
+  /* Video styles */
+  
+  #video {
+    display: none;
+  }
+  
+  video {
+    max-width: 100%;
+  }
+  
+  /* In-game styles */
+  
+  #in-game {
+    display: none;
+  }
+  
+  /* Go back button styles */
+  
+  .go-back-btn {
+    margin: 10px;
+  }
+  
+  /* Audio player styles */
+  
+  .audio-player {
+    margin-top: 10px;
+  }
+  
+  /* Setting form styles */
+  
+  #setting-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .form-group {
+    margin: 10px;
+  }
+  
+  .form-group label {
+    margin-right: 10px;
+  }
+  
+  .form-group select {
+    padding: 5px;
+    font-size: 16px;
+  }
+  
+  .form-group input[type="color"] {
+    padding: 0;
+    margin: 0;
+    width: 30px;
+    height: 30px;
+    appearance: none;
+    border: none;
+    background-color: transparent;
+  }
+  
+  .form-group input[type="color"]::-webkit-color-swatch-wrapper {
+    padding: 0;
+  }
+  
+  .form-group input[type="color"]::-webkit-color-swatch {
+    border: none;
+    border-radius: 0;
+  }
+  
+  /* Media queries */
+  
+  @media screen and (min-width: 768px) {
+    #setting-form {
+      flex-direction: row;
+    }
+  
+    .form-group {
+      margin: 0 10px;
+    }
+  }
+  
