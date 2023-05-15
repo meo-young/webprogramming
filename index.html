@@ -5,6 +5,12 @@
     <meta charset="UTF-8">
     <title>Brick Breaker</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="module" src="Main.js"></script>
+    <!-- <script type="module" src="inGame1.js"></script> -->
+    <script type="module" src="inGame2.js"></script>
+    <!-- <script type="module" src="inGame3.js"></script> -->
+    <script type="module" src="setting.js"></script>
 </head>
 
 <body>
@@ -44,20 +50,18 @@
         <button class="go-back-btn">Back</button>
     </div>
 
-    <div id="video" class="screen">
-        <video id="intro-video" controls>
-            <source src="video/intro.mp4" type="video/mp4">
-        </video>
-        <button id="skip-btn">Skip</button>
-    </div>
 
     <div id="in-game1" class="screen">
         <canvas id="game-canvas" width="480" height="320"></canvas>
         <button class="go-back-btn">Back</button>
     </div>
     <div id="in-game2" class="screen">
-        <canvas id="game-canvas"></canvas>
-        <button class="go-back-btn">Back</button>
+        <canvas id="screen2" width="1000" height="1000"></canvas>
+        <div>
+            <input id="gamestart2" type="button" value="게임시작">
+        </div>
+        <div id="ptext">0</div>
+        <div id="btext">0</div>
     </div>
     <div id="in-game3" class="screen">
         <canvas id="game-canvas"></canvas>
@@ -65,11 +69,6 @@
     </div>
 
 
-    <script type="module" src="Main.js"></script>
-    <script type="module" src="inGame1.js"></script>
-    <script type="module" src="inGame2.js"></script>
-    <script type="module" src="inGame3.js"></script>
-    <script type="module" src="setting.js"></script>
 </body>
 
 </html>
