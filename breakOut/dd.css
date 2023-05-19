@@ -16,7 +16,8 @@ body {
     margin: 20px 20px;
     width: 1000px;
     height: 600px;
-    background-color:aqua;
+    background-color:crimson;
+    text-align: center;
 }
 
 #main-menu {
@@ -48,21 +49,49 @@ body {
 #start-btn {    /* 스테이지 선택 화면으로 이동하는 버튼 */
     display: inline-block;
     margin: 50px;
-    width: 400px;
-    height: 200px;
-    font-size: 100px;
-    background-color: bisque;
+    width: 463px;
+    height: 100px;
+    background: url("./img/start_463x100.png");
     border: none;
 }
 #settings-btn, #shop-btn {/* 환경설정, 상점으로 이동하는 버튼 */
-    width: 100px;
-    height: 80px;
-    font-size: 20px;
-    background-color: bisque;
     border: none;
 }
-.stage-btn {/* 각 스테이지 선택 버튼 */
+#settings-btn {
+    width: 289px;
+    height: 43px;
+    background: url("./img/settings_289x43.png");
+}
+#shop-btn {
+    width: 161px;
+    height: 41px;
+    background: url("./img/shop_161x41.png");
+}
+.stage {
+    float: left;
     margin: 50px;
+    margin-top: 100px;
+}
+#stage3 {
+    margin-top: 79.73px;
+}
+#stgLevel1 {
+    width: 184px;
+    height: 51px;
+    background: url("./img/easy_184x51.png");
+}
+#stgLevel2 {
+    width: 305px;
+    height: 49px;
+    background: url("./img/normal_305x49.png");
+}
+#stgLevel3 {
+    width: 199px;
+    height: 47px;
+    background: url("./img/hard_199x47.png");
+}
+.stage-btn {/* 각 스테이지 선택 버튼 */
+    /* margin: 50px; */
     width: 150px;
     height: 350px;
     background: url("./moon.png");
@@ -76,6 +105,17 @@ body {
     height: 50px;
     background: url("./img/back_50x50.png");
     border: none;
+}
+
+#settings {
+    width: 289px;
+    height: 43px;
+    background: url("./img/settings_289x43.png");
+}
+#shop {
+    width: 161px;
+    height: 41px;
+    background: url("./img/shop_161x41.png");
 }
 
 .animateContent1 {  /* 페이지 전환 시 이전 페이지가 작아지는 효과 애니메이션 animate1을 2초간 실행 */

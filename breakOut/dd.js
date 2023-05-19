@@ -88,11 +88,11 @@ $(document).ready(function () {
         // 배경화면 선택
         $("#bgImg-select").change(function() {  // select 변경 시
             var currentImg = $("#bgImg-select option:selected").text(); // 선택 된 값 변수에 대입
-            if (currentImg == "aqua") {
-                $(".screen").css({"background-color" : "aqua"});
-            }
-            else if (currentImg == "crimson") {
+            if (currentImg == "crimson") {
                 $(".screen").css({"background-color" : "crimson"});
+            }
+            else if (currentImg == "aqua") {
+                $(".screen").css({"background-color" : "aqua"});
             }
             else if (currentImg == "coral") {
                 $(".screen").css({"background-color" : "coral"});
@@ -105,6 +105,7 @@ $(document).ready(function () {
                 $("#audioVol").css({ "background": "url(./img/volOn_50x50.png)" });
                 currentBGM.pause();
                 currentBGM = bgm1; 
+                currentBGM.currentTime = 0;
                 currentBGM.play();
                 currentBGM.loop = true;
             }
@@ -112,6 +113,7 @@ $(document).ready(function () {
                 $("#audioVol").css({ "background": "url(./img/volOn_50x50.png)" });
                 currentBGM.pause();
                 currentBGM = bgm2; 
+                currentBGM.currentTime = 0;
                 currentBGM.play();
                 currentBGM.loop = true;
             }
@@ -119,6 +121,7 @@ $(document).ready(function () {
                 $("#audioVol").css({ "background": "url(./img/volOn_50x50.png)" });
                 currentBGM.pause();
                 currentBGM = bgm3; 
+                currentBGM.currentTime = 0;
                 currentBGM.play();
                 currentBGM.loop = true;
             }
@@ -191,5 +194,24 @@ $(document).ready(function () {
     })
     $(".go-back-btn").mouseout(function () {
         $(this).css({ "background": "url(./img/back_50x50.png)" });
+    })
+    // 메인 메뉴 버튼들 마우스오버 시
+    $("#start-btn").mouseenter(function() { // 시작
+        $(this).css({ "transform" : "scale(1.2)" });
+    })
+    $("#start-btn").mouseout(function() {
+        $(this).css({ "transform" : "scale(1)" });
+    })
+    $("#settings-btn").mouseenter(function() { // 환경설정
+        $(this).css({ "transform" : "scale(1.2)" });
+    })
+    $("#settings-btn").mouseout(function() {
+        $(this).css({ "transform" : "scale(1)" });
+    })
+    $("#shop-btn").mouseenter(function() { // 상점
+        $(this).css({ "transform" : "scale(1.2)" });
+    })
+    $("#shop-btn").mouseout(function() {
+        $(this).css({ "transform" : "scale(1)" });
     })
 });

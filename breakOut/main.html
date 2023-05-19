@@ -5,7 +5,6 @@
     <link rel="stylesheet" href="./dd.css">
     <link href="https://fonts.googleapis.com/css2?family=Gugi&display=swap" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script type="module" src="./dd.js"></script>
 </head>
 
 <body>
@@ -13,22 +12,30 @@
     <div id="main-menu" class="screen"> <!-- #main-menu를 제외한 모든 .screen은 디스플레이 none상태입니다. -->
         <button id="audioVol"></button> <!-- bgm 온/오프 버튼 -->
         <p id="gold">Gold : 0</p> <!-- 골드 수급 상황 표시 -->
-        <br>
-        <br>
-        <br>
-        <br>
-        <button id="start-btn" class="main-btn">시 작</button>
-        <br>
-        <button id="settings-btn" class="main-btn">환경설정</button>
-        <button id="shop-btn" class="main-btn">상점</button>
+        <br><br><br><br><br><br>
+        <button id="start-btn" class="main-btn"></button>
+        <br><br>
+        <button id="settings-btn" class="main-btn"></button>
+        <br><br>
+        <button id="shop-btn" class="main-btn"></button>
     </div>
 
     <!-- 스테이지 선택 -->
     <div id="select-stage" class="screen">
         <p id="gold">Gold : 0</p>
-        <button id="stgbtn1" class="stage-btn"></button>
-        <button id="stgbtn2" class="stage-btn"></button>
-        <button id="stgbtn3" class="stage-btn"></button><br>
+        <div class="stage">
+            <div id="stgLevel1" class="stage-level"></div>
+            <button id="stgbtn1" class="stage-btn"></button>
+        </div>
+        <div class="stage">
+            <div id="stgLevel2" class="stage-level"></div>
+            <button id="stgbtn2" class="stage-btn"></button>
+        </div>
+        <div class="stage" id="stage3">
+            <div id="stgLevel3" class="stage-level"></div>
+            <button id="stgbtn3" class="stage-btn"></button>
+        </div>
+        <br><br><br><br><br><br>
         <button class="go-back-btn"></button>
     </div>
 
@@ -54,11 +61,11 @@
 
     <!-- 환경설정 -->
     <div id="settings-menu" class="screen">
-        <h1>환경설정</h1>
+        <div id="settings"></div><br>
         <label>Background : </label>
         <select id="bgImg-select">
-            <option class="bg-img">aqua</option>
             <option class="bg-img">crimson</option>
+            <option class="bg-img">aqua</option>
             <option class="bg-img">coral</option>
         </select>
         <br>
@@ -79,7 +86,7 @@
     <!-- 상점 -->
     <div id="shop-menu" class="screen">
         <p id="gold">Gold : 0</p>
-        <h1>상점</h1>
+        <div id="shop"></div><br>
         <br>
         <br>
         <div>
@@ -108,6 +115,10 @@
         </video>
         <button id="skip-btn">Skip</button>
     </div>
+
+
+
+    <script type="module" src="./dd.js"></script>
 </body>
 
 </html>
