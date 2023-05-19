@@ -102,18 +102,21 @@ $(document).ready(function () {
         $("#music-select").change(function() {  // select 변경 시
             var currentBGMName = $("#music-select option:selected").text(); // 선택 된 값 변수에 대입
             if (currentBGMName == "Music 1") {
+                $("#audioVol").css({ "background": "url(./img/volOn_50x50.png)" });
                 currentBGM.pause();
                 currentBGM = bgm1; 
                 currentBGM.play();
                 currentBGM.loop = true;
             }
             else if (currentBGMName == "Music 2") {
+                $("#audioVol").css({ "background": "url(./img/volOn_50x50.png)" });
                 currentBGM.pause();
                 currentBGM = bgm2; 
                 currentBGM.play();
                 currentBGM.loop = true;
             }
             else if (currentBGMName == "Music 3") {
+                $("#audioVol").css({ "background": "url(./img/volOn_50x50.png)" });
                 currentBGM.pause();
                 currentBGM = bgm3; 
                 currentBGM.play();
