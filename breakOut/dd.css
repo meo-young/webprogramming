@@ -8,7 +8,7 @@ body {
     background-color: white;
 }
 
-.screen {
+.screen {   /* 모든 화면 1000x600 사이즈 */
     display: none;
     overflow: hidden;
     border-radius: 20px 20px 20px 20px;
@@ -16,7 +16,7 @@ body {
     margin: 20px 20px;
     width: 1000px;
     height: 600px;
-    background-color: aqua;
+    background-color:aqua;
 }
 
 #main-menu {
@@ -32,44 +32,43 @@ body {
     float: left;
 }
 
-#audioVol {
+#audioVol { /* bgm 온/오프 버튼 */
     width: 50px;
     height: 50px;
     float: left;
     background: url("./img/volOn_50x50.png");
     border: none;
 }
-#gold {
+#gold { /* 골드 수급 상황 표시 */
     width: 100px;
     float: right;
     background: yellow;
 }
 
-#start-btn {
+#start-btn {    /* 스테이지 선택 화면으로 이동하는 버튼 */
     display: inline-block;
     margin: 50px;
     width: 400px;
     height: 200px;
     font-size: 100px;
     background-color: bisque;
-    /* background: url("Start-Button.png"); */
     border: none;
 }
-#settings-btn, #shop-btn {
+#settings-btn, #shop-btn {/* 환경설정, 상점으로 이동하는 버튼 */
     width: 100px;
     height: 80px;
     font-size: 20px;
     background-color: bisque;
     border: none;
 }
-.stage-btn {
+.stage-btn {/* 각 스테이지 선택 버튼 */
     margin: 50px;
     width: 150px;
     height: 350px;
-    background: url("moon.png");
+    background: url("./moon.png");
     border: none;
 }
-.go-back-btn {
+.go-back-btn {/* 스테이지 선택 화면, 환경설정 화면, 상점 화면에서 메인 메뉴로 돌아가기 버튼 */
     float: right;
     bottom: 0;
     right: 0;
@@ -79,10 +78,10 @@ body {
     border: none;
 }
 
-.animateContent1 {
+.animateContent1 {  /* 페이지 전환 시 이전 페이지가 작아지는 효과 애니메이션 animate1을 2초간 실행 */
     animation: animate1 2s ease;
 }
-@keyframes animate1 {
+@keyframes animate1 {   /* 애니메이션이 0~100% 진행됨에 따라 scale(가로비율, 세로비율) 변경 */
     10% {
         transform: scale(1, 0.002);
     }
@@ -95,7 +94,7 @@ body {
         opacity: 0;
     }
 }
-.animateContent2 {
+.animateContent2 {  /* 페이지 전환 시 다음 페이지가 커지는 효과 애니메이션 animate2를 2초간 실행 */
     animation: animate2 2s ease;
 }
 @keyframes animate2 {

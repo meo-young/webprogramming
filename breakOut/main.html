@@ -10,9 +10,9 @@
 
 <body>
     <!-- 메인메뉴 -->
-    <div id="main-menu" class="screen">
-        <button id="audioVol"></button>
-        <p id="gold">Gold : 0</p>
+    <div id="main-menu" class="screen"> <!-- #main-menu를 제외한 모든 .screen은 디스플레이 none상태입니다. -->
+        <button id="audioVol"></button> <!-- bgm 온/오프 버튼 -->
+        <p id="gold">Gold : 0</p> <!-- 골드 수급 상황 표시 -->
         <br>
         <br>
         <br>
@@ -57,16 +57,16 @@
         <h1>환경설정</h1>
         <label>Background : </label>
         <select id="bgImg-select">
-            <option class="bg-img" value="backimg/bg1.jpg">Background 1</option>
-            <option class="bg-img" value="backimg/bg2.jpg">Background 2</option>
-            <option class="bg-img" value="backimg/bg3.jpg">Background 3</option>
+            <option class="bg-img">aqua</option>
+            <option class="bg-img">crimson</option>
+            <option class="bg-img">coral</option>
         </select>
         <br>
         <label>Music : </label>
         <select id="music-select">
-            <option class="bg-music" value="">Music 1</option>
-            <option class="bg-music" value="">Music 2</option>
-            <option class="bg-music" value="">Music 3</option>
+            <option class="bg-music">Music 1</option>
+            <option class="bg-music">Music 2</option>
+            <option class="bg-music">Music 3</option>
         </select>
         <br>
         <label>배경음악 : on/off</label>
