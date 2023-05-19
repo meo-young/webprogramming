@@ -31,11 +31,38 @@ $(document).ready(function () {
         }, 1000);
     });
 
-    // 시작버튼(스테이지 선택) 클릭 시 스테이지 화면 애니메이션
+    // 각 스테이지 선택 시 스테이지 선택 화면 애니메이션
+    $(".stage-btn").click(function() {
+        click.play();   // 버튼 클릭 효과음
+        $("#select-stage").removeClass("animateContent2").addClass("animateContent1");    // 페이지 전환 효과 (작아지는)
+        setTimeout(function() {
+            $("#select-stage").removeClass("animateContent1").hide();
+        }, 1000);
+    });
+
+    // 시작버튼(스테이지 선택) 클릭 시 스테이지 선택 화면 애니메이션
     $("#start-btn").click(function () {
         setTimeout(function() {
             $("#select-stage").addClass("animateContent2").css({ "display": "inline-block" });
         }, 1000);
+        // 첫번째 보스
+        $("#stgbtn1").click(function() {
+            setTimeout(function() {
+                $("#stage1").addClass("animateContent2").css({ "display": "inline-block" });
+            }, 1000);
+        });
+        // 두번째 보스
+        $("#stgbtn2").click(function() {
+            setTimeout(function() {
+                $("#stage2").addClass("animateContent2").css({ "display": "inline-block" });
+            }, 1000);
+        });
+        // 세번째 보스
+        $("#stgbtn3").click(function() {
+            setTimeout(function() {
+                $("#stage3").addClass("animateContent2").css({ "display": "inline-block" });
+            }, 1000);
+        });
         // 뒤로가기 버튼 클릭 시 스테이지 화면과 메인 메뉴 애니메이션
         $(".go-back-btn").click(function () {
             click.play();   // 버튼 클릭 효과음
