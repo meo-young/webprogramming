@@ -6,7 +6,7 @@ $(document).ready(function () {
     var bgm3 = new Audio("./audio/bgm3.mp3");
     var click = new Audio("./audio/clickEffect.mp3");   // 버튼 클릭시 효과음
 
-    var currentBGM = bgm1;    // 현재 재생/중지 상태의 음악파일, 환경설정에서 변경 가능
+    var currentBGM = bgm2;    // 현재 재생/중지 상태의 음악파일, 환경설정에서 변경 가능
     currentBGM.play();
     currentBGM.loop = true;   // 반복재생
 
@@ -46,6 +46,34 @@ $(document).ready(function () {
         setTimeout(function() {
             $("#select-stage").addClass("animateContent2").css({ "display": "inline-block" });  
         }, 1000);
+        // 스테이지 화면 각 화면 마우스 오버 시 보스 이미지로 변환
+        $("#stgbtn1").mouseenter(function () {
+            $(this).css({ 
+                "background": "url(./img/boss/bossFirst_110x80.gif)",
+                "background-repeat" : "no-repeat"
+            });
+        })
+        $("#stgbtn1").mouseout(function () {
+            $(this).css({ "background": "url(./moon.png)" });
+        })
+        $("#stgbtn2").mouseenter(function () {
+            $(this).css({ 
+                "background": "url(./img/boss/bossSecond_122x80.gif)",
+                "background-repeat" : "no-repeat"
+            });
+        })
+        $("#stgbtn2").mouseout(function () {
+            $(this).css({ "background": "url(./moon.png)" });
+        })
+        $("#stgbtn3").mouseenter(function () {
+            $(this).css({ 
+                "background": "url(./img/boss/bossLast_101x80.gif)",
+                "background-repeat" : "no-repeat"
+            });
+        })
+        $("#stgbtn3").mouseout(function () {
+            $(this).css({ "background": "url(./moon.png)" });
+        })
         // 첫번째 보스 캔버스
         $("#stgbtn1").click(function() {
             setTimeout(function() {
@@ -146,6 +174,43 @@ $(document).ready(function () {
         setTimeout(function() {
             $("#shop-menu").addClass("animateContent2").css({ "display": "inline-block" });
         }, 1000);
+        // 각 플레이어 캐릭터 마우스 오버 시
+        $("#pDefault").mouseenter(function() {  // 기본 캐릭터
+            $(this).attr("src", "./img/player/playerRunDown_32x32.gif");
+        });
+        $("#pDefault").mouseout(function() {
+            $(this).attr("src", "./img/player/playerStanding_32x32.gif");
+        });
+        $("#pRed").mouseenter(function() {  // 빨강
+            $(this).attr("src", "./img/player/playerRunDown_red_32x32.gif");
+        });
+        $("#pRed").mouseout(function() {
+            $(this).attr("src", "./img/player/playerStanding_red_32x32.gif");
+        });
+        $("#pCyan").mouseenter(function() {  // 파랑
+            $(this).attr("src", "./img/player/playerRunDown_cyan_32x32.gif");
+        });
+        $("#pCyan").mouseout(function() {
+            $(this).attr("src", "./img/player/playerStanding_cyan_32x32.gif");
+        });
+        $("#pWhite").mouseenter(function() {  // 하양
+            $(this).attr("src", "./img/player/playerRunDown_white_32x32.gif");
+        });
+        $("#pWhite").mouseout(function() {
+            $(this).attr("src", "./img/player/playerStanding_white_32x32.gif");
+        });
+        $("#pYellow").mouseenter(function() {  // 금
+            $(this).attr("src", "./img/player/playerRunDown_yellow_32x32.gif");
+        });
+        $("#pYellow").mouseout(function() {
+            $(this).attr("src", "./img/player/playerStanding_yellow_32x32.gif");
+        });
+        $("#pPurple").mouseenter(function() {  // 보라
+            $(this).attr("src", "./img/player/playerRunDown_purple_32x32.gif");
+        });
+        $("#pPurple").mouseout(function() {
+            $(this).attr("src", "./img/player/playerStanding_purple_32x32.gif");
+        });
         // 뒤로가기
         $(".go-back-btn").click(function () {
             click.play();
@@ -160,34 +225,7 @@ $(document).ready(function () {
         });
     });
 
-    // 스테이지 화면 각 화면 마우스 오버 시 보스 이미지로 변환
-    $("#stgbtn1").mouseenter(function () {
-        $(this).css({ 
-            "background": "url(./img/bossFirst_110x80.gif)",
-            "background-repeat" : "no-repeat"
-        });
-    })
-    $("#stgbtn1").mouseout(function () {
-        $(this).css({ "background": "url(./moon.png)" });
-    })
-    $("#stgbtn2").mouseenter(function () {
-        $(this).css({ 
-            "background": "url(./img/bossSecond_122x80.gif)",
-            "background-repeat" : "no-repeat"
-        });
-    })
-    $("#stgbtn2").mouseout(function () {
-        $(this).css({ "background": "url(./moon.png)" });
-    })
-    $("#stgbtn3").mouseenter(function () {
-        $(this).css({ 
-            "background": "url(./img/bossLast_101x80.gif)",
-            "background-repeat" : "no-repeat"
-        });
-    })
-    $("#stgbtn3").mouseout(function () {
-        $(this).css({ "background": "url(./moon.png)" });
-    })
+    
     // 뒤로가기 버튼 오버 시
     $(".go-back-btn").mouseenter(function () {
         $(this).css({ "background": "url(./img/backHover_50x50.png)" });

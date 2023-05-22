@@ -149,3 +149,20 @@ body {
         transform: scale(1, 0.002);
     }
 }
+
+.pFirstRow {
+    display: inline-block;
+    margin: 0 50px;
+}
+.pSecondRow {
+    display: inline-block;
+    margin: 0 50px;
+    margin-top: 20px;
+}
+.pChar {
+    width: 96px;
+    height: 96px;
+    padding: 50px;
+    border: 2px solid yellow;
+    background-color: black;
+}
