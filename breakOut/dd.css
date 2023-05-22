@@ -1,0 +1,116 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+body {
+    text-align: center;
+    background-color: white;
+}
+
+.screen {
+    display: none;
+    overflow: hidden;
+    border-radius: 20px 20px 20px 20px;
+    padding: 80px 100px;
+    margin: 20px 20px;
+    width: 1000px;
+    height: 600px;
+}
+
+#main-menu {
+    display: inline-block;
+    background-color: blueviolet;
+}
+#select-stage {
+    /* background: url("stageBack.jpg"); */
+    background-color: brown;
+}
+#settings-menu {
+    background-color: aqua;
+}
+
+#shop-menu {
+    background-color: coral;
+}
+#shop-menu h3 {
+    float: left;
+}
+
+#audioVol {
+    width: 50px;
+    height: 50px;
+    float: left;
+    background: url("volOn.png");
+    border: none;
+}
+#gold {
+    width: 100px;
+    float: right;
+    background: yellow;
+}
+
+#start-btn {
+    display: inline-block;
+    margin: 50px;
+    width: 500px;
+    height: 250px;
+    background: url("Start-Button.png");
+    border: none;
+}
+#settings-btn {
+    background: none;
+    border: none;
+}
+#shop-btn {
+    background: none;
+    border: none;
+}
+.stage-btn {
+    margin: 50px;
+    width: 150px;
+    height: 350px;
+    background: url("moon.png");
+    border: none;
+}
+.go-back-btn {
+    float: right;
+    /* position: fixed;
+    bottom: 50px;
+    right: 50px; */
+    width: 50px;
+    height: 50px;
+    background: url("backIcon2.png");
+    border: none;
+}
+
+.animateContent1 {
+    animation: animate1 2s ease;
+}
+@keyframes animate1 {
+    10% {
+        transform: scale(1, 0.002);
+    }
+    50% {
+        transform: scale(0.2, 0.002);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(0.2, 0.002);
+        opacity: 0;
+    }
+}
+.animateContent2 {
+    animation: animate2 2s ease;
+}
+@keyframes animate2 {
+    0% {
+        transform: scale(0.2, 0.002);
+        opacity: 1;
+    }
+    30% {
+        transform: scale(0.2, 0.002);
+    }
+    90% {
+        transform: scale(1, 0.002);
+    }
+}

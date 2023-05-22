@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="stage2.css">
+	<script type="text/javascript" src="stage2.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+	<div id = "boss_UI">
+		<div id="boss_img">
+			<img class="character" src="boss1.png" width="180px" height="150px">
+		</div>
+		<div id="boss_bar">
+			<div id="container"></div>
+			<div id ="bp_num">20</div>
+		</div>
+	</div>
+	<div id = "player_UI">
+		<div id="player_img">
+			<img class="character" src="character1.png" width="180px" height="150px">
+		</div>
+		<div id="player_state">
+			<img src="filled_hearted.png" class="state" width="50px" height="50px">
+			<img src="filled_hearted.png" class="state" width="50px" height="50px">
+			<img src="filled_hearted.png" class="state" width="50px" height="50px">
+		</div>
+		<div id="skill">
+			<div>
+				<p>Q</p>
+				<div id="qtimer"></div>
+				<img id="qskill" src="qskill.png" width="50px" height="50px">
+			</div>
+			<div>
+				<p>W</p>
+				<div id="wtimer"></div>
+				<img id="wskill" src="wskill.png" width="50px" height="50px">
+			</div>
+		</div>
+	</div>
+	<canvas id="screen" width="600" height="600"></canvas>
+	<div>
+		<input id="gamestart" type="button" value="게임시작">
+	</div>
+	<div id="timer"></div>
+	<script>
+	</script>
+</body>
+</html>
