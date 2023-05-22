@@ -28,7 +28,7 @@ $(document).ready(function () {
         $("#main-menu").addClass("animateContent1");    // 메인 메뉴 페이지 전환 효과 (작아지는)
         setTimeout(function() {
             $("#main-menu").removeClass("animateContent1").hide();  // 1초 후 메인 메뉴 디스플레이 none
-        }, 1000);
+        }, 500);
     });
 
     // 각 스테이지 선택 시 스테이지 선택 화면 애니메이션
@@ -37,7 +37,7 @@ $(document).ready(function () {
         $("#select-stage").removeClass("animateContent2").addClass("animateContent1");    // 스테이지 선택 페이지 전환 효과 (작아지는)
         setTimeout(function() {
             $("#select-stage").removeClass("animateContent1").hide();
-        }, 1000);
+        }, 500);
     });
 
     // 시작버튼(스테이지 선택) 클릭 시 스테이지 선택 화면 애니메이션
@@ -45,7 +45,7 @@ $(document).ready(function () {
         // 메인 메뉴가 사라지면서 스테이지 선택 페이지 등장
         setTimeout(function() {
             $("#select-stage").addClass("animateContent2").css({ "display": "inline-block" });  
-        }, 1000);
+        }, 500);
         // 스테이지 화면 각 화면 마우스 오버 시 보스 이미지로 변환
         $("#stgbtn1").mouseenter(function () {
             $(this).css({ 
@@ -78,19 +78,19 @@ $(document).ready(function () {
         $("#stgbtn1").click(function() {
             setTimeout(function() {
                 $("#stage1").addClass("animateContent2").css({ "display": "inline-block" });
-            }, 1000);
+            }, 500);
         });
         // 두번째 보스 캔버스
         $("#stgbtn2").click(function() {
             setTimeout(function() {
                 $("#stage2").addClass("animateContent2").css({ "display": "inline-block" });
-            }, 1000);
+            }, 500);
         });
         // 세번째 보스 캔버스
         $("#stgbtn3").click(function() {
             setTimeout(function() {
                 $("#stage3").addClass("animateContent2").css({ "display": "inline-block" });
-            }, 1000);
+            }, 500);
         });
         // 뒤로가기 버튼 클릭 시 스테이지 화면과 메인 메뉴 애니메이션
         $(".go-back-btn").click(function () {
@@ -101,8 +101,8 @@ $(document).ready(function () {
                 $("#main-menu").show().addClass("animateContent2");         // 다시 메인 메뉴 나타나게
                 setTimeout(function() {
                     $("#main-menu").removeClass("animateContent2");
-                }, 2000);
-            }, 1000);
+                }, 1000);
+            }, 500);
         });
     });
 
@@ -112,7 +112,7 @@ $(document).ready(function () {
         // 메인 메뉴가 사라지면서 환경설정 페이지 등장
         setTimeout(function() {
             $("#settings-menu").addClass("animateContent2").css({ "display": "inline-block" });
-        }, 1000);
+        }, 500);
         // 배경화면 선택
         $("#bgImg-select").change(function() {  // select 변경 시
             var currentImg = $("#bgImg-select option:selected").text(); // 선택 된 값 변수에 대입
@@ -163,8 +163,8 @@ $(document).ready(function () {
                 $("#main-menu").show().addClass("animateContent2");
                 setTimeout(function() {
                     $("#main-menu").removeClass("animateContent2");
-                }, 2000);
-            }, 1000);
+                }, 1000);
+            }, 500);
         });
     });
 
@@ -173,7 +173,7 @@ $(document).ready(function () {
         // 메인 메뉴가 사라지면서 상점 페이지 등장
         setTimeout(function() {
             $("#shop-menu").addClass("animateContent2").css({ "display": "inline-block" });
-        }, 1000);
+        }, 500);
         // 각 플레이어 캐릭터 마우스 오버 시
         $("#pDefault").mouseenter(function() {  // 기본 캐릭터
             $(this).attr("src", "./img/player/playerRunDown_32x32.gif");
@@ -220,8 +220,8 @@ $(document).ready(function () {
                 $("#main-menu").show().addClass("animateContent2");
                 setTimeout(function() {
                     $("#main-menu").removeClass("animateContent2");
-                }, 2000);
-            }, 1000);
+                }, 1000);
+            }, 500);
         });
     });
 
