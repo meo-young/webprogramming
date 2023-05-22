@@ -265,6 +265,7 @@ function boss(){
 
 }
 
+//보스 체력 감소 해주는 함수
 function b_hp_decrease(){
     if(attack4 == 1){
         return;
@@ -281,7 +282,7 @@ function b_hp_decrease(){
     }
 }
 
-//보스 체력 감소 해주는 함수
+//보스 체력 회복 해주는 함수
 function b_hp_increase(){
     if(b_hp == 20){
         return;
@@ -296,10 +297,9 @@ function b_hp_increase(){
     }
 }
 
-//보스 체력 회복 해주는 함수
 function p_hp_decrease(){
     if(qskill == 1){
-        qskill =0;
+        qskill = 0;
         return;
     }
 	var p_hp_array = $(".state");
@@ -389,8 +389,6 @@ function collision(){
 	if((y > (cvht-20-ballRadius-yvelocity))){
 		if(x > barx+(barwidth/2+ballRadius) || x < barx-(barwidth/2+ballRadius)){ //바의 영역에서 벗어난 경우
 			if(y > (cvht-20-yvelocity)){
-				clearInterval(repeat);
-                drawinterval = 0;
 				ballRadius = 10;
 				init();
 				draw();
