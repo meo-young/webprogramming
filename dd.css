@@ -1,0 +1,168 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Gugi', cursive;
+}
+body {
+    text-align: center;
+    background-color: white;
+}
+
+.screen {   /* 모든 화면 1000x600 사이즈 */
+    display: none;
+    overflow: hidden;
+    border-radius: 20px 20px 20px 20px;
+    padding: 80px 100px;
+    margin: 20px 20px;
+    width: 1000px;
+    height: 600px;
+    background-color:crimson;
+    text-align: center;
+}
+
+#main-menu {
+    display: inline-block;
+}
+/* #select-stage {
+}
+#settings-menu {
+}
+#shop-menu {
+} */
+#shop-menu h3 {
+    float: left;
+}
+
+#audioVol { /* bgm 온/오프 버튼 */
+    width: 50px;
+    height: 50px;
+    float: left;
+    background: url("./img/volOn_50x50.png");
+    border: none;
+}
+#gold { /* 골드 수급 상황 표시 */
+    width: 100px;
+    float: right;
+    background: yellow;
+}
+
+#start-btn {    /* 스테이지 선택 화면으로 이동하는 버튼 */
+    display: inline-block;
+    margin: 50px;
+    width: 463px;
+    height: 100px;
+    background: url("./img/start_463x100.png");
+    border: none;
+}
+#settings-btn, #shop-btn {/* 환경설정, 상점으로 이동하는 버튼 */
+    border: none;
+}
+#settings-btn {
+    width: 289px;
+    height: 43px;
+    background: url("./img/settings_289x43.png");
+}
+#shop-btn {
+    width: 161px;
+    height: 41px;
+    background: url("./img/shop_161x41.png");
+}
+.stage {
+    float: left;
+    margin: 50px;
+    margin-top: 100px;
+}
+#stage3 {
+    margin-top: 79.73px;
+}
+#stgLevel1 {
+    width: 184px;
+    height: 51px;
+    background: url("./img/easy_184x51.png");
+}
+#stgLevel2 {
+    width: 305px;
+    height: 49px;
+    background: url("./img/normal_305x49.png");
+}
+#stgLevel3 {
+    width: 199px;
+    height: 47px;
+    background: url("./img/hard_199x47.png");
+}
+.stage-btn {/* 각 스테이지 선택 버튼 */
+    /* margin: 50px; */
+    width: 150px;
+    height: 350px;
+    background: url("./moon.png");
+    border: none;
+}
+.go-back-btn {/* 스테이지 선택 화면, 환경설정 화면, 상점 화면에서 메인 메뉴로 돌아가기 버튼 */
+    float: right;
+    bottom: 0;
+    right: 0;
+    width: 50px;
+    height: 50px;
+    background: url("./img/back_50x50.png");
+    border: none;
+}
+
+#settings {
+    width: 289px;
+    height: 43px;
+    background: url("./img/settings_289x43.png");
+}
+#shop {
+    width: 161px;
+    height: 41px;
+    background: url("./img/shop_161x41.png");
+}
+
+.animateContent1 {  /* 페이지 전환 시 이전 페이지가 작아지는 효과 애니메이션 animate1을 2초간 실행 */
+    animation: animate1 1s ease;
+}
+@keyframes animate1 {   /* 애니메이션이 0~100% 진행됨에 따라 scale(가로비율, 세로비율) 변경 */
+    10% {
+        transform: scale(1, 0.002);
+    }
+    50% {
+        transform: scale(0.2, 0.002);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(0.2, 0.002);
+        opacity: 0;
+    }
+}
+.animateContent2 {  /* 페이지 전환 시 다음 페이지가 커지는 효과 애니메이션 animate2를 2초간 실행 */
+    animation: animate2 1s ease;
+}
+@keyframes animate2 {
+    0% {
+        transform: scale(0.2, 0.002);
+        opacity: 1;
+    }
+    30% {
+        transform: scale(0.2, 0.002);
+    }
+    90% {
+        transform: scale(1, 0.002);
+    }
+}
+
+.pFirstRow {
+    display: inline-block;
+    margin: 0 50px;
+}
+.pSecondRow {
+    display: inline-block;
+    margin: 0 50px;
+    margin-top: 20px;
+}
+.pChar {
+    width: 96px;
+    height: 96px;
+    padding: 50px;
+    border: 2px solid yellow;
+    background-color: black;
+}

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="./dd.css">
+    <link rel="stylesheet" href="./stage1/stage1.css">
+    <link href="https://fonts.googleapis.com/css2?family=Gugi&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+    <!-- 메인메뉴 -->
+    <div id="main-menu" class="screen"> <!-- #main-menu를 제외한 모든 .screen은 디스플레이 none상태입니다. -->
+        <button id="audioVol"></button> <!-- bgm 온/오프 버튼 -->
+        <p id="gold">Gold : 0</p> <!-- 골드 수급 상황 표시 -->
+        <br><br><br><br><br><br>
+        <button id="start-btn" class="main-btn"></button>
+        <br><br>
+        <button id="settings-btn" class="main-btn"></button>
+        <br><br>
+        <button id="shop-btn" class="main-btn"></button>
+    </div>
+
+    <!-- 스테이지 선택 -->
+    <div id="select-stage" class="screen">
+        <p id="gold">Gold : 0</p>
+        <div class="stage">
+            <div id="stgLevel1" class="stage-level"></div>
+            <button id="stgbtn1" class="stage-btn"></button>
+        </div>
+        <div class="stage">
+            <div id="stgLevel2" class="stage-level"></div>
+            <button id="stgbtn2" class="stage-btn"></button>
+        </div>
+        <div class="stage" id="stage3">
+            <div id="stgLevel3" class="stage-level"></div>
+            <button id="stgbtn3" class="stage-btn"></button>
+        </div>
+        <br><br><br><br><br><br>
+        <button class="go-back-btn"></button>
+    </div>
+
+    <!-- 스테이지 -->
+    <div id="stage1" class="screen">
+        <div id = "boss_UI1">
+            <div id="boss_img1">
+                <img class="character1" src="./stage1/character1.png" width="180px" height="150px">
+            </div>
+            <div id="boss_bar1">
+                <div id="container1"></div>
+                <div id ="bp_num1">20</div>
+            </div>
+        </div>
+        <div id = "player_UI1">
+            <div id="player_img1">
+                <img class="character" src="./stage1/character1.png" width="180px" height="150px">
+            </div>
+            <div id="player_state1">
+                <img src="./stage1/filled_hearted.png" class="state" width="50px" height="50px">
+                <img src="./stage1/filled_hearted.png" class="state" width="50px" height="50px">
+                <img src="./stage1/filled_hearted.png" class="state" width="50px" height="50px">
+            </div>
+            <div id="skill1">
+                <div>
+                    <p>Q</p>
+                    <div id="qtimer1"></div>
+                    <img id="qskill1" src="./stage1/qskill.png" width="50px" height="50px">
+                </div>
+            </div>
+        </div>
+        <canvas id="screen1" width="600" height="600"></canvas>
+        <div>
+            <input id="gamestart1" type="button" value="게임시작">
+        </div>
+        <div id="timer"></div>
+    </div>
+    <div id="stage2" class="screen">
+        스테이지2<br>
+        뒤로가기 버튼 대신 esc로 종료, 돌아가기 기능 추가 필요<br>
+        캔버스 적용 필요
+        <canvas id="game-canvas"></canvas>
+    </div>
+    <div id="stage3" class="screen">
+        스테이지3<br>
+        뒤로가기 버튼 대신 esc로 종료, 돌아가기 기능 추가 필요<br>
+        캔버스 적용 필요
+        <canvas id="game-canvas"></canvas>
+    </div>
+
+    <!-- 환경설정 -->
+    <div id="settings-menu" class="screen">
+        <div id="settings"></div><br>
+        <label>Background : </label>
+        <select id="bgImg-select">
+            <option class="bg-img">crimson</option>
+            <option class="bg-img">aqua</option>
+            <option class="bg-img">coral</option>
+        </select>
+        <br>
+        <label>Music : </label>
+        <select id="music-select">
+            <option class="bg-music">Music 1</option>
+            <option class="bg-music">Music 2</option>
+            <option class="bg-music">Music 3</option>
+        </select>
+        <br>
+        <label>배경음악 : on/off</label>
+        <br>
+        <label>효과음 : on/off</label>
+        <br>
+        <button class="go-back-btn"></button>
+    </div>
+
+    <!-- 상점 -->
+    <div id="shop-menu" class="screen">
+        <p id="gold">Gold : 0</p>
+        <div id="shop"></div><br>
+        <br>
+        <br>
+        <div>
+            <div class="pFirstRow">
+                <img src="./img/player/playerStanding_32x32.gif" alt="샘플이미지" id="pDefault" class="pChar">
+                <h2>착용중</h2>
+            </div>
+            <div class="pFirstRow">
+                <img src="./img/player/playerStanding_red_32x32.gif" alt="샘플이미지" id="pRed" class="pChar">
+                <h2>100 gold</h2>
+            </div>
+            <div class="pFirstRow">
+                <img src="./img/player/playerStanding_cyan_32x32.gif" alt="샘플이미지" id="pCyan" class="pChar">
+                <h2>100 gold</h2>
+            </div>
+        </div>
+        <div>
+            <div class="pSecondRow">
+                <img src="./img/player/playerStanding_white_32x32.gif" alt="샘플이미지" id="pWhite" class="pChar">
+                <h2>100 gold</h2>
+            </div>
+            <div class="pSecondRow">
+                <img src="./img/player/playerStanding_yellow_32x32.gif" alt="샘플이미지" id="pYellow" class="pChar">
+                <h2>100 gold</h2>
+            </div>
+            <div class="pSecondRow">
+                <img src="./img/player/playerStanding_purple_32x32.gif" alt="샘플이미지" id="pPurple" class="pChar">
+                <h2>100 gold</h2>
+            </div>
+        </div>
+        <button class="go-back-btn"></button>
+    </div>
+
+    <div id="video" class="screen">
+        <video id="intro-video" controls>
+            <source src="video/intro.mp4" type="video/mp4">
+        </video>
+        <button id="skip-btn">Skip</button>
+    </div>
+
+
+
+    <script type="module" src="./dd.js"></script>
+    <script type="module" src="./stage1/stage1.js"></script>
+</body>
+
+</html>
