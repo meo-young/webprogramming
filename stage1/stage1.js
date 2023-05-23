@@ -72,6 +72,9 @@ export function stageStart1() {
 	/*플레이어, 보스 체력 */
 	var p_hp = 0;
 	var b_hp = 20;
+	//플레이어 이미지
+
+	var playerStandingsrc = "playerStanding_32x32.gif";
 
 	pageLoad();
 	windowsize();
@@ -248,6 +251,7 @@ export function stageStart1() {
 
 	function b_hp_decrease() {
 		b_hp--;
+		b_hp_decrease_Img();
 		hp();
 		var num = b_hp * 15;
 		$("#container").animate({
@@ -256,16 +260,51 @@ export function stageStart1() {
 		if (b_hp < 0 || b_hp == 0) {
 			game_over(1);
 		}
+
 	}
+
+
+	//보스 체력 감소시 플레이어 공격모션
+function b_hp_decrease_Img(){
+	var playerImg = $("#playerImg");
+	playerImg.attr("src","playerAttack1_32x32.gif");
+	setTimeout(function(){
+		playerImg.attr("src",playerStandingsrc);
+	},1000);
+}
+
 
 	function p_hp_decrease() {
 		var p_hp_array = $(".state");
 		p_hp_array[p_hp].src = "empty_hearted.png";
 		p_hp++;
-		if (p_hp == 3) {
+
+		if(p_hp == 1 || p_hp == 2){
+			p_hp_decrease_Img();
+		}
+		if(p_hp == 3){
+			game_over_Img();
 			game_over(2);
+
 		}
 	}
+
+	function p_hp_decrease_Img(){
+	var playImg = $("#playerImg");
+	var p_ImgBlankInterval = setInterval(function(){
+		if(playImg.attr("src")===playerStandingsrc){
+			playImg.attr("src","playerStanding_red_32x32.gif");}
+		else{
+			playImg.attr("src",playerStandingsrc);
+		}
+	}, 100);
+	setTimeout(function(){
+		clearInterval(p_ImgBlankInterval);
+		playImg.attr("src",playerStandingsrc);
+
+	}, 500);
+}
+
 
 	function game_over(who) {
 		removeEventListener('keydown', keydown);
@@ -286,6 +325,15 @@ export function stageStart1() {
 		$("#bp_num").text(b_hp);
 	}
 
+
+	function game_over_Img(){
+	var playerImg = $("#playerImg");
+	playerImg.attr("src","playerLose_32x32.gif");
+}
+/* 플레이어, 보스 체력 출력해주는 함수 */
+function hp(){
+	$("#bp_num").text(b_hp);
+}
 	/*---------------------------------------------------------그리는것 관련 함수---------------------------------------------------------*/
 
 
