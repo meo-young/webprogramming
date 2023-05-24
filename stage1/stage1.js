@@ -275,7 +275,7 @@ function b_hp_decrease_Img(){
 
 
 	function p_hp_decrease() {
-		var p_hp_array = $(".state");
+		var p_hp_array = $(".state1");
 		p_hp_array[p_hp].src = "stage1/empty_hearted.png";
 		p_hp++;
 
