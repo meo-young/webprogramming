@@ -7,6 +7,7 @@ window.onload = function(){
 	hp();
 	init();
 	draw();
+	
 }
 
 /* 플레이어 스킬 변수 */
@@ -112,7 +113,10 @@ var b_hp = 20;
 
 //플레이어 이미지
 
-var playerStandingsrc = "playerStanding_32x32.gif";
+var playerStandingsrc = "playerStanding_32x32.gif"; // div
+var bossImg = new Image(); // in canvas
+	bossImg.src = "boss2.jpg";
+var bossStandingsrc = "bossLast_101x80.gif"; // div
 
 
 
@@ -371,6 +375,9 @@ function boss(){
 	}
 	context.fill();
 
+	
+	context.drawImage(bossImg,bossx,bossy,bosswd,bossht);
+
 }
 
 function b_hp_decrease(){
@@ -457,6 +464,14 @@ function hp(){
 	$("#bp_num").text(b_hp);
 }
 
+//공격 모션
+function b_Attack_Img(){
+	var bossAttackImg = $("#bossImg");
+	bossAttackImg.attr("src","bossLastAttack_101x106.gif");
+	setTimeout(function(){
+		bossAttackImg.attr("src",bossStandingsrc);
+	},3500);
+}
 
 /*---------------------------------------------------------그리는것 관련 함수---------------------------------------------------------*/
 
@@ -707,6 +722,9 @@ function mousemove(event){
 function timeAttack(){
 	if(eskill != 1){
 		timer += 1;
+		if(timer % 6 == 0){
+			
+		}
 		if(timer % 8 == 0){
 			var randnum = Math.floor(Math.random()*1+3);
 			if(randnum == 0){
@@ -726,6 +744,7 @@ function timeAttack(){
 				attack3_count = 1;
 			}
 			else if(randnum == 3){
+				b_Attack_Img();
 				attack4 = 1;
 				attack4_count = 0;
 				rand = Math.floor(Math.random()*5);
@@ -786,6 +805,7 @@ function bossAttack1_timer(){
 /* 레이저 공격 */
 function bossAttack1(){ 
 	if(attack1 == 1){ //3초동안 사용자의 패들의 x좌표를 따라감
+		b_Attack_Img();
 		context.beginPath();
 		context.rect(barx-10,0,20,cvht);
 		context.fillStyle = "gray";
