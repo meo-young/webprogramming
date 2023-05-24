@@ -14,7 +14,7 @@
     <!-- 메인메뉴 -->
     <div id="main-menu" class="screen"> <!-- #main-menu를 제외한 모든 .screen은 디스플레이 none상태입니다. -->
         <button id="audioVol"></button> <!-- bgm 온/오프 버튼 -->
-        <p id="gold">Gold : 0</p> <!-- 골드 수급 상황 표시 -->
+        <p class="gold">Gold : </p> <!-- 골드 수급 상황 표시 -->
         <br><br><br><br>
         <img src="./img/title_734x93.png" width="734px" height="93px">
         <button id="start-btn" class="main-btn"></button>
@@ -26,7 +26,7 @@
 
     <!-- 스테이지 선택 -->
     <div id="select-stage" class="screen">
-        <p id="gold">Gold : 0</p>
+        <p class="gold">Gold : </p>
         <div class="stage">
             <div id="stgLevel1" class="stage-level"></div>
             <button id="stgbtn1" class="stage-btn"></button>
@@ -183,36 +183,36 @@
 
     <!-- 상점 -->
     <div id="shop-menu" class="screen">
-        <p id="gold">Gold : 0</p>
+        <p class="gold">Gold : </p>
         <div id="shop"></div><br>
         <br>
         <br>
         <div>
             <div class="pFirstRow">
                 <img src="./img/player/playerStanding_32x32.gif" alt="기본" id="pDefault" class="pChar">
-                <h2>착용중</h2>
+                <h2 id="shop1">착용중</h2>
             </div>
             <div class="pFirstRow">
                 <img src="./img/player/playerStanding_red_32x32.gif" alt="빨강" id="pRed" class="pChar">
-                <h2>100 gold</h2>
+                <h2 id="shop2">100 gold</h2>
             </div>
             <div class="pFirstRow">
                 <img src="./img/player/playerStanding_cyan_32x32.gif" alt="파랑" id="pCyan" class="pChar">
-                <h2>100 gold</h2>
+                <h2 id="shop3">100 gold</h2>
             </div>
         </div>
         <div>
             <div class="pSecondRow">
                 <img src="./img/player/playerStanding_white_32x32.gif" alt="하양" id="pWhite" class="pChar">
-                <h2>100 gold</h2>
+                <h2 id="shop4">100 gold</h2>
             </div>
             <div class="pSecondRow">
                 <img src="./img/player/playerStanding_yellow_32x32.gif" alt="노랑" id="pYellow" class="pChar">
-                <h2>100 gold</h2>
+                <h2 id="shop5">100 gold</h2>
             </div>
             <div class="pSecondRow">
                 <img src="./img/player/playerStanding_purple_32x32.gif" alt="보라" id="pPurple" class="pChar">
-                <h2>100 gold</h2>
+                <h2 id="shop6">100 gold</h2>
             </div>
         </div>
         <button class="go-back-btn" id="shop-to-main"></button>
