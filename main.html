@@ -4,6 +4,7 @@
 <head>
     <link rel="stylesheet" href="./dd.css">
     <link rel="stylesheet" href="./stage1/stage1.css">
+    <link rel="stylesheet" href="./stage2/stage2.css">
     <link rel="stylesheet" href="./stage3/stage3.css">
     <link href="https://fonts.googleapis.com/css2?family=Gugi&display=swap" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -76,10 +77,42 @@
         <div id="timer1"></div>
     </div>
     <div id="stage2" class="screen">
-        스테이지2<br>
-        뒤로가기 버튼 대신 esc로 종료, 돌아가기 기능 추가 필요<br>
-        캔버스 적용 필요
-        <canvas id="game-canvas"></canvas>
+        <div id = "boss_UI2">
+            <div id="boss_img2">
+                <img class="character" src="boss1.png" width="180px" height="150px">
+            </div>
+            <div id="boss_bar2">
+                <div id="container2"></div>
+                <div id ="bp_num2">20</div>
+            </div>
+        </div>
+        <div id = "player_UI2">
+            <div id="player_img2">
+                <img class="character" src="./stage2/character1.png" width="180px" height="150px">
+            </div>
+            <div id="player_state2">
+                <img src="./stage2/filled_hearted.png" class="state2" width="50px" height="50px">
+                <img src="./stage2/filled_hearted.png" class="state2" width="50px" height="50px">
+                <img src="./stage2/filled_hearted.png" class="state2" width="50px" height="50px">
+            </div>
+            <div id="skill2">
+                <div>
+                    <p>Q</p>
+                    <div id="qtimer2"></div>
+                    <img id="qskill2" src="./stage2/qskill.png" width="50px" height="50px">
+                </div>
+                <div>
+                    <p>W</p>
+                    <div id="wtimer2"></div>
+                    <img id="wskill2" src="./stage2/wskill.png" width="50px" height="50px">
+                </div>
+            </div>
+        </div>
+        <canvas id="screen2" width="600" height="600"></canvas>
+        <div>
+            <input id="gamestart2" type="button" value="게임시작">
+        </div>
+        <div id="timer2"></div>
     </div>
     <div id="stage3" class="screen">
         <div id="boss_UI3">
@@ -198,6 +231,7 @@
 
     <script type="module" src="./dd.js"></script>
     <script type="module" src="./stage1/stage1.js"></script>
+    <script type="module" src="./stage2/stage2.js"></script>
     <script type="module" src="./stage3/stage3.js"></script>
 </body>
 

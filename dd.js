@@ -1,4 +1,5 @@
 import { stageStart1 } from "./stage1/stage1.js";
+import { stageStart2 } from "./stage2/stage2.js";
 import { stageStart3 } from "./stage3/stage3.js";
 $(document).ready(function () {
     
@@ -88,6 +89,7 @@ $(document).ready(function () {
             setTimeout(function() {
                 $("#stage2").addClass("animateContent2").css({ "display": "inline-block" });
             }, 500);
+            stageStart2();
         });
         // 세번째 보스 캔버스
         $("#stgbtn3").click(function() {
