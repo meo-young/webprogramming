@@ -118,6 +118,9 @@ var bossImg = new Image(); // in canvas
 	bossImg.src = "boss2.jpg";
 var bossStandingsrc = "bossLast_101x80.gif"; // div
 
+var wskill_Img = new Image();
+wskill_Img.src = "sword.png";
+
 
 
 /* window size 변경 해주는 함수 */
@@ -358,6 +361,7 @@ function drawsword(){
 	context.rect(attack_x-15,ypl,30,100); // 가로 30 세로 100의 검 생성
 	context.fillStyle = "yellow";
 	context.fill();
+	context.drawImage(wskill_Img,attack_x-15,ypl,30,100);
 }
 
 
@@ -726,7 +730,7 @@ function timeAttack(){
 			
 		}
 		if(timer % 8 == 0){
-			var randnum = Math.floor(Math.random()*1+3);
+			var randnum = Math.floor(Math.random()*4);
 			if(randnum == 0){
 				attack1 = 1;
 				 attack1_repeat = setInterval(bossAttack1_timer,1000);
