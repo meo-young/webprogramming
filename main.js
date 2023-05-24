@@ -190,7 +190,7 @@ $(document).ready(function () {
         else {
             $("#BGM").css({ "background": "url(./img/volOff_50x50.png)" });
         }
-        $("#BGM").click(function() {
+        $("#BGM").off("click").on("click", function() {
             if(bgmOn) { // 재생 -> 정지
                 $(this).css({ "background": "url(./img/volOff_50x50.png)" });
                 $("#audioVol").css({ "background": "url(./img/volOff_50x50.png)" });
