@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <link rel="stylesheet" href="./dd.css">
+    <link rel="stylesheet" href="./main.css">
     <link rel="stylesheet" href="./stage1/stage1.css">
     <link rel="stylesheet" href="./stage2/stage2.css">
     <link rel="stylesheet" href="./stage3/stage3.css">
@@ -15,7 +15,8 @@
     <div id="main-menu" class="screen"> <!-- #main-menu를 제외한 모든 .screen은 디스플레이 none상태입니다. -->
         <button id="audioVol"></button> <!-- bgm 온/오프 버튼 -->
         <p id="gold">Gold : 0</p> <!-- 골드 수급 상황 표시 -->
-        <br><br><br><br><br><br>
+        <br><br><br><br>
+        <img src="./img/title_734x93.png" width="734px" height="93px">
         <button id="start-btn" class="main-btn"></button>
         <br><br>
         <button id="settings-btn" class="main-btn"></button>
@@ -162,24 +163,21 @@
     <!-- 환경설정 -->
     <div id="settings-menu" class="screen">
         <div id="settings"></div><br>
-        <label>Background : </label>
-        <select id="bgImg-select">
-            <option class="bg-img">crimson</option>
-            <option class="bg-img">aqua</option>
-            <option class="bg-img">coral</option>
-        </select>
-        <br>
-        <label>Music : </label>
-        <select id="music-select">
-            <option class="bg-music">Music 1</option>
-            <option class="bg-music">Music 2</option>
-            <option class="bg-music">Music 3</option>
-        </select>
-        <br>
-        <label>배경음악 : on/off</label>
-        <br>
-        <label>효과음 : on/off</label>
-        <br>
+        <div id="setting" class="setting">
+            <label>Background</label><br>
+            <img src="./backimg/bgImg1.jpg" class="bgImg" id="b1">
+            <img src="./backimg/bgImg2.jpg" class="bgImg" id="b2">
+            <img src="./backimg/bgImg3.jpg" class="bgImg" id="b3">
+            <img src="./backimg/bgImg4.jpg" class="bgImg" id="b4">
+        </div>
+        <div id="setting-bgMusic" class="setting">
+            <label>배경음악</label><br>
+            <button id="BGM"></button>
+        </div>
+        <div id="setting-effect" class="setting">
+            <label>효과음</label><br>
+            <button id="effectSound"></button>
+        </div>
         <button class="go-back-btn" id="settings-to-main"></button>
     </div>
 
@@ -191,29 +189,29 @@
         <br>
         <div>
             <div class="pFirstRow">
-                <img src="./img/player/playerStanding_32x32.gif" alt="샘플이미지" id="pDefault" class="pChar">
+                <img src="./img/player/playerStanding_32x32.gif" alt="기본" id="pDefault" class="pChar">
                 <h2>착용중</h2>
             </div>
             <div class="pFirstRow">
-                <img src="./img/player/playerStanding_red_32x32.gif" alt="샘플이미지" id="pRed" class="pChar">
+                <img src="./img/player/playerStanding_red_32x32.gif" alt="빨강" id="pRed" class="pChar">
                 <h2>100 gold</h2>
             </div>
             <div class="pFirstRow">
-                <img src="./img/player/playerStanding_cyan_32x32.gif" alt="샘플이미지" id="pCyan" class="pChar">
+                <img src="./img/player/playerStanding_cyan_32x32.gif" alt="파랑" id="pCyan" class="pChar">
                 <h2>100 gold</h2>
             </div>
         </div>
         <div>
             <div class="pSecondRow">
-                <img src="./img/player/playerStanding_white_32x32.gif" alt="샘플이미지" id="pWhite" class="pChar">
+                <img src="./img/player/playerStanding_white_32x32.gif" alt="하양" id="pWhite" class="pChar">
                 <h2>100 gold</h2>
             </div>
             <div class="pSecondRow">
-                <img src="./img/player/playerStanding_yellow_32x32.gif" alt="샘플이미지" id="pYellow" class="pChar">
+                <img src="./img/player/playerStanding_yellow_32x32.gif" alt="노랑" id="pYellow" class="pChar">
                 <h2>100 gold</h2>
             </div>
             <div class="pSecondRow">
-                <img src="./img/player/playerStanding_purple_32x32.gif" alt="샘플이미지" id="pPurple" class="pChar">
+                <img src="./img/player/playerStanding_purple_32x32.gif" alt="보라" id="pPurple" class="pChar">
                 <h2>100 gold</h2>
             </div>
         </div>
@@ -229,7 +227,7 @@
 
 
 
-    <script type="module" src="./dd.js"></script>
+    <script type="module" src="./main.js"></script>
     <script type="module" src="./stage1/stage1.js"></script>
     <script type="module" src="./stage2/stage2.js"></script>
     <script type="module" src="./stage3/stage3.js"></script>

@@ -18,6 +18,7 @@ body {
     height: 600px;
     background: url("./backimg/bgImg1.jpg");
     text-align: center;
+    color: white;
 }
 
 #main-menu {
@@ -44,6 +45,7 @@ body {
     width: 100px;
     float: right;
     background: yellow;
+    color: black;
 }
 
 #start-btn {    /* 스테이지 선택 화면으로 이동하는 버튼 */
@@ -112,6 +114,22 @@ body {
     height: 43px;
     background: url("./img/settings_289x43.png");
 }
+.setting {
+    margin-top: 40px;
+}
+.bgImg {
+    border: 3px solid black;
+    width: 240px;
+    height: 150px;
+}
+#BGM, #effectSound {
+    width: 50px;
+    height: 50px;
+    background: url("./img/volOn_50x50.png");
+    border: none;
+}
+
+
 #shop {
     width: 161px;
     height: 41px;

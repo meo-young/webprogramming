@@ -2,7 +2,12 @@ import { stageStart1 } from "./stage1/stage1.js";
 import { stageStart2 } from "./stage2/stage2.js";
 import { stageStart3 } from "./stage3/stage3.js";
 $(document).ready(function () {
-    
+    // 현재 배경 img
+    var currentIMG = $("#b1").attr("src");
+
+    // 효과음
+    var effectOn = true;
+
     // 배경음악, 배경음악 버튼, 배경음악 선택
     var bgmOn = true;
     var mainBgm = new Audio("./audio/main.mp3");    // 메인브금
@@ -23,13 +28,16 @@ $(document).ready(function () {
 
     // 좌측 상단 오디오 버튼 클릭 시
     $("#audioVol").click(function() {
-        if(!currentBGM.paused) {    // 재생 -> 정지
-            $("#audioVol").css({ "background": "url(./img/volOff_50x50.png)" });
+        // if(!currentBGM.paused) {    // 재생 -> 정지
+        if(bgmOn) {
+            $(this).css({ "background": "url(./img/volOff_50x50.png)" });
+            $("#BGM").css({ "background": "url(./img/volOff_50x50.png)" });
             currentBGM.pause();
             bgmOn = false;
         }
         else {  // 정지 -> 재생
-            $("#audioVol").css({ "background": "url(./img/volOn_50x50.png)" });
+            $(this).css({ "background": "url(./img/volOn_50x50.png)" });
+            $("#BGM").css({ "background": "url(./img/volOn_50x50.png)" });
             currentBGM.play();
             bgmOn = true;
         }
@@ -129,46 +137,76 @@ $(document).ready(function () {
         setTimeout(function() {
             $("#settings-menu").addClass("animateContent2").css({ "display": "inline-block" });
         }, 500);
+        // 현재 배경화면 테두리 노란색으로
+        if(currentIMG == "./backimg/bgImg1.jpg") {
+            $("#b1").css({"border" : "3px solid yellow"});
+        }
+        else if(currentIMG == "./backimg/bgImg2.jpg") {
+            $("#b2").css({"border" : "3px solid yellow"});
+        }
+        else if(currentIMG == "./backimg/bgImg3.jpg") {
+            $("#b3").css({"border" : "3px solid yellow"});
+        }
+        else if(currentIMG == "./backimg/bgImg4.jpg") {
+            $("#b4").css({"border" : "3px solid yellow"});
+        }
         // 배경화면 선택
-        $("#bgImg-select").change(function() {  // select 변경 시
-            var currentImg = $("#bgImg-select option:selected").text(); // 선택 된 값 변수에 대입
-            if (currentImg == "crimson") {
-                $(".screen").css({"background-color" : "crimson"});
+        $("#b1").click(function() { // 이미지 클릭시
+            currentIMG = $(this).attr("src");   // 현재 배경화면 변수
+            $(".screen").css({"background" : "url('./backimg/bgImg1.jpg')"});   // 배경화면 변경
+            $("#b1").css({"border" : "3px solid yellow"});  // 선택된 이미지 테두리 노란색으로 변경
+            $("#b2").css({"border" : "3px solid black"});
+            $("#b3").css({"border" : "3px solid black"});
+            $("#b4").css({"border" : "3px solid black"});
+        });
+        $("#b2").click(function() {
+            currentIMG = $(this).attr("src");
+            $(".screen").css({"background" : "url('./backimg/bgImg2.jpg')"});
+            $("#b1").css({"border" : "3px solid black"});
+            $("#b2").css({"border" : "3px solid yellow"});
+            $("#b3").css({"border" : "3px solid black"});
+            $("#b4").css({"border" : "3px solid black"});
+        });
+        $("#b3").click(function() {
+            currentIMG = $(this).attr("src");
+            $(".screen").css({"background" : "url('./backimg/bgImg3.jpg')"});
+            $("#b1").css({"border" : "3px solid black"});
+            $("#b2").css({"border" : "3px solid black"});
+            $("#b3").css({"border" : "3px solid yellow"});
+            $("#b4").css({"border" : "3px solid black"});
+        });
+        $("#b4").click(function() {
+            currentIMG = $(this).attr("src");
+            $(".screen").css({"background" : "url('./backimg/bgImg4.jpg')"});
+            $("#b1").css({"border" : "3px solid black"});
+            $("#b2").css({"border" : "3px solid black"});
+            $("#b3").css({"border" : "3px solid black"});
+            $("#b4").css({"border" : "3px solid yellow"});
+        });
+        // 배경음악
+        if(bgmOn) { // 온오프버튼 이미지 초기화
+            $("#BGM").css({ "background": "url(./img/volOn_50x50.png)" });
+        }
+        else {
+            $("#BGM").css({ "background": "url(./img/volOff_50x50.png)" });
+        }
+        $("#BGM").click(function() {
+            if(bgmOn) { // 재생 -> 정지
+                $(this).css({ "background": "url(./img/volOff_50x50.png)" });
+                $("#audioVol").css({ "background": "url(./img/volOff_50x50.png)" });
+                currentBGM.pause();
+                bgmOn = false;
             }
-            else if (currentImg == "aqua") {
-                $(".screen").css({"background-color" : "aqua"});
-            }
-            else if (currentImg == "coral") {
-                $(".screen").css({"background-color" : "coral"});
+            else {  // 정지 -> 재생
+                $(this).css({ "background": "url(./img/volOn_50x50.png)" });
+                $("#audioVol").css({ "background": "url(./img/volOn_50x50.png)" });
+                currentBGM.play();
+                bgmOn = true;
             }
         });
-        // 배경음악 선택
-        $("#music-select").change(function() {  // select 변경 시
-            var currentBGMName = $("#music-select option:selected").text(); // 선택 된 값 변수에 대입
-            if (currentBGMName == "Music 1") {
-                $("#audioVol").css({ "background": "url(./img/volOn_50x50.png)" });
-                currentBGM.pause();
-                currentBGM = bgm1; 
-                currentBGM.currentTime = 0;
-                currentBGM.play();
-                currentBGM.loop = true;
-            }
-            else if (currentBGMName == "Music 2") {
-                $("#audioVol").css({ "background": "url(./img/volOn_50x50.png)" });
-                currentBGM.pause();
-                currentBGM = bgm2; 
-                currentBGM.currentTime = 0;
-                currentBGM.play();
-                currentBGM.loop = true;
-            }
-            else if (currentBGMName == "Music 3") {
-                $("#audioVol").css({ "background": "url(./img/volOn_50x50.png)" });
-                currentBGM.pause();
-                currentBGM = bgm3; 
-                currentBGM.currentTime = 0;
-                currentBGM.play();
-                currentBGM.loop = true;
-            }
+        // 효과음
+        $("#effectSound").click(function() {
+
         });
         // 뒤로가기
         $("#settings-to-main").click(function () {
@@ -186,6 +224,7 @@ $(document).ready(function () {
 
     // 상점버튼 클릭 시 상점 화면 애니메이션
     $("#shop-btn").click(function () {
+        // 상점 브금
         if (bgmOn) {
             currentBGM.pause();
             currentBGM = shopBgm; 
