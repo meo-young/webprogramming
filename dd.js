@@ -4,12 +4,20 @@ import { stageStart3 } from "./stage3/stage3.js";
 $(document).ready(function () {
     
     // 배경음악, 배경음악 버튼, 배경음악 선택
-    var bgm1 = new Audio("./audio/bgm1.mp3");
-    var bgm2 = new Audio("./audio/bgm2.mp3");
-    var bgm3 = new Audio("./audio/bgm3.mp3");
+    var bgmOn = true;
+    var mainBgm = new Audio("./audio/main.mp3");    // 메인브금
+    var shopBgm = new Audio("./audio/shop.mp3");    // 상점브금
+    var bgm1 = new Audio("./audio/boss1.mp3");   // 보스1 브금
+    var bgm2 = new Audio("./audio/boss2.mp3");   // 보스2 브금
+    var bgm3 = new Audio("./audio/boss3.mp3");   // 보스3 브금
     var click = new Audio("./audio/clickEffect.mp3");   // 버튼 클릭시 효과음
+    var winBgm = new Audio("./audio/win_7s.mp3");  // 승리브금
+    var loseBgm = new Audio("./audio/lose_7s.mp3");  // 패배브금
+    var pAttack = new Audio();  // 플레이어 공격 효과음
+    var bAttack = new Audio();  // 보스 공격 효과음
+    var pSkill = new Audio();  // 플레이어 스킬 효과음
 
-    var currentBGM = bgm2;    // 현재 재생/중지 상태의 음악파일, 환경설정에서 변경 가능
+    var currentBGM = mainBgm;    // 현재 재생/중지 상태의 음악파일, 환경설정에서 변경 가능
     currentBGM.play();
     currentBGM.loop = true;   // 반복재생
 
@@ -18,10 +26,12 @@ $(document).ready(function () {
         if(!currentBGM.paused) {    // 재생 -> 정지
             $("#audioVol").css({ "background": "url(./img/volOff_50x50.png)" });
             currentBGM.pause();
+            bgmOn = false;
         }
         else {  // 정지 -> 재생
             $("#audioVol").css({ "background": "url(./img/volOn_50x50.png)" });
             currentBGM.play();
+            bgmOn = true;
         }
     });
 
@@ -99,7 +109,7 @@ $(document).ready(function () {
             stageStart3();
         });
         // 뒤로가기 버튼 클릭 시 스테이지 화면과 메인 메뉴 애니메이션
-        $(".go-back-btn").click(function () {
+        $("#stage-to-main").click(function () {
             click.play();   // 버튼 클릭 효과음
             $("#select-stage").removeClass("animateContent2").addClass("animateContent1");  // 스테이지 선택 페이지 줄어드는 애니메이션
             setTimeout(function() {
@@ -161,7 +171,7 @@ $(document).ready(function () {
             }
         });
         // 뒤로가기
-        $(".go-back-btn").click(function () {
+        $("#settings-to-main").click(function () {
             click.play();
             $("#settings-menu").removeClass("animateContent2").addClass("animateContent1");
             setTimeout(function() {
@@ -176,6 +186,13 @@ $(document).ready(function () {
 
     // 상점버튼 클릭 시 상점 화면 애니메이션
     $("#shop-btn").click(function () {
+        if (bgmOn) {
+            currentBGM.pause();
+            currentBGM = shopBgm; 
+            currentBGM.currentTime = 0;
+            currentBGM.play();
+            currentBGM.loop = true;
+        }
         // 메인 메뉴가 사라지면서 상점 페이지 등장
         setTimeout(function() {
             $("#shop-menu").addClass("animateContent2").css({ "display": "inline-block" });
@@ -218,7 +235,7 @@ $(document).ready(function () {
             $(this).attr("src", "./img/player/playerStanding_purple_32x32.gif");
         });
         // 뒤로가기
-        $(".go-back-btn").click(function () {
+        $("#shop-to-main").click(function () {
             click.play();
             $("#shop-menu").removeClass("animateContent2").addClass("animateContent1");
             setTimeout(function() {
@@ -228,6 +245,13 @@ $(document).ready(function () {
                     $("#main-menu").removeClass("animateContent2");
                 }, 1000);
             }, 500);
+            if (bgmOn) {
+                currentBGM.pause();
+                currentBGM = mainBgm; 
+                currentBGM.currentTime = 0;
+                currentBGM.play();
+                currentBGM.loop = true;
+            }
         });
     });
 
