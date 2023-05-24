@@ -16,7 +16,8 @@ body {
     margin: 20px 20px;
     width: 1000px;
     height: 600px;
-    background-color:crimson;
+    /* background-color:crimson; */
+    background: url("./backimg/bgImg1.jpg");
     text-align: center;
 }
 
