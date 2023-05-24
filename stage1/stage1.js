@@ -74,7 +74,7 @@ export function stageStart1() {
 	var b_hp = 20;
 	//플레이어 이미지
 
-	var playerStandingsrc = "playerStanding_32x32.gif";
+	var playerStandingsrc = "stage1/playerStanding_32x32.gif";
 
 	pageLoad();
 	windowsize();
@@ -112,7 +112,7 @@ export function stageStart1() {
 	/*---------------------------------------------------------게임시작 관련 함수---------------------------------------------------------*/
 	/* 게임시작 버튼 눌렀을 때 동작하는 함수 */
 	function wait() {
-		$("#gamestart").css({
+		$("#gamestart1").css({
 			"display": "none"
 		});
 		repeat = setInterval(start, 1000);
@@ -254,7 +254,7 @@ export function stageStart1() {
 		b_hp_decrease_Img();
 		hp();
 		var num = b_hp * 15;
-		$("#container").animate({
+		$("#container1").animate({
 			"height": num + "px"
 		});
 		if (b_hp < 0 || b_hp == 0) {
@@ -266,8 +266,8 @@ export function stageStart1() {
 
 	//보스 체력 감소시 플레이어 공격모션
 function b_hp_decrease_Img(){
-	var playerImg = $("#playerImg");
-	playerImg.attr("src","playerAttack1_32x32.gif");
+	var playerImg = $("#playerImg1");
+	playerImg.attr("src","stage1/playerAttack1_32x32.gif");
 	setTimeout(function(){
 		playerImg.attr("src",playerStandingsrc);
 	},1000);
@@ -276,7 +276,7 @@ function b_hp_decrease_Img(){
 
 	function p_hp_decrease() {
 		var p_hp_array = $(".state");
-		p_hp_array[p_hp].src = "empty_hearted.png";
+		p_hp_array[p_hp].src = "stage1/empty_hearted.png";
 		p_hp++;
 
 		if(p_hp == 1 || p_hp == 2){
@@ -290,10 +290,10 @@ function b_hp_decrease_Img(){
 	}
 
 	function p_hp_decrease_Img(){
-	var playImg = $("#playerImg");
+	var playImg = $("#playerImg1");
 	var p_ImgBlankInterval = setInterval(function(){
 		if(playImg.attr("src")===playerStandingsrc){
-			playImg.attr("src","playerStanding_red_32x32.gif");}
+			playImg.attr("src","stage1/playerStanding_red_32x32.gif");}
 		else{
 			playImg.attr("src",playerStandingsrc);
 		}
@@ -322,17 +322,17 @@ function b_hp_decrease_Img(){
 	}
 	/* 플레이어, 보스 체력 출력해주는 함수 */
 	function hp() {
-		$("#bp_num").text(b_hp);
+		$("#bp_num1").text(b_hp);
 	}
 
 
 	function game_over_Img(){
-	var playerImg = $("#playerImg");
-	playerImg.attr("src","playerLose_32x32.gif");
+	var playerImg = $("#playerImg1");
+	playerImg.attr("src","stage1/playerLose_32x32.gif");
 }
 /* 플레이어, 보스 체력 출력해주는 함수 */
 function hp(){
-	$("#bp_num").text(b_hp);
+	$("#bp_num1").text(b_hp);
 }
 	/*---------------------------------------------------------그리는것 관련 함수---------------------------------------------------------*/
 
@@ -457,13 +457,13 @@ function hp(){
 			//q를 누를경우
 			if (qskill_cooltime == 0 && qskill == 0 && event.keyCode == 81) { //쿨타임이 아니고, 보호막이 활성화되지 않을 때 사용 가능
 				qskill = 1; //이 변수가 1일 때 보호막 활성화
-				$("#qskill").css({ //스킬 이미지를 지우고 쿨타임 글씨 영역 활성화
+				$("#qskill1").css({ //스킬 이미지를 지우고 쿨타임 글씨 영역 활성화
 					"display": "none"
 				});
-				$("#qtimer").css({
+				$("#qtimer1").css({
 					"display": "block"
 				});
-				$("#qtimer").text(qskill_timer); //쿨타임 글씨 활성화
+				$("#qtimer1").text(qskill_timer); //쿨타임 글씨 활성화
 				qskill_repeat = setInterval(skill_timer1, 1000);
 				qskill_cooltime = 1;
 			}
@@ -478,15 +478,15 @@ function hp(){
 		else if (qskill_timer == -1) {
 			qskill_timer = 30;
 			clearInterval(qskill_repeat);
-			$("#qskill").css({
+			$("#qskill1").css({
 				"display": "block"
 			});
-			$("#qtimer").css({
+			$("#qtimer1").css({
 				"display": "none"
 			});
 			qskill_cooltime = 0;
 		}
-		$("#qtimer").text(qskill_timer);
+		$("#qtimer1").text(qskill_timer);
 	}
 
 
@@ -533,7 +533,7 @@ function hp(){
 			}
 
 		}
-		$("#timer").text(timer);
+		$("#timer1").text(timer);
 	}
 
 

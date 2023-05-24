@@ -1,4 +1,5 @@
 import { stageStart1 } from "./stage1/stage1.js";
+import { stageStart3 } from "./stage3/stage3.js";
 $(document).ready(function () {
     
     // 배경음악, 배경음악 버튼, 배경음악 선택
@@ -93,6 +94,7 @@ $(document).ready(function () {
             setTimeout(function() {
                 $("#stage3").addClass("animateContent2").css({ "display": "inline-block" });
             }, 500);
+            stageStart3();
         });
         // 뒤로가기 버튼 클릭 시 스테이지 화면과 메인 메뉴 애니메이션
         $(".go-back-btn").click(function () {

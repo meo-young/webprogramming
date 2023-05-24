@@ -4,6 +4,7 @@
 <head>
     <link rel="stylesheet" href="./dd.css">
     <link rel="stylesheet" href="./stage1/stage1.css">
+    <link rel="stylesheet" href="./stage3/stage3.css">
     <link href="https://fonts.googleapis.com/css2?family=Gugi&display=swap" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
@@ -72,7 +73,7 @@
         <div>
             <input id="gamestart1" type="button" value="게임시작">
         </div>
-        <div id="timer"></div>
+        <div id="timer1"></div>
     </div>
     <div id="stage2" class="screen">
         스테이지2<br>
@@ -81,10 +82,47 @@
         <canvas id="game-canvas"></canvas>
     </div>
     <div id="stage3" class="screen">
-        스테이지3<br>
-        뒤로가기 버튼 대신 esc로 종료, 돌아가기 기능 추가 필요<br>
-        캔버스 적용 필요
-        <canvas id="game-canvas"></canvas>
+        <div id = "boss_UI3">
+            <div id="boss_img3">
+                <img class="character" src="./stage3/boss1.png" width="180px" height="150px">
+            </div>
+            <div id="boss_bar3">
+                <div id="container3"></div>
+                <div id ="bp_num3">20</div>
+            </div>
+        </div>
+        <div id = "player_UI3">
+            <div id="player_img3">
+                <img id="playerImg3" class="character" src="./stage3/playerStanding_32x32.gif" width="180px" height="150px">
+            </div>
+            <div id="player_state3">
+                <img src="./stage3/filled_hearted.png" class="state" width="50px" height="50px">
+                <img src="./stage3/filled_hearted.png" class="state" width="50px" height="50px">
+                <img src="./stage3/filled_hearted.png" class="state" width="50px" height="50px">
+            </div>
+            <div id="skill3">
+                <div>
+                    <p>Q</p>
+                    <div id="qtimer3"></div>
+                    <img id="qskill3" src="./stage3/qskill.png" width="50px" height="50px">
+                </div>
+                <div>
+                    <p>W</p>
+                    <div id="wtimer3"></div>
+                    <img id="wskill3" src="./stage3/wskill.png" width="50px" height="50px">
+                </div>
+                <div>
+                    <p>E</p>
+                    <div id="etimer3"></div>
+                    <img id="eskill3" src="./stage3/eskill.png" width="50px" height="50px">
+                </div>
+            </div>
+        </div>
+        <canvas id="screen3" width="600" height="600"></canvas>
+        <div>
+            <input id="gamestart3" type="button" value="게임시작">
+        </div>
+        <div id="timer3"></div>
     </div>
 
     <!-- 환경설정 -->
@@ -159,6 +197,7 @@
 
     <script type="module" src="./dd.js"></script>
     <script type="module" src="./stage1/stage1.js"></script>
+    <script type="module" src="./stage3/stage3.js"></script>
 </body>
 
 </html>
