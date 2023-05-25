@@ -91,6 +91,14 @@ export function stageStart2() {
 	var p_hp = 0;
 	var b_hp = 20;
 
+	var barice_Img=new Image();
+	barice_Img.src="./img/stage2/바얼음.png";
+	var bossshield_Img=new Image();
+	bossshield_Img.src="./img/stage2/보스보호막.png";
+	var littlebrick_Img=new Image();
+	littlebrick_Img.src="./img/stage2/부적.png";
+	var bottom_attack_Img=new Image();
+	bottom_attack_Img.src="./img/stage2/하단공격.png";
 	pageLoad();
 	windowsize();
 
@@ -223,6 +231,7 @@ export function stageStart2() {
 		}
 		else if (bar_state == 1) {
 			context.fillStyle = "blue";
+			context.drawImage(barice_Img,(barx - barwidth / 2)-barwidth/2, cvht - 20-barheight/2, barwidth*2, barheight*2)
 		}
 		context.fill();
 	}
@@ -594,7 +603,7 @@ export function stageStart2() {
 	//보스 캐릭터 주변에 초록색 원을 그려주는 함수
 	function bossAttack1() {
 		context.beginPath();
-		context.arc(bossx + bosswd / 2, bossy + bossht / 2, bosswd / 2 + 10, 0, Math.PI * 2);
+		context.drawImage(bossshield_Img,bossx -bosswd / 3 + 10, bossy, (bosswd + 10)*1.3, (bosswd + 10)*1.3);
 		context.strokeStyle = "green"
 		context.stroke();
 	}
@@ -616,8 +625,8 @@ export function stageStart2() {
 	function bossAttack2() {
 		if (attack2_timer == 2) {
 			context.beginPath();
-			context.rect(attack_position, cvht - 100, 100, 100);
-			context.fillStyle = "red";
+			context.drawImage(bottom_attack_Img,attack_position, cvht - 100, 100, 100);
+			//context.fillStyle = "red";
 			context.fill();
 			if (barx + barwidth / 2 < attack_position || barx - barwidth / 2 > attack_position + 100) {
 				return;
@@ -658,8 +667,8 @@ export function stageStart2() {
 
 	function bossAttack4() {
 		context.beginPath();
-		context.rect(attack4_brick_x, attack4_brick_y, 20, 20);
-		context.fillStyle = "blue";
+		context.drawImage(littlebrick_Img,attack4_brick_x, attack4_brick_y, 20, 20);
+		//context.fillStyle = "blue";
 		context.fill();
 	}
 

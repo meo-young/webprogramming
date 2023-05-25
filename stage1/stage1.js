@@ -75,6 +75,10 @@ export function stageStart1() {
 	//플레이어 이미지
 
 	var playerStandingsrc = "stage1/playerStanding_32x32.gif";
+	var bossshield_Img=new Image();
+	bossshield_Img.src="./img/stage1/보스보호막.png";
+	var sword_Img=new Image();
+	sword_Img.src="./img/stage1/검.jpg";
 
 	pageLoad();
 	windowsize();
@@ -541,7 +545,7 @@ function hp(){
 	보스를 둘러싼 파란색 원이 생김 */
 	function bossAttack1() {
 		context.beginPath();
-		context.arc(bossx + bosswd / 2, bossy + bossht / 2, bosswd / 2 + 10, 0, Math.PI * 2);
+		context.drawImage(bossshield_Img,bossx -bosswd / 3 + 10, bossy, (bosswd + 10)*1.3, (bosswd + 10)*1.3);
 		context.strokeStyle = "blue"
 		context.stroke();
 	}
@@ -550,7 +554,7 @@ function hp(){
 	검이 패들의 영역에 있다면 플레이어 데미지 */
 	function bossAttack2() {
 		context.beginPath();
-		context.rect(attack_x + barwidth / 2 - 15, yplus, 30, 100); // 가로 30 세로 100의 검 생성
+		context.drawImage(sword_Img,attack_x + barwidth / 2 - 15, yplus, 30, 100); // 가로 30 세로 100의 검 생성
 		context.fillStyle = "yellow";
 		context.fill();
 	}
