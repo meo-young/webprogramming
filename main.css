@@ -96,7 +96,7 @@ body {
     /* margin: 50px; */
     width: 150px;
     height: 350px;
-    background: url("./moon.png");
+    background: url("./img/moon.png");
     border: none;
 }
 .go-back-btn {/* 스테이지 선택 화면, 환경설정 화면, 상점 화면에서 메인 메뉴로 돌아가기 버튼 */

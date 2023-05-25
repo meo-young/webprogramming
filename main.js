@@ -79,12 +79,12 @@ $(document).ready(function () {
         // 스테이지 화면 각 화면 마우스 오버 시 보스 이미지로 변환
         $("#stgbtn1").mouseenter(function () {
             $(this).css({ 
-                "background": "url(./img/boss/bossFirst_110x80.gif)",
+                "background": "url(./img/boss/bossFirst_150x350.gif)",
                 "background-repeat" : "no-repeat"
             });
         })
         $("#stgbtn1").mouseout(function () {
-            $(this).css({ "background": "url(./moon.png)" });
+            $(this).css({ "background": "url(./img/moon.png)" });
         })
         $("#stgbtn2").mouseenter(function () {
             $(this).css({ 
@@ -93,7 +93,7 @@ $(document).ready(function () {
             });
         })
         $("#stgbtn2").mouseout(function () {
-            $(this).css({ "background": "url(./moon.png)" });
+            $(this).css({ "background": "url(./img/moon.png)" });
         })
         $("#stgbtn3").mouseenter(function () {
             $(this).css({ 
@@ -102,7 +102,7 @@ $(document).ready(function () {
             });
         })
         $("#stgbtn3").mouseout(function () {
-            $(this).css({ "background": "url(./moon.png)" });
+            $(this).css({ "background": "url(./img/moon.png)" });
         })
         // 첫번째 보스 캔버스
         $("#stgbtn1").click(function() {
