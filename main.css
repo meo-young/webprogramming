@@ -38,7 +38,7 @@ body {
     width: 50px;
     height: 50px;
     float: left;
-    background: url("./img/volOn_50x50.png");
+    background: url("./img/interface/volOn_50x50.png");
     border: none;
 }
 .gold { /* 골드 수급 상황 표시 */
@@ -53,7 +53,7 @@ body {
     margin: 50px;
     width: 463px;
     height: 100px;
-    background: url("./img/start_463x100.png");
+    background: url("./img/interface/start_463x100.png");
     border: none;
 }
 #settings-btn, #shop-btn {/* 환경설정, 상점으로 이동하는 버튼 */
@@ -62,12 +62,12 @@ body {
 #settings-btn {
     width: 289px;
     height: 43px;
-    background: url("./img/settings_289x43.png");
+    background: url("./img/interface/settings_289x43.png");
 }
 #shop-btn {
     width: 161px;
     height: 41px;
-    background: url("./img/shop_161x41.png");
+    background: url("./img/interface/shop_161x41.png");
 }
 .stage {
     float: left;
@@ -80,23 +80,23 @@ body {
 #stgLevel1 {
     width: 184px;
     height: 51px;
-    background: url("./img/easy_184x51.png");
+    background: url("./img/interface/easy_184x51.png");
 }
 #stgLevel2 {
     width: 305px;
     height: 49px;
-    background: url("./img/normal_305x49.png");
+    background: url("./img/interface/normal_305x49.png");
 }
 #stgLevel3 {
     width: 199px;
     height: 47px;
-    background: url("./img/hard_199x47.png");
+    background: url("./img/interface/hard_199x47.png");
 }
 .stage-btn {/* 각 스테이지 선택 버튼 */
     /* margin: 50px; */
     width: 150px;
     height: 350px;
-    background: url("./img/moon.png");
+    background: url("./img/interface/moon.png");
     border: none;
 }
 .go-back-btn {/* 스테이지 선택 화면, 환경설정 화면, 상점 화면에서 메인 메뉴로 돌아가기 버튼 */
@@ -105,14 +105,14 @@ body {
     right: 0;
     width: 50px;
     height: 50px;
-    background: url("./img/back_50x50.png");
+    background: url("./img/interface/back_50x50.png");
     border: none;
 }
 
 #settings {
     width: 289px;
     height: 43px;
-    background: url("./img/settings_289x43.png");
+    background: url("./img/interface/settings_289x43.png");
 }
 .setting {
     margin-top: 40px;
@@ -125,7 +125,7 @@ body {
 #BGM, #effectSound {
     width: 50px;
     height: 50px;
-    background: url("./img/volOn_50x50.png");
+    background: url("./img/interface/volOn_50x50.png");
     border: none;
 }
 
@@ -133,7 +133,7 @@ body {
 #shop {
     width: 161px;
     height: 41px;
-    background: url("./img/shop_161x41.png");
+    background: url("./img/interface/shop_161x41.png");
 }
 
 .animateContent1 {  /* 페이지 전환 시 이전 페이지가 작아지는 효과 애니메이션 animate1을 2초간 실행 */

@@ -39,14 +39,14 @@ $(document).ready(function () {
     $("#audioVol").click(function() {
         // if(!currentBGM.paused) {    // 재생 -> 정지
         if(bgmOn) {
-            $(this).css({ "background": "url(./img/volOff_50x50.png)" });
-            $("#BGM").css({ "background": "url(./img/volOff_50x50.png)" });
+            $(this).css({ "background": "url(./img/interface/volOff_50x50.png)" });
+            $("#BGM").css({ "background": "url(./img/interface/volOff_50x50.png)" });
             currentBGM.pause();
             bgmOn = false;
         }
         else {  // 정지 -> 재생
-            $(this).css({ "background": "url(./img/volOn_50x50.png)" });
-            $("#BGM").css({ "background": "url(./img/volOn_50x50.png)" });
+            $(this).css({ "background": "url(./img/interface/volOn_50x50.png)" });
+            $("#BGM").css({ "background": "url(./img/interface/volOn_50x50.png)" });
             currentBGM.play();
             bgmOn = true;
         }
@@ -79,30 +79,30 @@ $(document).ready(function () {
         // 스테이지 화면 각 화면 마우스 오버 시 보스 이미지로 변환
         $("#stgbtn1").mouseenter(function () {
             $(this).css({ 
-                "background": "url(./img/boss/bossFirst_150x350.gif)",
+                "background": "url(./img/stage1/bossFirst_150x350.gif)",
                 "background-repeat" : "no-repeat"
             });
         })
         $("#stgbtn1").mouseout(function () {
-            $(this).css({ "background": "url(./img/moon.png)" });
+            $(this).css({ "background": "url(./img/interface/moon.png)" });
         })
         $("#stgbtn2").mouseenter(function () {
             $(this).css({ 
-                "background": "url(./img/boss/bossSecond_122x80.gif)",
+                "background": "url(./img/stage2/bossSecond_122x80.gif)",
                 "background-repeat" : "no-repeat"
             });
         })
         $("#stgbtn2").mouseout(function () {
-            $(this).css({ "background": "url(./img/moon.png)" });
+            $(this).css({ "background": "url(./img/interface/moon.png)" });
         })
         $("#stgbtn3").mouseenter(function () {
             $(this).css({ 
-                "background": "url(./img/boss/bossLast_101x80.gif)",
+                "background": "url(./img/stage3/bossLast_101x80.gif)",
                 "background-repeat" : "no-repeat"
             });
         })
         $("#stgbtn3").mouseout(function () {
-            $(this).css({ "background": "url(./img/moon.png)" });
+            $(this).css({ "background": "url(./img/interface/moon.png)" });
         })
         // 첫번째 보스 캔버스
         $("#stgbtn1").click(function() {
@@ -194,21 +194,21 @@ $(document).ready(function () {
         });
         // 배경음악
         if(bgmOn) { // 온오프버튼 이미지 초기화
-            $("#BGM").css({ "background": "url(./img/volOn_50x50.png)" });
+            $("#BGM").css({ "background": "url(./img/interface/volOn_50x50.png)" });
         }
         else {
-            $("#BGM").css({ "background": "url(./img/volOff_50x50.png)" });
+            $("#BGM").css({ "background": "url(./img/interface/volOff_50x50.png)" });
         }
         $("#BGM").off("click").on("click", function() {
             if(bgmOn) { // 재생 -> 정지
-                $(this).css({ "background": "url(./img/volOff_50x50.png)" });
-                $("#audioVol").css({ "background": "url(./img/volOff_50x50.png)" });
+                $(this).css({ "background": "url(./img/interface/volOff_50x50.png)" });
+                $("#audioVol").css({ "background": "url(./img/interface/volOff_50x50.png)" });
                 currentBGM.pause();
                 bgmOn = false;
             }
             else {  // 정지 -> 재생
-                $(this).css({ "background": "url(./img/volOn_50x50.png)" });
-                $("#audioVol").css({ "background": "url(./img/volOn_50x50.png)" });
+                $(this).css({ "background": "url(./img/interface/volOn_50x50.png)" });
+                $("#audioVol").css({ "background": "url(./img/interface/volOn_50x50.png)" });
                 currentBGM.play();
                 bgmOn = true;
             }
@@ -358,10 +358,10 @@ $(document).ready(function () {
     
     // 뒤로가기 버튼 오버 시
     $(".go-back-btn").mouseenter(function () {
-        $(this).css({ "background": "url(./img/backHover_50x50.png)" });
+        $(this).css({ "background": "url(./img/interface/backHover_50x50.png)" });
     })
     $(".go-back-btn").mouseout(function () {
-        $(this).css({ "background": "url(./img/back_50x50.png)" });
+        $(this).css({ "background": "url(./img/interface/back_50x50.png)" });
     })
     // 메인 메뉴 버튼들 마우스오버 시
     $("#start-btn").mouseenter(function() { // 시작
