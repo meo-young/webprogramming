@@ -87,6 +87,8 @@ export function stageStart1() {
 	bossshield_Img.src="./img/stage1/bossShield.png";
 	var sword_Img=new Image();
 	sword_Img.src="./img/stage1/boss1sword1.png";
+	var paddleImg = new Image();
+	paddleImg.src = "./img/player/paddle.png";
 	pageLoad();
 	wait();
 	windowsize();
@@ -234,8 +236,9 @@ export function stageStart1() {
 	function drawPaddle() {
 		context.beginPath();
 		context.rect((barx - barwidth / 2), cvht - 20, barwidth, barheight);
-		context.fillStyle = "black";
+		context.fillStyle = "transparent";
 		context.fill();
+		context.drawImage(paddleImg, (barx - barwidth / 2), cvht - 20, barwidth, barheight);
 	}
 
 	/* 글씨 기본 설정 해주는 함수 */

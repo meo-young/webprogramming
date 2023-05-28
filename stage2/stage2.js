@@ -109,6 +109,8 @@ export function stageStart2() {
 	bottom_attack_Img.src="./img/stage2/하단공격.png";
 	var warnImg=new Image();
 	warnImg.src="./img/stage2/warning.png"
+	var paddleImg = new Image();
+	paddleImg.src = "./img/player/paddle.png";
 	windowsize();
 	wait();
 	pageLoad();
@@ -259,7 +261,8 @@ export function stageStart2() {
 		context.beginPath();
 		context.rect((barx - barwidth / 2), cvht - 20, barwidth, barheight);
 		if (bar_state == 0) {
-			context.fillStyle = "black";
+			context.fillStyle = "transparent";
+			context.drawImage(paddleImg, (barx - barwidth / 2), cvht - 20, barwidth, barheight);
 		}
 		else if (bar_state == 1) {
 			context.fillStyle = "blue";

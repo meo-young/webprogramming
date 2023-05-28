@@ -127,7 +127,8 @@ export function stageStart3() {
 	falling_attack_Img.src="./img/stage3/떨어지는공격.png";
 	var iceball_Img=new Image();
 	iceball_Img.src="./img/stage3/아이스볼.png";
-
+	var paddleImg = new Image();
+	paddleImg.src = "./img/player/paddle.png";
 	var drawinterval=1;
 
 	wait();
@@ -291,8 +292,9 @@ export function stageStart3() {
 	function drawPaddle() {
 		context.beginPath();
 		context.rect((barx - barwidth / 2), cvht - 20, barwidth, barheight);
-		context.fillStyle = "black";
+		context.fillStyle = "transparent";
 		context.fill();
+		context.drawImage(paddleImg, (barx - barwidth / 2), cvht - 20, barwidth, barheight);
 	}
 
 	/* 글씨 기본 설정 해주는 함수 */
