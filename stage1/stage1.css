@@ -92,3 +92,14 @@ body {
     top: 20px;
     left: 10px;
 }
+
+#gold1 {
+    position: absolute;
+    top: 430px;
+    left: 75px;
+}
+
+#esc_menu1 {
+    
+    display: none;
+}

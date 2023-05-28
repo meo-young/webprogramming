@@ -114,7 +114,7 @@ export function stageStart3() {
 
 	var playerStandingsrc = "./img/player/playerStanding_32x32.gif"; // div
 	var bossImg = new Image(); // in canvas
-	bossImg.src = "./img/stage3/boss1_1.png";
+	bossImg.src = "./img/stage3/bossLast_101x80.gif";
 	var bossStandingsrc = "./img/stage3/bossLast_101x80.gif"; // div
 	//이미지들
 	var wskill_Img = new Image();
@@ -132,59 +132,45 @@ export function stageStart3() {
 
 	wait();
 	windowsize();
-
+	pageLoad();
 	/* 윈도우 창 크기를 변경할 때마다 canvas 크기도 변경 */
 	$(window).resize(windowsize);
 	hp();
 	init();
 	draw();
-	addEventListener("keydown", keydown);
 
-	$(window).onload(function(){
-		$("#play").onclick(function(){
-			$("#boss_UI3").css({
-				display : "block"
-			});
-			$("#player_UI3").css({
-				display : "block"
-			});
-			$("#screen3").css({
-				display : "block"
-			});
-			$("#esc_menu").css({
-				display : "none"
-			});
-			esc_count = 0;
-			keydown_count = 0;
-			addEventListener('mousemove', mousemove);
-			repeat = setInterval(draw,1);
-			time_repeat = setInterval(timeAttack,1000);
-			if(stop_pattern == 1){	
-				attack1_repeat = setInterval(bossAttack1_timer, 1000);
-			}
-			else if(stop_pattern == 3){
-				attack3_repeat = setInterval(bossAttack3_timer, 1000); 
-			}
-			else if(stop_pattern == 4){
-				attack4_timer = setInterval(bossAttack4_timer, 200);
-			}
-			if(qstop_pattern == 1){
-				qskill_repeat = setInterval(skill_timer1,1000);
-				qstop_pattern = 0;
-			}
-			if(wstop_pattern == 1){
-				wskill_repeat = setInterval(skill_timer2, 1000);
-				wskill_repeat2 = setInterval(wskill_time, 1);
-				wstop_pattern = 0;
-			}
-			if(estop_pattern == 1){
-				eskill_timer = setInterval(eskill_time, 1000);
-				eskill_repeat = setInterval(skill_timer3, 1000);
-				estop_pattern = 0;
-			}
-			stop_pattern = 0;
+	function pageLoad(){
+		var play_button = document.getElementById("play3");
+		play_button.onclick = play;
+	}
+
+	function play(){
+		$("#boss_UI3").css({
+			display : "block"
 		});
-	});
+		$("#player_UI3").css({
+			display : "block"
+		});
+		$("#screen3").css({
+			display : "block"
+		});
+		$("#esc_menu3").css({
+			display : "none"
+		});
+		esc_count = 0;
+		keydown_count = 0;
+		addEventListener('mousemove', mousemove);
+		repeat = setInterval(draw,1);
+		time_repeat = setInterval(timeAttack,1000);
+		if(stop_pattern == 2){	
+			attack2_repeat = setInterval(bossAttack2_timer, 1);
+		}
+		if(qstop_pattern == 1){
+			qskill_repeat = setInterval(skill_timer1,1000);
+			qstop_pattern = 0;
+		}
+		stop_pattern = 0;
+	}
 
 
 	/* window size 변경 해주는 함수 */
@@ -218,11 +204,10 @@ export function stageStart3() {
 		if (count == -1) {
 			clearInterval(repeat);
 			count = 3;
-			repeat = setInterval(draw, 1);
-			drawinterval = 1;
+			repeat = setInterval(draw,1);
 			time_repeat = setInterval(timeAttack, 1000);
 			addEventListener('mousemove', mousemove);
-			keydown_count = 0;
+			addEventListener("keydown", keydown);
 		}
 	}
 
@@ -246,7 +231,7 @@ export function stageStart3() {
 
 	function draw() {
 		context.clearRect(0, 0, cvwd, cvht);
-		$("#gold").text("gold : "+gold);
+		$("#gold3").text("gold : "+gold);
 		/* 보스 공격 관련 조건문 */
 		if (eskill == 0) {
 			if (attack1 == 1) {
@@ -431,7 +416,7 @@ export function stageStart3() {
 			context.fillStyle = "blue";
 		}
 		else {
-			context.fillStyle = "transparent";
+			context.fillStyle = "red";
 		}
 		context.fill();
 
@@ -480,7 +465,7 @@ export function stageStart3() {
 		var playImg = $("#playerImg3");
 		var p_ImgBlankInterval = setInterval(function () {
 			if (playImg.attr("src") === playerStandingsrc) {
-				playImg.attr("src", "./img/player/playerHit_default.png");
+				playImg.attr("src", "./img/player/playerStanding_red_32x32.gif");
 			}
 			else {
 				playImg.attr("src", playerStandingsrc);
@@ -648,7 +633,7 @@ export function stageStart3() {
 			$("#screen3").css({
 				display : "none"
 			});
-			$("#esc_menu").css({
+			$("#esc_menu3").css({
 				display : "block"
 			});
 			esc_count = 1;
@@ -694,7 +679,7 @@ export function stageStart3() {
 			$("#screen3").css({
 				display : "block"
 			});
-			$("#esc_menu").css({
+			$("#esc_menu3").css({
 				display : "none"
 			});
 			esc_count = 0;
@@ -1023,4 +1008,50 @@ export function stageStart3() {
 	}
 	/*---------------------------------------------------------보스 공격패턴 함수---------------------------------------------------------*/
 	
+
+	$("#play").onclick(function(){
+		$("#test").text("3");
+		$("#boss_UI3").css({
+			display : "block"
+		});
+		$("#player_UI3").css({
+			display : "block"
+		});
+		$("#screen3").css({
+			display : "block"
+		});
+		$("#esc_menu").css({
+			display : "none"
+		});
+		esc_count = 0;
+		keydown_count = 0;
+		addEventListener('mousemove', mousemove);
+		repeat = setInterval(draw,1);
+		time_repeat = setInterval(timeAttack,1000);
+		if(stop_pattern == 1){
+			attack1_repeat = setInterval(bossAttack1_timer, 1000);
+		}
+		else if(stop_pattern == 3){
+			attack3_repeat = setInterval(bossAttack3_timer, 1000);
+		}
+		else if(stop_pattern == 4){
+			attack4_timer = setInterval(bossAttack4_timer, 200);
+		}
+		if(qstop_pattern == 1){
+			qskill_repeat = setInterval(skill_timer1,1000);
+			qstop_pattern = 0;
+		}
+		if(wstop_pattern == 1){
+			wskill_repeat = setInterval(skill_timer2, 1000);
+			wskill_repeat2 = setInterval(wskill_time, 1);
+			wstop_pattern = 0;
+		}
+		if(estop_pattern == 1){
+			eskill_timer = setInterval(eskill_time, 1000);
+			eskill_repeat = setInterval(skill_timer3, 1000);
+			estop_pattern = 0;
+		}
+		stop_pattern = 0;
+	});
 }
+

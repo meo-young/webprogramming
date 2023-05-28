@@ -382,4 +382,6 @@ $(document).ready(function () {
     $("#shop-btn").mouseout(function() {
         $(this).css({ "transform" : "scale(1)" });
     })
+
+
 });

@@ -3,7 +3,7 @@ body {
     padding: 0;
 }
 
-#esc_menu {
+#esc_menu3 {
     
     display: none;
 }
@@ -49,7 +49,7 @@ body {
     right: 0;
 }
 
-#gold {
+#gold3 {
     position: absolute;
     top: 430px;
     left: 75px;

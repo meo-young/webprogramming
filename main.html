@@ -45,6 +45,11 @@
 
     <!-- 스테이지 -->
     <div id="stage1" class="screen">
+        <div id="esc_menu1">
+            <input id="play1" type="button" value = "PLAY">
+            <input id="set1" type="button" value = "SETTINGS">
+            <input id="exit1" type="button" value = "EXIT">
+        </div>
         <div id="boss_UI1">
             <div id="boss_img1">
                 <img class="character1" src="./img/stage1/bossFirst_110x80.gif" width="180px" height="150px">
@@ -56,12 +61,15 @@
         </div>
         <div id="player_UI1">
             <div id="player_img1">
-                <img class="character" id="playerImg1" src="./img/player/playerStanding_32x32.gif" width="180px" height="150px">
+                <img class="character" src="./img/player/playerStanding_32x32.gif" width="180px" height="150px">
             </div>
             <div id="player_state1">
                 <img src="./img/player/playerHeartFull_25x25.png" class="state1" width="50px" height="50px">
                 <img src="./img/player/playerHeartFull_25x25.png" class="state1" width="50px" height="50px">
                 <img src="./img/player/playerHeartFull_25x25.png" class="state1" width="50px" height="50px">
+            </div>
+            <div id="gold1">
+                gold : 
             </div>
             <div id="skill1">
                 <div>
@@ -72,12 +80,14 @@
             </div>
         </div>
         <canvas id="screen1" width="600" height="600"></canvas>
-        <div>
-            <input id="gamestart1" type="button" value="게임시작">
-        </div>
         <div id="timer1"></div>
     </div>
     <div id="stage2" class="screen">
+        <div id="esc_menu2">
+            <input id="play2" type="button" value = "PLAY">
+            <input id="set2" type="button" value = "SETTINGS">
+            <input id="exit2" type="button" value = "EXIT">
+        </div>
         <div id="boss_UI2">
             <div id="boss_img2">
                 <img class="character" src="./img/stage2/bossSecond_122x80.gif" width="180px" height="150px">
@@ -89,18 +99,21 @@
         </div>
         <div id="player_UI2">
             <div id="player_img2">
-                <img class="character" id="playerImg2" src="./img/player/playerStanding_32x32.gif" width="180px" height="150px">
+                <img class="character" src="./img/player/playerStanding_32x32.gif" width="180px" height="150px">
             </div>
             <div id="player_state2">
                 <img src="./img/player/playerHeartFull_25x25.png" class="state2" width="50px" height="50px">
                 <img src="./img/player/playerHeartFull_25x25.png" class="state2" width="50px" height="50px">
                 <img src="./img/player/playerHeartFull_25x25.png" class="state2" width="50px" height="50px">
             </div>
+            <div id="gold2">
+                gold : 
+            </div>
             <div id="skill2">
                 <div>
                     <p>Q</p>
                     <div id="qtimer2"></div>
-                    <img id="qskill2" src="./img/player/qskillpng" width="50px" height="50px">
+                    <img id="qskill2" src="./img/player/qskill" width="50px" height="50px">
                 </div>
                 <div>
                     <p>W</p>
@@ -110,17 +123,15 @@
             </div>
         </div>
         <canvas id="screen2" width="600" height="600"></canvas>
-        <div>
-            <input id="gamestart2" type="button" value="게임시작">
-        </div>
         <div id="timer2"></div>
     </div>
     <div id="stage3" class="screen">
-        <div id="esc_menu">
-            <input id="play" type="button" value = "PLAY">
-            <input id="set" type="button" value = "SETTINGS">
-            <input id="exit" type="button" value = "EXIT">
+        <div id="esc_menu3">
+            <input id="play3" type="button" value = "PLAY">
+            <input id="set3" type="button" value = "SETTINGS">
+            <input id="exit3" type="button" value = "EXIT">
         </div>
+        <div id="test">23213</div>
         <div id="boss_UI3">
             <div id="boss_img3">
                 <img class="character" src="./img/stage3/bossLast_101x80.gif" width="180px" height="150px">
@@ -140,7 +151,7 @@
                 <img src="./img/player/playerHeartFull_25x25.png" class="state3" width="50px" height="50px">
                 <img src="./img/player/playerHeartFull_25x25.png" class="state3" width="50px" height="50px">
             </div>
-            <div id="gold">
+            <div id="gold3">
                 gold : 
             </div>
             <div id="skill3">
