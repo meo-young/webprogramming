@@ -96,7 +96,9 @@ export function stageStart2() {
 	/*플레이어, 보스 체력 */
 	var p_hp = 0;
 	var b_hp = 20;
-
+	var playerStandingsrc = "./img/player/playerStanding_32x32.gif"; // div
+	var bossImg = new Image(); // in canvas
+	bossImg.src = "./img/stage2/b1.png";
 	var barice_Img=new Image();
 	barice_Img.src="./img/stage2/바얼음.png";
 	var bossshield_Img=new Image();
@@ -296,7 +298,7 @@ export function stageStart2() {
 		bossy = 10;
 		context.beginPath();
 		context.rect(bossx, bossy, bosswd, bossht);
-		context.fillStyle = "red";
+		context.fillStyle = "transparent";
 		context.fill();
 
 	}
@@ -307,6 +309,7 @@ export function stageStart2() {
 			return;
 		} else {
 			b_hp--;
+			b_hp_decrease_Img();
 			hp();
 			var num = b_hp * 15;
 			$("#container2").animate({
@@ -316,6 +319,15 @@ export function stageStart2() {
 				game_over(1);
 			}
 		}
+	}
+
+	//보스 체력 감소시 플레이어 공격모션
+	function b_hp_decrease_Img() {
+		var playerImg = $("#playerImg2");
+		playerImg.attr("src", "./img/player/playerAttack1_32x32.gif");
+		setTimeout(function () {
+			playerImg.attr("src", playerStandingsrc);
+		}, 1000);
 	}
 
 	//보스 체력 회복 해주는 함수
@@ -339,13 +351,28 @@ export function stageStart2() {
 			return;
 		}
 		var p_hp_array = $(".state2");
-		p_hp_array[p_hp].src = "stage2/empty_hearted.png";
+		p_hp_array[p_hp].src = "./img/player/playerHeartEmpty_25x25.png";
 		p_hp++;
 		if (p_hp == 3) {
 			game_over(2);
 		}
 	}
+	function p_hp_decrease_Img() {
+		var playImg = $("#playerImg2");
+		var p_ImgBlankInterval = setInterval(function () {
+			if (playImg.attr("src") === playerStandingsrc) {
+				playImg.attr("src", "./img/player/playerHit_default.png");
+			}
+			else {
+				playImg.attr("src", playerStandingsrc);
+			}
+		}, 100);
+		setTimeout(function () {
+			clearInterval(p_ImgBlankInterval);
+			playImg.attr("src", playerStandingsrc);
 
+		}, 500);
+	}
 	function game_over(who) {
 		keydown_count = 1;
 		removeEventListener('mousemove', mousemove);
@@ -364,6 +391,11 @@ export function stageStart2() {
 	/* 플레이어, 보스 체력 출력해주는 함수 */
 	function hp() {
 		$("#bp_num2").text(b_hp);
+	}
+
+	function game_over_Img() {
+		var playerImg = $("#playerImg2");
+		playerImg.attr("src", "./img/player/playerLose_32x32.gif");
 	}
 
 	/*---------------------------------------------------------그리는것 관련 함수---------------------------------------------------------*/
