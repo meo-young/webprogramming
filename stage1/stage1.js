@@ -302,29 +302,27 @@ export function stageStart1() {
 	}
 
 
-	//보스 체력 감소시 플레이어 공격모션
-function b_hp_decrease_Img(){
-	var playerImg = $("#playerImg1");
-	playerImg.attr("src","./img/player/playerAttack1_32x32.gif");
-	setTimeout(function(){
-		playerImg.attr("src",playerStandingsrc);
-	},1000);
-}
-
+function b_hp_decrease_Img() {
+		var playerImg = $("#playerImg1");
+		playerImg.attr("src", "./img/player/playerAttack1_32x32.gif");
+		setTimeout(function () {
+			playerImg.attr("src", playerStandingsrc);
+		}, 1000);
+	}
 
 	function p_hp_decrease() {
 		var p_hp_array = $(".state1");
 		p_hp_array[p_hp].src = "./img/player/playerHeartEmpty_25x25.png";
 		p_hp++;
 
-		if (p_hp == 1 || p_hp == 2) {
+		if(p_hp == 1 || p_hp == 2){
 			p_hp_decrease_Img();
 		}
-		if (p_hp == 3) {
+		if(p_hp == 3){
 			game_over_Img();
 			game_over(2);
+
 		}
-	}
 	}
 
 	function p_hp_decrease_Img(){
@@ -358,20 +356,17 @@ function b_hp_decrease_Img(){
 			drawText("You Lose");
 		}
 	}
-	/* 플레이어, 보스 체력 출력해주는 함수 */
-	function hp() {
-		$("#bp_num1").text(b_hp);
-	}
 
+
+/* 플레이어, 보스 체력 출력해주는 함수 */
+function hp() {
+	$("#bp_num1").text(b_hp);
+}
 
 	function game_over_Img() {
 		var playerImg = $("#playerImg1");
 		playerImg.attr("src", "./img/player/playerLose_32x32.gif");
 	}
-/* 플레이어, 보스 체력 출력해주는 함수 */
-function hp(){
-	$("#bp_num1").text(b_hp);
-}
 	/*---------------------------------------------------------그리는것 관련 함수---------------------------------------------------------*/
 
 
