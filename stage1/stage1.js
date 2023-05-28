@@ -74,7 +74,10 @@ export function stageStart1() {
 	var b_hp = 20;
 	//플레이어 이미지
 
-	var playerStandingsrc = "stage1/playerStanding_32x32.gif";
+	var playerStandingsrc = "./img/player/playerStanding_32x32.gif"; // div
+	var bossImg = new Image(); // in canvas
+	bossImg.src = "./img/stage1/b2.png";
+
 	var bossshield_Img=new Image();
 	bossshield_Img.src="./img/stage1/보스보호막.png";
 	var sword_Img=new Image();
@@ -248,8 +251,12 @@ export function stageStart1() {
 		bossy = 10;
 		context.beginPath();
 		context.rect(bossx, bossy, bosswd, bossht);
-		context.fillStyle = "red";
+		context.fillStyle = "transparent";
 		context.fill();
+
+
+		context.drawImage(bossImg, bossx, bossy, bosswd, bossht);
+
 
 	}
 
@@ -271,7 +278,7 @@ export function stageStart1() {
 	//보스 체력 감소시 플레이어 공격모션
 function b_hp_decrease_Img(){
 	var playerImg = $("#playerImg1");
-	playerImg.attr("src","stage1/playerAttack1_32x32.gif");
+	playerImg.attr("src","./img/player/playerAttack1_32x32.gif");
 	setTimeout(function(){
 		playerImg.attr("src",playerStandingsrc);
 	},1000);
@@ -280,7 +287,7 @@ function b_hp_decrease_Img(){
 
 	function p_hp_decrease() {
 		var p_hp_array = $(".state1");
-		p_hp_array[p_hp].src = "stage1/empty_hearted.png";
+		p_hp_array[p_hp].src = "./img/player/playerHeartEmpty_25x25.png";
 		p_hp++;
 
 		if(p_hp == 1 || p_hp == 2){
@@ -297,7 +304,7 @@ function b_hp_decrease_Img(){
 	var playImg = $("#playerImg1");
 	var p_ImgBlankInterval = setInterval(function(){
 		if(playImg.attr("src")===playerStandingsrc){
-			playImg.attr("src","stage1/playerStanding_red_32x32.gif");}
+			playImg.attr("src","./img/player/playerHit_default.png");}
 		else{
 			playImg.attr("src",playerStandingsrc);
 		}
@@ -330,10 +337,10 @@ function b_hp_decrease_Img(){
 	}
 
 
-	function game_over_Img(){
-	var playerImg = $("#playerImg1");
-	playerImg.attr("src","stage1/playerLose_32x32.gif");
-}
+	function game_over_Img() {
+		var playerImg = $("#playerImg1");
+		playerImg.attr("src", "./img/player/playerLose_32x32.gif");
+	}
 /* 플레이어, 보스 체력 출력해주는 함수 */
 function hp(){
 	$("#bp_num1").text(b_hp);

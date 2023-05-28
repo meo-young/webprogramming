@@ -114,7 +114,7 @@ export function stageStart3() {
 
 	var playerStandingsrc = "./img/player/playerStanding_32x32.gif"; // div
 	var bossImg = new Image(); // in canvas
-	bossImg.src = "./img/stage3/bossLast_101x80.gif";
+	bossImg.src = "./img/stage3/boss1_1.png";
 	var bossStandingsrc = "./img/stage3/bossLast_101x80.gif"; // div
 	//이미지들
 	var wskill_Img = new Image();
@@ -431,7 +431,7 @@ export function stageStart3() {
 			context.fillStyle = "blue";
 		}
 		else {
-			context.fillStyle = "red";
+			context.fillStyle = "transparent";
 		}
 		context.fill();
 
@@ -480,7 +480,7 @@ export function stageStart3() {
 		var playImg = $("#playerImg3");
 		var p_ImgBlankInterval = setInterval(function () {
 			if (playImg.attr("src") === playerStandingsrc) {
-				playImg.attr("src", "./img/player/playerStanding_red_32x32.gif");
+				playImg.attr("src", "./img/player/playerHit_default.png");
 			}
 			else {
 				playImg.attr("src", playerStandingsrc);
