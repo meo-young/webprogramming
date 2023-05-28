@@ -103,3 +103,9 @@ body {
     
     display: none;
 }
+
+#boomImg1{
+    position: absolute;
+    top: 40px;
+    left: 40px;
+}

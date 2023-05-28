@@ -119,3 +119,9 @@ body {
     
     display: none;
 }
+
+#boomImg2{
+    position: absolute;
+    top: 40px;
+    left: 40px;
+}

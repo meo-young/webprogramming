@@ -118,15 +118,15 @@ export function stageStart3() {
 	var bossStandingsrc = "./img/stage3/bossLast_101x80.gif"; // div
 	//이미지들
 	var wskill_Img = new Image();
-	wskill_Img.src = "sword.jpg";
+	wskill_Img.src = "./img/stage3/boss1sword3.png";
 	var brick_Img=new Image();
 	brick_Img.src="./img/stage3/벽돌.png";
 	var razer_Img=new Image();
-	razer_Img.src="/img/stage3/레이저.png";
+	razer_Img.src="./img/stage3/레이저.png";
 	var falling_attack_Img=new Image();
-	falling_attack_Img.src="/img/stage3/떨어지는공격.png";
+	falling_attack_Img.src="./img/stage3/떨어지는공격.png";
 	var iceball_Img=new Image();
-	iceball_Img.src="/img/stage3/아이스볼.png";
+	iceball_Img.src="./img/stage3/아이스볼.png";
 
 	var drawinterval=1;
 
@@ -440,8 +440,11 @@ export function stageStart3() {
 	function b_hp_decrease_Img() {
 		var playerImg = $("#playerImg3");
 		playerImg.attr("src", "./img/player/playerAttack1_32x32.gif");
+		var boomImg = $("#boomImg3");
+		boomImg.attr("src","./img/player/b3.png");
 		setTimeout(function () {
 			playerImg.attr("src", playerStandingsrc);
+			boomImg.attr("src", "");
 		}, 1000);
 	}
 

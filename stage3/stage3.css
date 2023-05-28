@@ -129,3 +129,9 @@ body {
     top: 20px;
     left: 10px;
 }
+
+#boomImg3{
+    position: absolute;
+    top: 40px;
+    left: 40px;
+}

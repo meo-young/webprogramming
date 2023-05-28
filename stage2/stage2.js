@@ -100,13 +100,15 @@ export function stageStart2() {
 	var bossImg = new Image(); // in canvas
 	bossImg.src = "./img/stage2/b1.png";
 	var barice_Img=new Image();
-	barice_Img.src="./img/stage2/바얼음.png";
+	barice_Img.src="./img/stage2/boss2freezing1.png";
 	var bossshield_Img=new Image();
-	bossshield_Img.src="./img/stage2/보스보호막.png";
+	bossshield_Img.src="./img/stage2/bossShield.png";
 	var littlebrick_Img=new Image();
 	littlebrick_Img.src="./img/stage2/부적.png";
 	var bottom_attack_Img=new Image();
 	bottom_attack_Img.src="./img/stage2/하단공격.png";
+	var warnImg=new Image();
+	warnImg.src="./img/stage2/warning.png"
 	windowsize();
 	wait();
 	pageLoad();
@@ -301,6 +303,7 @@ export function stageStart2() {
 		context.fillStyle = "transparent";
 		context.fill();
 
+		context.drawImage(bossImg, bossx, bossy, bosswd, bossht);
 	}
 
 	//보스 체력 감소 해주는 함수
@@ -321,14 +324,23 @@ export function stageStart2() {
 		}
 	}
 
+
+	
+
+
 	//보스 체력 감소시 플레이어 공격모션
 	function b_hp_decrease_Img() {
 		var playerImg = $("#playerImg2");
-		playerImg.attr("src", "./img/player/playerAttack1_32x32.gif");
+		playerImg.attr("src", "./img/player/playerAttack1_32x32.gif");	
+		var boomImg = $("#boomImg2");
+		boomImg.attr("src","./img/player/b3.png");
 		setTimeout(function () {
 			playerImg.attr("src", playerStandingsrc);
+			boomImg.attr("src", "");
 		}, 1000);
+
 	}
+
 
 	//보스 체력 회복 해주는 함수
 	function b_hp_increase() {
@@ -345,6 +357,8 @@ export function stageStart2() {
 		}
 	}
 
+
+
 	function p_hp_decrease() {
 		if (qskill == 1) {
 			qskill = 0;
@@ -353,7 +367,11 @@ export function stageStart2() {
 		var p_hp_array = $(".state2");
 		p_hp_array[p_hp].src = "./img/player/playerHeartEmpty_25x25.png";
 		p_hp++;
-		if (p_hp == 3) {
+		if(p_hp == 1 || p_hp == 2){
+			p_hp_decrease_Img();
+		}
+		if(p_hp == 3){
+			game_over_Img();
 			game_over(2);
 		}
 	}
@@ -793,8 +811,10 @@ export function stageStart2() {
 		else if (attack2_timer < 2) {
 			context.beginPath();
 			context.rect(attack_position, cvht - 100, 100, 100);
-			context.fillStyle = "gray";
+			context.fillStyle = "transparent";
 			context.fill();
+			context.drawImage(warnImg,attack_position, cvht - 100, 100, 100);
+
 		}
 	}
 

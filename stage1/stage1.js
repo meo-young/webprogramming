@@ -84,9 +84,9 @@ export function stageStart1() {
 	var bossImg = new Image(); // in canvas
 	bossImg.src = "./img/stage1/b2.png";
 	var bossshield_Img=new Image();
-	bossshield_Img.src="./img/stage1/보스보호막.png";
+	bossshield_Img.src="./img/stage1/bossShield.png";
 	var sword_Img=new Image();
-	sword_Img.src="./img/stage1/검.jpg";
+	sword_Img.src="./img/stage1/boss1sword1.png";
 	pageLoad();
 	wait();
 	windowsize();
@@ -299,14 +299,20 @@ export function stageStart1() {
 			game_over(1);
 		}
 
+
 	}
+
+
 
 
 function b_hp_decrease_Img() {
 		var playerImg = $("#playerImg1");
 		playerImg.attr("src", "./img/player/playerAttack1_32x32.gif");
+		var boomImg = $("#boomImg1");
+		boomImg.attr("src","./img/player/b3.png");
 		setTimeout(function () {
 			playerImg.attr("src", playerStandingsrc);
+			boomImg.attr("src", "");
 		}, 1000);
 	}
 
