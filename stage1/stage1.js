@@ -89,6 +89,12 @@ export function stageStart1() {
 	sword_Img.src="./img/stage1/boss1sword1.png";
 	var paddleImg = new Image();
 	paddleImg.src = "./img/player/paddle.png";
+
+	//오디오 소스
+	const brickAudio = new Audio('./audio/brickbreak.mp3');
+	const swingAudio = new Audio('./audio/swing.mp3');
+	const bossAudio=new Audio('./audio/bosshit.mp3');
+
 	pageLoad();
 	wait();
 	windowsize();
@@ -293,6 +299,7 @@ export function stageStart1() {
 	function b_hp_decrease() {
 		b_hp--;
 		b_hp_decrease_Img();
+		bossAudio.play();
 		hp();
 		var num = b_hp * 15;
 		$("#container1").animate({
@@ -400,21 +407,25 @@ function hp() {
 						context.clearRect(brickx, bricky, BRICKWIDTH, BRICKHEIGHT);
 						bricks[i] = 0;
 						dy = -dy;
+						brickAudio.play();
 					}
 					if (x > brickx - ballRadius - dxf && x < brickx && y < bricky + BRICKHEIGHT + ballRadius && y > bricky - ballRadius) { //벽돌의 왼쪽 부분과 충돌
 						context.clearRect(brickx, bricky, BRICKWIDTH, BRICKHEIGHT);
 						bricks[i] = 0;
 						dx = -dx;
+						brickAudio.play();
 					}
 					if (x < brickx + BRICKWIDTH + ballRadius + dxf && x > brickx + BRICKWIDTH && y < bricky + BRICKHEIGHT + ballRadius && y > bricky - ballRadius) { // 벽돌의 오른쪽 부분과 충돌
 						context.clearRect(brickx, bricky, BRICKWIDTH, BRICKHEIGHT);
 						bricks[i] = 0;
 						dx = -dx;
+						brickAudio.play();
 					}
 					if (brickx + BRICKWIDTH > x && brickx < x && y > bricky - ballRadius && y < bricky) { // 벽돌의 윗 부분과 충돌
 						context.clearRect(brickx, bricky, BRICKWIDTH, BRICKHEIGHT);
 						bricks[i] = 0;
 						dy = -dy;
+						brickAudio.play();
 					}
 				}
 			}
@@ -456,12 +467,14 @@ function hp() {
 			} else if (x > barx - (barwidth / 2 + ballRadius) && x < barx + (barwidth / 2 + ballRadius)) { //바의 영역에 있는 경우	
 				if(dy > 0){
 					gold += 5;
+					swingAudio.play();
 				}
 				dx = xvelocity * (x - barx) / (barwidth + ballRadius / 2);
 				dy = -dy;
 			} else { //바의 영역의 마지노선에 맞닿는 경우
 				if(dy > 0){
 					gold += 5;
+					swingAudio.play();
 				}
 				dy = -dy;
 				dx = -dx;

@@ -111,6 +111,14 @@ export function stageStart2() {
 	warnImg.src="./img/stage2/warning.png"
 	var paddleImg = new Image();
 	paddleImg.src = "./img/player/paddle.png";
+
+	//오디오 파일
+	const brickAudio = new Audio('./audio/brickbreak.mp3');
+	const swingAudio = new Audio('./audio/swing.mp3');
+	const bossAudio=new Audio('./audio/bosshit.mp3');
+
+
+
 	windowsize();
 	wait();
 	pageLoad();
@@ -316,6 +324,7 @@ export function stageStart2() {
 		} else {
 			b_hp--;
 			b_hp_decrease_Img();
+			bossAudio().play();
 			hp();
 			var num = b_hp * 15;
 			$("#container2").animate({
@@ -434,24 +443,28 @@ export function stageStart2() {
 				//공이 보스패턴4로 소환된 첫번째 벽의 밑면에 맞는 경우
 				dy = -dy;
 				attack4 = 0;
+				brickAudio.play();
 				b_hp_decrease();
 			}
 			else if (x > attack4_brick_x - ballRadius && x < attack4_brick_x + 20 + ballRadius && y > attack4_brick_y - ballRadius && y < attack4_brick_y) {
 				//공이 윗면에 맞는경우
 				dy = -dy;
 				attack4 = 0;
+				brickAudio.play();
 				b_hp_decrease();
 			}
 			else if (x > attack4_brick_x - ballRadius && x < attack4_brick_x && y > attack4_brick_y - ballRadius && y < attack4_brick_y + 20 + ballRadius) {
 				//공이 왼쪽 면에 맞는경우
 				dx = -dx;
 				attack4 = 0;
+				brickAudio.play();
 				b_hp_decrease();
 			}
 			else if (x < attack4_brick_x + 20 + ballRadius && x > attack4_brick_x + 20 && y > attack4_brick_y - ballRadius && y < attack4_brick_y + 20 + ballRadius) {
 				//공이 오른쪽 면에 맞는 경우
 				dx = -dx;
 				attack4 = 0;
+				brickAudio.play();
 				b_hp_decrease();
 			}
 		}
@@ -488,12 +501,14 @@ export function stageStart2() {
 			} else if (x > barx - (barwidth / 2 + ballRadius) && x < barx + (barwidth / 2 + ballRadius)) { //바의 영역에 있는 경우	
 				if(dy > 0){
 					gold += 5;
+					swingAudio.play();
 				}
 				dx = xvelocity * (x - barx) / (barwidth + ballRadius / 2);
 				dy = -dy;
 			} else { //바의 영역의 마지노선에 맞닿는 경우
 				if(dy > 0){
 					gold += 5;
+					swingAudio.play();
 				}
 				dy = -dy;
 				dx = -dx;
