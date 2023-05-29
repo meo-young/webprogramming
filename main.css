@@ -11,7 +11,7 @@ body {
 
 .screen {   /* 모든 화면 1000x600 사이즈 */
     display: none;
-    overflow: hidden;
+    overflow: visible;
     border-radius: 20px 20px 20px 20px;
     margin: 20px auto;
     width: 1000px;
@@ -67,34 +67,25 @@ body {
     height: 41px;
     background: url("./img/interface/shop_161x41.png");
 }
-.stage {
-    float: left;
-    margin: 50px;
-    margin-top: 100px;
-}
-#stgLevel1 {
-    width: 184px;
-    height: 51px;
-    background: url("./img/interface/easy_184x51.png");
-}
-#stgLevel2 {
-    width: 305px;
-    height: 49px;
-    background: url("./img/interface/normal_305x49.png");
-}
-#stgLevel3 {
-    width: 199px;
-    height: 47px;
-    background: url("./img/interface/hard_199x47.png");
-}
-.stage-btn {/* 각 스테이지 선택 버튼 */
-    width: 150px;
-    height: 350px;
-    background: url("./img/interface/moon.png");
+
+.stage-btn {
+    display: inline-block;
+    width: 160px;
+    height: 568px;
     border: none;
 }
+#stgbtn1 {
+    background: url("./img/interface/stage1select1.png");
+}
+#stgbtn2 {
+    background: url("./img/interface/stage2select1.png");
+}
+#stgbtn3 {
+    background: url("./img/interface/stage3select1.png");
+}
+
 .go-back-btn {/* 스테이지 선택 화면, 환경설정 화면, 상점 화면에서 메인 메뉴로 돌아가기 버튼 */
-    float: right;
+    /* float: right; */
     bottom: 0;
     right: 0;
     width: 50px;

@@ -78,30 +78,30 @@ $(document).ready(function () {
         // 스테이지 화면 각 화면 마우스 오버 시 보스 이미지로 변환
         $("#stgbtn1").mouseenter(function () {
             $(this).css({ 
-                "background": "url(./img/stage1/bossFirst_150x350.gif)",
+                "background": "url(./img/interface/stage1select2.png)",
                 "background-repeat" : "no-repeat"
             });
         })
         $("#stgbtn1").mouseout(function () {
-            $(this).css({ "background": "url(./img/interface/moon.png)" });
+            $(this).css({ "background": "url(./img/interface/stage1select1.png)" });
         })
         $("#stgbtn2").mouseenter(function () {
             $(this).css({ 
-                "background": "url(./img/stage2/bossSecond_122x80.gif)",
+                "background": "url(./img/interface/stage2select2.png)",
                 "background-repeat" : "no-repeat"
             });
         })
         $("#stgbtn2").mouseout(function () {
-            $(this).css({ "background": "url(./img/interface/moon.png)" });
+            $(this).css({ "background": "url(./img/interface/stage2select1.png)" });
         })
         $("#stgbtn3").mouseenter(function () {
             $(this).css({ 
-                "background": "url(./img/stage3/bossLast_101x80.gif)",
+                "background": "url(./img/interface/stage3select2.png)",
                 "background-repeat" : "no-repeat"
             });
         })
         $("#stgbtn3").mouseout(function () {
-            $(this).css({ "background": "url(./img/interface/moon.png)" });
+            $(this).css({ "background": "url(./img/interface/stage3select1.png)" });
         })
         // 첫번째 보스 캔버스
         $("#stgbtn1").click(function() {
