@@ -6,11 +6,6 @@ $(document).ready(function () {
     var currentGold = 300;
     $(".gold").append(currentGold);
 
-    // 상점 상품 구매(보유) 유무
-    var buy = [1, 0, 0, 0, 0, 0];
-    // 상점 상품 착용 유무
-    var equip = 1;
-
     // 현재 배경 img
     var currentIMG = $("#b1").attr("src");
 
@@ -282,58 +277,31 @@ $(document).ready(function () {
         $("#pPurple").mouseout(function() {
             $(this).attr("src", "./img/player/playerStanding_purple_32x32.gif");
         });
-        // 착용중이면 배경 검은색->회색
-        if (equip == 1) {
-            $("#pDefault").css({"background-color" : "gray"});
-        }
-        else if (equip == 2) {
-            $("#pRed").css({"background-color" : "gray"});
-        }
-        else if (equip == 3) {
-            $("#pCyan").css({"background-color" : "gray"});
-        }
-        else if (equip == 4) {
-            $("#pWhite").css({"background-color" : "gray"});
-        }
-        else if (equip == 5) {
-            $("#pYellow").css({"background-color" : "gray"});
-        }
-        else if (equip == 6) {
-            $("#pPurple").css({"background-color" : "gray"});
-        }
+        
         // 각 플레이어 캐릭터 클릭 시
-        $("#pDefault").click(function() {
-            if (equip == 1) {
-                alert("이미 착용중 입니다!");
+        $(".pChar").click(function() {
+            if($(this).hasClass("owned")) { // 보유중인 캐릭터 클릭시
+                if ($(".pChar").hasClass("equip"))
+                    $(".pChar").removeClass("equip");
+                $(this).addClass("equip"); // 착용중으로 변경
             }
-            else {
-                equip = 1;
-                $("#shop1").html("착용중");
+            else if ($(this).hasClass("equip")) {
+                $(this).removeClass("equip");
             }
-        });
-        $("#pRed").click(function() {
-            if (equip == 2) {
-                alert("이미 착용중 입니다!");
-            }
-            else if($("#shop2").text() == "100 gold") {
-                if (currentGold < 100) {
-                    alert("보유 gold가 부족합니다!");
-                }
-                else {
-                    $("#shop2").html("보유중");
-                    currentGold = currentGold - 100;
-                    $(".gold").html("Gold : " + currentGold);
-                    currentRed = true;
+            else {  // 보유중이지 않은 캐릭터 클릭시
+                if (confirm("100 gold로 구매하시겠습니까?")) {
+                    if (currentGold >= 100) {
+                        currentGold -= 100;
+                        $(".gold").html("Gold : " + currentGold);
+                        $(this).addClass("owned");
+                    }
+                    else {
+                        alert("골드가 부족합니다!");
+                    }
                 }
             }
-            else if($("#shop2").text() == "보유중") {
-                $("#shop2").html("착용중");
-            }
         });
-        $("#pCyan")
-        $("#pWhite")
-        $("#pYellow")
-        $("#pPurple")
+
         // 뒤로가기
         $("#shop-to-main").click(function () {
             click.play();

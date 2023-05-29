@@ -12,8 +12,7 @@ body {
     display: none;
     overflow: hidden;
     border-radius: 20px 20px 20px 20px;
-    padding: 80px 100px;
-    margin: 20px 20px;
+    margin: 20px auto;
     width: 1000px;
     height: 600px;
     background: url("./backimg/bgImg1.jpg");
@@ -24,12 +23,6 @@ body {
 #main-menu {
     display: inline-block;
 }
-/* #select-stage {
-}
-#settings-menu {
-}
-#shop-menu {
-} */
 #shop-menu h3 {
     float: left;
 }
@@ -40,12 +33,17 @@ body {
     float: left;
     background: url("./img/interface/volOn_50x50.png");
     border: none;
+    margin-top: 20px;
+    margin-left: 20px;
 }
 .gold { /* 골드 수급 상황 표시 */
     width: 100px;
     float: right;
     background: yellow;
     color: black;
+    border-radius: 20px;
+    margin-top: 20px;
+    margin-right: 20px;
 }
 
 #start-btn {    /* 스테이지 선택 화면으로 이동하는 버튼 */
@@ -74,9 +72,6 @@ body {
     margin: 50px;
     margin-top: 100px;
 }
-#stage3 {
-    margin-top: 79.73px;
-}
 #stgLevel1 {
     width: 184px;
     height: 51px;
@@ -93,7 +88,6 @@ body {
     background: url("./img/interface/hard_199x47.png");
 }
 .stage-btn {/* 각 스테이지 선택 버튼 */
-    /* margin: 50px; */
     width: 150px;
     height: 350px;
     background: url("./img/interface/moon.png");
@@ -183,4 +177,10 @@ body {
     padding: 50px;
     border: 2px solid yellow;
     background-color: black;
+}
+.owned {    /*캐릭터 보유 중*/
+    background-color: gray;
+}
+.equip {    /*캐릭터 착용 중*/
+    background-color: crimson;
 }

@@ -46,9 +46,9 @@
     <!-- 스테이지 -->
     <div id="stage1" class="screen">
         <div id="esc_menu1">
-            <input id="play1" type="button" value = "PLAY">
-            <input id="set1" type="button" value = "SETTINGS">
-            <input id="exit1" type="button" value = "EXIT">
+            <input id="play1" type="button" value="PLAY">
+            <input id="set1" type="button" value="SETTINGS">
+            <input id="exit1" type="button" value="EXIT">
         </div>
         <div id="boss_UI1">
             <div id="boss_img1">
@@ -62,7 +62,8 @@
         </div>
         <div id="player_UI1">
             <div id="player_img1">
-                <img class="character" id="playerImg1" src="./img/player/playerStanding_32x32.gif" width="180px" height="150px">
+                <img class="character" id="playerImg1" src="./img/player/playerStanding_32x32.gif" width="180px"
+                    height="150px">
             </div>
             <div id="player_state1">
                 <img src="./img/player/playerHeartFull_25x25.png" class="state1" width="50px" height="50px">
@@ -70,7 +71,7 @@
                 <img src="./img/player/playerHeartFull_25x25.png" class="state1" width="50px" height="50px">
             </div>
             <div id="gold1">
-                gold : 
+                gold :
             </div>
             <div id="skill1">
                 <div>
@@ -85,9 +86,9 @@
     </div>
     <div id="stage2" class="screen">
         <div id="esc_menu2">
-            <input id="play2" type="button" value = "PLAY">
-            <input id="set2" type="button" value = "SETTINGS">
-            <input id="exit2" type="button" value = "EXIT">
+            <input id="play2" type="button" value="PLAY">
+            <input id="set2" type="button" value="SETTINGS">
+            <input id="exit2" type="button" value="EXIT">
         </div>
         <div id="boss_UI2">
             <div id="boss_img2">
@@ -101,7 +102,8 @@
         </div>
         <div id="player_UI2">
             <div id="player_img2">
-                <img class="character" id="playerImg2" src="./img/player/playerStanding_32x32.gif" width="180px" height="150px">
+                <img class="character" id="playerImg2" src="./img/player/playerStanding_32x32.gif" width="180px"
+                    height="150px">
             </div>
             <div id="player_state2">
                 <img src="./img/player/playerHeartFull_25x25.png" class="state2" width="50px" height="50px">
@@ -109,7 +111,7 @@
                 <img src="./img/player/playerHeartFull_25x25.png" class="state2" width="50px" height="50px">
             </div>
             <div id="gold2">
-                gold : 
+                gold :
             </div>
             <div id="skill2">
                 <div>
@@ -129,11 +131,10 @@
     </div>
     <div id="stage3" class="screen">
         <div id="esc_menu3">
-            <input id="play3" type="button" value = "PLAY">
-            <input id="set3" type="button" value = "SETTINGS">
-            <input id="exit3" type="button" value = "EXIT">
+            <input id="play3" type="button" value="PLAY">
+            <input id="set3" type="button" value="SETTINGS">
+            <input id="exit3" type="button" value="EXIT">
         </div>
-        <div id="test">23213</div>
         <div id="boss_UI3">
             <div id="boss_img3">
                 <img id="boomImg3" src="">
@@ -144,6 +145,7 @@
                 <div id="bp_num3">20</div>
             </div>
         </div>
+        <canvas id="screen3" width="600" height="600"></canvas>
         <div id="player_UI3">
             <div id="player_img3">
                 <img id="playerImg3" class="character" src="./img/player/playerStanding_32x32.gif" width="180px"
@@ -155,7 +157,7 @@
                 <img src="./img/player/playerHeartFull_25x25.png" class="state3" width="50px" height="50px">
             </div>
             <div id="gold3">
-                gold : 
+                gold :
             </div>
             <div id="skill3">
                 <div>
@@ -175,7 +177,6 @@
                 </div>
             </div>
         </div>
-        <canvas id="screen3" width="600" height="600"></canvas>
         <div id="timer3"></div>
     </div>
 
@@ -208,30 +209,24 @@
         <br>
         <div>
             <div class="pFirstRow">
-                <img src="./img/player/playerStanding_32x32.gif" alt="기본" id="pDefault" class="pChar">
-                <h2 id="shop1">착용중</h2>
+                <img src="./img/player/playerStanding_32x32.gif" alt="기본" id="pDefault" class="equip owned pChar">
             </div>
             <div class="pFirstRow">
                 <img src="./img/player/playerStanding_red_32x32.gif" alt="빨강" id="pRed" class="pChar">
-                <h2 id="shop2">100 gold</h2>
             </div>
             <div class="pFirstRow">
                 <img src="./img/player/playerStanding_cyan_32x32.gif" alt="파랑" id="pCyan" class="pChar">
-                <h2 id="shop3">100 gold</h2>
             </div>
         </div>
         <div>
             <div class="pSecondRow">
                 <img src="./img/player/playerStanding_white_32x32.gif" alt="하양" id="pWhite" class="pChar">
-                <h2 id="shop4">100 gold</h2>
             </div>
             <div class="pSecondRow">
                 <img src="./img/player/playerStanding_yellow_32x32.gif" alt="노랑" id="pYellow" class="pChar">
-                <h2 id="shop5">100 gold</h2>
             </div>
             <div class="pSecondRow">
                 <img src="./img/player/playerStanding_purple_32x32.gif" alt="보라" id="pPurple" class="pChar">
-                <h2 id="shop6">100 gold</h2>
             </div>
         </div>
         <button class="go-back-btn" id="shop-to-main"></button>

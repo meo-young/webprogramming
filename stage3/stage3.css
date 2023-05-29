@@ -4,14 +4,13 @@ body {
 }
 
 #esc_menu3 {
-    
     display: none;
 }
 
+/* 캔버스 */
 #screen3 {
-	border: 1px solid black;
-    position: fixed;
-    top: 0;
+    float: left;
+    background: url("../backimg/stage3bg.jpg");
 }
 
 #gamestart3 {
@@ -21,59 +20,41 @@ body {
     font-size: 20px;
 }
 
+/* 왼쪽 보스 */
 #boss_UI3 {
-    border-top: 1px solid black;
-    border-left: 1px solid black;
-    border-bottom: 1px solid black;
-    margin: 0px;
-    padding: 0px;
-    position: fixed;
+    float: left;
     width: 200px;
     height: 600px;
 }
 
+/* 오른쪽 플레이어 */
 #player_UI3 {
-    border-top: 1px solid black;
-    border-right: 1px solid black;
-    border-bottom: 1px solid black;
-    position: fixed;
+    float: left;
     width: 200px;
     height: 600px;
 }
 
+/* 플레이어 hp */
 #player_state3 {
-    text-align: center;
-    position: absolute;
-    top: 300px;
-    left: 0;
-    right: 0;
+    margin-top: 100px;
 }
-
+/* 골드 */
 #gold3 {
-    position: absolute;
-    top: 430px;
-    left: 75px;
+    margin-top: 100px;
 }
-
+/* 보스 hp */
 #boss_bar3 {
-    position: absolute;
-    top: 200px;
-    left: 90px;
-    height: 300px;
-    width: 20px;
+    margin: 50px 90px;
 }
-
 #container3 {
     width: 20px;
     height: 300px;
     background-color: red;
 }
-
+/* 플레이어 스킬 */
 #skill3 {
-    position: absolute;
-    top: 500px;
-    left: 10px;
-    overflow: hidden;
+    margin-top: 70px;
+    margin-left: 10px;
 }
 
 #skill3 div p {
@@ -125,13 +106,8 @@ body {
 }
 
 .character {
-    position: absolute;
+    /* position: absolute; */
+    position: relative;
     top: 20px;
     left: 10px;
-}
-
-#boomImg3{
-    position: absolute;
-    top: 40px;
-    left: 40px;
 }
