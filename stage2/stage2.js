@@ -1,4 +1,4 @@
-export function stageStart2() {
+export function stageStart2(mainGold) {
 	/* 플레이어 스킬 변수 */
 	var qskill = 0;
 	var qskill_timer = 30;
@@ -413,6 +413,7 @@ export function stageStart2() {
 		context.clearRect(0, 0, cvwd, cvht);
 		if (who == 1) {
 			drawText("You Win");
+			$(".gold").html(mainGold+gold);//골드 추가 부분
 		}
 		else if (who == 2) {
 			drawText("You Lose");

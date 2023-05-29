@@ -4,7 +4,7 @@ import { stageStart3 } from "./stage3/stage3.js";
 $(document).ready(function () {
     // 골드
     var currentGold = 300;
-    $(".gold").append(currentGold);
+    $(".gold").html(currentGold);
 
     // 현재 배경 img
     var currentIMG = $("#b1").attr("src");
@@ -108,24 +108,24 @@ $(document).ready(function () {
             setTimeout(function() {
                 $("#stage1").addClass("animateContent2").css({ "display": "inline-block" });
             }, 500);
-            currentGold+=stageStart1();
-            $(".gold").html("Gold : " + currentGold);
+            currentGold=parseInt($(".gold").eq(0).text());
+            stageStart1(currentGold);
         });
         // 두번째 보스 캔버스
         $("#stgbtn2").click(function() {
             setTimeout(function() {
                 $("#stage2").addClass("animateContent2").css({ "display": "inline-block" });
             }, 500);
-            currentGold+=stageStart2();
-            $(".gold").html("Gold : " + currentGold);
+            currentGold=parseInt($(".gold").eq(0).text());
+            stageStart2(currentGold);
         });
         // 세번째 보스 캔버스
         $("#stgbtn3").click(function() {
             setTimeout(function() {
                 $("#stage3").addClass("animateContent2").css({ "display": "inline-block" });
             }, 500);
-            currentGold+=stageStart3();
-            $(".gold").html("Gold : " + currentGold);
+            currentGold=parseInt($(".gold").eq(0).text());
+            stageStart3(currentGold);
         });
         // 뒤로가기 버튼 클릭 시 스테이지 화면과 메인 메뉴 애니메이션
         $("#stage-to-main").click(function () {
@@ -304,6 +304,7 @@ $(document).ready(function () {
         
         // 각 플레이어 캐릭터 클릭 시
         $(".pChar").click(function() {
+            currentGold=parseInt($(".gold").eq(0).text());
             if($(this).hasClass("owned")) { // 보유중인 캐릭터 클릭시
                 if ($(".pChar").hasClass("equip"))
                     $(".pChar").removeClass("equip");
@@ -316,7 +317,7 @@ $(document).ready(function () {
                 if (confirm("100 gold로 구매하시겠습니까?")) {
                     if (currentGold >= 100) {
                         currentGold -= 100;
-                        $(".gold").html("Gold : " + currentGold);
+                        $(".gold").html(currentGold);
                         $(this).addClass("owned");
                     }
                     else {

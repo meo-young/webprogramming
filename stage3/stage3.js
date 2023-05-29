@@ -1,5 +1,5 @@
 
-export function stageStart3() {
+export function stageStart3(mainGold) {
 	/* 플레이어 스킬 변수 */
 	var qskill = 0;
 	var qskill_timer = 30;
@@ -521,6 +521,7 @@ export function stageStart3() {
 		context.clearRect(0, 0, cvwd, cvht);
 		if (who == 1) {
 			drawText("You Win");
+			$(".gold").html(mainGold+gold);//골드 추가 부분
 		}
 		else if (who == 2) {
 			drawText("You Lose");
@@ -719,6 +720,7 @@ export function stageStart3() {
 						$("#select-stage").removeClass("animateContent2");
 					}, 1000);
 				}, 500);
+				$(".gold").html(mainGold+gold);//골드 추가 부분
 			});
 		}
 		else if(event.keyCode == 27 && esc_count == 1){
