@@ -1,4 +1,4 @@
-export function stageStart1(mainGold) {
+export function stageStart1() {
 	/* 플레이어 스킬 변수 */
 	var qskill = 0;
 	var qskill_timer = 30;
@@ -119,6 +119,8 @@ export function stageStart1(mainGold) {
 	function pageLoad(){
 		var play_button = document.getElementById("play1");
 		play_button.onclick = play;
+		var exit_button = document.getElementById("exit1");
+		exit_button.onclick = exit;
 	}
 
 	function play(){
@@ -148,6 +150,78 @@ export function stageStart1(mainGold) {
 		}
 		stop_pattern = 0;
 	}
+
+	function exit(){
+		// if (effectOn) {
+		// 	clickSound.play();   // 버튼 클릭 효과음
+		// }
+		$("#boss_UI1").css({
+			display : "block"
+		});
+		$("#player_UI1").css({
+			display : "block"
+		});
+		$("#screen1").css({
+			display : "block"
+		});
+		$("#esc_menu1").css({
+			display : "none"
+		});
+		esc_count = 0;
+		keydown_count = 0;
+		removeEventListener('keydown', keydown);
+		removeEventListener('mousemove', mousemove);
+		clearInterval(repeat);
+		if(attack1 == 1){
+			clearInterval(attack1_repeat);
+			attack1 = 0;
+			attack1_img_count = 0;
+			attack1_img = 1;
+		}
+		else if(attack2 == 1){
+			attack2 = 0;
+			yplus = 100;
+			attack2_img = 1;
+			attack2_img_count = 0;
+			clearInterval(attack2_repeat);
+			attack2_count = 0;
+		}
+		ballRadius = 10;
+		barwidth = 100;
+		if(qskill_cooltime== 1){
+			clearInterval(qskill_repeat);
+			qskill_cooltime = 0;
+			qskill = 0;
+			qskill_timer = 30;
+			$("#qskill1").css({
+				"display": "block"
+			});
+			$("#qtimer1").css({
+				"display": "none"
+			});
+		}
+		clearInterval(time_repeat);
+		init();
+		p_hp = 0;
+		b_hp = 10;
+		$("#container1").animate({
+			"height": b_hp*30 + "px"
+		});
+		var p_hp_array = $(".state1");
+		for(var i=0; i<3; i++){
+			p_hp_array[i].src = "./img/player/playerHeartFull_25x25.png";
+		}
+		
+		$("#stage1").removeClass("animateContent2").addClass("animateContent1");  // 스테이지3 esc화면 줄어드는 애니메이션
+		setTimeout(function() {
+			$("#stage1").removeClass("animateContent1").hide();   // 스테이지3 esc화면 none해주고
+			$("#select-stage").show().addClass("animateContent2");         // 다시 스테이지 선택 페이지 나타나게
+			setTimeout(function() {
+				$("#select-stage").removeClass("animateContent2");
+			}, 1000);
+		}, 500);
+		$(".gold").html(mainGold+gold);//골드 추가 부분
+}
 
 	/* window size 변경 해주는 함수 */
 	function windowsize() {
@@ -312,6 +386,9 @@ export function stageStart1(mainGold) {
 		if (b_hp < 0 || b_hp == 0) {
 			game_over(1);
 		}
+		else {
+			attackedmotion();
+		}
 
 
 	}
@@ -322,7 +399,6 @@ export function stageStart1(mainGold) {
 	function b_hp_decrease_Img() {
 		var playerImg = $("#playerImg1");
 		playerImg.attr("src", "./img/player/playerAttack1_32x32.gif");
-		attackedmotion();
 		setTimeout(function () {
 			playerImg.attr("src", playerStandingsrc);
 		}, 1000);
@@ -364,15 +440,17 @@ export function stageStart1(mainGold) {
 		keydown_count = 1;
 		removeEventListener('mousemove', mousemove);
 		clearInterval(repeat);
+		clearInterval(attack1_repeat);
 		clearInterval(attack2_repeat);
 		clearInterval(time_repeat);
 		context.clearRect(0, 0, cvwd, cvht);
 		if (who == 1) {
 			drawText("You Win");
-			$(".gold").html(mainGold+gold);//골드 추가 부분
+			deathmotion();
 		}
 		else if (who == 2) {
 			drawText("You Lose");
+			winmotion();
 		}
 	}
 
@@ -676,6 +754,20 @@ function hp() {
 		bossStanding[0].src = "./img/stage1/bt.gif";
 		setTimeout(function(){
 			bossStanding[0].src = "./img/stage1/boss1.gif";
+		},1600);
+	}
+
+	function deathmotion(){
+		bossStanding[0].src = "./img/stage1/bd.gif";
+		setTimeout(function(){
+			bossStanding[0].src = "./img/stage1/bd2.png";
+		},2200);
+	}
+
+	function winmotion(){
+		bossStanding[0].src = "./img/stage1/bw.gif";
+		setTimeout(function(){
+			bossStanding[0].src = "./img/stage1/bw2.png";
 		},1600);
 	}
 

@@ -196,6 +196,8 @@ export function stageStart3(mainGold) {
 	function pageLoad(){
 		var play_button = document.getElementById("play3");
 		play_button.onclick = play;
+		var exit_button = document.getElementById("exit3");
+		exit_button.onclick = exit;
 	}
 
 	function play(){
@@ -224,6 +226,103 @@ export function stageStart3(mainGold) {
 			qstop_pattern = 0;
 		}
 		stop_pattern = 0;
+	}
+
+	function exit(){
+			// if (effectOn) {
+			// 	clickSound.play();   // 버튼 클릭 효과음
+			// }
+			$("#boss_UI3").css({
+				display : "block"
+			});
+			$("#player_UI3").css({
+				display : "block"
+			});
+			$("#screen3").css({
+				display : "block"
+			});
+			$("#esc_menu3").css({
+				display : "none"
+			});
+			esc_count = 0;
+			keydown_count = 0;
+			removeEventListener('keydown', keydown);
+			removeEventListener('mousemove', mousemove);
+			clearInterval(repeat);
+			if(attack1 == 1){
+				clearInterval(attack1_repeat);
+				attack1 = 0;
+			}
+			else if(attack3 == 1){
+				clearInterval(attack3_repeat);
+				attack3 = 0;
+			}
+			else if (attack4 == 1){
+				clearInterval(attack4_timer);
+				attack4 = 0;
+			}
+			if(qskill_cooltime == 1){
+				clearInterval(qskill_repeat);
+				qskill_cooltime = 0;
+				qskill = 0;
+				qskill_timer = 30;
+				$("#qskill3").css({
+					"display": "block"
+				});
+				$("#qtimer3").css({
+					"display": "none"
+				});
+			}
+
+			if(wskill_cooltime == 1){
+				clearInterval(wskill_repeat);
+				clearInterval(wskill_repeat2);
+				wskill_cooltime = 0;
+				wskill = 0;
+				wskill_count = 0;
+				wskill_timer = 10;
+				$("#wskill3").css({
+					"display": "block"
+				});
+				$("#wtimer3").css({
+					"display": "none"
+				});
+			}
+			if(eskill_state == 1){
+				clearInterval(eskill_repeat);
+				clearInterval(eskill_timer);
+				eskill = 0;
+				eskill_count = 0;
+				eskill_cooltime = 15;
+				eskill_state = 0;
+				$("#eskill3").css({
+					"display": "block"
+				});
+				$("#etimer3").css({
+					"display": "none"
+				});
+			}
+			clearInterval(time_repeat);
+			init();
+			p_hp = 0;
+			b_hp = 20;
+			$("#container3").animate({
+				"height": b_hp*15 + "px"
+			});
+			var p_hp_array = $(".state3");
+			for(var i=0; i<3; i++){
+				p_hp_array[i].src = "./img/player/playerHeartFull_25x25.png";
+			}
+			
+			$("#stage3").removeClass("animateContent2").addClass("animateContent1");  // 스테이지3 esc화면 줄어드는 애니메이션
+			setTimeout(function() {
+				$("#stage3").removeClass("animateContent1").hide();   // 스테이지3 esc화면 none해주고
+				$("#select-stage").show().addClass("animateContent2");         // 다시 스테이지 선택 페이지 나타나게
+				setTimeout(function() {
+					$("#select-stage").removeClass("animateContent2");
+				}, 1000);
+			}, 500);
+			$(".gold").html(mainGold+gold);//골드 추가 부분
 	}
 
 
@@ -879,21 +978,6 @@ export function stageStart3(mainGold) {
 				estop_pattern = 1;
 			}
 			clearInterval(time_repeat);
-			// exit->스테이지 선택 화면으로
-			$("#exit3").click(function() {
-				// if (effectOn) {
-				// 	clickSound.play();   // 버튼 클릭 효과음
-				// }
-				$("#stage3").removeClass("animateContent2").addClass("animateContent1");  // 스테이지3 esc화면 줄어드는 애니메이션
-				setTimeout(function() {
-					$("#stage3").removeClass("animateContent1").hide();   // 스테이지3 esc화면 none해주고
-					$("#select-stage").show().addClass("animateContent2");         // 다시 스테이지 선택 페이지 나타나게
-					setTimeout(function() {
-						$("#select-stage").removeClass("animateContent2");
-					}, 1000);
-				}, 500);
-				$(".gold").html(mainGold+gold);//골드 추가 부분
-			});
 		}
 		else if(event.keyCode == 27 && esc_count == 1){
 			$("#boss_UI3").css({
@@ -1232,50 +1316,7 @@ export function stageStart3(mainGold) {
 	/*---------------------------------------------------------보스 공격패턴 함수---------------------------------------------------------*/
 	
 
-	$("#play").onclick(function(){
-		$("#test").text("3");
-		$("#boss_UI3").css({
-			display : "block"
-		});
-		$("#player_UI3").css({
-			display : "block"
-		});
-		$("#screen3").css({
-			display : "block"
-		});
-		$("#esc_menu").css({
-			display : "none"
-		});
-		esc_count = 0;
-		keydown_count = 0;
-		addEventListener('mousemove', mousemove);
-		repeat = setInterval(draw,1);
-		time_repeat = setInterval(timeAttack,1000);
-		if(stop_pattern == 1){
-			attack1_repeat = setInterval(bossAttack1_timer, 1000);
-		}
-		else if(stop_pattern == 3){
-			attack3_repeat = setInterval(bossAttack3_timer, 1000);
-		}
-		else if(stop_pattern == 4){
-			attack4_timer = setInterval(bossAttack4_timer, 200);
-		}
-		if(qstop_pattern == 1){
-			qskill_repeat = setInterval(skill_timer1,1000);
-			qstop_pattern = 0;
-		}
-		if(wstop_pattern == 1){
-			wskill_repeat = setInterval(skill_timer2, 1000);
-			wskill_repeat2 = setInterval(wskill_time, 1);
-			wstop_pattern = 0;
-		}
-		if(estop_pattern == 1){
-			eskill_timer = setInterval(eskill_time, 1000);
-			eskill_repeat = setInterval(skill_timer3, 1000);
-			estop_pattern = 0;
-		}
-		stop_pattern = 0;
-	});
+
 	/*---------------------------------------------------------효과음 함수---------------------------------------------------------*/
 
 }
