@@ -264,12 +264,12 @@ export function stageStart3() {
 			if (attack1 == 1) {
 				bossAttack1();
 			}
-			if (attack2 != 0) {
-				bossAttack2();
-			}
 			if (attack4 != 0) {
 				bossAttack4();
 			}
+		}
+		if (attack2 != 0) {
+			bossAttack2();
 		}
 		/* drawPaddle 관련 위치 조건문 */
 		if (barx > (cvwd - barwidth / 2)) {
@@ -945,9 +945,6 @@ export function stageStart3() {
 				attack1 = 0;
 				clearInterval(attack1_repeat);
 				attack1_timer = 0;
-			}
-			else if (attack2 == 1) {
-				attack2 = 0;
 			}
 			else if (attack3 == 1) {
 				attack3 = 0;
