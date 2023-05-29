@@ -14,6 +14,8 @@ export function stageStart3(mainGold) {
 	var ypl = 480;
 	var wskill_count = 0;
 	var attack_x;
+	var wskill_img_count = 0;
+	var wskill_img = 1;
 
 	var eskill = 0;
 	var eskill_cooltime = 15;
@@ -31,6 +33,9 @@ export function stageStart3(mainGold) {
 	var attack1_timer = 0;
 	var attack1_repeat;
 	var check = 0;
+	var attack1_img =1;
+	var attack1_repeat2;
+	var attack1_img_count = 0;
 
 	var attack2 = 0;
 
@@ -49,6 +54,8 @@ export function stageStart3(mainGold) {
 	var attack4_timer;
 	var attack4_count = 0;
 	var yplus = 0;
+	var attack4_img = 1;
+	var attack4_img_count=0;
 	/* 스페이스바를 누르면 start_number = 1로 변경 되면서 공이 발사됨 */
 	var start_number = 0;
 	var keydown_count = 0;
@@ -65,7 +72,7 @@ export function stageStart3(mainGold) {
 
 	/* 벽돌의 x,y좌표 */
 	var bricks = [0, 0, 0, 0, 0];
-	var BRICKWIDTH = 119;
+	var BRICKWIDTH = 120;
 	var BRICKHEIGHT = 29;
 
 	/* 게임시작 후 카운트 세주는 변수 */
@@ -160,19 +167,25 @@ export function stageStart3(mainGold) {
 		playerColor = "purple";
 	}
 
-	
+	var blood_img = new Image();
+	blood_img.src = "./img/stage3/blood1.png";
+	var blood_repeat;
+
+	var bossattacked = new Image();
+	bossattacked.src = "./img/stage3/bat.png";
 	var bossImg = new Image(); // in canvas
-	bossImg.src = "./img/stage3/boss1_1.png";
-	var bossStandingsrc = "./img/stage3/bossLast_101x80.gif"; // div
+	bossImg.src = "./img/stage3/boss3.gif";
+	var bsimg = new Image();
+	bsimg.src = "./img/stage3/ba1.png";
 	//이미지들
 	var wskill_Img = new Image();
-	wskill_Img.src = "./img/stage3/boss1sword3.png";
+	wskill_Img.src = "./img/stage3/blast1.png";
 	var brick_Img=new Image();
-	brick_Img.src="./img/stage3/벽돌.png";
+	brick_Img.src="./img/stage3/brick.png";
 	var razer_Img=new Image();
-	razer_Img.src="./img/stage3/레이저.png";
+	razer_Img.src="./img/stage3/l2.png";
 	var falling_attack_Img=new Image();
-	falling_attack_Img.src="./img/stage3/떨어지는공격.png";
+	falling_attack_Img.src="./img/stage3/m1.png";
 	var iceball_Img=new Image();
 	iceball_Img.src="./img/stage3/아이스볼.png";
 	var paddleImg = new Image();
@@ -250,16 +263,31 @@ export function stageStart3(mainGold) {
 			removeEventListener('mousemove', mousemove);
 			clearInterval(repeat);
 			if(attack1 == 1){
-				clearInterval(attack1_repeat);
 				attack1 = 0;
+				check = 0;
+				attack1_timer = 0;
+				attack1_img_count = 0;
+				attack1_img = 1;
+				bsimg.src = "./img/stage3/ba"+attack1_img+".png";
+				razer_Img.src = "./img/stage3/l2.png";
+				clearInterval(attack1_repeat);
 			}
 			else if(attack3 == 1){
-				clearInterval(attack3_repeat);
 				attack3 = 0;
+				clearInterval(attack3_repeat);
+				attack3_timer = 0;
+				attack3_count = 0;
 			}
 			else if (attack4 == 1){
-				clearInterval(attack4_timer);
 				attack4 = 0;
+				attack4_count = 0;
+				clearInterval(attack4_timer);
+				attack4_img_count = 0;
+				attack4_img = 1;
+				yplus = 0;
+				for (var r = 0; r < attack_bricks.length; r++) {
+					attack_bricks[r] = 0;
+				}
 			}
 			if(qskill_cooltime == 1){
 				clearInterval(qskill_repeat);
@@ -281,6 +309,9 @@ export function stageStart3(mainGold) {
 				wskill = 0;
 				wskill_count = 0;
 				wskill_timer = 10;
+				wskill_Img.src = "./img/stage3/blast1.png";
+				wskill_img_count = 0;
+				wskill_img = 1;
 				$("#wskill3").css({
 					"display": "block"
 				});
@@ -481,7 +512,7 @@ export function stageStart3(mainGold) {
 		var brickx;
 		var bricky;
 		var wd = 120;
-		var ht = 30;
+		var ht = 70;
 		for (var i = 0; i < cvwd / 120; i++) {
 			if (i == rand) {
 				continue;
@@ -525,22 +556,22 @@ export function stageStart3(mainGold) {
 						}
 					}
 					clearInterval(attack4_timer);
+					attack4_img = 1;
 					attack4 = 0;
 					yplus = 0;
+					falling_attack_Img.src = "./img/stage3/m1.png";
+
 					for (var r = 0; r < attack_bricks.length; r++) {
 						attack_bricks[r] = 0;
 					}
 					break;
 				}
 				if (attack_bricks[i] == 1) {
-					context.beginPath();
 					context.drawImage(falling_attack_Img,brickx, bricky, wd, ht);
-					//context.fillStyle = "red";
-					//context.fill();
-				}
 			}
 		}
 	}
+}
 
 
 	function drawshield() {
@@ -552,10 +583,6 @@ export function stageStart3(mainGold) {
 
 	/*w키를 누르면 검격이 나가게 보여주는 함수 */
 	function drawsword() {
-		context.beginPath();
-		context.rect(attack_x - 15, ypl, 30, 100); // 가로 30 세로 100의 검 생성
-		context.fillStyle = "yellow";
-		context.fill();
 		context.drawImage(wskill_Img, attack_x - 15, ypl, 30, 100);
 	}
 
@@ -581,6 +608,12 @@ export function stageStart3(mainGold) {
 
 	function b_hp_decrease() {
 		var num = b_hp * 15;
+		if(b_hp != 0){
+			document.getElementsByClassName('character')[4].src = bossattacked.src;
+			setTimeout(function(){
+				document.getElementsByClassName('character')[4].src = "./img/stage3/boss3.gif";
+			},1000);
+		}
 		$("#container3").animate({
 			"height": num + "px"
 		});
@@ -615,9 +648,7 @@ export function stageStart3(mainGold) {
 		else if(playerColor == "white"){
 			playerImg.attr("src", pWhiteAttacksrc);
 		}
-		
-		var boomImg = $("#boomImg3");
-		boomImg.attr("src","./img/player/b3.png");
+	
 		setTimeout(function () {
 		
 			if(playerColor == "default"){
@@ -639,7 +670,6 @@ export function stageStart3(mainGold) {
 				playerImg.attr("src", pWhitestdsrc);
 			}
 		
-			boomImg.attr("src", "");
 		}, 1000);
 	}
 
@@ -809,19 +839,6 @@ export function stageStart3(mainGold) {
 		}
 
 	}
-	// /* 플레이어, 보스 체력 출력해주는 함수 */
-	// function hp(){
-	// 	$("#bp_num").text(b_hp);
-	// }
-
-	//공격 모션
-	function b_Attack_Img() {
-		var bossAttackImg = $("#bossImg3");
-		bossAttackImg.attr("src", "./img/stage3/bossLastAttack_101x106.gif");
-		setTimeout(function () {
-			bossAttackImg.attr("src", bossStandingsrc);
-		}, 3500);
-	}
 
 	/*---------------------------------------------------------그리는것 관련 함수---------------------------------------------------------*/
 
@@ -840,33 +857,54 @@ export function stageStart3(mainGold) {
 			for (var j = 1; j < 2; j++) {
 				bricky = j * 220;
 				if (bricks[i] == 1) {
+					if(wskill == 1){
+						if(ypl <= bricky + BRICKHEIGHT && ypl+100 >= bricky &&attack_x + 30 >= brickx && attack_x <= brickx + BRICKWIDTH){
+							ypl = 480;
+							clearInterval(wskill_repeat2);
+							wskill_count = 0;
+							wskill = 0;
+							wskill_Img.src = "./img/stage3/blast1.png";
+							wskill_img_count = 0;
+							wskill_img = 1;
+							blood(brickx);
+							context.clearRect(brickx, bricky, BRICKWIDTH, BRICKHEIGHT);
+							bricks[i] = 0;
+												
+						}
+					}
 					if (y > bricky + BRICKHEIGHT && y < bricky + BRICKHEIGHT + ballRadius && brickx + BRICKWIDTH > x && brickx < x) { //벽돌의 아래 부분과 충돌
 						context.clearRect(brickx, bricky, BRICKWIDTH, BRICKHEIGHT);
 						bricks[i] = 0;
 						dy = -dy;
 						brickAudio.play();
+						blood(brickx);
 					}
 					if (x > brickx - ballRadius - dxf && x < brickx && y < bricky + BRICKHEIGHT + ballRadius && y > bricky - ballRadius) { //벽돌의 왼쪽 부분과 충돌
 						context.clearRect(brickx, bricky, BRICKWIDTH, BRICKHEIGHT);
 						bricks[i] = 0;
 						dx = -dx;
 						brickAudio.play();
+						blood(brickx);
 					}
 					if (x < brickx + BRICKWIDTH + ballRadius + dxf && x > brickx + BRICKWIDTH && y < bricky + BRICKHEIGHT + ballRadius && y > bricky - ballRadius) { // 벽돌의 오른쪽 부분과 충돌
 						context.clearRect(brickx, bricky, BRICKWIDTH, BRICKHEIGHT);
 						bricks[i] = 0;
 						dx = -dx;
-						brickAudio.play();
+						brickAudio.play();		
+						blood(brickx);
 					}
 					if (brickx + BRICKWIDTH > x && brickx < x && y > bricky - ballRadius && y < bricky) { // 벽돌의 윗 부분과 충돌
 						context.clearRect(brickx, bricky, BRICKWIDTH, BRICKHEIGHT);
 						bricks[i] = 0;
 						dy = -dy;
-						brickAudio.play();
+						brickAudio.play();				
+						blood(brickx);
 					}
 				}
 			}
 		}
+	
+		
 		if ((x < bossx & x > bossx - ballRadius - dxf & y < bossy + bossht + ballRadius & y > bossy - ballRadius) || (x < bossx + bosswd + ballRadius + dxf & x > bossx + bosswd & y < bossy + bossht + ballRadius & y > bossy - ballRadius)) { //보스의 왼쪽, 오른쪽에 충돌
 			dx = -dx;
 			b_hp--;
@@ -923,6 +961,34 @@ export function stageStart3(mainGold) {
 	}
 
 
+	function blood(index){
+		blood_repeat = setInterval(function(){
+			context.drawImage(blood_img,index,160,154, 140);
+		},1);
+		blood_img.src = "./img/stage3/blood2.png";
+		setTimeout(function(){
+			blood_img.src = "./img/stage3/blood3.png";
+			setTimeout(function(){
+				blood_img.src = "./img/stage3/blood4.png";
+				setTimeout(function(){
+					blood_img.src = "./img/stage3/blood5.png";
+					setTimeout(function(){
+						blood_img.src = "./img/stage3/blood6.png";
+						setTimeout(function(){
+							blood_img.src = "./img/stage3/blood7.png";
+							setTimeout(function(){
+								blood_img.src = "./img/stage3/blood8.png";
+								setTimeout(function(){
+									blood_img.src = "./img/stage3/blood1.png";
+									clearInterval(blood_repeat);	
+								},20);
+							},20);
+						},20);
+					},20);
+				},20);
+			},20);
+		},20);
+	}
 
 
 
@@ -1134,10 +1200,23 @@ export function stageStart3(mainGold) {
 	/* 1개의 검이 떨어지는 움직임을 재현해주는 함수 */
 	function wskill_time() {
 		ypl = ypl - 2; // Y좌표는 2칸씩 이동
+		wskill_img_count++;
+		if(wskill_img_count % 50 ==0){
+			wskill_img++;
+			if(wskill_img > 3){
+				wskill_Img.src = "./img/stage3/blast3.png";
+			}
+			else{
+				wskill_Img.src = "./img/stage3/blast"+wskill_img+".png";
+			}
+		}
 		if (wskill_count == 0 && ypl < bossy + bossht && attack_x + 30 >= bossx && attack_x <= bossx + bosswd) {
 			b_hp_decrease();
 			wskill_count = 1;
 			wskill = 0;
+			wskill_Img.src = "./img/stage3/blast1.png";
+			wskill_img_count = 0;
+			wskill_img = 1;
 		}
 
 		if (ypl + 100 == 0) { //검이 영역 밖으로 나갔을 경우 함수 종료
@@ -1145,6 +1224,9 @@ export function stageStart3(mainGold) {
 			clearInterval(wskill_repeat2);
 			wskill_count = 0;
 			wskill = 0;
+			wskill_Img.src = "./img/stage3/blast1.png";
+			wskill_img_count = 0;
+			wskill_img = 1;
 		}
 	}
 
@@ -1177,8 +1259,8 @@ export function stageStart3(mainGold) {
 	function timeAttack() {
 		if (eskill != 1) {
 			timer += 1;
-			if (timer % 8 == 0) {
-				var randnum = Math.floor(Math.random()*4);
+			if (timer % 6 == 0) {
+				var randnum = Math.floor(Math.random())+1;
 				if (randnum == 0) {
 					attack1 = 1;
 					attack1_repeat = setInterval(bossAttack1_timer, 1000);
@@ -1215,18 +1297,26 @@ export function stageStart3(mainGold) {
 		else {
 			if (attack1 == 1) {
 				attack1 = 0;
-				clearInterval(attack1_repeat);
+				check = 0;
 				attack1_timer = 0;
+				attack1_img_count = 0;
+				attack1_img = 1;
+				bsimg.src = "./img/stage3/ba"+attack1_img+".png";
+				razer_Img.src = "./img/stage3/l2.png";
+				clearInterval(attack1_repeat);
 			}
 			else if (attack3 == 1) {
 				attack3 = 0;
 				clearInterval(attack3_repeat);
 				attack3_timer = 0;
+				attack3_count = 0;
 			}
 			else if (attack4 == 1) {
 				attack4 = 0;
 				attack4_count = 0;
 				clearInterval(attack4_timer);
+				attack4_img_count = 0;
+				attack4_img = 1;
 				yplus = 0;
 				for (var r = 0; r < attack_bricks.length; r++) {
 					attack_bricks[r] = 0;
@@ -1243,16 +1333,14 @@ export function stageStart3(mainGold) {
 	/* 레이저 공격 */
 	function bossAttack1() {
 		if (attack1_timer == 3) { //3초 후에 사용자의 직전의 x좌표에 1초동안 머무름.
-			context.beginPath();
-			context.rect(coordinate - 10, 0, 20, cvht);
-			context.fillStyle = "gray";
-			context.fill();
+			context.drawImage(bsimg,coordinate,100,60,72);
+			if(attack1_img_count == 1){
+				context.drawImage(razer_Img,coordinate,150,60,cvht-150);
+			}
 		}
 		else if (attack1_timer == 4) { //1초 경과시 패들이 위치에 존재하면 사용자의 hp --
-			context.beginPath();
-			context.drawImage(razer_Img ,coordinate - 10, 0, 20, cvht);
-			//context.fillStyle = "red";
-			context.fill();
+			context.drawImage(bsimg,coordinate,100,60,72);
+			context.drawImage(razer_Img ,coordinate, 150, 60, cvht-150);
 			if (check == 0 && barx - barwidth / 2 < coordinate && barx + barwidth / 2 > coordinate) {
 				if (qskill == 1) {
 					qskill = 0;
@@ -1267,16 +1355,36 @@ export function stageStart3(mainGold) {
 			attack1 = 0;
 			check = 0;
 			attack1_timer = 0;
+			attack1_img_count = 0;
+			attack1_img = 1;
+			bsimg.src = "./img/stage3/ba"+attack1_img+".png";
+			razer_Img.src = "./img/stage3/l2.png";
 			clearInterval(attack1_repeat);
 		}
 		else{ //3초동안 사용자의 패들의 x좌표를 따라감
 			b_Attack_Img();
-			context.beginPath();
-			context.rect(barx - 10, 0, 20, cvht);
-			context.fillStyle = "gray";
-			context.fill();
-			coordinate = barx;
+			context.drawImage(bsimg,barx-30,100,60,72);
+			coordinate = barx-30;
+			if(attack1_img_count == 1){
+				context.drawImage(razer_Img,barx-30,150,60,cvht-150);
+			}
 		}
+
+		if(attack1_timer == 1 && attack1_img_count == 0){
+			setTimeout(function(){
+				attack1_repeat2 = setInterval(lazerimage,200);
+			},600);
+			attack1_img_count = 1;
+		}
+	}
+
+	function lazerimage(){
+		attack1_img++;
+		if(attack1_img == 14){
+			clearInterval(attack1_repeat2);
+		}
+		razer_Img.src = "./img/stage3/l"+(attack1_img+1)+".png";
+		bsimg.src = "./img/stage3/ba"+attack1_img+".png";
 	}
 
 	/* 벽돌 소환으로 방어 */
@@ -1312,6 +1420,17 @@ export function stageStart3(mainGold) {
 
 	function bossAttack4() {
 		drawbrick2();
+		attack4_img_count++;
+		if(attack4_img_count % 10 ==0){
+			attack4_img++;
+			if(attack4_img == 25){
+				attack4_img = 17;
+				falling_attack_Img.src = "./img/stage3/m24.png";
+			}
+			else{
+				falling_attack_Img.src = "./img/stage3/m"+attack4_img+".png"; 
+			}
+		}
 	}
 	/*---------------------------------------------------------보스 공격패턴 함수---------------------------------------------------------*/
 	
@@ -1319,5 +1438,5 @@ export function stageStart3(mainGold) {
 
 	/*---------------------------------------------------------효과음 함수---------------------------------------------------------*/
 
-}
+	}
 
