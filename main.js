@@ -19,7 +19,7 @@ $(document).ready(function () {
     var bgm1 = new Audio("./audio/boss1.mp3");   // 보스1 브금
     var bgm2 = new Audio("./audio/boss2.mp3");   // 보스2 브금
     var bgm3 = new Audio("./audio/boss3.mp3");   // 보스3 브금
-    var click = new Audio("./audio/clickEffect.mp3");   // 버튼 클릭시 효과음
+    var clickSound = new Audio("./audio/clickEffect.mp3");   // 버튼 클릭시 효과음
     var winBgm = new Audio("./audio/win_7s.mp3");  // 승리브금
     var loseBgm = new Audio("./audio/lose_7s.mp3");  // 패배브금
     var pAttack = new Audio();  // 플레이어 공격 효과음
@@ -49,7 +49,9 @@ $(document).ready(function () {
 
     // 시작(스테이지), 환경설정, 상점 버튼 클릭 시 메인메뉴 애니메이션
     $(".main-btn").click(function() {
-        click.play();   // 버튼 클릭 효과음
+        if (effectOn) {
+            clickSound.play();   // 버튼 클릭 효과음
+        }
         $("#main-menu").addClass("animateContent1");    // 메인 메뉴 페이지 전환 효과 (작아지는)
         setTimeout(function() {
             $("#main-menu").removeClass("animateContent1").hide();  // 1초 후 메인 메뉴 디스플레이 none
@@ -58,7 +60,9 @@ $(document).ready(function () {
 
     // 각 스테이지 선택 시 스테이지 선택 화면 애니메이션
     $(".stage-btn").click(function() {
-        click.play();   // 버튼 클릭 효과음
+        if (effectOn) {
+            clickSound.play();   // 버튼 클릭 효과음
+        }
         $("#select-stage").removeClass("animateContent2").addClass("animateContent1");    // 스테이지 선택 페이지 전환 효과 (작아지는)
         setTimeout(function() {
             $("#select-stage").removeClass("animateContent1").hide();
@@ -122,7 +126,9 @@ $(document).ready(function () {
         });
         // 뒤로가기 버튼 클릭 시 스테이지 화면과 메인 메뉴 애니메이션
         $("#stage-to-main").click(function () {
-            click.play();   // 버튼 클릭 효과음
+            if (effectOn) {
+                clickSound.play();   // 버튼 클릭 효과음
+            }
             $("#select-stage").removeClass("animateContent2").addClass("animateContent1");  // 스테이지 선택 페이지 줄어드는 애니메이션
             setTimeout(function() {
                 $("#select-stage").removeClass("animateContent1").hide();   // 스테이지 선택 페이지 none해주고
@@ -209,12 +215,27 @@ $(document).ready(function () {
             }
         });
         // 효과음
-        $("#effectSound").click(function() {
-
+        if(effectOn) { // 온오프버튼 이미지 초기화
+            $("#effectSound").css({ "background": "url(./img/interface/volOn_50x50.png)" });
+        }
+        else {
+            $("#effectSound").css({ "background": "url(./img/interface/volOff_50x50.png)" });
+        }
+        $("#effectSound").off("click").on("click", function() {
+            if(effectOn) { // 재생 -> 정지
+                $(this).css({ "background": "url(./img/interface/volOff_50x50.png)" });
+                effectOn = false;
+            }
+            else {  // 정지 -> 재생
+                $(this).css({ "background": "url(./img/interface/volOn_50x50.png)" });
+                effectOn = true;
+            }
         });
         // 뒤로가기
         $("#settings-to-main").click(function () {
-            click.play();
+            if (effectOn) {
+                clickSound.play();   // 버튼 클릭 효과음
+            }
             $("#settings-menu").removeClass("animateContent2").addClass("animateContent1");
             setTimeout(function() {
                 $("#settings-menu").removeClass("animateContent1").hide();
@@ -304,7 +325,9 @@ $(document).ready(function () {
 
         // 뒤로가기
         $("#shop-to-main").click(function () {
-            click.play();
+            if (effectOn) {
+                clickSound.play();   // 버튼 클릭 효과음
+            }
             $("#shop-menu").removeClass("animateContent2").addClass("animateContent1");
             setTimeout(function() {
                 $("#shop-menu").removeClass("animateContent1").hide();
