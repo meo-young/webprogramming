@@ -111,8 +111,29 @@ export function stageStart3() {
 	var b_hp = 20;
 
 	//플레이어 이미지
+	var playerStandingsrc = "./img/player/playerStanding_32x32.gif";
+	
+	// 착용중인 캐릭터 이미지로 변경
+	if ($("#pDefault").hasClass("equip")) {
+		$("#playerImg3").attr("src", "./img/player/playerStanding_32x32.gif");
+	}
+	else if ($("#pRed").hasClass("equip")) {
+		$("#playerImg3").attr("src", "./img/player/playerStandin_red_32x32.gif");
+	}
+	else if ($("#pCyan").hasClass("equip")) {
+		$("#playerImg3").attr("src", "./img/player/playerStanding_cyan_32x32.gif");
+	}
+	else if ($("#pWhite").hasClass("equip")) {
+		$("#playerImg3").attr("src", "./img/player/playerStanding_white_32x32.gif");
+	}
+	else if ($("#pYellow").hasClass("equip")) {
+		$("#playerImg3").attr("src", "./img/player/playerStanding_yellow_32x32.gif");
+	}
+	else if ($("#pPurple").hasClass("equip")) {
+		$("#playerImg3").attr("src", "./img/player/playerStanding_purple_32x32.gif");
+	}
 
-	var playerStandingsrc = "./img/player/playerStanding_32x32.gif"; // div
+	
 	var bossImg = new Image(); // in canvas
 	bossImg.src = "./img/stage3/boss1_1.png";
 	var bossStandingsrc = "./img/stage3/bossLast_101x80.gif"; // div
