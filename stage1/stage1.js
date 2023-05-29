@@ -77,7 +77,7 @@ export function stageStart1() {
 
 	/*플레이어, 보스 체력 */
 	var p_hp = 0;
-	var b_hp = 20;
+	var b_hp = 10;
 	//플레이어 이미지
 
 	var playerStandingsrc = "./img/player/playerStanding_32x32.gif"; // div
@@ -301,7 +301,7 @@ export function stageStart1() {
 		b_hp_decrease_Img();
 		bossAudio.play();
 		hp();
-		var num = b_hp * 15;
+		var num = b_hp * 30;
 		$("#container1").animate({
 			"height": num + "px"
 		});
