@@ -1,4 +1,4 @@
-export function stageStart1(mainGold) {
+export function stageStart1() {
 	/* 플레이어 스킬 변수 */
 	var qskill = 0;
 	var qskill_timer = 30;
@@ -312,6 +312,9 @@ export function stageStart1(mainGold) {
 		if (b_hp < 0 || b_hp == 0) {
 			game_over(1);
 		}
+		else {
+			attackedmotion();
+		}
 
 
 	}
@@ -322,7 +325,6 @@ export function stageStart1(mainGold) {
 	function b_hp_decrease_Img() {
 		var playerImg = $("#playerImg1");
 		playerImg.attr("src", "./img/player/playerAttack1_32x32.gif");
-		attackedmotion();
 		setTimeout(function () {
 			playerImg.attr("src", playerStandingsrc);
 		}, 1000);
@@ -364,15 +366,17 @@ export function stageStart1(mainGold) {
 		keydown_count = 1;
 		removeEventListener('mousemove', mousemove);
 		clearInterval(repeat);
+		clearInterval(attack1_repeat);
 		clearInterval(attack2_repeat);
 		clearInterval(time_repeat);
 		context.clearRect(0, 0, cvwd, cvht);
 		if (who == 1) {
 			drawText("You Win");
-			$(".gold").html(mainGold+gold);//골드 추가 부분
+			deathmotion();
 		}
 		else if (who == 2) {
 			drawText("You Lose");
+			winmotion();
 		}
 	}
 
@@ -676,6 +680,20 @@ function hp() {
 		bossStanding[0].src = "./img/stage1/bt.gif";
 		setTimeout(function(){
 			bossStanding[0].src = "./img/stage1/boss1.gif";
+		},1600);
+	}
+
+	function deathmotion(){
+		bossStanding[0].src = "./img/stage1/bd.gif";
+		setTimeout(function(){
+			bossStanding[0].src = "./img/stage1/bd2.png";
+		},2200);
+	}
+
+	function winmotion(){
+		bossStanding[0].src = "./img/stage1/bw.gif";
+		setTimeout(function(){
+			bossStanding[0].src = "./img/stage1/bw2.png";
 		},1600);
 	}
 
