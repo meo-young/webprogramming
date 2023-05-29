@@ -1,4 +1,4 @@
-export function stageStart1(mainGold) {
+export function stageStart1() {
 	/* 플레이어 스킬 변수 */
 	var qskill = 0;
 	var qskill_timer = 30;
@@ -8,15 +8,24 @@ export function stageStart1(mainGold) {
 	/* 보스의 공격이 일정시간마다 진행되기위해 필요한 변수 */
 	var timer = 0;
 	var time_repeat;
+	var attack_time_repeat;
+	var attack_time_count = 0;
+	var bs_attack = 0;
+	var bs_attacked = 0;
 
 	var attack1 = 0;
 	var bs_barrier = 0;
+	var attack1_img_count = 0;
+	var attack1_img = 1;
+	var attack1_repeat;
 
 	var attack2 = 0;
 	var yplus = 100;
 	var attack_x;
 	var attack2_repeat;
 	var attack2_count = 0;
+	var attack2_img_count = 0;
+	var attack2_img = 1;
 
 
 	/* 스페이스바를 누르면 start_number = 1로 변경 되면서 공이 발사됨 */
@@ -80,13 +89,14 @@ export function stageStart1(mainGold) {
 	var b_hp = 10;
 	//플레이어 이미지
 
+	var bossStanding = document.getElementsByClassName("character");
 	var playerStandingsrc = "./img/player/playerStanding_32x32.gif"; // div
 	var bossImg = new Image(); // in canvas
-	bossImg.src = "./img/stage1/b2.png";
+	bossImg.src = "./img/stage1/boss1.gif";
 	var bossshield_Img=new Image();
-	bossshield_Img.src="./img/stage1/bossShield.png";
+	bossshield_Img.src="./img/stage1/s1.png";
 	var sword_Img=new Image();
-	sword_Img.src="./img/stage1/boss1sword1.png";
+	sword_Img.src="./img/stage1/a1.png";
 	var paddleImg = new Image();
 	paddleImg.src = "./img/player/paddle.png";
 
@@ -198,12 +208,7 @@ export function stageStart1(mainGold) {
 	function draw() {
 		context.clearRect(0, 0, cvwd, cvht);
 		/* 보스 공격 관련 조건문 */
-		if (attack1 == 1) {
-			bossAttack1();
-		}
-		else if (attack2 == 1) {
-			bossAttack2();
-		}
+
 		/* drawPaddle 관련 위치 조건문 */
 		if (barx > (cvwd - barwidth / 2)) {
 			barx = cvwd - barwidth / 2;
@@ -223,11 +228,16 @@ export function stageStart1(mainGold) {
 		if (qskill == 1) {
 			drawshield();
 		}
-
 		boss();
 		drawBall();
 		drawPaddle();
 		collision();
+		if (attack1 == 1) {
+			bossAttack1();
+		}
+		else if (attack2 == 1) {
+			bossAttack2();
+		}
 	}
 
 	/* 공 그리는 함수 */
@@ -287,13 +297,7 @@ export function stageStart1(mainGold) {
 	function boss() {
 		bossx = (cvwd - bosswd) / 2;
 		bossy = 10;
-		context.beginPath();
-		context.rect(bossx, bossy, bosswd, bossht);
-		context.fillStyle = "transparent";
-		context.fill();
-
 		context.drawImage(bossImg, bossx, bossy, bosswd, bossht);
-
 	}
 
 	function b_hp_decrease() {
@@ -315,14 +319,12 @@ export function stageStart1(mainGold) {
 
 
 
-function b_hp_decrease_Img() {
+	function b_hp_decrease_Img() {
 		var playerImg = $("#playerImg1");
 		playerImg.attr("src", "./img/player/playerAttack1_32x32.gif");
-		var boomImg = $("#boomImg1");
-		boomImg.attr("src","./img/player/b3.png");
+		attackedmotion();
 		setTimeout(function () {
 			playerImg.attr("src", playerStandingsrc);
-			boomImg.attr("src", "");
 		}, 1000);
 	}
 
@@ -367,7 +369,6 @@ function b_hp_decrease_Img() {
 		context.clearRect(0, 0, cvwd, cvht);
 		if (who == 1) {
 			drawText("You Win");
-			$(".gold").html(mainGold+gold);//골드 추가 부분
 		}
 		else if (who == 2) {
 			drawText("You Lose");
@@ -434,8 +435,11 @@ function hp() {
 		if ((x < bossx & x > bossx - ballRadius - dxf & y < bossy + bossht + ballRadius & y > bossy - ballRadius) || (x < bossx + bosswd + ballRadius + dxf & x > bossx + bosswd & y < bossy + bossht + ballRadius & y > bossy - ballRadius)) { //보스의 왼쪽, 오른쪽에 충돌
 			dx = -dx;
 			if (bs_barrier == 1) {
+				attack1_repeat = setInterval(bossAttack1_attacked,1);
 				bs_barrier = 0;
 				attack1 = 0;
+				attack1_img = 1;
+				attack1_img_count = 0;
 			}
 			else {
 				b_hp_decrease();
@@ -445,7 +449,10 @@ function hp() {
 			dy = -dy;
 			if (bs_barrier == 1) {
 				bs_barrier = 0;
+				attack1_repeat = setInterval(bossAttack1_attacked,1);
 				attack1 = 0;
+				attack1_img = 1;
+				attack1_img_count = 0;
 			}
 			else {
 				b_hp_decrease();
@@ -530,19 +537,6 @@ function hp() {
 				qstop_pattern = 1;
 			}
 			clearInterval(time_repeat);
-			$("#exit1").click(function() {
-				// if (effectOn) {
-				// 	clickSound.play();   // 버튼 클릭 효과음
-				// }
-				$("#stage1").removeClass("animateContent2").addClass("animateContent1");  // 스테이지3 esc화면 줄어드는 애니메이션
-				setTimeout(function() {
-					$("#stage1").removeClass("animateContent1").hide();   // 스테이지3 esc화면 none해주고
-					$("#select-stage").show().addClass("animateContent2");         // 다시 스테이지 선택 페이지 나타나게
-					setTimeout(function() {
-						$("#select-stage").removeClass("animateContent2");
-					}, 1000);
-				}, 500);
-			});
 		}
 		else if(event.keyCode == 27 && esc_count == 1){
 			$("#boss_UI1").css({
@@ -640,9 +634,12 @@ function hp() {
 
 	function timeAttack() {
 		timer += 1;
+		if(timer % 8 == 6){
+			attackmotion();
+		}
 
 		if (timer % 8 == 0) {
-			var randnum = Math.floor(Math.random() * 4);
+			var randnum = Math.floor(Math.random()*4);
 			if (randnum == 0) { //첫번째 보스 패턴 ( 보스 배리어 )
 				attack1 = 1;
 				bs_barrier = 1;
@@ -666,39 +663,80 @@ function hp() {
 	}
 
 
+
+	function attackmotion(){
+		bossStanding[0].src = "./img/stage1/ba.gif";
+		setTimeout(function(){
+			bossStanding[0].src = "./img/stage1/boss1.gif";
+		},1800);
+	}
+
+	function attackedmotion(){
+		bossStanding[0].src = "./img/stage1/bt.gif";
+		setTimeout(function(){
+			bossStanding[0].src = "./img/stage1/boss1.gif";
+		},1600);
+	}
+
 	/* 보스 보호막 패턴
 	보스를 둘러싼 파란색 원이 생김 */
 	function bossAttack1() {
-		context.beginPath();
-		context.drawImage(bossshield_Img,bossx -bosswd / 3 + 10, bossy, (bosswd + 10)*1.3, (bosswd + 10)*1.3);
-		context.strokeStyle = "blue"
-		context.stroke();
+		attack1_img_count++;
+		if(attack1_img_count % 50 == 0){
+			attack1_img++;
+			if(attack1_img == 9){
+				attack1_img = 4;
+			}
+			bossshield_Img.src = "./img/stage1/s"+attack1_img+".png"
+		}
+		context.drawImage(bossshield_Img,bossx -bosswd / 3 + 10, bossy-15, (bosswd + 10)*1.3, (bosswd + 10)*1.3);
+	}
+
+	function bossAttack1_attacked(){
+		attack1_img_count++;
+		if(attack1_img_count % 50 == 0){
+			attack1_img++;
+			if(attack1_img == 4){
+				clearInterval(attack1_repeat);
+				attack1_img_count = 0;
+				attack1_img = 1;
+			}
+			bossshield_Img.src = "./img/stage1/ss"+attack1_img+".png"
+		}
+		context.drawImage(bossshield_Img,bossx -bosswd / 3 + 10, bossy-15, (bosswd + 10)*1.3, (bosswd + 10)*1.3);
 	}
 
 	/* 보스 밑으로 1개의 검이 떨어지면서
 	검이 패들의 영역에 있다면 플레이어 데미지 */
 	function bossAttack2() {
-		context.beginPath();
-		context.drawImage(sword_Img,attack_x + barwidth / 2 - 15, yplus, 30, 100); // 가로 30 세로 100의 검 생성
-		context.fillStyle = "yellow";
-		context.fill();
+		attack2_img_count++;
+		if(attack2_img_count % 30 == 0){
+			attack2_img++;
+			if(attack2_img == 13){
+				attack2_img = 1;
+			}
+			sword_Img.src = "./img/stage1/a"+attack2_img+".png";
+		}
+		context.drawImage(sword_Img,attack_x + barwidth / 2 - 15, yplus, 45, 74); // 가로 45 세로 74의 검 생성
 	}
 
 	/* 1개의 검이 떨어지는 움직임을 재현해주는 함수 */
 	function bossAttack2_timer() {
 		yplus = yplus + 2; // Y좌표는 2칸씩 이동
-		if (attack2_count == 0 && yplus + 100 > cvht - 20 && attack_x + 30 > barx - barwidth / 2 && attack_x < barx + barwidth / 2) {
+		if (attack2_count == 0 && yplus > cvht - 20 && attack_x + barwidth / 2 - 15 + 45 > barx - barwidth / 2 && attack_x + barwidth / 2 - 15 < barx + barwidth / 2) {
 			if (qskill == 1) { //플레이어 보호막이 활성되어 있다면 보호막이 깨짐
 				qskill = 0;
 			}
 			else {
 				p_hp_decrease(); // 플레이어 보호막이 없다면 체력 1칸 감소
 			}
-			attack2_count = 1; //이 변수가 1인 동안은 검이 계속 떨어짐
+			attack2_count = 1; //이 변수가 1인 동안은 검에 맞아도 데미지 0
 		}
 		if (yplus == cvht) { //검이 영역 밖으로 나갔을 경우 함수 종료
 			attack2 = 0;
 			yplus = 100;
+			attack2_img = 1;
+			attack2_img_count = 0;
 			clearInterval(attack2_repeat);
 			attack2_count = 0;
 		}
