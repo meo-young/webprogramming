@@ -306,6 +306,9 @@ export function stageStart3(mainGold) {
 			init();
 			p_hp = 0;
 			b_hp = 20;
+			$("#container3").animate({
+				"height": b_hp*15 + "px"
+			});
 			var p_hp_array = $(".state3");
 			for(var i=0; i<3; i++){
 				p_hp_array[i].src = "./img/player/playerHeartFull_25x25.png";
