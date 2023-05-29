@@ -166,7 +166,10 @@ $(document).ready(function () {
         // 배경화면 선택
         $("#b1").click(function() { // 이미지 클릭시
             currentIMG = $(this).attr("src");   // 현재 배경화면 변수
-            $(".screen").css({"background" : "url('./backimg/bgImg1.jpg')"});   // 배경화면 변경
+            $("body").css({
+                "background" : "url('./backimg/bgImg1.jpg')",
+                "background-size" : "cover"
+            });   // 배경화면 변경
             $("#b1").css({"border" : "3px solid yellow"});  // 선택된 이미지 테두리 노란색으로 변경
             $("#b2").css({"border" : "3px solid black"});
             $("#b3").css({"border" : "3px solid black"});
@@ -174,7 +177,10 @@ $(document).ready(function () {
         });
         $("#b2").click(function() {
             currentIMG = $(this).attr("src");
-            $(".screen").css({"background" : "url('./backimg/bgImg2.jpg')"});
+            $("body").css({
+                "background" : "url('./backimg/bgImg2.jpg')",
+                "background-size" : "cover"
+            });
             $("#b1").css({"border" : "3px solid black"});
             $("#b2").css({"border" : "3px solid yellow"});
             $("#b3").css({"border" : "3px solid black"});
@@ -182,7 +188,10 @@ $(document).ready(function () {
         });
         $("#b3").click(function() {
             currentIMG = $(this).attr("src");
-            $(".screen").css({"background" : "url('./backimg/bgImg3.jpg')"});
+            $("body").css({
+                "background" : "url('./backimg/bgImg3.jpg')",
+                "background-size" : "cover"
+            });
             $("#b1").css({"border" : "3px solid black"});
             $("#b2").css({"border" : "3px solid black"});
             $("#b3").css({"border" : "3px solid yellow"});
@@ -190,7 +199,10 @@ $(document).ready(function () {
         });
         $("#b4").click(function() {
             currentIMG = $(this).attr("src");
-            $(".screen").css({"background" : "url('./backimg/bgImg4.jpg')"});
+            $("body").css({
+                "background" : "url('./backimg/bgImg4.jpg')",
+                "background-size" : "cover"
+            });
             $("#b1").css({"border" : "3px solid black"});
             $("#b2").css({"border" : "3px solid black"});
             $("#b3").css({"border" : "3px solid black"});
