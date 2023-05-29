@@ -575,6 +575,20 @@ export function stageStart2() {
 				wstop_pattern = 1;
 			}
 			clearInterval(time_repeat);
+			$("#exit3").click(function() {
+				// if (effectOn) {
+				// 	clickSound.play();   // 버튼 클릭 효과음
+				// }
+				$("#stage3").removeClass("animateContent2").addClass("animateContent1");  // 스테이지3 esc화면 줄어드는 애니메이션
+				setTimeout(function() {
+					$("#stage3").removeClass("animateContent1").hide();   // 스테이지3 esc화면 none해주고
+					$("#select-stage").show().addClass("animateContent2");         // 다시 스테이지 선택 페이지 나타나게
+					setTimeout(function() {
+						$("#select-stage").removeClass("animateContent2");
+					}, 1000);
+				}, 500);
+			});
+
 		}
 		else if(event.keyCode == 27 && esc_count == 1){
 			$("#boss_UI2").css({

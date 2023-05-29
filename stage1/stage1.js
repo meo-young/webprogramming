@@ -454,15 +454,12 @@ function hp() {
 		if ((y > (cvht - 20 - ballRadius - yvelocity))) {
 			if (x > barx + (barwidth / 2 + ballRadius) || x < barx - (barwidth / 2 + ballRadius)) { //바의 영역에서 벗어난 경우
 				if (y > (cvht - 20 - yvelocity)) {
-					clearInterval(repeat);
-					//removeEventListener('mousemove', mousemove);
 					ballRadius = 10;
 					init();
 					draw();
 					p_hp_decrease();
 					start_number = 0;
-					addEventListener("keydown", keydown);
-					//drawText("Game Over");
+					keydown_count = 0;
 				}
 			} else if (x > barx - (barwidth / 2 + ballRadius) && x < barx + (barwidth / 2 + ballRadius)) { //바의 영역에 있는 경우	
 				if(dy > 0){
@@ -532,6 +529,19 @@ function hp() {
 				qstop_pattern = 1;
 			}
 			clearInterval(time_repeat);
+			$("#exit1").click(function() {
+				// if (effectOn) {
+				// 	clickSound.play();   // 버튼 클릭 효과음
+				// }
+				$("#stage1").removeClass("animateContent2").addClass("animateContent1");  // 스테이지3 esc화면 줄어드는 애니메이션
+				setTimeout(function() {
+					$("#stage1").removeClass("animateContent1").hide();   // 스테이지3 esc화면 none해주고
+					$("#select-stage").show().addClass("animateContent2");         // 다시 스테이지 선택 페이지 나타나게
+					setTimeout(function() {
+						$("#select-stage").removeClass("animateContent2");
+					}, 1000);
+				}, 500);
+			});
 		}
 		else if(event.keyCode == 27 && esc_count == 1){
 			$("#boss_UI1").css({
