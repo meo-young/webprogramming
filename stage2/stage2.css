@@ -122,6 +122,7 @@ body {
 
 #boomImg2{
     position: absolute;
-    top: 40px;
-    left: 40px;
+    bottom: 470px;
+    right: 0px;
+
 }

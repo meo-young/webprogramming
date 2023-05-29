@@ -123,27 +123,27 @@ export function stageStart2() {
 		var playerColor ="";
 		// 착용중인 캐릭터 이미지로 변경
 		if ($("#pDefault").hasClass("equip")) {
-			$("#playerImg3").attr("src", pDefaultStdsrc);
+			$("#playerImg2").attr("src", pDefaultStdsrc);
 			playerColor = "default";
 		}
 		else if ($("#pRed").hasClass("equip")) {
-			$("#playerImg3").attr("src", pRedStdsrc);
+			$("#playerImg2").attr("src", pRedStdsrc);
 			playerColor = "red";
 		}
 		else if ($("#pCyan").hasClass("equip")) {
-			$("#playerImg3").attr("src", pCyanstdsrc);
+			$("#playerImg2").attr("src", pCyanstdsrc);
 			playerColor = "cyan";
 		}
 		else if ($("#pWhite").hasClass("equip")) {
-			$("#playerImg3").attr("src", pWhitestdsrc);
+			$("#playerImg2").attr("src", pWhitestdsrc);
 			playerColor = "white";
 		}
 		else if ($("#pYellow").hasClass("equip")) {
-			$("#playerImg3").attr("src", pYellowstdsrc);
+			$("#playerImg2").attr("src", pYellowstdsrc);
 			playerColor = "yellow";
 		}
 		else if ($("#pPurple").hasClass("equip")) {
-			$("#playerImg3").attr("src", pPurplestdsrc);
+			$("#playerImg2").attr("src", pPurplestdsrc);
 			playerColor = "purple";
 		}
 	
@@ -160,7 +160,7 @@ export function stageStart2() {
 	var littlebrick_Img=new Image();
 	littlebrick_Img.src="./img/stage2/부적.png";
 	var bottom_attack_Img=new Image();
-	bottom_attack_Img.src="./img/stage2/하단공격.png";
+	bottom_attack_Img.src="./img/stage2/7img.png";
 	var warnImg=new Image();
 	warnImg.src="./img/stage2/warning.png"
 	var paddleImg = new Image();
@@ -322,13 +322,14 @@ export function stageStart2() {
 	/* 바(bar) 그리는 함수 */
 	function drawPaddle() {
 		context.beginPath();
-		context.rect((barx - barwidth / 2), cvht - 20, barwidth, barheight);
+		
 		if (bar_state == 0) {
 			context.fillStyle = "transparent";
+			context.rect((barx - barwidth / 2), cvht - 20, barwidth, barheight);
 			context.drawImage(paddleImg, (barx - barwidth / 2), cvht - 20, barwidth, barheight);
 		}
 		else if (bar_state == 1) {
-			context.fillStyle = "blue";
+			context.fillStyle = "transparente";
 			context.drawImage(barice_Img,(barx - barwidth / 2)-barwidth/2, cvht - 20-barheight/2, barwidth*2, barheight*2)
 		}
 		context.fill();
@@ -421,7 +422,7 @@ export function stageStart2() {
 		}
 		
 		var boomImg = $("#boomImg2");
-		boomImg.attr("src","./img/player/b3.png");
+		boomImg.attr("src","./img/stage2/b1.gif");
 		setTimeout(function () {
 			if(playerColor == "default"){
 				playerImg.attr("src", pDefaultStdsrc);
@@ -618,7 +619,11 @@ export function stageStart2() {
 		else if(playerColor == "white"){
 			playerImg.attr("src", "./img/player/playerWin_white.gif");
 		}
-
+		var bossImg = $("#bossImg2");
+		bossImg.attr("src","./img/stage2/end.png");
+		bossImg.attr("width","200px");
+		bossImg.attr("height","110px");
+		bossImg.attr("top","100px");
 	}
 	
 
@@ -975,7 +980,7 @@ export function stageStart2() {
 	//보스 캐릭터 주변에 초록색 원을 그려주는 함수
 	function bossAttack1() {
 		context.beginPath();
-		context.drawImage(bossshield_Img,bossx -bosswd / 3 + 10, bossy, (bosswd + 10)*1.3, (bosswd + 10)*1.3);
+		context.drawImage(bossshield_Img,bossx -bosswd / 3 + 10, bossy-40, (bosswd + 10)*1.3, (bosswd + 10)*1.3);
 		context.strokeStyle = "green"
 		context.stroke();
 	}
@@ -1041,7 +1046,7 @@ export function stageStart2() {
 
 	function bossAttack4() {
 		context.beginPath();
-		context.drawImage(littlebrick_Img,attack4_brick_x, attack4_brick_y, 20, 20);
+		context.drawImage(littlebrick_Img,attack4_brick_x, attack4_brick_y, 50, 50);
 		//context.fillStyle = "blue";
 		context.fill();
 	}
