@@ -20,9 +20,14 @@ body {
     color: white;
 }
 
-#main-menu {
+#story-menu {
     display: inline-block;
 }
+#storyImg{
+    width: 1000px;
+    height: 600px;
+}
+
 #shop-menu h3 {
     float: left;
 }
@@ -175,3 +180,9 @@ body {
 .equip {    /*캐릭터 착용 중*/
     background-color: crimson;
 }
+
+#myImage {
+    opacity: 0; /* 초기에 투명하게 설정 */
+    transition: opacity 0.5s; /* 페이드 인 효과를 위한 transition 설정 */
+  }
+  

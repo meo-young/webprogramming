@@ -27,10 +27,10 @@ $(document).ready(function () {
     var pSkill = new Audio();  // 플레이어 스킬 효과음
 
     var currentBGM = mainBgm;    // 현재 재생/중지 상태의 음악파일, 환경설정에서 변경 가능
+    var storyimgcount=1;
     currentBGM.play();
     currentBGM.loop = true;   // 반복재생
 
-    var storyImg=$("#storyImg");
 
     // 좌측 상단 오디오 버튼 클릭 시
     $("#audioVol").click(function() {
@@ -392,13 +392,21 @@ $(document).ready(function () {
         $(this).css({ "transform" : "scale(1)" });
     })
     
-    storyImg.addEventListener('click', function() {
-        $().style.opacity = '0'; /* 클릭 시 이미지를 투명하게 설정하여 fade out 효과 적용 */
-        
+    $("#storyImg").click(function(){
+        storyimgcount++;
+        if(storyimgcount==4){
+            $("#story-menu").addClass("animateContent1");    // 메인 메뉴 페이지 전환 효과 (작아지는)
         setTimeout(function() {
-          image.src = "./storyimg/스토리2.png"; /* 이미지 변경 */
-          image.style.opacity = '1'; /* 투명도를 1로 설정하여 fade in 효과 적용 */
-        }, 500); /* 0.5초 후에 이미지 변경 및 페이드 인 효과 적용 */
+            $("#story-menu").removeClass("animateContent1").hide();  // 1초 후 메인 메뉴 디스플레이 none
+        }, 500);
+            $("#main-menu").addClass("animateContent2").css({ "display": "inline-block" });
+        }else{
+            let str="./storyimg/스토리"+storyimgcount.toString()+".png";
+            $(this).fadeOut(500, function() {
+                // fadeOut() 메서드로 천천히 사라지고, 애니메이션 완료 후 콜백 함수 실행
+                $(this).attr("src", str).fadeIn(1000); // fadeIn() 메서드로 천천히 나타남
+              });
+        }
       });
       
 
