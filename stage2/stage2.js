@@ -95,8 +95,10 @@ export function stageStart2() {
 	/* boss의 x,y좌표*/
 	var bossx;
 	var bossy;
-	var bosswd = 80;
-	var bossht = 80;
+	var bosswd = 160;
+	var bossht = 90;
+	var bs_img_count = 0;
+	var bs_img = 1;
 
 	/*플레이어, 보스 체력 */
 	var p_hp = 0;
@@ -470,11 +472,6 @@ export function stageStart2() {
 	function boss() {
 		bossx = (cvwd - bosswd) / 2;
 		bossy = 10;
-		context.beginPath();
-		context.rect(bossx, bossy, bosswd, bossht);
-		context.fillStyle = "transparent";
-		context.fill();
-
 		context.drawImage(bossImg, bossx, bossy, bosswd, bossht);
 	}
 
@@ -585,6 +582,95 @@ export function stageStart2() {
 		if(p_hp == 3){
 			game_over_Img();
 			game_over(2);
+			removeEventListener('keydown', keydown);
+			removeEventListener('mousemove', mousemove);
+			clearInterval(repeat);
+			setTimeout(function(){
+				$("#boss_UI2").css({
+					display : "block"
+				});
+				$("#player_UI2").css({
+					display : "block"
+				});
+				$("#screen2").css({
+					display : "block"
+				});
+				$("#esc_menu2").css({
+					display : "none"
+				});
+				esc_count = 0;
+				keydown_count = 0;
+				if(attack1 == 1){
+					attack1 = 0;
+					attack1_timer = 0;
+					clearInterval(attack1_repeat);
+				}
+				else if(attack2 == 1){
+					attack2_timer = 0;
+					attack2 = 0;
+					attack2_count = 0;
+					attack2_img = 1;
+					attack2_img_count = 0;
+					bottom_attack_Img.src = "./img/stage2/a"+attack2_img+".png";
+				}
+				else if( attack4 == 1){
+					attack4 = 0;
+				}
+				bar_state = 0;
+				if(qskill_cooltime == 1){
+					clearInterval(qskill_repeat);
+					qskill_cooltime = 0;
+					qskill = 0;
+					qskill_timer = 30;
+					$("#qskill2").css({
+						"display": "block"
+					});
+					$("#qtimer2").css({
+						"display": "none"
+					});
+				}
+		
+				if(wskill_cooltime == 1){
+					clearInterval(wskill_repeat);
+					clearInterval(wskill_repeat2);
+					wskill_cooltime = 0;
+					wskill = 0;
+					wskill_count = 0;
+					wskill_timer = 10;
+					wskill_Img.src = "./img/stage2/blast1.png";
+					wskill_img_count = 0;
+					wskill_img = 1;
+					$("#wskill2").css({
+						"display": "block"
+					});
+					$("#wtimer2").css({
+						"display": "none"
+					});
+				}
+				clearInterval(time_repeat);
+				init();
+				p_hp = 0;
+				b_hp = 20;
+				$("#container2").animate({
+					"height": b_hp*15 + "px"
+				});
+				var p_hp_array = $(".state2");
+				for(var i=0; i<3; i++){
+					p_hp_array[i].src = "./img/player/playerHeartFull_25x25.png";
+				}
+				
+				$("#stage2").removeClass("animateContent2").addClass("animateContent1");  // 스테이지3 esc화면 줄어드는 애니메이션
+				setTimeout(function() {
+					$("#stage2").removeClass("animateContent1").hide();   // 스테이지3 esc화면 none해주고
+					$("#select-stage").show().addClass("animateContent2");         // 다시 스테이지 선택 페이지 나타나게
+					setTimeout(function() {
+						$("#select-stage").removeClass("animateContent2");
+					}, 1000);
+				}, 500);
+				$(".screen").css({
+					"background" : "url(./backimg/back1.gif)"
+				});
+			},4000);
 		}
 	}
 	function p_hp_decrease_Img() {
