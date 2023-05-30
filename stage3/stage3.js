@@ -691,7 +691,120 @@ export function stageStart3(mainGold) {
 		if (p_hp == 3) {
 			game_over_Img();
 			game_over(2);
-
+			clearInterval(repeat);
+			removeEventListener('keydown', keydown);
+			removeEventListener('mousemove', mousemove);
+			setTimeout(function(){
+				$("#boss_UI3").css({
+					display : "block"
+				});
+				$("#player_UI3").css({
+					display : "block"
+				});
+				$("#screen3").css({
+					display : "block"
+				});
+				$("#esc_menu3").css({
+					display : "none"
+				});
+				esc_count = 0;
+				keydown_count = 0;
+				if(attack1 == 1){
+					attack1 = 0;
+					check = 0;
+					attack1_timer = 0;
+					attack1_img_count = 0;
+					attack1_img = 1;
+					bsimg.src = "./img/stage3/ba"+attack1_img+".png";
+					razer_Img.src = "./img/stage3/l2.png";
+					clearInterval(attack1_repeat);
+				}
+				else if(attack3 == 1){
+					attack3 = 0;
+					clearInterval(attack3_repeat);
+					attack3_timer = 0;
+					attack3_count = 0;
+				}
+				else if (attack4 == 1){
+					attack4 = 0;
+					attack4_count = 0;
+					clearInterval(attack4_timer);
+					attack4_img_count = 0;
+					attack4_img = 1;
+					yplus = 0;
+					for (var r = 0; r < attack_bricks.length; r++) {
+						attack_bricks[r] = 0;
+					}
+				}
+				if(qskill_cooltime == 1){
+					clearInterval(qskill_repeat);
+					qskill_cooltime = 0;
+					qskill = 0;
+					qskill_timer = 30;
+					$("#qskill3").css({
+						"display": "block"
+					});
+					$("#qtimer3").css({
+						"display": "none"
+					});
+				}
+	
+				if(wskill_cooltime == 1){
+					clearInterval(wskill_repeat);
+					clearInterval(wskill_repeat2);
+					wskill_cooltime = 0;
+					wskill = 0;
+					wskill_count = 0;
+					wskill_timer = 10;
+					wskill_Img.src = "./img/stage3/blast1.png";
+					wskill_img_count = 0;
+					wskill_img = 1;
+					$("#wskill3").css({
+						"display": "block"
+					});
+					$("#wtimer3").css({
+						"display": "none"
+					});
+				}
+				if(eskill_state == 1){
+					clearInterval(eskill_repeat);
+					clearInterval(eskill_timer);
+					eskill = 0;
+					eskill_count = 0;
+					eskill_cooltime = 15;
+					eskill_state = 0;
+					$("#eskill3").css({
+						"display": "block"
+					});
+					$("#etimer3").css({
+						"display": "none"
+					});
+				}
+				clearInterval(time_repeat);
+				init();
+				p_hp = 0;
+				b_hp = 20;
+				$("#container3").animate({
+					"height": b_hp*15 + "px"
+				});
+				var p_hp_array = $(".state3");
+				for(var i=0; i<3; i++){
+					p_hp_array[i].src = "./img/player/playerHeartFull_25x25.png";
+				}
+				
+				$("#stage3").removeClass("animateContent2").addClass("animateContent1");  // 스테이지3 esc화면 줄어드는 애니메이션
+				setTimeout(function() {
+					$("#stage3").removeClass("animateContent1").hide();   // 스테이지3 esc화면 none해주고
+					$("#select-stage").show().addClass("animateContent2");         // 다시 스테이지 선택 페이지 나타나게
+					setTimeout(function() {
+						$("#select-stage").removeClass("animateContent2");
+					}, 1000);
+				}, 500);
+				$(".screen").css({
+					"background" : "url(./backimg/back1.gif)"
+				});
+				
+			}, 4000);
 		}
 	}
 
