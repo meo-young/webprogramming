@@ -330,7 +330,7 @@ export function stageStart2() {
 		}
 		else if (bar_state == 1) {
 			context.fillStyle = "transparente";
-			context.drawImage(barice_Img,(barx - barwidth / 2)-barwidth/2, cvht - 20-barheight/2, barwidth*2, barheight*2)
+			context.drawImage(barice_Img,(barx - barwidth / 2)-barwidth/2, cvht - 20-barheight/2, barwidth*1.5, barheight*1.5)
 		}
 		context.fill();
 	}
@@ -1046,7 +1046,7 @@ export function stageStart2() {
 
 	function bossAttack4() {
 		context.beginPath();
-		context.drawImage(littlebrick_Img,attack4_brick_x, attack4_brick_y, 50, 50);
+		context.drawImage(littlebrick_Img,attack4_brick_x, attack4_brick_y, 45, 45);
 		//context.fillStyle = "blue";
 		context.fill();
 	}

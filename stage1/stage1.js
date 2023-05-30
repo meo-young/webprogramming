@@ -90,7 +90,55 @@ export function stageStart1() {
 	//플레이어 이미지
 
 	var bossStanding = document.getElementsByClassName("character");
-	var playerStandingsrc = "./img/player/playerStanding_32x32.gif"; // div
+	var pDefaultStdsrc = "./img/player/playerStanding_32x32.gif";
+	var pRedStdsrc = "./img/player/playerStanding_red_32x32.gif";
+	var pCyanstdsrc = "./img/player/playerStanding_cyan_32x32.gif";
+	var pWhitestdsrc = "./img/player/playerStanding_white_32x32.gif";
+	var pYellowstdsrc = "./img/player/playerStanding_yellow_32x32.gif";
+	var pPurplestdsrc = "./img/player/playerStanding_purple_32x32.gif";
+
+	var pDefaultAttacksrc = "./img/player/playerAttack1_32x32.gif";
+	var pRedAttacksrc = "./img/player/playerAttack1_red_32x32.gif";
+	var pCyanAttacksrc = "./img/player/playerAttack1_cyan_32x32.gif";
+	var pWhiteAttacksrc = "./img/player/playerAttack1_white_32x32.gif";
+	var pYellowAttacksrc = "./img/player/playerAttack1_yellow_32x32.gif";
+	var pPurpleAttacksrc = "./img/player/playerAttack1_purple_32x32.gif";
+
+	var pDefaultHitsrc = "./img/player/playerHit_default.png";
+	var pRedHItsrc = "./img/player/playerHit_red.png";
+	var pCyanHitsrc = "./img/player/playerHit_cyan.png";
+	var pWhiteHitsrc = "./img/player/playerHit_white.png";
+	var pYellowHitsrc = "./img/player/playerHit_yellow.png";
+	var pPurpleHitsrc = "./img/player/playerHit_purple.png";
+
+
+	var playerColor ="";
+
+		// 착용중인 캐릭터 이미지로 변경
+	if ($("#pDefault").hasClass("equip")) {
+		$("#playerImg1").attr("src", pDefaultStdsrc);
+		playerColor = "default";
+	}
+	else if ($("#pRed").hasClass("equip")) {
+		$("#playerImg1").attr("src", pRedStdsrc);
+		playerColor = "red";
+	}
+	else if ($("#pCyan").hasClass("equip")) {
+		$("#playerImg1").attr("src", pCyanstdsrc);
+		playerColor = "cyan";
+	}
+	else if ($("#pWhite").hasClass("equip")) {
+		$("#playerImg1").attr("src", pWhitestdsrc);
+		playerColor = "white";
+	}
+	else if ($("#pYellow").hasClass("equip")) {
+		$("#playerImg1").attr("src", pYellowstdsrc);
+		playerColor = "yellow";
+	}
+	else if ($("#pPurple").hasClass("equip")) {
+		$("#playerImg1").attr("src", pPurplestdsrc);
+		playerColor = "purple";
+	}
 	var bossImg = new Image(); // in canvas
 	bossImg.src = "./img/stage1/boss1.gif";
 	var bossshield_Img=new Image();
@@ -376,7 +424,6 @@ export function stageStart1() {
 
 	function b_hp_decrease() {
 		b_hp--;
-		b_hp_decrease_Img();
 		bossAudio.play();
 		hp();
 		var num = b_hp * 30;
@@ -388,6 +435,7 @@ export function stageStart1() {
 		}
 		else {
 			attackedmotion();
+			b_hp_decrease_Img();
 		}
 
 
@@ -398,9 +446,43 @@ export function stageStart1() {
 
 	function b_hp_decrease_Img() {
 		var playerImg = $("#playerImg1");
-		playerImg.attr("src", "./img/player/playerAttack1_32x32.gif");
+		if(playerColor == "default"){
+			playerImg.attr("src", pDefaultAttacksrc);
+		}
+		else if(playerColor == "red"){
+			playerImg.attr("src", pRedAttacksrc);
+		}
+		else if(playerColor == "cyan"){
+			playerImg.attr("src", pCyanAttacksrc);
+		}
+		else if(playerColor == "purple"){
+			playerImg.attr("src", pPurpleAttacksrc);
+		}	
+		else if(playerColor == "yellow"){
+			playerImg.attr("src", pYellowAttacksrc);
+		}
+		else if(playerColor == "white"){
+			playerImg.attr("src", pWhiteAttacksrc);
+		}
 		setTimeout(function () {
-			playerImg.attr("src", playerStandingsrc);
+			if(playerColor == "default"){
+				playerImg.attr("src", pDefaultStdsrc);
+			}
+			else if(playerColor == "red"){
+				playerImg.attr("src", pRedStdsrc);
+			}
+			else if(playerColor == "cyan"){
+				playerImg.attr("src", pCyanstdsrc);
+			}
+			else if(playerColor == "purple"){
+				playerImg.attr("src", pPurplestdsrc);
+			}	
+			else if(playerColor == "yellow"){
+				playerImg.attr("src", pYellowstdsrc);
+			}
+			else if(playerColor == "white"){
+				playerImg.attr("src", pWhitestdsrc);
+			}
 		}, 1000);
 	}
 
@@ -420,17 +502,78 @@ export function stageStart1() {
 	}
 
 	function p_hp_decrease_Img(){
-	var playImg = $("#playerImg1");
+	var playerImg = $("#playerImg1");
 	var p_ImgBlankInterval = setInterval(function(){
-		if(playImg.attr("src")===playerStandingsrc){
-			playImg.attr("src","./img/player/playerHit_default.png");}
-		else{
-			playImg.attr("src",playerStandingsrc);
+		if(playerColor == "default"){
+			if (playerImg.attr("src") === pDefaultStdsrc) {
+				playerImg.attr("src", pDefaultHitsrc);
+			}
+			else {
+				playerImg.attr("src", pDefaultStdsrc);
+			}
 		}
+		else if(playerColor == "red"){
+			if (playerImg.attr("src") === pRedStdsrc) {
+				playerImg.attr("src", pRedHItsrc);
+			}
+			else {
+				playerImg.attr("src", pRedStdsrc);
+			}
+		}
+		else if(playerColor == "cyan"){
+			if (playerImg.attr("src") === pCyanstdsrc) {
+				playerImg.attr("src", pCyanHitsrc);
+			}
+			else {
+				playerImg.attr("src", pCyanstdsrc);
+			}
+		}
+		else if(playerColor == "purple"){
+			if (playerImg.attr("src") === pPurplestdsrc) {
+				playerImg.attr("src", pPurpleHitsrc);
+			}
+			else {
+				playerImg.attr("src", pPurplestdsrc);
+			}
+		}	
+		else if(playerColor == "yellow"){
+			if (playerImg.attr("src") === pYellowstdsrc) {
+				playerImg.attr("src", pYellowHitsrc);
+			}
+			else {
+				playerImg.attr("src", pYellowstdsrc);
+			}
+		}
+		else if(playerColor == "white"){
+			if (playerImg.attr("src") === pWhitestdsrc) {
+				playerImg.attr("src", pWhiteHitsrc);
+			}
+			else {
+				playerImg.attr("src", pWhitestdsrc);
+			}
+		}
+
 	}, 100);
 	setTimeout(function(){
 		clearInterval(p_ImgBlankInterval);
-		playImg.attr("src",playerStandingsrc);
+		if(playerColor == "default"){
+			playerImg.attr("src", pDefaultStdsrc);
+		}
+		else if(playerColor == "red"){
+			playerImg.attr("src", pRedStdsrc);
+		}
+		else if(playerColor == "cyan"){
+			playerImg.attr("src", pCyanstdsrc);
+		}
+		else if(playerColor == "purple"){
+			playerImg.attr("src", pPurplestdsrc);
+		}	
+		else if(playerColor == "yellow"){
+			playerImg.attr("src", pYellowstdsrc);
+		}
+		else if(playerColor == "white"){
+			playerImg.attr("src", pWhitestdsrc);
+		}
 
 	}, 500);
 }
@@ -446,14 +589,59 @@ export function stageStart1() {
 		context.clearRect(0, 0, cvwd, cvht);
 		if (who == 1) {
 			drawText("You Win");
+			game_over_win_Img();
 			deathmotion();
 		}
 		else if (who == 2) {
 			drawText("You Lose");
+			game_over_Img();
 			winmotion();
+			
 		}
 	}
+	function game_over_Img() {
+		var playerImg = $("#playerImg1");
+		if(playerColor == "default"){
+			playerImg.attr("src",  "./img/player/playerLose_32x32.gif");
+		}
+		else if(playerColor == "red"){
+			playerImg.attr("src",  "./img/player/playerLose_red_32x32.gif");
+		}
+		else if(playerColor == "cyan"){
+			playerImg.attr("src",  "./img/player/playerLose_cyan_32x32.gif");
+		}
+		else if(playerColor == "purple"){
+			playerImg.attr("src",  "./img/player/playerLose_purple_32x32.gif");
+		}	
+		else if(playerColor == "yellow"){
+			playerImg.attr("src",  "./img/player/playerLose_yellow_32x32.gif");
+		}
+		else if(playerColor == "white"){
+			playerImg.attr("src", "./img/player/playerLose_white_32x32.gif");
+		}
+	}
+	function game_over_win_Img(){
+		var playerImg = $("#playerImg1");
+		if(playerColor == "default"){
+			playerImg.attr("src",  "./img/player/playerWin_default.gif");
+		}
+		else if(playerColor == "red"){
+			playerImg.attr("src",  "./img/player/playerWin_red.gif");
+		}
+		else if(playerColor == "cyan"){
+			playerImg.attr("src", "./img/player/playerWin_cyan.gif");
+		}
+		else if(playerColor == "purple"){
+			playerImg.attr("src",  "./img/player/playerWin_purple.gif");
+		}	
+		else if(playerColor == "yellow"){
+			playerImg.attr("src",  "./img/player/playerWin_yellow.gif");
+		}
+		else if(playerColor == "white"){
+			playerImg.attr("src", "./img/player/playerWin_white.gif");
+		}
 
+	}
 
 /* 플레이어, 보스 체력 출력해주는 함수 */
 function hp() {
