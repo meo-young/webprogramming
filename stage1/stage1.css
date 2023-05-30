@@ -1,11 +1,11 @@
 body {
     margin: 0;
     padding: 0;
+    background-size: cover;
 }
 
 #screen1 {
     float: left;
-    background: url("../backimg/stage1bg.jpg");
 }
 
 #gamestart1 {

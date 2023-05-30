@@ -169,6 +169,9 @@ export function stageStart1() {
 		play_button.onclick = play;
 		var exit_button = document.getElementById("exit1");
 		exit_button.onclick = exit;
+		$(".screen").css({
+			"background" : "url(./backimg/back2.gif)"
+		});
 	}
 
 	function play(){
