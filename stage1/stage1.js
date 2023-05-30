@@ -28,6 +28,11 @@ export function stageStart1() {
 	var attack2_img = 1;
 
 
+	var attack3 = 0;
+	var attack3_img_count = 0;
+	var attack3_img = 1;
+	var attack3_count = 0;
+
 	/* 스페이스바를 누르면 start_number = 1로 변경 되면서 공이 발사됨 */
 	var start_number = 0;
 	var keydown_count = 0;
@@ -139,6 +144,9 @@ export function stageStart1() {
 		$("#playerImg1").attr("src", pPurplestdsrc);
 		playerColor = "purple";
 	}
+
+	var fireball = new Image();
+	fireball.src = "./img/stage1/af1.png";
 	var bossImg = new Image(); // in canvas
 	bossImg.src = "./img/stage1/boss1.gif";
 	var bossshield_Img=new Image();
@@ -195,6 +203,9 @@ export function stageStart1() {
 		if(stop_pattern == 2){	
 			attack2_repeat = setInterval(bossAttack2_timer, 1);
 		}
+		else if(stop_pattern == 3){
+			attack3 = 1;
+		}
 		if(qstop_pattern == 1){
 			qskill_repeat = setInterval(skill_timer1,1000);
 			qstop_pattern = 0;
@@ -236,6 +247,13 @@ export function stageStart1() {
 			attack2_img_count = 0;
 			clearInterval(attack2_repeat);
 			attack2_count = 0;
+		}
+		else if(attack3 == 1){
+			attack3_img = 1;
+			attack3_img_count = 0;
+			attack3 = 0;
+			attack3_count = 0;
+			fireball.src = "./img/stage1/af"+attack3_img+".png";
 		}
 		ballRadius = 10;
 		barwidth = 100;
@@ -362,6 +380,9 @@ export function stageStart1() {
 		}
 		else if (attack2 == 1) {
 			bossAttack2();
+		}
+		else if(attack3 == 1){
+			bossAttack3();
 		}
 	}
 
@@ -500,7 +521,80 @@ export function stageStart1() {
 		if(p_hp == 3){
 			game_over_Img();
 			game_over(2);
-
+			removeEventListener('keydown', keydown);
+			removeEventListener('mousemove', mousemove);
+			setTimeout(function(){
+				$("#boss_UI1").css({
+					display : "block"
+				});
+				$("#player_UI1").css({
+					display : "block"
+				});
+				$("#screen1").css({
+					display : "block"
+				});
+				$("#esc_menu1").css({
+					display : "none"
+				});
+				esc_count = 0;
+				keydown_count = 0;
+				clearInterval(repeat);
+				if(attack1 == 1){
+					clearInterval(attack1_repeat);
+					attack1 = 0;
+					attack1_img_count = 0;
+					attack1_img = 1;
+				}
+				else if(attack2 == 1){
+					attack2 = 0;
+					yplus = 100;
+					attack2_img = 1;
+					attack2_img_count = 0;
+					clearInterval(attack2_repeat);
+					attack2_count = 0;
+				}
+				else if(attack3 == 1){
+					attack3_img = 1;
+					attack3_img_count = 0;
+					attack3 = 0;
+					attack3_count = 0;
+					fireball.src = "./img/stage1/af"+attack3_img+".png";
+				}
+				ballRadius = 10;
+				barwidth = 100;
+				if(qskill_cooltime== 1){
+					clearInterval(qskill_repeat);
+					qskill_cooltime = 0;
+					qskill = 0;
+					qskill_timer = 30;
+					$("#qskill1").css({
+						"display": "block"
+					});
+					$("#qtimer1").css({
+						"display": "none"
+					});
+				}
+				clearInterval(time_repeat);
+				init();
+				p_hp = 0;
+				b_hp = 10;
+				$("#container1").animate({
+					"height": b_hp*30 + "px"
+				});
+				var p_hp_array = $(".state1");
+				for(var i=0; i<3; i++){
+					p_hp_array[i].src = "./img/player/playerHeartFull_25x25.png";
+				}
+				
+				$("#stage1").removeClass("animateContent2").addClass("animateContent1");  // 스테이지3 esc화면 줄어드는 애니메이션
+				setTimeout(function() {
+					$("#stage1").removeClass("animateContent1").hide();   // 스테이지3 esc화면 none해주고
+					$("#select-stage").show().addClass("animateContent2");         // 다시 스테이지 선택 페이지 나타나게
+					setTimeout(function() {
+						$("#select-stage").removeClass("animateContent2");
+					}, 1000);
+				}, 500);
+			},4000);
 		}
 	}
 
@@ -802,6 +896,10 @@ function hp() {
 				clearInterval(attack2_repeat);
 				stop_pattern = 2;
 			}
+			else if(attack3 == 1){
+				attack3 = 0;
+				stop_pattern = 3;
+			}
 			if(qskill_cooltime == 1){
 				clearInterval(qskill_repeat);
 				qstop_pattern = 1;
@@ -828,6 +926,9 @@ function hp() {
 			time_repeat = setInterval(timeAttack,1000);
 			if(stop_pattern == 2){	
 				attack2_repeat = setInterval(bossAttack2_timer, 1);
+			}
+			else if(stop_pattern == 3){
+				attack3 = 1;
 			}
 			if(qstop_pattern == 1){
 				qskill_repeat = setInterval(skill_timer1,1000);
@@ -904,12 +1005,12 @@ function hp() {
 
 	function timeAttack() {
 		timer += 1;
-		if(timer % 8 == 6){
+		if(timer % 6 == 4){
 			attackmotion();
 		}
 
-		if (timer % 8 == 0) {
-			var randnum = Math.floor(Math.random()*4);
+		if (timer % 6 == 0) {
+			var randnum = Math.floor(Math.random())+2;
 			if (randnum == 0) { //첫번째 보스 패턴 ( 보스 배리어 )
 				attack1 = 1;
 				bs_barrier = 1;
@@ -920,8 +1021,8 @@ function hp() {
 				attack2_repeat = setInterval(bossAttack2_timer, 1);
 			}
 			else if (randnum == 2) { // 세번째 보스 패턴 ( 패들 길이 -50 )
-				barwidth = 50;
-				setTimeout(bossAttack3, 3000);
+				attack_x = Math.floor(Math.random() * 480);
+				attack3 = 1;
 			}
 			else if (randnum == 3) { // 네번째 보스 패턴 ( 공 반지름 -5 )
 				ballRadius = 5;
@@ -990,8 +1091,7 @@ function hp() {
 		context.drawImage(bossshield_Img,bossx -bosswd / 3 + 10, bossy-15, (bosswd + 10)*1.3, (bosswd + 10)*1.3);
 	}
 
-	/* 보스 밑으로 1개의 검이 떨어지면서
-	검이 패들의 영역에 있다면 플레이어 데미지 */
+	/* 보스 밑으로 파이어볼 공격 */
 	function bossAttack2() {
 		attack2_img_count++;
 		if(attack2_img_count % 30 == 0){
@@ -1001,13 +1101,13 @@ function hp() {
 			}
 			sword_Img.src = "./img/stage1/a"+attack2_img+".png";
 		}
-		context.drawImage(sword_Img,attack_x + barwidth / 2 - 15, yplus, 45, 74); // 가로 45 세로 74의 검 생성
+		context.drawImage(sword_Img,attack_x + barwidth / 2 - 15, yplus, 80, 150); // 가로 45 세로 74의 검 생성
 	}
 
 	/* 1개의 검이 떨어지는 움직임을 재현해주는 함수 */
 	function bossAttack2_timer() {
 		yplus = yplus + 2; // Y좌표는 2칸씩 이동
-		if (attack2_count == 0 && yplus > cvht - 20 && attack_x + barwidth / 2 - 15 + 45 > barx - barwidth / 2 && attack_x + barwidth / 2 - 15 < barx + barwidth / 2) {
+		if (attack2_count == 0 && yplus > cvht - 20 && attack_x + barwidth / 2 - 15 + 80 > barx - barwidth / 2 && attack_x + barwidth / 2 - 15 < barx + barwidth / 2) {
 			if (qskill == 1) { //플레이어 보호막이 활성되어 있다면 보호막이 깨짐
 				qskill = 0;
 			}
@@ -1026,9 +1126,33 @@ function hp() {
 		}
 	}
 
-	/* 호출시 원래 패들 길이로 복구 */
+	/* 바닥에서 불꽃이 솟아나는 공격 */
 	function bossAttack3() {
-		barwidth = 100;
+		attack3_img_count++;
+		if(attack3_img_count % 50 == 0){
+			attack3_img++;
+			if(attack3_img == 13){
+				attack3_img = 1;
+				attack3_img_count = 0;
+				attack3 = 0;
+				attack3_count = 0;
+			}
+			fireball.src = "./img/stage1/af"+attack3_img+".png";
+		}
+		context.drawImage(fireball,attack_x,cvht-130, 120, 130);
+		if(attack3_img_count >= 300){
+			if(attack_x <= barx+barwidth/2 && attack_x+120 >= barx-barwidth/2){
+				if(qskill == 1){
+					qskill = 0;
+				}
+				else {
+					if(attack3_count == 0){
+						attack3_count = 1;
+						p_hp_decrease();
+					}
+				}
+			}
+		}
 	}
 
 	/* 호출시 원래 공 반지름 길이로 복구 */
