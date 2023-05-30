@@ -2,8 +2,9 @@ import { stageStart1 } from "./stage1/stage1.js";
 import { stageStart2 } from "./stage2/stage2.js";
 import { stageStart3 } from "./stage3/stage3.js";
 $(document).ready(function () {
+
     // 골드
-    var currentGold = 2000;
+    var currentGold = 200;
     $(".gold").html(currentGold);
 
     // 현재 배경 img
@@ -28,12 +29,10 @@ $(document).ready(function () {
 
     var currentBGM = mainBgm;    // 현재 재생/중지 상태의 음악파일, 환경설정에서 변경 가능
     var storyimgcount=1;
-    var stage2open=false;
-    var stage3open=false;
-
     currentBGM.play();
     currentBGM.loop = true;   // 반복재생
 
+    
 
     // 좌측 상단 오디오 버튼 클릭 시
     $("#audioVol").click(function() {
@@ -65,13 +64,13 @@ $(document).ready(function () {
 
     // 각 스테이지 선택 시 스테이지 선택 화면 애니메이션
     $(".stage-btn").click(function() {
-        // if (effectOn) {
-        //     clickSound.play();   // 버튼 클릭 효과음
-        // }
-        // $("#select-stage").removeClass("animateContent2").addClass("animateContent1");    // 스테이지 선택 페이지 전환 효과 (작아지는)
-        // setTimeout(function() {
-        //     $("#select-stage").removeClass("animateContent1").hide();
-        // }, 500);
+        if (effectOn) {
+            clickSound.play();   // 버튼 클릭 효과음
+        }
+        $("#select-stage").removeClass("animateContent2").addClass("animateContent1");    // 스테이지 선택 페이지 전환 효과 (작아지는)
+        setTimeout(function() {
+            $("#select-stage").removeClass("animateContent1").hide();
+        }, 500);
     });
 
     // 시작버튼(스테이지 선택) 클릭 시 스테이지 선택 화면 애니메이션
@@ -110,13 +109,6 @@ $(document).ready(function () {
         })
         // 첫번째 보스 캔버스
         $("#stgbtn1").click(function() {
-            if (effectOn) {
-                clickSound.play();   // 버튼 클릭 효과음
-            }
-            $("#select-stage").removeClass("animateContent2").addClass("animateContent1");    // 스테이지 선택 페이지 전환 효과 (작아지는)
-            setTimeout(function() {
-                $("#select-stage").removeClass("animateContent1").hide();
-            }, 500);
             setTimeout(function() {
                 $("#stage1").addClass("animateContent2").css({ "display": "inline-block" });
             }, 500);
@@ -125,60 +117,19 @@ $(document).ready(function () {
         });
         // 두번째 보스 캔버스
         $("#stgbtn2").click(function() {
-            if(stage2open){
-                if (effectOn) {
-                    clickSound.play();   // 버튼 클릭 효과음
-                }
-                $("#select-stage").removeClass("animateContent2").addClass("animateContent1");    // 스테이지 선택 페이지 전환 효과 (작아지는)
-                setTimeout(function() {
-                    $("#select-stage").removeClass("animateContent1").hide();
-                }, 500);
-                setTimeout(function() {
-                    $("#stage2").addClass("animateContent2").css({ "display": "inline-block" });
-                }, 500);
-                currentGold=parseInt($(".gold").eq(0).text());
-                stageStart2(currentGold);
-            }else{
-                currentGold=parseInt($(".gold").eq(0).text());
-                if(currentGold>=200){
-                    currentGold-=200;
-                    $(".gold").html(currentGold);
-                    alert('문이 열렸습니다.');
-                    stage2open=true;
-                }else{
-                    alert('돈이 부족합니다.');
-                }
-
-            }
+            setTimeout(function() {
+                $("#stage2").addClass("animateContent2").css({ "display": "inline-block" });
+            }, 500);
+            currentGold=parseInt($(".gold").eq(0).text());
+            stageStart2(currentGold);
         });
         // 세번째 보스 캔버스
         $("#stgbtn3").click(function() {
-            if(stage3open){
-                if (effectOn) {
-                    clickSound.play();   // 버튼 클릭 효과음
-                }
-                $("#select-stage").removeClass("animateContent2").addClass("animateContent1");    // 스테이지 선택 페이지 전환 효과 (작아지는)
-                setTimeout(function() {
-                    $("#select-stage").removeClass("animateContent1").hide();
-                }, 500);
-                setTimeout(function() {
-                    $("#stage3").addClass("animateContent2").css({ "display": "inline-block" });
-                }, 500);
-                currentGold=parseInt($(".gold").eq(0).text());
-                stageStart3(currentGold);
-            }else{
-                currentGold=parseInt($(".gold").eq(0).text());
-                if(currentGold>=300){
-                    currentGold-=300;
-                    $(".gold").html(currentGold);
-                    alert('문이 열렸습니다.');
-                    stage3open=true;
-                }else{
-                    alert('돈이 부족합니다.');
-                }
-
-            }
-            
+            setTimeout(function() {
+                $("#stage3").addClass("animateContent2").css({ "display": "inline-block" });
+            }, 500);
+            currentGold=parseInt($(".gold").eq(0).text());
+            stageStart3(currentGold);
         });
         // 뒤로가기 버튼 클릭 시 스테이지 화면과 메인 메뉴 애니메이션
         $("#stage-to-main").click(function () {
