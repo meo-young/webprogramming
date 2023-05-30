@@ -171,8 +171,9 @@ $(document).ready(function () {
         $("#b1").click(function() { // 이미지 클릭시
             currentIMG = $(this).attr("src");   // 현재 배경화면 변수
             $("body").css({
-                "background" : "url('./backimg/bgImg1.jpg')",
-                "background-size" : "cover"
+                // "background" : "url('./backimg/bgImg1.jpg')",
+                // "background-size" : "cover"
+                "background-color" : "black"
             });   // 배경화면 변경
             $("#b1").css({"border" : "3px solid yellow"});  // 선택된 이미지 테두리 노란색으로 변경
             $("#b2").css({"border" : "3px solid black"});
@@ -182,8 +183,9 @@ $(document).ready(function () {
         $("#b2").click(function() {
             currentIMG = $(this).attr("src");
             $("body").css({
-                "background" : "url('./backimg/bgImg2.jpg')",
-                "background-size" : "cover"
+                // "background" : "url('./backimg/bgImg2.jpg')",
+                // "background-size" : "cover"
+                "background-color" : "white"
             });
             $("#b1").css({"border" : "3px solid black"});
             $("#b2").css({"border" : "3px solid yellow"});
@@ -193,8 +195,9 @@ $(document).ready(function () {
         $("#b3").click(function() {
             currentIMG = $(this).attr("src");
             $("body").css({
-                "background" : "url('./backimg/bgImg3.jpg')",
-                "background-size" : "cover"
+                // "background" : "url('./backimg/bgImg3.jpg')",
+                // "background-size" : "cover"
+                "background-color" : "crimson"
             });
             $("#b1").css({"border" : "3px solid black"});
             $("#b2").css({"border" : "3px solid black"});
@@ -204,8 +207,9 @@ $(document).ready(function () {
         $("#b4").click(function() {
             currentIMG = $(this).attr("src");
             $("body").css({
-                "background" : "url('./backimg/bgImg4.jpg')",
-                "background-size" : "cover"
+                // "background" : "url('./backimg/bgImg4.jpg')",
+                // "background-size" : "cover"
+                "background-color" : "gray"
             });
             $("#b1").css({"border" : "3px solid black"});
             $("#b2").css({"border" : "3px solid black"});
@@ -394,22 +398,24 @@ $(document).ready(function () {
         $(this).css({ "transform" : "scale(1)" });
     })
     
-    $("#storyImg").click(function(){
+    $("#storyImg").click(function() {
         storyimgcount++;
-        if(storyimgcount==4){
-            $("#story-menu").addClass("animateContent1");    // 메인 메뉴 페이지 전환 효과 (작아지는)
-        setTimeout(function() {
-            $("#story-menu").removeClass("animateContent1").hide();  // 1초 후 메인 메뉴 디스플레이 none
-        }, 500);
-            $("#main-menu").addClass("animateContent2").css({ "display": "inline-block" });
-        }else{
+        if(storyimgcount==4) {
+            $("#story-menu").addClass("animateContent1");
+            setTimeout(function() {
+                $("#story-menu").removeClass("animateContent1").hide();
+                $("#main-menu").show().addClass("animateContent2");
+                setTimeout(function() {
+                    $("#main-menu").removeClass("animateContent2");
+                }, 1000);
+            }, 500);
+        }
+        else {
             let str="./storyimg/스토리"+storyimgcount.toString()+".png";
             $(this).fadeOut(500, function() {
                 // fadeOut() 메서드로 천천히 사라지고, 애니메이션 완료 후 콜백 함수 실행
                 $(this).attr("src", str).fadeIn(1000); // fadeIn() 메서드로 천천히 나타남
-              });
-        }
-      });
-      
-
+            });
+        }  
+    });
 });
