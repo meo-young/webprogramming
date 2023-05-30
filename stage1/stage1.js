@@ -212,7 +212,7 @@ export function stageStart1() {
 		}
 		stop_pattern = 0;
 	}
-
+	
 	function exit(){
 		// if (effectOn) {
 		// 	clickSound.play();   // 버튼 클릭 효과음

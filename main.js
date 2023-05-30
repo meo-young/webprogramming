@@ -152,68 +152,6 @@ $(document).ready(function () {
         setTimeout(function() {
             $("#settings-menu").addClass("animateContent2").css({ "display": "inline-block" });
         }, 500);
-        // 현재 배경화면 테두리 노란색으로
-        if(currentIMG == "./backimg/bgImg1.jpg") {
-            $("#b1").css({"border" : "3px solid yellow"});
-        }
-        else if(currentIMG == "./backimg/bgImg2.jpg") {
-            $("#b2").css({"border" : "3px solid yellow"});
-        }
-        else if(currentIMG == "./backimg/bgImg3.jpg") {
-            $("#b3").css({"border" : "3px solid yellow"});
-        }
-        else if(currentIMG == "./backimg/bgImg4.jpg") {
-            $("#b4").css({"border" : "3px solid yellow"});
-        }
-        // 배경화면 선택
-        $("#b1").click(function() { // 이미지 클릭시
-            currentIMG = $(this).attr("src");   // 현재 배경화면 변수
-            $("body").css({
-                // "background" : "url('./backimg/bgImg1.jpg')",
-                // "background-size" : "cover"
-                "background-color" : "black"
-            });   // 배경화면 변경
-            $("#b1").css({"border" : "3px solid yellow"});  // 선택된 이미지 테두리 노란색으로 변경
-            $("#b2").css({"border" : "3px solid black"});
-            $("#b3").css({"border" : "3px solid black"});
-            $("#b4").css({"border" : "3px solid black"});
-        });
-        $("#b2").click(function() {
-            currentIMG = $(this).attr("src");
-            $("body").css({
-                // "background" : "url('./backimg/bgImg2.jpg')",
-                // "background-size" : "cover"
-                "background-color" : "white"
-            });
-            $("#b1").css({"border" : "3px solid black"});
-            $("#b2").css({"border" : "3px solid yellow"});
-            $("#b3").css({"border" : "3px solid black"});
-            $("#b4").css({"border" : "3px solid black"});
-        });
-        $("#b3").click(function() {
-            currentIMG = $(this).attr("src");
-            $("body").css({
-                // "background" : "url('./backimg/bgImg3.jpg')",
-                // "background-size" : "cover"
-                "background-color" : "crimson"
-            });
-            $("#b1").css({"border" : "3px solid black"});
-            $("#b2").css({"border" : "3px solid black"});
-            $("#b3").css({"border" : "3px solid yellow"});
-            $("#b4").css({"border" : "3px solid black"});
-        });
-        $("#b4").click(function() {
-            currentIMG = $(this).attr("src");
-            $("body").css({
-                // "background" : "url('./backimg/bgImg4.jpg')",
-                // "background-size" : "cover"
-                "background-color" : "gray"
-            });
-            $("#b1").css({"border" : "3px solid black"});
-            $("#b2").css({"border" : "3px solid black"});
-            $("#b3").css({"border" : "3px solid black"});
-            $("#b4").css({"border" : "3px solid yellow"});
-        });
         // 배경음악
         if(bgmOn) { // 온오프버튼 이미지 초기화
             $("#BGM").css({ "background": "url(./img/interface/volOn_50x50.png)" });
@@ -396,6 +334,7 @@ $(document).ready(function () {
         $(this).css({ "transform" : "scale(1)" });
     })
     
+    // 게임 시작시 등장하는 스토리
     $("#storyImg").click(function() {
         storyimgcount++;
         if(storyimgcount==4) {
@@ -415,5 +354,69 @@ $(document).ready(function () {
                 $(this).attr("src", str).fadeIn(1000); // fadeIn() 메서드로 천천히 나타남
             });
         }  
+    });
+
+    // 스테이지1 esc 환경설정
+    $("#set1").click(function() {
+		$("#stage1").addClass("animateContent1");
+        setTimeout(function() {
+            $("#stage1").removeClass("animateContent1").hide();
+            $("#set1-menu").show().addClass("animateContent2");
+            setTimeout(function() {
+                $("#set1-menu").removeClass("animateContent2");
+			}, 1000);
+        }, 500);
+	});
+    $("#settings-to-esc1").click(function () {
+        $("#set1-menu").addClass("animateContent1");
+        setTimeout(function() {
+            $("#set1-menu").removeClass("animateContent1").hide();
+            $("#stage1").show().addClass("animateContent2");
+            setTimeout(function() {
+                $("#stage1").removeClass("animateContent2");
+            }, 1000);
+        }, 500);
+    });
+    // 스테이지2 esc 환경설정
+    $("#set2").click(function() {
+		$("#stage2").addClass("animateContent1");
+        setTimeout(function() {
+            $("#stage2").removeClass("animateContent1").hide();
+            $("#set2-menu").show().addClass("animateContent2");
+            setTimeout(function() {
+                $("#set2-menu").removeClass("animateContent2");
+			}, 1000);
+        }, 500);
+	});
+    $("#settings-to-esc2").click(function () {
+        $("#set2-menu").addClass("animateContent1");
+        setTimeout(function() {
+            $("#set2-menu").removeClass("animateContent1").hide();
+            $("#stage2").show().addClass("animateContent2");
+            setTimeout(function() {
+                $("#stage2").removeClass("animateContent2");
+            }, 1000);
+        }, 500);
+    });
+    // 스테이지3 esc 환경설정
+    $("#set3").click(function() {
+		$("#stage3").addClass("animateContent1");
+        setTimeout(function() {
+            $("#stage3").removeClass("animateContent1").hide();
+            $("#set3-menu").show().addClass("animateContent2");
+            setTimeout(function() {
+                $("#set3-menu").removeClass("animateContent2");
+			}, 1000);
+        }, 500);
+	});
+    $("#settings-to-esc3").click(function () {
+        $("#set3-menu").addClass("animateContent1");
+        setTimeout(function() {
+            $("#set3-menu").removeClass("animateContent1").hide();
+            $("#stage3").show().addClass("animateContent2");
+            setTimeout(function() {
+                $("#stage3").removeClass("animateContent2");
+            }, 1000);
+        }, 500);
     });
 });
