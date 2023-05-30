@@ -42,7 +42,7 @@ body {
     margin-left: 20px;
 }
 .gold { /* 골드 수급 상황 표시 */
-    width: 100px;
+    width: 70px;
     float: right;
     background: yellow;
     color: black;

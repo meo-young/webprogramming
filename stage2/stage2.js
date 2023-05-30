@@ -13,6 +13,8 @@ export function stageStart2() {
 	var yplus = 480;
 	var wskill_count = 0;
 	var attack_x;
+	var wskill_img_count = 0;
+	var wskill_img = 1;
 
 	/* 보스의 공격이 일정시간마다 진행되기위해 필요한 변수 */
 	var timer = 0;
@@ -27,13 +29,16 @@ export function stageStart2() {
 	var attack2_repeat;
 	var attack_position;
 	var attack2_count = 0;
+	var attack2_img =1;
+	var attack2_img_count = 0;
 
 	var attack4 = 0;
 	var attack4_brick;
 	var attack4_brick_x = 150;
 	var attack4_brick_y = 110;
-
-
+	var attack4_repeat;
+	var fly_count = 1;
+	var fly_repeat;
 
 	/* 스페이스바를 누르면 start_number = 1로 변경 되면서 공이 발사됨 */
 	var start_number = 0;
@@ -150,7 +155,8 @@ export function stageStart2() {
 
 
 
-
+	var wskill_Img = new Image();
+	wskill_Img.src = "./img/stage2/blast1.png";
 	var bossImg = new Image(); // in canvas
 	bossImg.src = "./img/stage2/b1.png";
 	var barice_Img=new Image();
@@ -159,8 +165,10 @@ export function stageStart2() {
 	bossshield_Img.src="./img/stage2/bossShield.png";
 	var littlebrick_Img=new Image();
 	littlebrick_Img.src="./img/stage2/부적.png";
+	var fishfly = new Image();
+	fishfly.src = "./img/stage2/pf1.png";
 	var bottom_attack_Img=new Image();
-	bottom_attack_Img.src="./img/stage2/7img.png";
+	bottom_attack_Img.src="./img/stage2/a1.png";
 	var warnImg=new Image();
 	warnImg.src="./img/stage2/warning.png"
 	var paddleImg = new Image();
@@ -273,16 +281,6 @@ export function stageStart2() {
 
 	function draw() {
 		context.clearRect(0, 0, cvwd, cvht);
-		/* 보스 공격 관련 조건문 */
-		if (attack1 == 1) {
-			bossAttack1();
-		}
-		if (attack2 == 1) {
-			bossAttack2();
-		}
-		if (attack4 == 1) {
-			bossAttack4();
-		}
 
 		/* drawPaddle 관련 위치 조건문 */
 		if (barx > (cvwd - barwidth / 2)) {
@@ -309,6 +307,17 @@ export function stageStart2() {
 		drawBall();
 		drawPaddle();
 		collision();
+
+		/* 보스 공격 관련 조건문 */
+		if (attack1 == 1) {
+			bossAttack1();
+		}
+		if (attack2 == 1) {
+			bossAttack2();
+		}
+		if (attack4 == 1) {
+			bossAttack4();
+		}
 	}
 
 	/* 공 그리는 함수 */
@@ -355,10 +364,8 @@ export function stageStart2() {
 
 	/*w키를 누르면 검격이 나가게 보여주는 함수 */
 	function drawsword() {
-		context.beginPath();
-		context.rect(attack_x - 15, yplus, 30, 100); // 가로 30 세로 100의 검 생성
-		context.fillStyle = "yellow";
-		context.fill();
+		context.drawImage(wskill_Img,attack_x - 15, yplus, 30, 100); // 가로 30 세로 100의 검 생성
+
 	}
 
 	/* 보스를 그려주는 함수 */
@@ -468,11 +475,12 @@ export function stageStart2() {
 	function p_hp_decrease() {
 		if (qskill == 1) {
 			qskill = 0;
-			return;
 		}
-		var p_hp_array = $(".state2");
-		p_hp_array[p_hp].src = "./img/player/playerHeartEmpty_25x25.png";
-		p_hp++;
+		else{
+			var p_hp_array = $(".state2");
+			p_hp_array[p_hp].src = "./img/player/playerHeartEmpty_25x25.png";
+			p_hp++;
+		}
 		if(p_hp == 1 || p_hp == 2){
 			p_hp_decrease_Img();
 		}
@@ -644,6 +652,7 @@ export function stageStart2() {
 				attack4 = 0;
 				brickAudio.play();
 				b_hp_decrease();
+				fishdie();
 			}
 			else if (x > attack4_brick_x - ballRadius && x < attack4_brick_x + 20 + ballRadius && y > attack4_brick_y - ballRadius && y < attack4_brick_y) {
 				//공이 윗면에 맞는경우
@@ -651,6 +660,7 @@ export function stageStart2() {
 				attack4 = 0;
 				brickAudio.play();
 				b_hp_decrease();
+				fishdie();
 			}
 			else if (x > attack4_brick_x - ballRadius && x < attack4_brick_x && y > attack4_brick_y - ballRadius && y < attack4_brick_y + 20 + ballRadius) {
 				//공이 왼쪽 면에 맞는경우
@@ -658,6 +668,7 @@ export function stageStart2() {
 				attack4 = 0;
 				brickAudio.play();
 				b_hp_decrease();
+				fishdie();
 			}
 			else if (x < attack4_brick_x + 20 + ballRadius && x > attack4_brick_x + 20 && y > attack4_brick_y - ballRadius && y < attack4_brick_y + 20 + ballRadius) {
 				//공이 오른쪽 면에 맞는 경우
@@ -665,6 +676,7 @@ export function stageStart2() {
 				attack4 = 0;
 				brickAudio.play();
 				b_hp_decrease();
+				fishdie();
 			}
 		}
 		if ((x < bossx & x > bossx - ballRadius - dxf & y < bossy + bossht + ballRadius & y > bossy - ballRadius) || (x < bossx + bosswd + ballRadius + dxf & x > bossx + bosswd & y < bossy + bossht + ballRadius & y > bossy - ballRadius)) { //보스의 왼쪽, 오른쪽에 충돌
@@ -695,7 +707,7 @@ export function stageStart2() {
 					draw();
 					p_hp_decrease();
 					start_number = 0;
-					addEventListener("keydown", keydown);
+					keydown_count = 0;
 				}
 			} else if (x > barx - (barwidth / 2 + ballRadius) && x < barx + (barwidth / 2 + ballRadius)) { //바의 영역에 있는 경우	
 				if(dy > 0){
@@ -731,6 +743,63 @@ export function stageStart2() {
 	}
 
 
+	function fishdie(){
+		littlebrick_Img.src = "./img/stage2/pd1.png";
+		attack4_repeat = setInterval(function(){
+			context.drawImage(littlebrick_Img,attack4_brick_x, attack4_brick_y, 45, 45);
+		},1);
+		littlebrick_Img.src = "./img/stage2/pd2.png";
+		setTimeout(function(){
+			littlebrick_Img.src = "./img/stage2/pd3.png";
+			setTimeout(function(){
+				littlebrick_Img.src = "./img/stage2/pd4.png";
+				setTimeout(function(){
+					littlebrick_Img.src = "./img/stage2/pd5.png";
+					setTimeout(function(){
+						littlebrick_Img.src = "./img/stage2/pd6.png";
+						setTimeout(function(){
+							littlebrick_Img.src = "./img/stage2/pd7.png";
+							setTimeout(function(){
+								littlebrick_Img.src = "./img/stage2/pd8.png";
+								setTimeout(function(){
+									littlebrick_Img.src = "./img/stage2/pd9.png";
+									setTimeout(function(){
+										littlebrick_Img.src = "./img/stage2/pd10.png";
+										setTimeout(function(){
+											littlebrick_Img.src = "./img/stage2/pd11.png";
+											setTimeout(function(){
+												littlebrick_Img.src = "./img/stage2/pd12.png";
+												setTimeout(function(){
+													littlebrick_Img.src = "./img/stage2/pd13.png";
+													setTimeout(function(){
+														littlebrick_Img.src = "./img/stage2/pd14.png";
+														setTimeout(function(){
+															littlebrick_Img.src = "./img/stage2/pd15.png";
+															setTimeout(function(){
+																littlebrick_Img.src = "./img/stage2/pd16.png";
+																setTimeout(function(){
+																	littlebrick_Img.src = "./img/stage2/pd17.png";
+																	setTimeout(function(){
+																		littlebrick_Img.src = "./img/stage2/pd1.png";
+																		clearInterval(attack4_repeat)
+																	},10);
+																},10);
+															},10);
+														},10);
+													},10);
+												},10);
+											},10);
+										},10);
+									},10);
+								},10);
+							},10);
+						},10);
+					},10);
+				},10);
+			},10);
+		},10);
+	}
+
 
 	/*---------------------------------------------------------마우스, 키보드 이벤트리스너---------------------------------------------------------*/
 
@@ -758,10 +827,7 @@ export function stageStart2() {
 				clearInterval(attack1_repeat);
 				stop_pattern = 1;
 			}
-			else if(attack2 == 1){
-				clearInterval(attack2_repeat);
-				stop_pattern = 2;
-			}
+
 			
 			if(qskill_cooltime == 1){
 				clearInterval(qskill_repeat);
@@ -796,9 +862,6 @@ export function stageStart2() {
 			if(stop_pattern == 1){	
 				attack1_repeat = setInterval(bossAttack1_timer, 1000);
 			}
-			else if(stop_pattern == 2){
-				attack2_repeat = setInterval(bossAttack2_timer, 1000);
-			}
 			
 			if(qstop_pattern == 1){
 				qskill_repeat = setInterval(skill_timer1,1000);
@@ -822,38 +885,38 @@ export function stageStart2() {
 					}
 				}
 			}
-		}
-		else if (start_number == 1) {
-			//q를 누를경우
-			if (qskill_cooltime == 0 && qskill == 0 && event.keyCode == 81) { //쿨타임이 아니고, 보호막이 활성화되지 않을 때 사용 가능
-				qskill = 1; //이 변수가 1일 때 보호막 활성화
-				$("#qskill2").css({ //스킬 이미지를 지우고 쿨타임 글씨 영역 활성화
-					"display": "none"
-				});
-				$("#qtimer2").css({
-					"display": "block"
-				});
-				$("#qtimer2").text(qskill_timer); //쿨타임 글씨 활성화
-				qskill_repeat = setInterval(skill_timer1, 1000);
-				qskill_cooltime = 1;
-			}
-			else if (wskill_cooltime == 0 && wskill == 0 && event.keyCode == 87) {
-				wskill = 1; //이 변수가 1일 때 보호막 활성화
-				wskill_count = 0;
-				attack_x = barx;
-				$("#wskill2").css({ //스킬 이미지를 지우고 쿨타임 글씨 영역 활성화
-					"display": "none"
-				});
-				$("#wtimer2").css({
-					"display": "block"
-				});
-				$("#wtimer2").text(wskill_timer); //쿨타임 글씨 활성화
-				wskill_repeat = setInterval(skill_timer2, 1000);
-				wskill_cooltime = 1;
-				wskill_repeat2 = setInterval(wskill_time, 1);
-			}
+			else if (start_number == 1) {
+				//q를 누를경우
+				if (qskill_cooltime == 0 && qskill == 0 && event.keyCode == 81) { //쿨타임이 아니고, 보호막이 활성화되지 않을 때 사용 가능
+					qskill = 1; //이 변수가 1일 때 보호막 활성화
+					$("#qskill2").css({ //스킬 이미지를 지우고 쿨타임 글씨 영역 활성화
+						"display": "none"
+					});
+					$("#qtimer2").css({
+						"display": "block"
+					});
+					$("#qtimer2").text(qskill_timer); //쿨타임 글씨 활성화
+					qskill_repeat = setInterval(skill_timer1, 1000);
+					qskill_cooltime = 1;
+				}
+				else if (wskill_cooltime == 0 && wskill == 0 && event.keyCode == 87) {
+					wskill = 1; //이 변수가 1일 때 보호막 활성화
+					wskill_count = 0;
+					attack_x = barx;
+					$("#wskill2").css({ //스킬 이미지를 지우고 쿨타임 글씨 영역 활성화
+						"display": "none"
+					});
+					$("#wtimer2").css({
+						"display": "block"
+					});
+					$("#wtimer2").text(wskill_timer); //쿨타임 글씨 활성화
+					wskill_repeat = setInterval(skill_timer2, 1000);
+					wskill_cooltime = 1;
+					wskill_repeat2 = setInterval(wskill_time, 1);
+				}
 		}
 	}
+}
 
 	function skill_timer1() {
 		qskill_timer--;
@@ -893,6 +956,16 @@ export function stageStart2() {
 	/* 1개의 검이 떨어지는 움직임을 재현해주는 함수 */
 	function wskill_time() {
 		yplus = yplus - 2; // Y좌표는 2칸씩 이동
+		wskill_img_count++;
+		if(wskill_img_count % 50 ==0){
+			wskill_img++;
+			if(wskill_img > 3){
+				wskill_Img.src = "./img/stage3/blast3.png";
+			}
+			else{
+				wskill_Img.src = "./img/stage3/blast"+wskill_img+".png";
+			}
+		}
 		if (wskill_count == 0 && yplus < bossy + bossht && attack_x + 30 >= bossx && attack_x <= bossx + bosswd) {
 			if (attack1 == 1) {
 				b_hp_increase();
@@ -911,6 +984,7 @@ export function stageStart2() {
 				wskill = 0;
 				wskill_count = 1;
 				b_hp_decrease();
+				fishdie();
 			}
 		}
 		if (yplus + 100 == 0) { //검이 영역 밖으로 나갔을 경우 함수 종료
@@ -948,7 +1022,7 @@ export function stageStart2() {
 				randnum = Math.floor(Math.random() * 3);
 			}
 			else {
-				randnum = Math.floor(Math.random() * 4);
+				randnum = Math.floor(Math.random())+1;
 			}
 			if (randnum == 0) { //첫번째 보스 패턴 ( 보스 배리어 )
 				attack1 = 1; //1로 값을 변경해줌으로써 draw에서 bossAttack1()을 반복적으로 호출
@@ -959,7 +1033,6 @@ export function stageStart2() {
 				attack_position = Math.random() * 500;
 				bossAttack2();
 				attack2 = 1;
-				attack2_repeat = setInterval(bossAttack2_timer, 1000);
 			}
 			else if (randnum == 2) {
 				removeEventListener('mousemove', mousemove);
@@ -970,6 +1043,7 @@ export function stageStart2() {
 				attack4 = 1;
 				var num = Math.floor(Math.random() * 3);
 				attack4_brick_x = 150 * (num + 1);
+				//fly_repeat = setInterval(fishflying,1);
 				bossAttack4();
 			}
 
@@ -1000,44 +1074,32 @@ export function stageStart2() {
 
 
 	function bossAttack2() {
-		if (attack2_timer == 2) {
-			context.beginPath();
-			context.drawImage(bottom_attack_Img,attack_position, cvht - 100, 100, 100);
-			//context.fillStyle = "red";
-			context.fill();
-			if (barx + barwidth / 2 < attack_position || barx - barwidth / 2 > attack_position + 100) {
-				return;
+		attack2_img_count++;
+		if(attack2_img_count % 25 == 0){
+			attack2_img++;
+			if(attack2_img == 20){
+				attack2_timer = 0;
+				attack2 = 0;
+				attack2_count = 0;
+				attack2_img = 1;
+				attack2_img_count = 0;
 			}
-			else {
+			bottom_attack_Img.src = "./img/stage2/a"+attack2_img+".png";
+		}
+		
+		context.drawImage(bottom_attack_Img,attack_position, cvht - 100, 100, 100);
+
+		if (attack2_img_count >= 300) {
+			if (attack_position <= barx + barwidth/2 && attack_position + 100 >= barx-barwidth/2) {
 				if (attack2_count == 0) {
 					p_hp_decrease();
 					attack2_count = 1;
 				}
-				else {
-					return;
-				}
 			}
 		}
-		else if (attack2_timer == 3) {
-			attack2_timer = 0;
-			attack2 = 0;
-			attack2_count = 0;
-			clearInterval(attack2_repeat);
-			return;
-		}
-		else if (attack2_timer < 2) {
-			context.beginPath();
-			context.rect(attack_position, cvht - 100, 100, 100);
-			context.fillStyle = "transparent";
-			context.fill();
-			context.drawImage(warnImg,attack_position, cvht - 100, 100, 100);
-
-		}
 	}
 
-	function bossAttack2_timer() {
-		attack2_timer++;
-	}
+
 
 	function bossAttack3() {
 		addEventListener('mousemove', mousemove);
@@ -1045,13 +1107,21 @@ export function stageStart2() {
 	}
 
 	function bossAttack4() {
-		context.beginPath();
 		context.drawImage(littlebrick_Img,attack4_brick_x, attack4_brick_y, 45, 45);
-		//context.fillStyle = "blue";
-		context.fill();
 	}
+/*
+	function fishflying(){
+		fly += 1;
+		if(fly % 10 == 0){
+			fly_count++;
+			if(fly_count == 13){
 
-
+			}
+			fishfly.src = "./img/stage2/pf"+fly_count+".png";
+		}
+		context.drawImage(fishfly,attack4_brick_x,fly,45,45);
+	}
+*/
 
 	/*---------------------------------------------------------보스 공격패턴 함수---------------------------------------------------------*/
 }
