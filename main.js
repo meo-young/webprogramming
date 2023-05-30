@@ -3,7 +3,7 @@ import { stageStart2 } from "./stage2/stage2.js";
 import { stageStart3 } from "./stage3/stage3.js";
 $(document).ready(function () {
     // 골드
-    var currentGold = 300;
+    var currentGold = 200;
     $(".gold").html(currentGold);
 
     // 현재 배경 img
