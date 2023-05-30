@@ -21,8 +21,8 @@ export function stageStart2() {
 	var time_repeat;
 
 	var attack1 = 0; //1이면 보스패턴 1이 시작된 상태
-	var attack1_repeat;
-	var attack1_timer = 0;
+	var attack1_img = 1;
+	var attack1_img_count = 0;
 
 	var attack2 = 0;
 	var attack2_timer = 0;
@@ -164,7 +164,7 @@ export function stageStart2() {
 	var barice_Img=new Image();
 	barice_Img.src="./img/stage2/boss2freezing1.png";
 	var bossshield_Img=new Image();
-	bossshield_Img.src="./img/stage2/bossShield.png";
+	bossshield_Img.src="./img/stage2/s1.png";
 	var littlebrick_Img=new Image();
 	littlebrick_Img.src="./img/stage2/부적.png";
 	var fishfly = new Image();
@@ -267,12 +267,7 @@ export function stageStart2() {
 		removeEventListener('keydown', keydown);
 		removeEventListener('mousemove', mousemove);
 		clearInterval(repeat);
-		if(attack1 == 1){
-			attack1 = 0;
-			attack1_timer = 0;
-			clearInterval(attack1_repeat);
-		}
-		else if(attack2 == 1){
+		if(attack2 == 1){
 			attack2_timer = 0;
 			attack2 = 0;
 			attack2_count = 0;
@@ -602,8 +597,6 @@ export function stageStart2() {
 				keydown_count = 0;
 				if(attack1 == 1){
 					attack1 = 0;
-					attack1_timer = 0;
-					clearInterval(attack1_repeat);
 				}
 				else if(attack2 == 1){
 					attack2_timer = 0;
@@ -753,7 +746,6 @@ export function stageStart2() {
 		keydown_count = 1;
 		removeEventListener('mousemove', mousemove);
 		clearInterval(repeat);
-		clearInterval(attack1_repeat);
 		clearInterval(attack2_repeat);
 		clearInterval(time_repeat);
 		context.clearRect(0, 0, cvwd, cvht);
@@ -1008,7 +1000,7 @@ export function stageStart2() {
 			removeEventListener('mousemove', mousemove);
 			clearInterval(repeat);
 			if(attack1 == 1){
-				clearInterval(attack1_repeat);
+				attack1 = 0;
 				stop_pattern = 1;
 			}
 
@@ -1044,7 +1036,7 @@ export function stageStart2() {
 			repeat = setInterval(draw,1);
 			time_repeat = setInterval(timeAttack,1000);
 			if(stop_pattern == 1){	
-				attack1_repeat = setInterval(bossAttack1_timer, 1000);
+				attack1 = 1;
 			}
 			
 			if(qstop_pattern == 1){
@@ -1200,18 +1192,17 @@ export function stageStart2() {
 	function timeAttack() {
 		timer += 1;
 
-		if (timer % 8 == 0) {
+		if (timer % 6 == 0) {
 			var randnum
 			if (attack4 == 1) {
 				randnum = Math.floor(Math.random() * 3);
 			}
 			else {
-				randnum = Math.floor(Math.random())+1;
+				randnum = Math.floor(Math.random()* 4);
 			}
 			if (randnum == 0) { //첫번째 보스 패턴 ( 보스 배리어 )
 				attack1 = 1; //1로 값을 변경해줌으로써 draw에서 bossAttack1()을 반복적으로 호출
 				bossAttack1();
-				attack1_repeat = setInterval(bossAttack1_timer, 1000); //3초동안만 보스 배리어 지속
 			}
 			else if (randnum == 1) {
 				attack_position = Math.random() * 500;
@@ -1237,23 +1228,17 @@ export function stageStart2() {
 
 	//보스 캐릭터 주변에 초록색 원을 그려주는 함수
 	function bossAttack1() {
-		context.beginPath();
-		context.drawImage(bossshield_Img,bossx -bosswd / 3 + 10, bossy-40, (bosswd + 10)*1.3, (bosswd + 10)*1.3);
-		context.strokeStyle = "green"
-		context.stroke();
-	}
-
-	//2초를 세주는 함수. 2초가 되면 보스패턴1 종료.
-	function bossAttack1_timer() {
-		if (attack1_timer == 2) {
-			attack1 = 0;
-			attack1_timer = 0;
-			clearInterval(attack1_repeat);
-			return;
+		attack1_img_count++;
+		if(attack1_img_count %65 ==0){
+			attack1_img ++;
+			if(attack1_img == 9){
+				attack1_img = 1;
+				attack1_img_count = 0;
+				attack1 = 0;
+			}
+			bossshield_Img.src = "./img/stage2/s"+attack1_img+".png";
 		}
-		else {
-			attack1_timer++;
-		}
+		context.drawImage(bossshield_Img,bossx-20, bossy-20, 200, 180);
 	}
 
 
