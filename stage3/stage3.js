@@ -211,6 +211,9 @@ export function stageStart3(mainGold) {
 		play_button.onclick = play;
 		var exit_button = document.getElementById("exit3");
 		exit_button.onclick = exit;
+		$(".screen").css({
+			"background" : "url(./backimg/back3.gif)"
+		});
 	}
 
 	function play(){
@@ -353,6 +356,9 @@ export function stageStart3(mainGold) {
 					$("#select-stage").removeClass("animateContent2");
 				}, 1000);
 			}, 500);
+			$(".screen").css({
+				"background" : "url(./backimg/back1.gif)"
+			});
 			$(".gold").html(mainGold+gold);//골드 추가 부분
 	}
 
@@ -1260,7 +1266,7 @@ export function stageStart3(mainGold) {
 		if (eskill != 1) {
 			timer += 1;
 			if (timer % 6 == 0) {
-				var randnum = Math.floor(Math.random())+1;
+				var randnum = Math.floor(Math.random()*4);
 				if (randnum == 0) {
 					attack1 = 1;
 					attack1_repeat = setInterval(bossAttack1_timer, 1000);
@@ -1278,7 +1284,6 @@ export function stageStart3(mainGold) {
 					attack3_count = 1;
 				}
 				else if (randnum == 3) {
-					b_Attack_Img();
 					attack4 = 1;
 					attack4_count = 0;
 					rand = Math.floor(Math.random() * 5);
@@ -1362,7 +1367,6 @@ export function stageStart3(mainGold) {
 			clearInterval(attack1_repeat);
 		}
 		else{ //3초동안 사용자의 패들의 x좌표를 따라감
-			b_Attack_Img();
 			context.drawImage(bsimg,barx-30,100,60,72);
 			coordinate = barx-30;
 			if(attack1_img_count == 1){

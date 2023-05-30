@@ -10,7 +10,6 @@ body {
 /* 캔버스 */
 #screen3 {
     float: left;
-    background: url("../backimg/stage3bg.jpg");
 }
 
 #gamestart3 {
