@@ -30,6 +30,8 @@ $(document).ready(function () {
     currentBGM.play();
     currentBGM.loop = true;   // 반복재생
 
+    var storyImg=$("#storyImg");
+
     // 좌측 상단 오디오 버튼 클릭 시
     $("#audioVol").click(function() {
         // if(!currentBGM.paused) {    // 재생 -> 정지
@@ -389,6 +391,15 @@ $(document).ready(function () {
     $("#shop-btn").mouseout(function() {
         $(this).css({ "transform" : "scale(1)" });
     })
-
+    
+    storyImg.addEventListener('click', function() {
+        $().style.opacity = '0'; /* 클릭 시 이미지를 투명하게 설정하여 fade out 효과 적용 */
+        
+        setTimeout(function() {
+          image.src = "./storyimg/스토리2.png"; /* 이미지 변경 */
+          image.style.opacity = '1'; /* 투명도를 1로 설정하여 fade in 효과 적용 */
+        }, 500); /* 0.5초 후에 이미지 변경 및 페이드 인 효과 적용 */
+      });
+      
 
 });
