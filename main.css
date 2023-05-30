@@ -23,6 +23,7 @@ body {
   }
 
 .screen {   /* 모든 화면 1000x600 사이즈 */
+    position: relative;
     display: none;
     overflow: visible;
     border-radius: 20px 20px 20px 20px;
@@ -93,6 +94,7 @@ body {
 }
 
 .stage-btn {
+    position: relative;
     display: inline-block;
     width: 160px;
     height: 568px;
@@ -101,16 +103,20 @@ body {
 }
 #stgbtn1 {
     background: url("./img/interface/stage1select1.png");
+    margin-left: 0;
 }
 #stgbtn2 {
     background: url("./img/interface/stage2select1.png");
 }
 #stgbtn3 {
     background: url("./img/interface/stage3select1.png");
+    margin-right: 0;
 }
 
 .go-back-btn {/* 스테이지 선택 화면, 환경설정 화면, 상점 화면에서 메인 메뉴로 돌아가기 버튼 */
-    /* float: right; */
+    float: right;
+    margin-bottom: 20px;
+    margin-right: 20px;
     bottom: 0;
     right: 0;
     width: 50px;
@@ -118,8 +124,13 @@ body {
     background: url("./img/interface/back_50x50.png");
     border: none;
 }
+#stage-to-main {
+    position: absolute;
+}
 
 #settings {
+    margin-top: 20px;
+    margin-left: 20px;
     width: 289px;
     height: 43px;
     background: url("./img/interface/settings_289x43.png");
@@ -141,6 +152,8 @@ body {
 
 
 #shop {
+    margin-top: 20px;
+    margin-left: 20px;
     width: 161px;
     height: 41px;
     background: url("./img/interface/shop_161x41.png");
@@ -185,7 +198,7 @@ body {
 .pSecondRow {
     display: inline-block;
     margin: 0 50px;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 .pChar {
     width: 96px;

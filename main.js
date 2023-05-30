@@ -32,8 +32,6 @@ $(document).ready(function () {
     currentBGM.play();
     currentBGM.loop = true;   // 반복재생
 
-    
-
     // 좌측 상단 오디오 버튼 클릭 시
     $("#audioVol").click(function() {
         // if(!currentBGM.paused) {    // 재생 -> 정지

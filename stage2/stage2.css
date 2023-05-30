@@ -97,10 +97,21 @@ body {
     
     display: none;
 }
-
-#boomImg2{
-    position: relative;
-    bottom: 470px;
-    right: 0px;
-
+#play2 {
+    width: 179px;
+    height: 49px;
+    background: url("../img/interface/esc_play.png");
+    border: none;
+}
+#set2 {
+    width: 289px;
+    height: 43px;
+    background: url("../img/interface/settings_289x43.png");
+    border: none;
+}
+#exit2 {
+    width: 160px;
+    height: 51px;
+    background: url("../img/interface/esc_exit.png");
+    border: none;
 }

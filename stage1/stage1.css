@@ -83,9 +83,21 @@ body {
     
     display: none;
 }
-
-#boomImg1{
-    position: relative;
-    top: 40px;
-    left: 40px;
+#play1 {
+    width: 179px;
+    height: 49px;
+    background: url("../img/interface/esc_play.png");
+    border: none;
+}
+#set1 {
+    width: 289px;
+    height: 43px;
+    background: url("../img/interface/settings_289x43.png");
+    border: none;
+}
+#exit1 {
+    width: 160px;
+    height: 51px;
+    background: url("../img/interface/esc_exit.png");
+    border: none;
 }
