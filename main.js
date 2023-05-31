@@ -82,6 +82,10 @@ $(document).ready(function () {
 
     // 시작버튼(스테이지 선택) 클릭 시 스테이지 선택 화면 애니메이션
     $("#start-btn").off('click').on('click', function() {
+        if (effectOn) {
+            clickSound.play();   // 버튼 클릭 효과음
+        }
+        
         $("#main-menu").addClass("animateContent1");    // 메인 메뉴 페이지 전환 효과 (작아지는)
         setTimeout(function() {
             $("#main-menu").removeClass("animateContent1").hide();  // 1초 후 메인 메뉴 디스플레이 none
@@ -120,6 +124,9 @@ $(document).ready(function () {
         })
         // 첫번째 보스 캔버스
         $("#stgbtn1").off('click').on('click', function() {
+            if (effectOn) {
+                clickSound.play();   // 버튼 클릭 효과음
+            }
             $("#select-stage").removeClass("animateContent2").addClass("animateContent1");    // 스테이지 선택 페이지 전환 효과 (작아지는)
             setTimeout(function() {
                 $("#select-stage").removeClass("animateContent1").hide();
@@ -135,6 +142,9 @@ $(document).ready(function () {
         });
         // 두번째 보스 캔버스
         $("#stgbtn2").off('click').on('click', function() {
+            if (effectOn) {
+                clickSound.play();   // 버튼 클릭 효과음
+            }
             $("#select-stage").removeClass("animateContent2").addClass("animateContent1");    // 스테이지 선택 페이지 전환 효과 (작아지는)
             setTimeout(function() {
                 $("#select-stage").removeClass("animateContent1").hide();
@@ -147,6 +157,9 @@ $(document).ready(function () {
         });
         // 세번째 보스 캔버스
         $("#stgbtn3").off('click').on('click', function() {
+            if (effectOn) {
+                clickSound.play();   // 버튼 클릭 효과음
+            }
             $("#select-stage").removeClass("animateContent2").addClass("animateContent1");    // 스테이지 선택 페이지 전환 효과 (작아지는)
             setTimeout(function() {
                 $("#select-stage").removeClass("animateContent1").hide();
@@ -176,6 +189,9 @@ $(document).ready(function () {
     // 위와 애니메이션 동작 방식 동일
     // 환경설정버튼 클릭 시 환경설정 화면 애니메이션
     $("#settings-btn").off('click').on('click', function() {
+        if (effectOn) {
+            clickSound.play();   // 버튼 클릭 효과음
+        }
         $("#main-menu").addClass("animateContent1");    // 메인 메뉴 페이지 전환 효과 (작아지는)
         setTimeout(function() {
             $("#main-menu").removeClass("animateContent1").hide();  // 1초 후 메인 메뉴 디스플레이 none
@@ -240,6 +256,9 @@ $(document).ready(function () {
 
     // 상점버튼 클릭 시 상점 화면 애니메이션
     $("#shop-btn").off('click').on('click', function() {
+        if (effectOn) {
+            clickSound.play();   // 버튼 클릭 효과음
+        }
         // 상점 브금
         if (bgmOn) {
             currentBGM.pause();
@@ -431,6 +450,10 @@ $(document).ready(function () {
                 setTimeout(function() {
                     $("#main-menu").removeClass("animateContent2");
                 }, 1000);
+                currentBGM = mainBgm;    // 현재 재생/중지 상태의 음악파일, 환경설정에서 변경 가능
+                var storyimgflag=0;
+                currentBGM.play();
+                currentBGM.loop = true; 
             }, 500);
         }
         else if(storyimgflag==1){//처음 화면 클릭
@@ -461,6 +484,9 @@ $(document).ready(function () {
 
     // 스테이지1 esc 환경설정
     $("#set1").off('click').on('click', function() {
+        if (effectOn) {
+            clickSound.play();   // 버튼 클릭 효과음
+        }
 		$("#stage1").addClass("animateContent1");
         setTimeout(function() {
             $("#stage1").removeClass("animateContent1").hide();
@@ -471,6 +497,9 @@ $(document).ready(function () {
         }, 500);
 	});
     $("#settings-to-esc1").off('click').on('click', function() {
+        if (effectOn) {
+            clickSound.play();   // 버튼 클릭 효과음
+        }
         $("#set1-menu").addClass("animateContent1");
         setTimeout(function() {
             $("#set1-menu").removeClass("animateContent1").hide();
@@ -482,6 +511,9 @@ $(document).ready(function () {
     });
     // 스테이지2 esc 환경설정
     $("#set2").off('click').on('click', function() {
+        if (effectOn) {
+            clickSound.play();   // 버튼 클릭 효과음
+        }
 		$("#stage2").addClass("animateContent1");
         setTimeout(function() {
             $("#stage2").removeClass("animateContent1").hide();
@@ -492,6 +524,9 @@ $(document).ready(function () {
         }, 500);
 	});
     $("#settings-to-esc2").off('click').on('click', function() {
+        if (effectOn) {
+            clickSound.play();   // 버튼 클릭 효과음
+        }
         $("#set2-menu").addClass("animateContent1");
         setTimeout(function() {
             $("#set2-menu").removeClass("animateContent1").hide();
@@ -503,6 +538,9 @@ $(document).ready(function () {
     });
     // 스테이지3 esc 환경설정
     $("#set3").off('click').on('click', function() {
+        if (effectOn) {
+            clickSound.play();   // 버튼 클릭 효과음
+        }
 		$("#stage3").addClass("animateContent1");
         setTimeout(function() {
             $("#stage3").removeClass("animateContent1").hide();
@@ -513,6 +551,9 @@ $(document).ready(function () {
         }, 500);
 	});
     $("#settings-to-esc3").off('click').on('click', function() {
+        if (effectOn) {
+            clickSound.play();   // 버튼 클릭 효과음
+        }
         $("#set3-menu").addClass("animateContent1");
         setTimeout(function() {
             $("#set3-menu").removeClass("animateContent1").hide();
