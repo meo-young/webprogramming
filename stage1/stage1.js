@@ -141,6 +141,7 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 	var playerColor ="";
 	var player = new Image();
 	var player_num;
+	var ball = new Image();
 
 		// 착용중인 캐릭터 이미지로 변경
 	if ($("#pDefault").hasClass("equip")) {
@@ -153,6 +154,7 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 	else if ($("#pRed").hasClass("equip")) {
 		$("#playerImg1").attr("src", pRedStdsrc);
 		playerColor = "red"; //도트데미지
+		ball.src = "./img/player/br.png";
 		firedot = 1;
 		attack_stat = 50;
 		player_num = 2;
@@ -160,6 +162,7 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 	else if ($("#pCyan").hasClass("equip")) {
 		$("#playerImg1").attr("src", pCyanstdsrc);
 		playerColor = "cyan"; //
+		ball.src = "./img/player/bc.png";
 		ballRadius = 20;
 		attack_stat = 50;
 		player_num = 3;
@@ -167,6 +170,7 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 	else if ($("#pWhite").hasClass("equip")) {
 		$("#playerImg1").attr("src", pWhitestdsrc);
 		playerColor = "white"; //공격력 2배, 입는 피해2배
+		ball.src = "./img/player/bw.png";
 		attack_stat = 100;
 		white = 1;
 		player_num = 4;
@@ -174,6 +178,7 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 	else if ($("#pYellow").hasClass("equip")) {
 		$("#playerImg1").attr("src", pYellowstdsrc);
 		playerColor = "yellow"; //공 즉시 회수
+		ball.src = "./img/player/by.png";
 		attack_stat = 50;
 		yellow = 1;
 		player_num = 5;
@@ -181,6 +186,7 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 	else if ($("#pPurple").hasClass("equip")) {
 		$("#playerImg1").attr("src", pPurplestdsrc);
 		playerColor = "purple"; //중독데미지 중첩 가능
+		ball.src = "./img/player/bp.png";
 		attack_stat = 50;
 		purple = 1;
 		player_num = 6;
@@ -507,10 +513,15 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 
 	/* 공 그리는 함수 */
 	function drawBall() {
-		context.beginPath();
-		context.arc(x, y, ballRadius, 0, Math.PI * 2);
-		context.fillStyle = "black";
-		context.fill();
+		if(player_num == 1){
+			context.beginPath();
+			context.arc(x, y, ballRadius, 0, Math.PI * 2);
+			context.fillStyle = "black";
+			context.fill();
+		}
+		else {
+			context.drawImage(ball,x,y,ballRadius+10,ballRadius+10);
+		}
 	}
 
 	/* 바(bar) 그리는 함수 */

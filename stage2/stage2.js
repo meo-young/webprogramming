@@ -148,6 +148,7 @@ export function stageStart2(mainGold,effectOn, potion1Num, potion2Num, potion3Nu
 		var player = new Image();
 		var player_num;
 		var playerColor ="";
+		var ball = new Image();
 
 		// 착용중인 캐릭터 이미지로 변경
 		if ($("#pDefault").hasClass("equip")) {
@@ -160,6 +161,7 @@ export function stageStart2(mainGold,effectOn, potion1Num, potion2Num, potion3Nu
 			$("#playerImg2").attr("src", pRedStdsrc);
 			playerColor = "red";
 			firedot = 1;
+			ball.src = "./img/player/br.png";
 			attack_stat = 50;
 			player_num = 2;
 		}
@@ -167,6 +169,7 @@ export function stageStart2(mainGold,effectOn, potion1Num, potion2Num, potion3Nu
 			$("#playerImg2").attr("src", pCyanstdsrc);
 			playerColor = "cyan";
 			attack_stat = 50;
+			ball.src = "./img/player/bc.png";
 			ballRadius = 20;
 			player_num =3;
 		}
@@ -174,6 +177,7 @@ export function stageStart2(mainGold,effectOn, potion1Num, potion2Num, potion3Nu
 			$("#playerImg2").attr("src", pWhitestdsrc);
 			playerColor = "white";
 			attack_stat = 100;
+			ball.src = "./img/player/bw.png";
 			white = 1;
 			player_num = 4;
 		}
@@ -181,6 +185,7 @@ export function stageStart2(mainGold,effectOn, potion1Num, potion2Num, potion3Nu
 			$("#playerImg2").attr("src", pYellowstdsrc);
 			playerColor = "yellow";
 			yellow = 1;
+			ball.src = "./img/player/by.png";
 			attack_stat = 50;
 			player_num = 5;
 		}
@@ -188,6 +193,7 @@ export function stageStart2(mainGold,effectOn, potion1Num, potion2Num, potion3Nu
 			$("#playerImg2").attr("src", pPurplestdsrc);
 			playerColor = "purple";
 			purple = 1;
+			ball.src = "./img/player/bp.png";
 			attack_stat =50;
 			player_num = 6;
 		}
@@ -520,10 +526,15 @@ export function stageStart2(mainGold,effectOn, potion1Num, potion2Num, potion3Nu
 
 	/* 공 그리는 함수 */
 	function drawBall() {
-		context.beginPath();
-		context.arc(x, y, ballRadius, 0, Math.PI * 2);
-		context.fillStyle = "black";
-		context.fill();
+		if(player_num == 1){
+			context.beginPath();
+			context.arc(x, y, ballRadius, 0, Math.PI * 2);
+			context.fillStyle = "black";
+			context.fill();
+		}
+		else {
+			context.drawImage(ball,x,y,ballRadius+10,ballRadius+10);
+		}
 	}
 
 	/* 바(bar) 그리는 함수 */
