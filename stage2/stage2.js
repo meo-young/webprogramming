@@ -4,6 +4,9 @@ export function stageStart2(mainGold, effectOn, potion1Num, potion2Num, potion3N
 	var qskill_timer = 30;
 	var qskill_repeat;
 	var qskill_cooltime = 0;
+	var shield_img = 1;
+	var shield_img_count = 0;
+	var shield_repeat;
 
 	var wskill = 0;
 	var wskill_timer = 10;
@@ -219,6 +222,8 @@ export function stageStart2(mainGold, effectOn, potion1Num, potion2Num, potion3N
 	warnImg.src = "./img/stage2/warning.png"
 	var paddleImg = new Image();
 	paddleImg.src = "./img/player/paddle.png";
+	var player_sh = new Image();
+	player_sh.src = "./img/player/s1.png";
 
 	//오디오 파일
 	const brickAudio = new Audio('./오디오/boss/bosshit3.mp3');
@@ -590,11 +595,31 @@ export function stageStart2(mainGold, effectOn, potion1Num, potion2Num, potion3N
 	}
 
 	function drawshield() {
-		context.beginPath();
-		context.arc(barx, cvht - 20, barwidth / 2, Math.PI, 0);
-		context.strokeStyle = "yellow";
-		context.stroke();
+		shield_img_count++;
+		if(shield_img_count % 30 == 0){
+			shield_img++;
+			if(shield_img == 14){
+				shield_img = 8;
+			}
+			player_sh.src ="./img/player/s"+shield_img+".png";
+		}
+		context.drawImage(player_sh,(barx-60),cvht-100,120,120);
 	}
+
+	function attacked_shield(){
+		shield_img_count++;
+		if(shield_img_count % 30 == 0){
+			shield_img--;
+			if(shield_img == 0){
+				shield_img = 1;
+				shield_img_count = 0;
+				clearInterval(shield_repeat);
+			}
+			player_sh.src ="./img/player/s"+shield_img+".png";
+		}
+		context.drawImage(player_sh,(barx-60),cvht-100,120,120);
+	}
+
 
 	/*w키를 누르면 검격이 나가게 보여주는 함수 */
 	function drawsword() {
@@ -739,6 +764,9 @@ export function stageStart2(mainGold, effectOn, potion1Num, potion2Num, potion3N
 	function p_hp_decrease() {
 		if (qskill == 1) {
 			qskill = 0;
+			shield_img =8;
+			shield_img_count =0;
+			shield_repeat = setInterval(attacked_shield, 1);
 		}
 		else {
 			var p_hp_array = $(".state2");
@@ -1410,6 +1438,9 @@ export function stageStart2(mainGold, effectOn, potion1Num, potion2Num, potion3N
 		qskill_timer--;
 		if (qskill_timer == 28) {
 			qskill = 0;
+			shield_img =8;
+			shield_img_count =0;
+			shield_repeat = setInterval(attacked_shield, 1);
 		}
 		else if (qskill_timer == -1) {
 			qskill_timer = 30;
