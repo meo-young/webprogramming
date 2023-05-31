@@ -230,6 +230,7 @@ export function stageStart2(mainGold,effectOn, potion1Num, potion2Num, potion3Nu
 	const winAudio=new Audio('./audio/win_7s.mp3');
 	const loseAudio=new Audio('./audio/lose_7s.mp3');
 	const fishAudio=new Audio('./오디오/stage2/물고기 나올때.mp3');
+    var keyboardAudio=new Audio("./storyimg/키보드소리.mp3");
 
 
 
@@ -1008,6 +1009,15 @@ export function stageStart2(mainGold,effectOn, potion1Num, potion2Num, potion3Nu
 			if(effectOn)
 				winAudio.play();
 			drawText("You Win");
+			$("#stage2").fadeOut(7000,()=>{
+				$("#stageStoryImg").attr("src", "./storyimg/stage2B.gif");
+				$("#stage-story").fadeIn(1,()=>{
+					keyboardAudio.play();
+					setTimeout(()=>{
+						keyboardAudio.pause();
+					},4000);
+				});
+				setTimeout(()=>{$("#stgbtn3").trigger('click');},4000);});
 		}
 		else if (who == 2) {
 			if(effectOn)

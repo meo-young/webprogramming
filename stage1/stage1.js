@@ -210,6 +210,7 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 	const qskillonAudio=new Audio('./오디오/player/q스킬쉴드장착.mp3');
 	const winAudio=new Audio('./audio/win_7s.mp3');
 	const loseAudio=new Audio('./audio/lose_7s.mp3');
+    var keyboardAudio=new Audio("./storyimg/키보드소리.mp3");
 
 	pageLoad();
 	wait();
@@ -985,7 +986,14 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 			boss_img_count = 0;
 			boss_finish_repeat = setInterval(deathmotion,1);
 			$("#stage1").fadeOut(7000,()=>{
-				$(this).hide();
+				$("#stageStoryImg").attr("src", "./storyimg/stage1B.gif");
+				$("#stage-story").fadeIn(1,()=>{
+					keyboardAudio.play();
+					setTimeout(()=>{
+						keyboardAudio.pause();
+					},4000);
+				});
+				setTimeout(()=>{$("#stgbtn2").trigger('click');},4000);
 			});
 		}
 		else if (who == 2) {
