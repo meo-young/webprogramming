@@ -8,9 +8,9 @@ $(document).ready(function () {
     $(".gold").html(currentGold);
 
     // 물약 개수 변수
-    var potion1Num = 0;
-    var potion2Num = 0;
-    var potion3Num = 0;
+    var potion1Num = 3;
+    var potion2Num = 3;
+    var potion3Num = 3;
 
     // 현재 배경 img
     var currentIMG = $("#b1").attr("src");
@@ -559,4 +559,13 @@ $(document).ready(function () {
             }, 1000);
         }, 500);
     });
+    function showGif(gifsrc){
+        $("#stage-story").fadeIn(1000,()=>{
+            $("#stageStoryImg").attr("src", gifsrc);
+            keyboardAudio.play();
+            setTimeout(()=>{
+                keyboardAudio.pause();
+            },5000);
+        })
+    }
 });
