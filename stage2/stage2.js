@@ -83,8 +83,8 @@ export function stageStart2(mainGold,effectOn) {
 	var ballRadius = 10;
 
 	/* 공의 이동속도 */
-	var xvelocity = 2;
-	var yvelocity = 2;
+	var xvelocity = 3;
+	var yvelocity = 3;
 	var dx;
 	var dy;
 
