@@ -358,9 +358,6 @@ export function stageStart2(mainGold,effectOn) {
 				$("#select-stage").removeClass("animateContent2");
 			}, 1000);
 		}, 500);
-		$(".screen").css({
-			"background" : "url(./backimg/back1.gif)"
-		});
 		$(".gold").html(mainGold+gold);//골드 추가 부분
 }
 
@@ -544,6 +541,7 @@ export function stageStart2(mainGold,effectOn) {
 			damage = att - Math.floor(Math.random()*20);
 			b_hp -= damage;
 			damage_state = 1;
+			hp();
 			$("#container2").animate({
 				"width": b_hp + "px"
 			});
@@ -1221,10 +1219,10 @@ export function stageStart2(mainGold,effectOn) {
 		}
 		if (wskill_count == 0 && yplus < bossy + bossht && attack_x + 30 >= bossx && attack_x <= bossx + bosswd) {
 			if (attack1 == 1) {
-				b_hp_increase();
+				b_hp_increase(attack_stat*2);
 			}
 			else {
-				b_hp_decrease();
+				b_hp_decrease(attack_stat*2);
 			}
 			wskill_count = 1;
 			wskill = 0;
@@ -1272,10 +1270,10 @@ export function stageStart2(mainGold,effectOn) {
 		if (timer % 6 == 0) {
 			var randnum
 			if (attack4 == 1) {
-				randnum = Math.floor(Math.random() * 3);
+				randnum = Math.floor(Math.random() * 2);
 			}
 			else {
-				randnum = Math.floor(Math.random()* 4);
+				randnum = Math.floor(Math.random()* 3);
 			}
 			if (randnum == 0) { //첫번째 보스 패턴 ( 보스 배리어 )
 				attack1 = 1; //1로 값을 변경해줌으로써 draw에서 bossAttack1()을 반복적으로 호출
@@ -1289,13 +1287,6 @@ export function stageStart2(mainGold,effectOn) {
 				attack2 = 1;
 			}
 			else if (randnum == 2) {
-				removeEventListener('mousemove', mousemove);
-				setTimeout(bossAttack3, 1000);
-				if(effectOn)
-					iceAudio.play();
-				bar_state = 1;
-			}
-			else if (randnum == 3) {
 				attack4 = 1;
 				var num = Math.floor(Math.random() * 3);
 				attack4_brick_x = 150 * (num + 1);
@@ -1349,11 +1340,6 @@ export function stageStart2(mainGold,effectOn) {
 	}
 
 
-
-	function bossAttack3() {
-		addEventListener('mousemove', mousemove);
-		bar_state = 0;
-	}
 
 	function bossAttack4() {
 		context.drawImage(littlebrick_Img,attack4_brick_x, attack4_brick_y, 45, 45);

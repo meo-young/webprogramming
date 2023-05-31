@@ -257,19 +257,22 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 		removeEventListener('keydown', keydown);
 		removeEventListener('mousemove', mousemove);
 		clearInterval(repeat);
+		drawinterval = 0;
 		if(attack1 == 1){
 			clearInterval(attack1_repeat);
 			attack1 = 0;
 			attack1_img_count = 0;
 			attack1_img = 1;
+			bossshield_Img.src = "./img/stage1/s"+attack1_img+".png"
 		}
 		else if(attack2 == 1){
+			clearInterval(attack2_repeat);
 			attack2 = 0;
 			yplus = 100;
 			attack2_img = 1;
 			attack2_img_count = 0;
-			clearInterval(attack2_repeat);
 			attack2_count = 0;
+			sword_Img.src = "./img/stage1/a"+attack2_img+".png";
 		}
 		else if(attack3 == 1){
 			attack3_img = 1;
@@ -278,7 +281,6 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 			attack3_count = 0;
 			fireball.src = "./img/stage1/af"+attack3_img+".png";
 		}
-		ballRadius = 10;
 		if(qskill_cooltime== 1){
 			clearInterval(qskill_repeat);
 			qskill_cooltime = 0;
@@ -784,6 +786,7 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 			winmotion();
 			
 		}
+	
 	}
 	function game_over_Img() {
 		var playerImg = $("#playerImg1");
@@ -1177,6 +1180,8 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 	}
 
 	function bossAttack1_attacked(){
+		attack1_img_count = 0;
+		attack1_img = 1;
 		attack1_img_count++;
 		if(attack1_img_count % 50 == 0){
 			attack1_img++;
