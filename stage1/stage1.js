@@ -361,7 +361,7 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 				$("#select-stage").removeClass("animateContent2");
 			}, 1000);
 		}, 500);
-		$(".gold").html(currentGold + gold);//골드 추가 부분
+		$(".gold").html(gold);//골드 추가 부분
 	}
 
 	/* window size 변경 해주는 함수 */

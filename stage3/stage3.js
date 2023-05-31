@@ -60,7 +60,7 @@ export function stageStart3(mainGold, effectOn, potion1Num, potion2Num, potion3N
 	var qstop_pattern;
 	var wstop_pattern;
 	var estop_pattern;
-	var gold = 0;
+	var gold = mainGold;
 	var damage_state = 0;
 	var damage;
 	var damage_count = 0;
@@ -1192,7 +1192,7 @@ export function stageStart3(mainGold, effectOn, potion1Num, potion2Num, potion3N
 		context.clearRect(0, 0, cvwd, cvht);
 		if (who == 1) {
 			drawText("You Win");
-			$(".gold").html(mainGold + gold);//골드 추가 부분
+			$(".gold").html(gold);//골드 추가 부분
 			if (effectOn) {
 				winAudio.play();
 			}
