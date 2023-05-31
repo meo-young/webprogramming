@@ -31,9 +31,12 @@ $(document).ready(function () {
     var pAttack = new Audio();  // 플레이어 공격 효과음
     var bAttack = new Audio();  // 보스 공격 효과음
     var pSkill = new Audio();  // 플레이어 스킬 효과음
+    var keyboardAudio=new Audio("./storyimg/키보드소리.mp3");
+    var keyboardAudio2=new Audio("./storyimg/키보드소리.mp3");
+    var thunderAudio=new Audio("./storyimg/펑소리.mp3");
 
     var currentBGM = mainBgm;    // 현재 재생/중지 상태의 음악파일, 환경설정에서 변경 가능
-    var storyimgflag=false;
+    var storyimgflag=0;
     currentBGM.play();
     currentBGM.loop = true;   // 반복재생
 
@@ -386,8 +389,13 @@ $(document).ready(function () {
     
     // 게임 시작시 등장하는 스토리
     $("#storyImg").click(function() {
-        if(storyimgflag) {//두번째 클릭
+        storyimgflag++;
+        if(storyimgflag==2) {//두번째 클릭
             //오디오 종료
+            keyboardAudio.pause();
+            keyboardAudio2.pause();
+            thunderAudio.pause();
+            //메인메뉴 브금 넣기
             $("#story-menu").addClass("animateContent1");
             setTimeout(function() {
                 $("#story-menu").removeClass("animateContent1").hide();
@@ -397,18 +405,28 @@ $(document).ready(function () {
                 }, 1000);
             }, 500);
         }
-        else {//처음 화면 클릭
+        else if(storyimgflag==1){//처음 화면 클릭
             storyimgflag=true;
+            currentBGM.pause();
+            setTimeout(() => {
+                keyboardAudio.play();
+            keyboardAudio.addEventListener('ended',function(){
+                keyboardAudio.removeEventListener('ended',$(this));
+                thunderAudio.play();
+                thunderAudio.addEventListener('ended',()=>{
+                    keyboardAudio2.play();
+                })
+            })
+            }, 1000);
             $(this).fadeOut(500, function() {
                 // fadeOut() 메서드로 천천히 사라지고, 애니메이션 완료 후 콜백 함수 실행
-                $(this).attr("src", "./storyimg/프롤로그.gif"); // fadeIn() 메서드로 천천히 나타남
+                $(this).attr("src", "./storyimg/prologe.gif").fadeIn(500); // fadeIn() 메서드로 천천히 나타남
                 setTimeout(() => {
                     $(this).trigger('click');
                 }, 20000);
                 //오디오 재생
             });
         }  
-        storyimgflag=true;
     });
 
 

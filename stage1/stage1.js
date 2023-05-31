@@ -199,7 +199,9 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 
 	function pageLoad(){
 		if(effectOn)
-			setTimeout(countdownAudio.play(),1000);
+			setTimeout(() => {
+				countdownAudio.play();
+			  },1000);
 		var play_button = document.getElementById("play1");
 		play_button.onclick = play;
 		var exit_button = document.getElementById("exit1");

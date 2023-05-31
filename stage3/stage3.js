@@ -399,7 +399,9 @@ export function stageStart3(mainGold,effectOn) {
 	/* 게임시작 버튼 눌렀을 때 동작하는 함수 */
 	function wait() {
 		if(effectOn)
-			setTimeout(countdownAudio.play(),1000);
+			setTimeout(() => {
+				countdownAudio.play();
+			  },1000);
 		repeat = setInterval(start, 1000);
 	}
 

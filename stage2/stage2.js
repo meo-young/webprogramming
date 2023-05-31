@@ -207,7 +207,6 @@ export function stageStart2(mainGold,effectOn) {
 	const winAudio=new Audio('./audio/win_7s.mp3');
 	const loseAudio=new Audio('./audio/lose_7s.mp3');
 	const fishAudio=new Audio('./오디오/stage2/물고기 나올때.mp3');
-	const iceAudio=new Audio('./오디오/stage2/얼음.mp3');
 
 
 
@@ -225,7 +224,9 @@ export function stageStart2(mainGold,effectOn) {
 
 	function pageLoad(){
 		if(effectOn)
-			setTimeout(countdownAudio.play(),1000);
+			setTimeout(() => {
+				countdownAudio.play();
+			  },1000);
 
 		var play_button = document.getElementById("play2");
 		play_button.onclick = play;
