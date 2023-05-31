@@ -88,36 +88,50 @@
             </div>
             <div id="boss_UI1">
                 <div id="boss_img1">
-                    <img class="character" src="./img/stage1/boss1.gif" width="180px" height="150px">
+                    <img class="character" src="./img/stage1/boss.png" width="50px" height="50px">
                 </div>
                 <div id="boss_bar1">
                     <div id="container1"></div>
                     <div id="bp_num1">20</div>
                 </div>
             </div>
-            <canvas id="screen1" width="600" height="600"></canvas>
+        
+            <div id="canvas_screen">
+                <canvas id="screen1" width="1000" height="600"></canvas>
+            </div>
+
             <div id="player_UI1">
                 <div id="player_img1">
                     <img class="character" id="playerImg1" src="./img/player/playerStanding_32x32.gif" width="180px"
                         height="150px">
                 </div>
                 <div id="player_state1">
-                    <img src="./img/player/playerHeartFull_25x25.png" class="state1" width="50px" height="50px">
-                    <img src="./img/player/playerHeartFull_25x25.png" class="state1" width="50px" height="50px">
-                    <img src="./img/player/playerHeartFull_25x25.png" class="state1" width="50px" height="50px">
+                    <div> 
+                        <img src="./img/player/playerHeartFull_25x25.png" class="state1" width="50px" height="50px">
+                        <img src="./img/player/playerHeartFull_25x25.png" class="state1" width="50px" height="50px">
+                        <img src="./img/player/playerHeartFull_25x25.png" class="state1" width="50px" height="50px">
+                        <img src="./img/player/playerHeartFull_25x25.png" class="state1" width="50px" height="50px">
+                        <img src="./img/player/playerHeartFull_25x25.png" class="state1" width="50px" height="50px"></div>
+                    <div id="skill1">
+                        <div>
+                            <p>Q</p>
+                            <div id="qtimer1"></div>
+                            <img id="qskill1" src="./img/player/qskill.png" width="70px" height="70px">
+                        </div>
+                        <div>
+                            <p>W</p>
+                            <img id="wskill1" src="./img/interface/lock.png" width="70px" height="70px">
+                        </div>
+                        <div>
+                            <p>E</p>
+                            <img id="eskill1" src="./img/interface/lock.png" width="70px" height="70px">
+                        </div>
+                    </div>
                 </div>
                 <div id="gold1">
                     gold :
                 </div>
-                <div id="skill1">
-                    <div>
-                        <p>Q</p>
-                        <div id="qtimer1"></div>
-                        <img id="qskill1" src="./img/player/qskill.png" width="50px" height="50px">
-                    </div>
-                </div>
             </div>
-            <div id="timer1"></div>
         </div>
         <div id="stage2" class="screen">
             <div id="esc_menu2">
