@@ -48,6 +48,8 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 	var damagey;
 
 	var attack_stat;
+	var firedot = 0;
+	var dot_count = 0;
 
 	var player_img = 1;
 	var player_img_count=0;
@@ -139,10 +141,13 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 	else if ($("#pRed").hasClass("equip")) {
 		$("#playerImg1").attr("src", pRedStdsrc);
 		playerColor = "red"; //도트데미지
+		firedot = 1;
+		attack_stat = 50;
 	}
 	else if ($("#pCyan").hasClass("equip")) {
 		$("#playerImg1").attr("src", pCyanstdsrc);
 		playerColor = "cyan"; //
+
 	}
 	else if ($("#pWhite").hasClass("equip")) {
 		$("#playerImg1").attr("src", pWhitestdsrc);
@@ -172,9 +177,9 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 	const bossAudio=new Audio('./오디오/boss/bosshit.mp3');
 	const bossAudio2=new Audio('./오디오/boss/bosshit2.mp3');
 	const bossAudio3=new Audio('./오디오/boss/bosshit3.mp3');
-	const playerhitAudio=new Audio('./오디오/player/플래이어 피격 (1).wav');
+	const playerhitAudio=new Audio('./오디오/player/플레이어 피격 (1).wav');
 	const bossskillAudio=new Audio('./오디오/stage1/보스기합.wav');
-	const bossskillAudio2=new Audio('./오디오/stage1/폭발공격.wav');
+	const bossskillAudio2=new Audio('./오디오/stage1/폭발공격.mp3');
 	const countdownAudio=new Audio('./오디오/Interface/카운트다운.mp3');
 	const bossdieAudio=new Audio('./오디오/stage1/보스피격.wav');
 	const bossdieAudio2=new Audio('./오디오/stage1/보스사망.wav');
@@ -195,7 +200,9 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 
 	function pageLoad(){
 		if(effectOn)
-			setTimeout(countdownAudio.play(),1000);
+			setTimeout(() => {
+				countdownAudio.play();
+			  },1000);
 		var play_button = document.getElementById("play1");
 		play_button.onclick = play;
 		var exit_button = document.getElementById("exit1");
@@ -313,7 +320,7 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 				$("#select-stage").removeClass("animateContent2");
 			}, 1000);
 		}, 500);
-		$(".gold").html(mainGold+gold);//골드 추가 부분
+		$(".gold").html(currentGold+gold);//골드 추가 부분
 }
 
 	/* window size 변경 해주는 함수 */
@@ -418,7 +425,6 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 			bossAttack3();
 			if(effectOn)
 			bossskillAudio2.play();
-
 		}
 
 		if(damage_state >= 1){
@@ -437,7 +443,11 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 				if(damage_count % 80 == 0){
 					damage_state = 0;
 					damage_count = 0;
+					dot_count = 0;
 				}
+			}
+			if(dot_count == 1){
+				drawDamage(30,bossx+30,bossy+30);
 			}
 			drawDamage(damage,damagex,damagey);
 		}
@@ -518,6 +528,25 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 		damage = att - Math.floor(Math.random()*20);
 		b_hp -= damage;
 		damage_state = 1;
+		if(firedot == 1){
+			setTimeout(function(){
+				b_hp -= 30;
+				dot_count = 1;
+				if(effectOn){
+					let randtemp=Math.floor(Math.random() * 4)
+					if(randtemp==0)
+						bossAudio.play();
+					else if(randtemp==1)
+						bossAudio2.play();
+					else if(randtemp==2)
+						bossAudio3.play();
+					else
+						bossdieAudio.play();
+					if(b_hp==1)
+						bossdieAudio2.play();
+				}
+			},300);
+		}
 		if(effectOn){
 			let randtemp=Math.floor(Math.random() * 4)
 			if(randtemp==0)
@@ -530,7 +559,6 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 				bossdieAudio.play();
 			if(b_hp==1)
 				bossdieAudio2.play();
-
 		}
 		hp();
 		$("#container1").animate({
@@ -545,6 +573,7 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 
 
 	}
+
 
 
 
@@ -783,7 +812,7 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 			loseAudio.play();
 			drawText("You Lose");
 			game_over_Img();
-			winmotion();
+			//winmotion();
 			
 		}
 	
@@ -1260,9 +1289,7 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 	}
 
 	/* 호출시 원래 공 반지름 길이로 복구 */
-	function bossAttack4() {
-		ballRadius = 10;
-	}
+	
 
 
 	/*---------------------------------------------------------보스 공격패턴 함수---------------------------------------------------------*/
