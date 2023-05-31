@@ -813,7 +813,7 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 			loseAudio.play();
 			drawText("You Lose");
 			game_over_Img();
-			winmotion();
+			//winmotion();
 			
 		}
 	
@@ -1290,9 +1290,7 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 	}
 
 	/* 호출시 원래 공 반지름 길이로 복구 */
-	function bossAttack4() {
-		ballRadius = 10;
-	}
+	
 
 
 	/*---------------------------------------------------------보스 공격패턴 함수---------------------------------------------------------*/
