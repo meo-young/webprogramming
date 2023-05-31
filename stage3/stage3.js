@@ -1,5 +1,5 @@
 
-export function stageStart3(mainGold,effectOn) {
+export function stageStart3(mainGold,effectOn,potion1Num, potion2Num, potion3Num) {
 	/* 플레이어 스킬 변수 */
 	var qskill = 0;
 	var qskill_timer = 30;
@@ -453,6 +453,10 @@ export function stageStart3(mainGold,effectOn) {
 	function draw() {
 		context.clearRect(0, 0, cvwd, cvht);
 		$("#gold3").text("gold : "+gold);
+		$("#red3").text(potion1Num);
+		$("#blue3").text(potion2Num);
+		$("#green3").text(potion3Num);
+		
 		/* 보스 공격 관련 조건문 */
 		if (eskill == 0) {
 			if (attack1 == 1) {
