@@ -222,6 +222,9 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 	const winAudio = new Audio('./audio/win_7s.mp3');
 	const loseAudio = new Audio('./audio/lose_7s.mp3');
 	var keyboardAudio = new Audio("./storyimg/키보드소리.mp3");
+	var potion1Audio = new Audio("./오디오/player/potion1.mp3");
+	var potion2Audio = new Audio("./오디오/player/potion2.mp3");
+	var potion3Audio = new Audio("./오디오/player/potion3.mp3");
 
 	pageLoad();
 	wait();
@@ -1304,7 +1307,33 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 			}
 			stop_pattern = 0;
 		}
-		if (keydown_count == 0) {
+		else if(event.keyCode == 49 && potion1Num>= 1){// 1번 눌렀을 때 포션 사용
+			
+			if(p_hp > 0 && p_hp < 5){
+				potion1Num--;
+				p_hp--;
+				$("#p1Num").html(potion1Num); 
+				var p_hp_array = $(".state1");
+				p_hp_array[p_hp].src = "./img/player/playerHeartFull_25x25.png";
+				potion1Audio.play();
+			}
+		}
+		else if(event.keyCode == 50 && potion2Num>= 1){//2번 눌렀을 때 포션 사용
+			potion2Num--;
+			$("#p2Num").html(potion2Num); 
+			potion2Audio.play();
+			
+				
+		}
+		else if(event.keyCode == 51 && potion3Num>= 1){//3번 눌렀을 때 포션 사용
+			potion3Num--;
+			$("#p3Num").html(potion3Num); 
+			potion3Audio.play();
+		}
+
+
+		
+		if(keydown_count == 0){
 			if (start_number == 0) {
 				//스페이스바를 누를경우
 				if (event.keyCode == 32) {
