@@ -43,6 +43,7 @@ $(document).ready(function () {
     var buySkin = new Audio("./audio/구매성공.mp3");
     var buyCant = new Audio("./audio/구매실패.mp3");
     var buyPotion = new Audio("./audio/포션구매.mp3");
+    var changeSkin = new Audio("./audio/스킨전환.mp3");
 
     var currentBGM = mainBgm;    // 현재 재생/중지 상태의 음악파일, 환경설정에서 변경 가능
     var storyimgflag = 0;
@@ -340,6 +341,7 @@ $(document).ready(function () {
                 if ($(".pChar").hasClass("equip"))
                     $(".pChar").removeClass("equip");
                 $(this).addClass("equip"); // 착용중으로 변경
+                changeSkin.play();
             }
             else if ($(this).hasClass("equip")) {
                 $(this).removeClass("equip");
