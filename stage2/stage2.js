@@ -1,4 +1,4 @@
-export function stageStart2() {
+export function stageStart2(mainGold,effectOn) {
 	/* 플레이어 스킬 변수 */
 	var qskill = 0;
 	var qskill_timer = 30;
@@ -177,9 +177,21 @@ export function stageStart2() {
 	paddleImg.src = "./img/player/paddle.png";
 
 	//오디오 파일
-	const brickAudio = new Audio('./audio/brickbreak.mp3');
-	const swingAudio = new Audio('./audio/swing.mp3');
-	const bossAudio=new Audio('./audio/bosshit.mp3');
+	const brickAudio = new Audio('./오디오/boss/bosshit3.mp3');
+	const swingAudio = new Audio('./오디오/player/칼휘두르는소리.mp3');
+	const bossAudio=new Audio('./오디오/boss/bosshit.mp3');
+	const bossAudio2=new Audio('./오디오/boss/bosshit2.mp3');
+	const bossAudio3=new Audio('./오디오/boss/bosshit3.mp3');
+	const playerhitAudio=new Audio('./오디오/player/플래이어 피격 (1).wav');
+	const bossskillAudio=new Audio('./오디오/stage2/splash water.wav');
+	const countdownAudio=new Audio('./오디오/Interface/카운트다운.mp3');
+	const bossdieAudio2=new Audio('./오디오/stage2/보스사망.wav');
+	const bossdieAudio=new Audio('./오디오/stage2/보스피격.wav');
+	const qskillonAudio=new Audio('./오디오/player/q스킬쉴드장착.mp3');
+	const wskillonAudio=new Audio('./오디오/player/w스킬.mp3');
+	const winAudio=new Audio('./audio/win_7s.mp3');
+	const loseAudio=new Audio('./audio/lose_7s.mp3');
+	const fishAudio=new Audio('./오디오/stage2/물고기 나올때.mp3');
 
 
 
@@ -195,6 +207,8 @@ export function stageStart2() {
 	draw();
 
 	function pageLoad(){
+		if(effectOn)
+			countdownAudio.play();
 		var play_button = document.getElementById("play2");
 		play_button.onclick = play;
 		var exit_button = document.getElementById("exit2");
@@ -376,7 +390,7 @@ export function stageStart2() {
 
 	function draw() {
 		context.clearRect(0, 0, cvwd, cvht);
-
+		$("#gold2").text("gold : "+gold);
 		/* drawPaddle 관련 위치 조건문 */
 		if (barx > (cvwd - barwidth / 2)) {
 			barx = cvwd - barwidth / 2;
@@ -406,6 +420,8 @@ export function stageStart2() {
 		/* 보스 공격 관련 조건문 */
 		if (attack1 == 1) {
 			bossAttack1();
+			if(effectOn)
+				bossskillAudio.play();
 		}
 		if (attack2 == 1) {
 			bossAttack2();
@@ -476,7 +492,19 @@ export function stageStart2() {
 			return;
 		} else {
 			b_hp--;
-			bossAudio.play();
+			if(effectOn){
+				let randtemp=Math.floor(Math.random() * 3)
+				if(randtemp==0)
+					bossAudio.play();
+				else if(randtemp==1)
+					bossAudio2.play();
+				else
+					bossAudio3.play();
+				if(b_hp==1)
+					bossdieAudio2.play();
+				else if(randtemp==1)
+					bossdieAudio.play();
+				}
 			hp();
 			var num = b_hp * 20;
 			$("#container2").animate({
@@ -573,6 +601,8 @@ export function stageStart2() {
 		}
 		if(p_hp == 1 || p_hp == 2){
 			p_hp_decrease_Img();
+			if(effectOn)
+				playerhitAudio.play();
 		}
 		if(p_hp == 3){
 			game_over_Img();
@@ -750,9 +780,13 @@ export function stageStart2() {
 		clearInterval(time_repeat);
 		context.clearRect(0, 0, cvwd, cvht);
 		if (who == 1) {
+			if(effectOn)
+				winAudio.play();
 			drawText("You Win");
 		}
 		else if (who == 2) {
+			if(effectOn)
+				loseAudio.play();
 			drawText("You Lose");
 		}
 	}
@@ -1065,6 +1099,8 @@ export function stageStart2() {
 				//q를 누를경우
 				if (qskill_cooltime == 0 && qskill == 0 && event.keyCode == 81) { //쿨타임이 아니고, 보호막이 활성화되지 않을 때 사용 가능
 					qskill = 1; //이 변수가 1일 때 보호막 활성화
+					if(effectOn)
+						qskillonAudio.play();
 					$("#qskill2").css({ //스킬 이미지를 지우고 쿨타임 글씨 영역 활성화
 						"display": "none"
 					});
@@ -1074,6 +1110,8 @@ export function stageStart2() {
 					$("#qtimer2").text(qskill_timer); //쿨타임 글씨 활성화
 					qskill_repeat = setInterval(skill_timer1, 1000);
 					qskill_cooltime = 1;
+					if(effectOn)
+						qskillonAudio.play();
 				}
 				else if (wskill_cooltime == 0 && wskill == 0 && event.keyCode == 87) {
 					wskill = 1; //이 변수가 1일 때 보호막 활성화
@@ -1089,6 +1127,8 @@ export function stageStart2() {
 					wskill_repeat = setInterval(skill_timer2, 1000);
 					wskill_cooltime = 1;
 					wskill_repeat2 = setInterval(wskill_time, 1);
+					if(effectOn)
+						wskillonAudio.play();
 				}
 		}
 	}
@@ -1207,6 +1247,8 @@ export function stageStart2() {
 			else if (randnum == 1) {
 				attack_position = Math.random() * 500;
 				bossAttack2();
+				if(effectOn)
+					fishAudio.play();
 				attack2 = 1;
 			}
 			else if (randnum == 2) {
