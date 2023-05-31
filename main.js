@@ -31,19 +31,19 @@ $(document).ready(function () {
     var pAttack = new Audio();  // 플레이어 공격 효과음
     var bAttack = new Audio();  // 보스 공격 효과음
     var pSkill = new Audio();  // 플레이어 스킬 효과음
-    var keyboardAudio=new Audio("./storyimg/키보드소리.mp3");
-    var keyboardAudio2=new Audio("./storyimg/키보드소리.mp3");
-    var thunderAudio=new Audio("./storyimg/펑소리.mp3");
+    var keyboardAudio = new Audio("./storyimg/키보드소리.mp3");
+    var keyboardAudio2 = new Audio("./storyimg/키보드소리.mp3");
+    var thunderAudio = new Audio("./storyimg/펑소리.mp3");
 
     var currentBGM = mainBgm;    // 현재 재생/중지 상태의 음악파일, 환경설정에서 변경 가능
-    var storyimgflag=0;
+    var storyimgflag = 0;
     currentBGM.play();
     currentBGM.loop = true;   // 반복재생
 
     // 좌측 상단 오디오 버튼 클릭 시
-    $("#audioVol").off('click').on('click', function() {
+    $("#audioVol").off('click').on('click', function () {
         // if(!currentBGM.paused) {    // 재생 -> 정지
-        if(bgmOn) {
+        if (bgmOn) {
             $(this).css({ "background": "url(./img/interface/volOff_50x50.png)" });
             $("#BGM").css({ "background": "url(./img/interface/volOff_50x50.png)" });
             currentBGM.pause();
@@ -80,112 +80,112 @@ $(document).ready(function () {
     // });
 
     // 시작버튼(스테이지 선택) 클릭 시 스테이지 선택 화면 애니메이션
-    $("#start-btn").off('click').on('click', function() {
+    $("#start-btn").off('click').on('click', function () {
         if (effectOn) {
             clickSound.play();   // 버튼 클릭 효과음
         }
-        
+
         $("#main-menu").addClass("animateContent1");    // 메인 메뉴 페이지 전환 효과 (작아지는)
-        setTimeout(function() {
+        setTimeout(function () {
             $("#main-menu").removeClass("animateContent1").hide();  // 1초 후 메인 메뉴 디스플레이 none
         }, 500);
         // 메인 메뉴가 사라지면서 스테이지 선택 페이지 등장
-        setTimeout(function() {
-            $("#select-stage").addClass("animateContent2").css({ "display": "inline-block" });  
+        setTimeout(function () {
+            $("#select-stage").addClass("animateContent2").css({ "display": "inline-block" });
         }, 500);
         // 스테이지 화면 각 화면 마우스 오버 시 보스 이미지로 변환
         $("#stgbtn1").mouseenter(function () {
-            $(this).css({ 
+            $(this).css({
                 "background": "url(./img/interface/stage1select2.png)",
-                "background-repeat" : "no-repeat"
+                "background-repeat": "no-repeat"
             });
         })
         $("#stgbtn1").mouseout(function () {
             $(this).css({ "background": "url(./img/interface/stage1select1.png)" });
         })
         $("#stgbtn2").mouseenter(function () {
-            $(this).css({ 
+            $(this).css({
                 "background": "url(./img/interface/stage2select2.png)",
-                "background-repeat" : "no-repeat"
+                "background-repeat": "no-repeat"
             });
         })
         $("#stgbtn2").mouseout(function () {
             $(this).css({ "background": "url(./img/interface/stage2select1.png)" });
         })
         $("#stgbtn3").mouseenter(function () {
-            $(this).css({ 
+            $(this).css({
                 "background": "url(./img/interface/stage3select2.png)",
-                "background-repeat" : "no-repeat"
+                "background-repeat": "no-repeat"
             });
         })
         $("#stgbtn3").mouseout(function () {
             $(this).css({ "background": "url(./img/interface/stage3select1.png)" });
         })
         // 첫번째 보스 캔버스
-        $("#stgbtn1").off('click').on('click', function() {
+        $("#stgbtn1").off('click').on('click', function () {
             if (effectOn) {
                 clickSound.play();   // 버튼 클릭 효과음
             }
             currentBGM.pause();
             showGif('./storyimg/stage1A.gif');
-            setTimeout(()=>{
+            setTimeout(() => {
                 $("#select-stage").removeClass("animateContent2").addClass("animateContent1");    // 스테이지 선택 페이지 전환 효과 (작아지는)
-                setTimeout(function() {
+                setTimeout(function () {
                     $("#select-stage").removeClass("animateContent1").hide();
                 }, 500);
-                setTimeout(function() {
+                setTimeout(function () {
                     $("#stage1").addClass("animateContent2").css({ "display": "inline-block" });
                 }, 500);
-                currentGold=parseInt($(".gold").eq(0).text());
+                currentGold = parseInt($(".gold").eq(0).text());
                 stageStart1(currentGold, effectOn, potion1Num, potion2Num, potion3Num);
-            },5000)
+            }, 5000)
         });
         // 두번째 보스 캔버스
-        $("#stgbtn2").off('click').on('click', function() {
+        $("#stgbtn2").off('click').on('click', function () {
             if (effectOn) {
                 clickSound.play();   // 버튼 클릭 효과음
             }
             showGif('./storyimg/stage2A.gif');
-            setTimeout(()=>{
+            setTimeout(() => {
                 $("#select-stage").removeClass("animateContent2").addClass("animateContent1");    // 스테이지 선택 페이지 전환 효과 (작아지는)
-                setTimeout(function() {
+                setTimeout(function () {
                     $("#select-stage").removeClass("animateContent1").hide();
                 }, 500);
-                setTimeout(function() {
+                setTimeout(function () {
                     $("#stage2").addClass("animateContent2").css({ "display": "inline-block" });
                 }, 500);
-                currentGold=parseInt($(".gold").eq(0).text());
+                currentGold = parseInt($(".gold").eq(0).text());
                 stageStart2(currentGold, effectOn, potion1Num, potion2Num, potion3Num);
-            },5000);
+            }, 5000);
         });
         // 세번째 보스 캔버스
-        $("#stgbtn3").off('click').on('click', function() {
+        $("#stgbtn3").off('click').on('click', function () {
             if (effectOn) {
                 clickSound.play();   // 버튼 클릭 효과음
             }
             showGif('./storyimg/stage3A.gif');
-            setTimeout(()=>{
+            setTimeout(() => {
                 $("#select-stage").removeClass("animateContent2").addClass("animateContent1");    // 스테이지 선택 페이지 전환 효과 (작아지는)
-            setTimeout(function() {
-                $("#select-stage").removeClass("animateContent1").hide();
-            }, 500);
-            setTimeout(function() {
-                $("#stage3").addClass("animateContent2").css({ "display": "inline-block" });
-            }, 500);
-            currentGold=parseInt($(".gold").eq(0).text());
-            stageStart3(currentGold, effectOn, potion1Num, potion2Num, potion3Num);
-            },5000);
+                setTimeout(function () {
+                    $("#select-stage").removeClass("animateContent1").hide();
+                }, 500);
+                setTimeout(function () {
+                    $("#stage3").addClass("animateContent2").css({ "display": "inline-block" });
+                }, 500);
+                currentGold = parseInt($(".gold").eq(0).text());
+                stageStart3(currentGold, effectOn, potion1Num, potion2Num, potion3Num);
+            }, 5000);
         });
         // 뒤로가기 버튼 클릭 시 스테이지 화면과 메인 메뉴 애니메이션
-        $("#stage-to-main").off('click').on('click', function() {
+        $("#stage-to-main").off('click').on('click', function () {
             if (effectOn) {
                 clickSound.play();   // 버튼 클릭 효과음
             }
             $("#select-stage").removeClass("animateContent2").addClass("animateContent1");  // 스테이지 선택 페이지 줄어드는 애니메이션
-            setTimeout(function() {
+            setTimeout(function () {
                 $("#select-stage").removeClass("animateContent1").hide();   // 스테이지 선택 페이지 none해주고
                 $("#main-menu").show().addClass("animateContent2");         // 다시 메인 메뉴 나타나게
-                setTimeout(function() {
+                setTimeout(function () {
                     $("#main-menu").removeClass("animateContent2");
                 }, 1000);
             }, 500);
@@ -194,27 +194,27 @@ $(document).ready(function () {
 
     // 위와 애니메이션 동작 방식 동일
     // 환경설정버튼 클릭 시 환경설정 화면 애니메이션
-    $("#settings-btn").off('click').on('click', function() {
+    $("#settings-btn").off('click').on('click', function () {
         if (effectOn) {
             clickSound.play();   // 버튼 클릭 효과음
         }
         $("#main-menu").addClass("animateContent1");    // 메인 메뉴 페이지 전환 효과 (작아지는)
-        setTimeout(function() {
+        setTimeout(function () {
             $("#main-menu").removeClass("animateContent1").hide();  // 1초 후 메인 메뉴 디스플레이 none
         }, 500);
         // 메인 메뉴가 사라지면서 환경설정 페이지 등장
-        setTimeout(function() {
+        setTimeout(function () {
             $("#settings-menu").addClass("animateContent2").css({ "display": "inline-block" });
         }, 500);
         // 배경음악
-        if(bgmOn) { // 온오프버튼 이미지 초기화
+        if (bgmOn) { // 온오프버튼 이미지 초기화
             $("#BGM").css({ "background": "url(./img/interface/volOn_50x50.png)" });
         }
         else {
             $("#BGM").css({ "background": "url(./img/interface/volOff_50x50.png)" });
         }
-        $("#BGM").off("click").on("click", function() {
-            if(bgmOn) { // 재생 -> 정지
+        $("#BGM").off("click").on("click", function () {
+            if (bgmOn) { // 재생 -> 정지
                 $(this).css({ "background": "url(./img/interface/volOff_50x50.png)" });
                 $("#audioVol").css({ "background": "url(./img/interface/volOff_50x50.png)" });
                 currentBGM.pause();
@@ -228,14 +228,14 @@ $(document).ready(function () {
             }
         });
         // 효과음
-        if(effectOn) { // 온오프버튼 이미지 초기화
+        if (effectOn) { // 온오프버튼 이미지 초기화
             $("#effectSound").css({ "background": "url(./img/interface/volOn_50x50.png)" });
         }
         else {
             $("#effectSound").css({ "background": "url(./img/interface/volOff_50x50.png)" });
         }
-        $("#effectSound").off("click").on("click", function() {
-            if(effectOn) { // 재생 -> 정지
+        $("#effectSound").off("click").on("click", function () {
+            if (effectOn) { // 재생 -> 정지
                 $(this).css({ "background": "url(./img/interface/volOff_50x50.png)" });
                 effectOn = false;
             }
@@ -245,15 +245,15 @@ $(document).ready(function () {
             }
         });
         // 뒤로가기
-        $("#settings-to-main").off('click').on('click', function() {
+        $("#settings-to-main").off('click').on('click', function () {
             if (effectOn) {
                 clickSound.play();   // 버튼 클릭 효과음
             }
             $("#settings-menu").removeClass("animateContent2").addClass("animateContent1");
-            setTimeout(function() {
+            setTimeout(function () {
                 $("#settings-menu").removeClass("animateContent1").hide();
                 $("#main-menu").show().addClass("animateContent2");
-                setTimeout(function() {
+                setTimeout(function () {
                     $("#main-menu").removeClass("animateContent2");
                 }, 1000);
             }, 500);
@@ -261,68 +261,68 @@ $(document).ready(function () {
     });
 
     // 상점버튼 클릭 시 상점 화면 애니메이션
-    $("#shop-btn").off('click').on('click', function() {
+    $("#shop-btn").off('click').on('click', function () {
         if (effectOn) {
             clickSound.play();   // 버튼 클릭 효과음
         }
         // 상점 브금
         if (bgmOn) {
             currentBGM.pause();
-            currentBGM = shopBgm; 
+            currentBGM = shopBgm;
             currentBGM.currentTime = 0;
             currentBGM.play();
             currentBGM.loop = true;
         }
         $("#main-menu").addClass("animateContent1");    // 메인 메뉴 페이지 전환 효과 (작아지는)
-        setTimeout(function() {
+        setTimeout(function () {
             $("#main-menu").removeClass("animateContent1").hide();  // 1초 후 메인 메뉴 디스플레이 none
         }, 500);
         // 메인 메뉴가 사라지면서 상점 페이지 등장
-        setTimeout(function() {
+        setTimeout(function () {
             $("#shop-menu").addClass("animateContent2").css({ "display": "inline-block" });
         }, 500);
         // 각 플레이어 캐릭터 마우스 오버 시
-        $("#pDefault").mouseenter(function() {  // 기본 캐릭터
+        $("#pDefault").mouseenter(function () {  // 기본 캐릭터
             $(this).attr("src", "./img/player/playerRunDown_32x32.gif");
         });
-        $("#pDefault").mouseout(function() {
+        $("#pDefault").mouseout(function () {
             $(this).attr("src", "./img/player/playerStanding_32x32.gif");
         });
-        $("#pRed").mouseenter(function() {  // 빨강
+        $("#pRed").mouseenter(function () {  // 빨강
             $(this).attr("src", "./img/player/playerRunDown_red_32x32.gif");
         });
-        $("#pRed").mouseout(function() {
+        $("#pRed").mouseout(function () {
             $(this).attr("src", "./img/player/playerStanding_red_32x32.gif");
         });
-        $("#pCyan").mouseenter(function() {  // 파랑
+        $("#pCyan").mouseenter(function () {  // 파랑
             $(this).attr("src", "./img/player/playerRunDown_cyan_32x32.gif");
         });
-        $("#pCyan").mouseout(function() {
+        $("#pCyan").mouseout(function () {
             $(this).attr("src", "./img/player/playerStanding_cyan_32x32.gif");
         });
-        $("#pWhite").mouseenter(function() {  // 하양
+        $("#pWhite").mouseenter(function () {  // 하양
             $(this).attr("src", "./img/player/playerRunDown_white_32x32.gif");
         });
-        $("#pWhite").mouseout(function() {
+        $("#pWhite").mouseout(function () {
             $(this).attr("src", "./img/player/playerStanding_white_32x32.gif");
         });
-        $("#pYellow").mouseenter(function() {  // 금색
+        $("#pYellow").mouseenter(function () {  // 금색
             $(this).attr("src", "./img/player/playerRunDown_yellow_32x32.gif");
         });
-        $("#pYellow").mouseout(function() {
+        $("#pYellow").mouseout(function () {
             $(this).attr("src", "./img/player/playerStanding_yellow_32x32.gif");
         });
-        $("#pPurple").mouseenter(function() {  // 보라
+        $("#pPurple").mouseenter(function () {  // 보라
             $(this).attr("src", "./img/player/playerRunDown_purple_32x32.gif");
         });
-        $("#pPurple").mouseout(function() {
+        $("#pPurple").mouseout(function () {
             $(this).attr("src", "./img/player/playerStanding_purple_32x32.gif");
         });
-        
+
         // 각 플레이어 캐릭터 클릭 시
-        $(".pChar").off('click').on('click', function() {
-            currentGold=parseInt($(".gold").eq(0).text());
-            if($(this).hasClass("owned")) { // 보유중인 캐릭터 클릭시
+        $(".pChar").off('click').on('click', function () {
+            currentGold = parseInt($(".gold").eq(0).text());
+            if ($(this).hasClass("owned")) { // 보유중인 캐릭터 클릭시
                 if ($(".pChar").hasClass("equip"))
                     $(".pChar").removeClass("equip");
                 $(this).addClass("equip"); // 착용중으로 변경
@@ -343,14 +343,14 @@ $(document).ready(function () {
                 }
             }
         });
-        
-        
+
+
         $("#p1Num").html(potion1Num);
         $("#p2Num").html(potion2Num);
         $("#p3Num").html(potion3Num);
 
         // 1번 물약 클릭시
-        $("#potion1").off('click').on('click', function() {
+        $("#potion1").off('click').on('click', function () {
             currentGold = parseInt($(".gold").eq(0).text());
             if (currentGold >= 10) {
                 potion1Num++;
@@ -363,7 +363,7 @@ $(document).ready(function () {
             }
         });
         // 2번 물약 클릭시
-        $("#potion2").off('click').on('click', function() {
+        $("#potion2").off('click').on('click', function () {
             currentGold = parseInt($(".gold").eq(0).text());
             if (currentGold >= 20) {
                 potion2Num++;
@@ -376,7 +376,7 @@ $(document).ready(function () {
             }
         });
         // 3번 물약 클릭시
-        $("#potion3").off('click').on('click', function() {
+        $("#potion3").off('click').on('click', function () {
             currentGold = parseInt($(".gold").eq(0).text());
             if (currentGold >= 30) {
                 potion3Num++;
@@ -390,21 +390,21 @@ $(document).ready(function () {
         });
 
         // 뒤로가기
-        $("#shop-to-main").off('click').on('click', function() {
+        $("#shop-to-main").off('click').on('click', function () {
             if (effectOn) {
                 clickSound.play();   // 버튼 클릭 효과음
             }
             $("#shop-menu").removeClass("animateContent2").addClass("animateContent1");
-            setTimeout(function() {
+            setTimeout(function () {
                 $("#shop-menu").removeClass("animateContent1").hide();
                 $("#main-menu").show().addClass("animateContent2");
-                setTimeout(function() {
+                setTimeout(function () {
                     $("#main-menu").removeClass("animateContent2");
                 }, 1000);
             }, 500);
             if (bgmOn) {
                 currentBGM.pause();
-                currentBGM = mainBgm; 
+                currentBGM = mainBgm;
                 currentBGM.currentTime = 0;
                 currentBGM.play();
                 currentBGM.loop = true;
@@ -412,7 +412,7 @@ $(document).ready(function () {
         });
     });
 
-    
+
     // 뒤로가기 버튼 오버 시
     $(".go-back-btn").mouseenter(function () {
         $(this).css({ "background": "url(./img/interface/backHover_50x50.png)" });
@@ -421,47 +421,47 @@ $(document).ready(function () {
         $(this).css({ "background": "url(./img/interface/back_50x50.png)" });
     })
     // 메인 메뉴 버튼들 마우스오버 시
-    $("#start-btn").mouseenter(function() { // 시작
-        $(this).css({ "transform" : "scale(1.2)" });
+    $("#start-btn").mouseenter(function () { // 시작
+        $(this).css({ "transform": "scale(1.2)" });
     })
-    $("#start-btn").mouseout(function() {
-        $(this).css({ "transform" : "scale(1)" });
+    $("#start-btn").mouseout(function () {
+        $(this).css({ "transform": "scale(1)" });
     })
-    $("#settings-btn").mouseenter(function() { // 환경설정
-        $(this).css({ "transform" : "scale(1.2)" });
+    $("#settings-btn").mouseenter(function () { // 환경설정
+        $(this).css({ "transform": "scale(1.2)" });
     })
-    $("#settings-btn").mouseout(function() {
-        $(this).css({ "transform" : "scale(1)" });
+    $("#settings-btn").mouseout(function () {
+        $(this).css({ "transform": "scale(1)" });
     })
-    $("#shop-btn").mouseenter(function() { // 상점
-        $(this).css({ "transform" : "scale(1.2)" });
+    $("#shop-btn").mouseenter(function () { // 상점
+        $(this).css({ "transform": "scale(1.2)" });
     })
-    $("#shop-btn").mouseout(function() {
-        $(this).css({ "transform" : "scale(1)" });
+    $("#shop-btn").mouseout(function () {
+        $(this).css({ "transform": "scale(1)" });
     })
-    
+
     // 게임 시작시 등장하는 스토리
-    $("#storyImg").off('click').on('click', function() {
+    $("#storyImg").off('click').on('click', function () {
         storyimgflag++;
-        if(storyimgflag==2) {//두번째 클릭
+        if (storyimgflag == 2) {//두번째 클릭
             //오디오 종료
             keyboardAudio.pause();
             thunderAudio.pause();
             //메인메뉴 브금 넣기
             $("#story-menu").addClass("animateContent1");
-            setTimeout(function() {
+            setTimeout(function () {
                 $("#story-menu").removeClass("animateContent1").hide();
                 $("#main-menu").show().addClass("animateContent2");
-                setTimeout(function() {
+                setTimeout(function () {
                     $("#main-menu").removeClass("animateContent2");
                 }, 1000);
                 currentBGM = mainBgm;    // 현재 재생/중지 상태의 음악파일, 환경설정에서 변경 가능
-                var storyimgflag=0;
+                var storyimgflag = 0;
                 currentBGM.play();
-                currentBGM.loop = true; 
+                currentBGM.loop = true;
             }, 500);
         }
-        else if(storyimgflag==1){//처음 화면 클릭
+        else if (storyimgflag == 1) {//처음 화면 클릭
             currentBGM.pause();
             setTimeout(() => {
                 keyboardAudio.play();
@@ -482,7 +482,7 @@ $(document).ready(function () {
                 keyboardAudio.play();
             }, 16000);
 
-            $(this).fadeOut(500, function() {
+            $(this).fadeOut(500, function () {
                 // fadeOut() 메서드로 천천히 사라지고, 애니메이션 완료 후 콜백 함수 실행
                 $(this).attr("src", "./storyimg/prologe.gif").fadeIn(500); // fadeIn() 메서드로 천천히 나타남
                 setTimeout(() => {
@@ -490,101 +490,101 @@ $(document).ready(function () {
                 }, 20000);
                 //오디오 재생
             });
-        }  
+        }
     });
 
 
 
     // 스테이지1 esc 환경설정
-    $("#set1").off('click').on('click', function() {
+    $("#set1").off('click').on('click', function () {
         if (effectOn) {
             clickSound.play();   // 버튼 클릭 효과음
         }
-		$("#stage1").addClass("animateContent1");
-        setTimeout(function() {
+        $("#stage1").addClass("animateContent1");
+        setTimeout(function () {
             $("#stage1").removeClass("animateContent1").hide();
             $("#set1-menu").show().addClass("animateContent2");
-            setTimeout(function() {
+            setTimeout(function () {
                 $("#set1-menu").removeClass("animateContent2");
-			}, 1000);
+            }, 1000);
         }, 500);
-	});
-    $("#settings-to-esc1").off('click').on('click', function() {
+    });
+    $("#settings-to-esc1").off('click').on('click', function () {
         if (effectOn) {
             clickSound.play();   // 버튼 클릭 효과음
         }
         $("#set1-menu").addClass("animateContent1");
-        setTimeout(function() {
+        setTimeout(function () {
             $("#set1-menu").removeClass("animateContent1").hide();
             $("#stage1").show().addClass("animateContent2");
-            setTimeout(function() {
+            setTimeout(function () {
                 $("#stage1").removeClass("animateContent2");
             }, 1000);
         }, 500);
     });
     // 스테이지2 esc 환경설정
-    $("#set2").off('click').on('click', function() {
+    $("#set2").off('click').on('click', function () {
         if (effectOn) {
             clickSound.play();   // 버튼 클릭 효과음
         }
-		$("#stage2").addClass("animateContent1");
-        setTimeout(function() {
+        $("#stage2").addClass("animateContent1");
+        setTimeout(function () {
             $("#stage2").removeClass("animateContent1").hide();
             $("#set2-menu").show().addClass("animateContent2");
-            setTimeout(function() {
+            setTimeout(function () {
                 $("#set2-menu").removeClass("animateContent2");
-			}, 1000);
+            }, 1000);
         }, 500);
-	});
-    $("#settings-to-esc2").off('click').on('click', function() {
+    });
+    $("#settings-to-esc2").off('click').on('click', function () {
         if (effectOn) {
             clickSound.play();   // 버튼 클릭 효과음
         }
         $("#set2-menu").addClass("animateContent1");
-        setTimeout(function() {
+        setTimeout(function () {
             $("#set2-menu").removeClass("animateContent1").hide();
             $("#stage2").show().addClass("animateContent2");
-            setTimeout(function() {
+            setTimeout(function () {
                 $("#stage2").removeClass("animateContent2");
             }, 1000);
         }, 500);
     });
     // 스테이지3 esc 환경설정
-    $("#set3").off('click').on('click', function() {
+    $("#set3").off('click').on('click', function () {
         if (effectOn) {
             clickSound.play();   // 버튼 클릭 효과음
         }
-		$("#stage3").addClass("animateContent1");
-        setTimeout(function() {
+        $("#stage3").addClass("animateContent1");
+        setTimeout(function () {
             $("#stage3").removeClass("animateContent1").hide();
             $("#set3-menu").show().addClass("animateContent2");
-            setTimeout(function() {
+            setTimeout(function () {
                 $("#set3-menu").removeClass("animateContent2");
-			}, 1000);
+            }, 1000);
         }, 500);
-	});
-    $("#settings-to-esc3").off('click').on('click', function() {
+    });
+    $("#settings-to-esc3").off('click').on('click', function () {
         if (effectOn) {
             clickSound.play();   // 버튼 클릭 효과음
         }
         $("#set3-menu").addClass("animateContent1");
-        setTimeout(function() {
+        setTimeout(function () {
             $("#set3-menu").removeClass("animateContent1").hide();
             $("#stage3").show().addClass("animateContent2");
-            setTimeout(function() {
+            setTimeout(function () {
                 $("#stage3").removeClass("animateContent2");
             }, 1000);
         }, 500);
     });
-    function showGif(gifsrc){
+    function showGif(gifsrc) {
         $("#select-stage").hide();
         $("#stageStoryImg").attr("src", gifsrc);
-        $("#stage-story").fadeIn(1,()=>{
+        $("#stage-story").fadeIn(1, () => {
             keyboardAudio.play();
-            setTimeout(()=>{
+            setTimeout(() => {
                 keyboardAudio.pause();
-            },4000);
+            }, 4000);
         })
-        setTimeout(()=>{$("#stage-story").fadeOut(2000);},3000);
+        setTimeout(() => { $("#stage-story").fadeOut(2000); }, 3000);
     }
 });
