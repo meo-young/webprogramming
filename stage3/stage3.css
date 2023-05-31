@@ -124,7 +124,21 @@ body {
     margin-left: 50px;
     float: left;
 }
-
+#red3 {
+    margin-top: 97px;
+    margin-left: 125px;
+    float: left;
+}
+#blue3 {
+    margin-top: 97px;
+    margin-left: 91px;
+    float: left;
+}
+#green3 {
+    margin-top: 97px;
+    margin-left: 91px;
+    float: left;
+}
 
 #esc_menu3 {
     display: none;

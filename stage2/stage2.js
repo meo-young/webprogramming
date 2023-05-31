@@ -1,4 +1,4 @@
-export function stageStart2(mainGold,effectOn) {
+export function stageStart2(mainGold,effectOn, potion1Num, potion2Num, potion3Num) {
 	/* 플레이어 스킬 변수 */
 	var qskill = 0;
 	var qskill_timer = 30;
@@ -60,6 +60,10 @@ export function stageStart2(mainGold,effectOn) {
 	var dot_count = 0;
 	var white = 0;
 	var yellow = 0;
+	var purple = 0;
+	var poison_damage = 0;
+	var poison_count = 0;
+	var ps_count = 0;
 
 	var player_img = 1;
 	var player_img_count=0;
@@ -157,6 +161,8 @@ export function stageStart2(mainGold,effectOn) {
 		else if ($("#pCyan").hasClass("equip")) {
 			$("#playerImg2").attr("src", pCyanstdsrc);
 			playerColor = "cyan";
+			attack_stat = 50;
+			ballRadius = 20;
 		}
 		else if ($("#pWhite").hasClass("equip")) {
 			$("#playerImg2").attr("src", pWhitestdsrc);
@@ -173,6 +179,8 @@ export function stageStart2(mainGold,effectOn) {
 		else if ($("#pPurple").hasClass("equip")) {
 			$("#playerImg2").attr("src", pPurplestdsrc);
 			playerColor = "purple";
+			purple = 1;
+			attack_stat =50;
 		}
 	
 	var player = new Image();
@@ -414,6 +422,10 @@ export function stageStart2(mainGold,effectOn) {
 	function draw() {
 		context.clearRect(0, 0, cvwd, cvht);
 		$("#gold2").text("gold : "+gold);
+		$("#red2").text(potion1Num);
+		$("#blue2").text(potion2Num);
+		$("#green2").text(potion3Num);
+		
 		/* drawPaddle 관련 위치 조건문 */
 		if (barx > (cvwd - barwidth / 2)) {
 			barx = cvwd - barwidth / 2;
@@ -476,6 +488,25 @@ export function stageStart2(mainGold,effectOn) {
 			}
 			drawDamage(damage,damagex,damagey);
 		}
+		if(poison_count == 1){
+			ps_count++;
+			if(ps_count % 200 >= 0 && ps_count % 200 <= 100){
+				poison();
+			}
+			if(ps_count % 200 == 0){
+				b_hp -= poison_damage;
+				hp();
+				$("#container1").animate({
+					"width": b_hp + "px"
+				});
+				if (b_hp < 0 || b_hp == 0) {
+					game_over(1);
+				}
+				else {
+					b_hp_decrease_Img();
+				}
+			}
+		}
 	}
 
 	/* 공 그리는 함수 */
@@ -513,6 +544,12 @@ export function stageStart2(mainGold,effectOn) {
 		context.font = "30px Chakra-Petch";
 		context.fillStyle = 'red';
 		context.fillText(text, x, y);
+	}
+	function poison(){
+		var text2 = "-"+poison_damage;
+		context.font = "bold 30px Chakra-Petch";
+		context.fillStyle = 'purple';
+		context.fillText(text2, bossx+30, bossy+30);
 	}
 
 	function drawshield() {
@@ -556,6 +593,10 @@ export function stageStart2(mainGold,effectOn) {
 			damage = att - Math.floor(Math.random()*20);
 			b_hp -= damage;
 			damage_state = 1;
+			hp();
+			$("#container2").animate({
+				"width": b_hp + "px"
+			});
 			if(firedot == 1){
 				setTimeout(function(){
 					b_hp -= 30;
@@ -575,10 +616,10 @@ export function stageStart2(mainGold,effectOn) {
 					}
 				},300);
 			}
-			hp();
-			$("#container2").animate({
-				"width": b_hp + "px"
-			});
+			if(purple == 1){
+				poison_damage++;
+				poison_count = 1;
+			}
 			if (b_hp < 0 || b_hp == 0) {
 				game_over(1);
 				game_over_win_Img();
@@ -1020,7 +1061,8 @@ export function stageStart2(mainGold,effectOn) {
 				//공이 보스패턴4로 소환된 첫번째 벽의 밑면에 맞는 경우
 				dy = -dy;
 				attack4 = 0;
-				brickAudio.play();
+				if(effectOn)
+					brickAudio.play();
 				b_hp_decrease(attack_stat);
 				fishdie();
 			}
@@ -1028,7 +1070,8 @@ export function stageStart2(mainGold,effectOn) {
 				//공이 윗면에 맞는경우
 				dy = -dy;
 				attack4 = 0;
-				brickAudio.play();
+				if(effectOn)
+					brickAudio.play();
 				b_hp_decrease(attack_stat);
 				fishdie();
 			}
@@ -1036,7 +1079,8 @@ export function stageStart2(mainGold,effectOn) {
 				//공이 왼쪽 면에 맞는경우
 				dx = -dx;
 				attack4 = 0;
-				brickAudio.play();
+				if(effectOn)
+					brickAudio.play();
 				b_hp_decrease(attack_stat);
 				fishdie();
 			}
@@ -1044,7 +1088,8 @@ export function stageStart2(mainGold,effectOn) {
 				//공이 오른쪽 면에 맞는 경우
 				dx = -dx;
 				attack4 = 0;
-				brickAudio.play();
+				if(effectOn)
+					brickAudio.play();
 				b_hp_decrease(attack_stat);
 				fishdie();
 			}
@@ -1082,14 +1127,16 @@ export function stageStart2(mainGold,effectOn) {
 			} else if (x > barx - (barwidth / 2 + ballRadius) && x < barx + (barwidth / 2 + ballRadius)) { //바의 영역에 있는 경우	
 				if(dy > 0){
 					gold += 5;
-					swingAudio.play();
+					if(effectOn)
+						swingAudio.play();
 				}
 				dx = xvelocity * (x - barx) / (barwidth + ballRadius / 2);
 				dy = -dy;
 			} else { //바의 영역의 마지노선에 맞닿는 경우
 				if(dy > 0){
 					gold += 5;
-					swingAudio.play();
+					if(effectOn)
+						swingAudio.play();
 				}
 				dy = -dy;
 				dx = -dx;
@@ -1365,7 +1412,7 @@ export function stageStart2(mainGold,effectOn) {
 				attack4 = 0;
 				wskill = 0;
 				wskill_count = 1;
-				b_hp_decrease();
+				b_hp_decrease(attack_stat*2);
 				fishdie();
 			}
 		}

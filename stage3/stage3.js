@@ -1,5 +1,5 @@
 
-export function stageStart3(mainGold,effectOn) {
+export function stageStart3(mainGold,effectOn,potion1Num, potion2Num, potion3Num) {
 	/* 플레이어 스킬 변수 */
 	var qskill = 0;
 	var qskill_timer = 30;
@@ -69,6 +69,10 @@ export function stageStart3(mainGold,effectOn) {
 	var dot_count = 0;
 	var white = 0;
 	var yellow = 0;
+	var purple = 0;
+	var poison_damage = 0;
+	var poison_count = 0;
+	var ps_count = 0;
 
 	var player_img = 1;
 	var player_img_count=0;
@@ -168,6 +172,8 @@ export function stageStart3(mainGold,effectOn) {
 	else if ($("#pCyan").hasClass("equip")) {
 		$("#playerImg3").attr("src", pCyanstdsrc);
 		playerColor = "cyan";
+		attack_stat = 50;
+		ballRadius = 20;
 	}
 	else if ($("#pWhite").hasClass("equip")) {
 		$("#playerImg3").attr("src", pWhitestdsrc);
@@ -184,6 +190,8 @@ export function stageStart3(mainGold,effectOn) {
 	else if ($("#pPurple").hasClass("equip")) {
 		$("#playerImg3").attr("src", pPurplestdsrc);
 		playerColor = "purple";
+		purple = 1;
+		attack_stat = 50;
 	}
 
 	var player = new Image();
@@ -270,9 +278,6 @@ export function stageStart3(mainGold,effectOn) {
 		addEventListener('mousemove', mousemove);
 		repeat = setInterval(draw,1);
 		time_repeat = setInterval(timeAttack,1000);
-		if(stop_pattern == 2){	
-			attack2_repeat = setInterval(bossAttack2_timer, 1);
-		}
 		if(qstop_pattern == 1){
 			qskill_repeat = setInterval(skill_timer1,1000);
 			qstop_pattern = 0;
@@ -448,6 +453,10 @@ export function stageStart3(mainGold,effectOn) {
 	function draw() {
 		context.clearRect(0, 0, cvwd, cvht);
 		$("#gold3").text("gold : "+gold);
+		$("#red3").text(potion1Num);
+		$("#blue3").text(potion2Num);
+		$("#green3").text(potion3Num);
+		
 		/* 보스 공격 관련 조건문 */
 		if (eskill == 0) {
 			if (attack1 == 1) {
@@ -512,6 +521,25 @@ export function stageStart3(mainGold,effectOn) {
 			}
 			drawDamage(damage,damagex,damagey);
 		}
+		if(poison_count == 1){
+			ps_count++;
+			if(ps_count % 200 >= 0 && ps_count % 200 <= 100){
+				poison();
+			}
+			if(ps_count % 200 == 0){
+				b_hp -= poison_damage;
+				hp();
+				$("#container1").animate({
+					"width": b_hp + "px"
+				});
+				if (b_hp < 0 || b_hp == 0) {
+					game_over(1);
+				}
+				else {
+					b_hp_decrease_Img();
+				}
+			}
+		}
 	}
 
 	/* 공 그리는 함수 */
@@ -539,6 +567,12 @@ export function stageStart3(mainGold,effectOn) {
 		context.font = "30px Chakra-Petch";
 		context.fillStyle = 'red';
 		context.fillText(text, x, y);
+	}
+	function poison(){
+		var text2 = "-"+poison_damage;
+		context.font = "bold 30px Chakra-Petch";
+		context.fillStyle = 'purple';
+		context.fillText(text2, bossx+30, bossy+30);
 	}
 
 	/* 글씨 기본 설정 해주는 함수 */
@@ -679,6 +713,10 @@ export function stageStart3(mainGold,effectOn) {
 		damage = att - Math.floor(Math.random()*20);
 		b_hp -= damage;
 		damage_state = 1
+		hp();
+		$("#container3").animate({
+			"width": b_hp + "px"
+		});
 		if(firedot == 1){
 			setTimeout(function(){
 				b_hp -= 30;
@@ -698,13 +736,14 @@ export function stageStart3(mainGold,effectOn) {
 				}
 			},300);
 		}
-		$("#container3").animate({
-			"width": b_hp + "px"
-		});
+		if(purple == 1){
+			poison_damage++;
+			poison_count = 1;
+		}
 		if(effectOn){
 			let randtemp=Math.floor(Math.random() * 4)
 			if(randtemp==0)
-		bossAudio.play();
+				bossAudio.play();
 			else if(randtemp==1)
 				bossAudio2.play();
 			else if(randtemp==2)
@@ -1084,6 +1123,7 @@ export function stageStart3(mainGold,effectOn) {
 		}
 		else if (who == 2) {
 			drawText("You Lose");
+			if(effectOn)
 				loseAudio.play();
 		}
 	}
@@ -1234,14 +1274,16 @@ export function stageStart3(mainGold,effectOn) {
 			} else if (x > barx - (barwidth / 2 + ballRadius) && x < barx + (barwidth / 2 + ballRadius)&&start_number == 1) { //바의 영역에 있는 경우	
 				if(dy > 0){
 					gold += 5;
-					swingAudio.play();
+					if(effectOn)
+						swingAudio.play();
 				}
 				dx = xvelocity * (x - barx) / (barwidth + ballRadius / 2);
 				dy = -dy;
 			} else { //바의 영역의 마지노선에 맞닿는 경우
 				if(dy > 0){
 					gold += 5;
-					swingAudio.play();
+					if(effectOn)
+						swingAudio.play();
 				}
 				dy = -dy;
 				dx = -dx;
@@ -1633,7 +1675,8 @@ export function stageStart3(mainGold,effectOn) {
 	function bossAttack1() {
 		if(razerflag){
 			razerflag=false;
-			razerAudio1.play();
+			if(effectOn)
+				razerAudio1.play();
 			setTimeout(function() {
 				razerAudio1.pause();
 			  }, 3000); // 3초를 밀리초로 변환한 값입니다.
@@ -1649,7 +1692,8 @@ export function stageStart3(mainGold,effectOn) {
 		else if (attack1_timer == 4) { //1초 경과시 패들이 위치에 존재하면 사용자의 hp --
 			if(razerflag2){
 				razerflag2=false;
-				razerAudio2.play();
+				if(effectOn)
+					razerAudio2.play();
 			}
 	
 			context.drawImage(bsimg,coordinate,100,60,72);

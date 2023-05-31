@@ -115,6 +115,22 @@ body {
     margin-left: 50px;
     float: left;
 }
+#red2 {
+    margin-top: 97px;
+    margin-left: 125px;
+    float: left;
+}
+#blue2 {
+    margin-top: 97px;
+    margin-left: 91px;
+    float: left;
+}
+#green2 {
+    margin-top: 97px;
+    margin-left: 91px;
+    float: left;
+}
+
 #esc_menu2 {
     
     display: none;
