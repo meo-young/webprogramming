@@ -126,24 +126,24 @@ body {
 
 
 #esc_menu1 {
-    
+    line-height: 250px;
     display: none;
 }
 #play1 {
-    width: 179px;
-    height: 49px;
-    background: url("../img/interface/esc_play.png");
+    width: 300px;
+    height: 100px;
+    background: url("../img/interface/play.png");
     border: none;
 }
 #set1 {
-    width: 289px;
-    height: 43px;
-    background: url("../img/interface/settings_289x43.png");
+    width: 700px;
+    height: 100px;
+    background: url("../img/interface/setting.png");
     border: none;
 }
 #exit1 {
-    width: 160px;
-    height: 51px;
-    background: url("../img/interface/esc_exit.png");
+    width: 300px;
+    height: 100px;
+    background: url("../img/interface/exit.png");
     border: none;
 }
