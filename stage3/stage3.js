@@ -100,8 +100,8 @@ export function stageStart3(mainGold,effectOn,potion1Num, potion2Num, potion3Num
 	var ballRadius = 10;
 
 	/* 공의 이동속도 */
-	var xvelocity = 3;
-	var yvelocity = 3;
+	var xvelocity = 2;
+	var yvelocity = 2;
 	var dx;
 	var dy;
 
@@ -121,14 +121,15 @@ export function stageStart3(mainGold,effectOn,potion1Num, potion2Num, potion3Num
 	/* boss의 x,y좌표*/
 	var bossx;
 	var bossy;
-	var bosswd = 80;
-	var bossht = 80;
+	var bosswd = 250;
+	var bossht = 200;
 	var bs_img_count = 0;
 	var bs_img = 1;
+	var bs_state = 1;
 
 	/*플레이어, 보스 체력 */
 	var p_hp = 0;
-	var b_hp = 948;
+	var b_hp = 1896;
 
 	//플레이어 이미지
 	var pDefaultStdsrc = "./img/player/playerStanding_32x32.gif";
@@ -218,7 +219,7 @@ export function stageStart3(mainGold,effectOn,potion1Num, potion2Num, potion3Num
 	var bossattacked = new Image();
 	bossattacked.src = "./img/stage3/bat.png";
 	var bossImg = new Image(); // in canvas
-	bossImg.src = "./img/stage3/boss3.gif";
+	bossImg.src = "./img/stage3/9_1.png";
 	var bsimg = new Image();
 	bsimg.src = "./img/stage3/ba1.png";
 	//이미지들
@@ -386,9 +387,9 @@ export function stageStart3(mainGold,effectOn,potion1Num, potion2Num, potion3Num
 			clearInterval(time_repeat);
 			init();
 			p_hp = 0;
-			b_hp = 948;
+			b_hp = 1896;
 			$("#container3").animate({
-				"width": b_hp + "px"
+				"width": b_hp/2 + "px"
 			});
 			var p_hp_array = $(".state3");
 			for(var i=0; i<5; i++){
@@ -506,8 +507,12 @@ export function stageStart3(mainGold,effectOn,potion1Num, potion2Num, potion3Num
 		if (wskill == 1) {
 			drawsword();
 		}
-
-		boss();
+		if(bs_state == 1){
+			boss();
+		}
+		else if (bs_state == 2){
+			attackmotion();
+		}
 		drawBall();
 		drawPaddle();
 		collision();
@@ -562,7 +567,7 @@ export function stageStart3(mainGold,effectOn,potion1Num, potion2Num, potion3Num
 		if(player_num == 1){
 			context.beginPath();
 			context.arc(x, y, ballRadius, 0, Math.PI * 2);
-			context.fillStyle = "black";
+			context.fillStyle = "white";
 			context.fill();
 		}
 		else {
@@ -722,20 +727,20 @@ export function stageStart3(mainGold,effectOn,potion1Num, potion2Num, potion3Num
 	/* 보스를 그려주는 함수 */
 	function boss() {
 		bossx = (cvwd - bosswd) / 2;
-		bossy = 10;
-		context.beginPath();
-		context.rect(bossx, bossy, bosswd, bossht);
+		bossy = 0;
+		bs_img_count++;
+		if(bs_img_count % 50 == 0){
+			bs_img++;
+			if(bs_img == 11){
+				bs_img = 1;
+			}
+			bossImg.src = "./img/stage3/9_"+bs_img+".png";
+		}
 		if (eskill == 1) {
 			context.fillStyle = "transparent";
 			bossImg.src="./img/stage3/bossfrzImg.png";
 		}
-		else {
-			context.fillStyle = "transparent";
-			bossImg.src="./img/stage3/boss3.gif";
-		}
-			context.fill();
 
-		
 		context.drawImage(bossImg, bossx, bossy, bosswd, bossht);
 
 	}
@@ -752,7 +757,7 @@ export function stageStart3(mainGold,effectOn,potion1Num, potion2Num, potion3Num
 		damage_state = 1
 		hp();
 		$("#container3").animate({
-			"width": b_hp + "px"
+			"width": b_hp/2 + "px"
 		});
 		if(firedot == 1){
 			setTimeout(function(){
@@ -946,9 +951,9 @@ export function stageStart3(mainGold,effectOn,potion1Num, potion2Num, potion3Num
 				clearInterval(time_repeat);
 				init();
 				p_hp = 0;
-				b_hp = 948;
+				b_hp = 1896;
 				$("#container3").animate({
-					"width": b_hp + "px"
+					"width": b_hp/2 + "px"
 				});
 				var p_hp_array = $(".state3");
 				for(var i=0; i<5; i++){
@@ -1041,7 +1046,7 @@ export function stageStart3(mainGold,effectOn,potion1Num, potion2Num, potion3Num
 				clearInterval(time_repeat);
 				init();
 				p_hp = 0;
-				b_hp = 950;
+				b_hp = 1896;
 				$("#container1").animate({
 					"width": b_hp + "px"
 				});
@@ -1178,7 +1183,7 @@ export function stageStart3(mainGold,effectOn,potion1Num, potion2Num, potion3Num
 	}
 	/* 플레이어, 보스 체력 출력해주는 함수 */
 	function hp() {
-		var percent = parseInt(b_hp/948*100);
+		var percent = parseInt(b_hp/1896*100);
 		$("#bp_num3").text(percent+"%");
 	}
 
@@ -1659,6 +1664,11 @@ export function stageStart3(mainGold,effectOn,potion1Num, potion2Num, potion3Num
 	function timeAttack() {
 		if (eskill != 1) {
 			timer += 1;
+			if(timer % 6 == 4){
+				bs_img = 1;
+				bs_img_count = 0;
+				bs_state = 2;
+			}
 			if (timer % 6 == 0) {
 				var randnum = Math.floor(Math.random()*3);
 				if (randnum == 0) {
@@ -1714,6 +1724,22 @@ export function stageStart3(mainGold,effectOn,potion1Num, potion2Num, potion3Num
 				}
 			}
 		}
+	}
+
+	function attackmotion(){
+		bossx = (cvwd - bosswd) / 2;
+		bossy = 0;
+		bs_img_count++;
+		if(bs_img_count % 50 == 0){
+			bs_img++;
+			if(bs_img == 12){
+				bs_img = 1;
+				bs_img_count = 0;
+				bs_state = 1;
+			}
+			bossImg.src = "./img/stage3/6_"+bs_img+".png";
+		}
+		context.drawImage(bossImg, bossx, bossy, bosswd, bossht);
 	}
 
 	function bossAttack1_timer() {
