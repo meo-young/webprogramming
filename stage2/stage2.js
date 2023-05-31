@@ -397,7 +397,6 @@ export function stageStart2(mainGold, effectOn, potion1Num, potion2Num, potion3N
 				$("#select-stage").removeClass("animateContent2");
 			}, 1000);
 		}, 500);
-		$(".gold").html(mainGold + gold);//골드 추가 부분
 	}
 
 	/*---------------------------------------------------------게임시작 관련 함수---------------------------------------------------------*/
@@ -1047,6 +1046,7 @@ export function stageStart2(mainGold, effectOn, potion1Num, potion2Num, potion3N
 		clearInterval(time_repeat);
 		context.clearRect(0, 0, cvwd, cvht);
 		if (who == 1) {
+			$(".gold").html(gold);//골드 추가 부분
 			if (effectOn)
 				winAudio.play();
 			drawText("You Win");
