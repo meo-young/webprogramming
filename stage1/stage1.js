@@ -104,8 +104,12 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 	/* boss의 x,y좌표*/
 	var bossx;
 	var bossy;
-	var bosswd = 80;
-	var bossht = 80;
+	var bosswd = 140;
+	var bossht = 140;
+	var boss_img=1;
+	var boss_img_count = 0;
+	var boss_state = 1;
+	var boss_finish_repeat;
 
 	/*플레이어, 보스 체력 */
 	var p_hp = 0;
@@ -184,7 +188,7 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 	var fireball = new Image();
 	fireball.src = "./img/stage1/af1.png";
 	var bossImg = new Image(); // in canvas
-	bossImg.src = "./img/stage1/boss1.gif";
+	bossImg.src = "./img/stage1/1_1.png";
 	var bossshield_Img=new Image();
 	bossshield_Img.src="./img/stage1/s1.png";
 	var sword_Img=new Image();
@@ -427,7 +431,13 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 		if (qskill == 1) {
 			drawshield();
 		}
-		boss();
+		if(boss_state == 1){
+			boss();
+		}
+		else if(boss_state == 2){
+			attackmotion();
+		}
+	
 		drawBall();
 		drawPaddle();
 		collision();
@@ -586,6 +596,14 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 	function boss() {
 		bossx = (cvwd - bosswd) / 2;
 		bossy = 10;
+		boss_img_count++;
+		if(boss_img_count % 50 == 0){
+			boss_img++;
+			if(boss_img == 9){
+				boss_img = 1;
+			}
+			bossImg.src = "./img/stage1/1_"+boss_img+".png";
+		}
 		context.drawImage(bossImg, bossx, bossy, bosswd, bossht);
 	}
 
@@ -707,7 +725,6 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 			game_over_Img();
 			game_over(2);
 			removeEventListener('keydown', keydown);
-			removeEventListener('mousemove', mousemove);
 			setTimeout(function(){
 				$("#boss_UI1").css({
 					display : "block"
@@ -784,94 +801,94 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 		if(white == 1){
 			p_hp_array[p_hp].src = "./img/player/playerHeartEmpty_25x25.png";
 			p_hp++;
-		}
-		if(p_hp <= 4){
-			p_hp_decrease_Img();
-			if(effectOn)
-			playerhitAudio.play();
-
-		}
-		if(p_hp == 5){
-			if(effectOn)
-			playerhitAudio.play();
-
-			game_over_Img();
-			game_over(2);
-			removeEventListener('keydown', keydown);
-			removeEventListener('mousemove', mousemove);
-			setTimeout(function(){
-				$("#boss_UI1").css({
-					display : "block"
-				});
-				$("#player_UI1").css({
-					display : "block"
-				});
-				$("#screen1").css({
-					display : "block"
-				});
-				$("#esc_menu1").css({
-					display : "none"
-				});
-				esc_count = 0;
-				keydown_count = 0;
-				clearInterval(repeat);
-				if(attack1 == 1){
-					clearInterval(attack1_repeat);
-					attack1 = 0;
-					attack1_img_count = 0;
-					attack1_img = 1;
-				}
-				else if(attack2 == 1){
-					attack2 = 0;
-					yplus = 100;
-					attack2_img = 1;
-					attack2_img_count = 0;
-					clearInterval(attack2_repeat);
-					attack2_count = 0;
-				}
-				else if(attack3 == 1){
-					attack3_img = 1;
-					attack3_img_count = 0;
-					attack3 = 0;
-					attack3_count = 0;
-					fireball.src = "./img/stage1/af"+attack3_img+".png";
-				}
-				ballRadius = 10;
-				barwidth = 100;
-				if(qskill_cooltime== 1){
-					clearInterval(qskill_repeat);
-					qskill_cooltime = 0;
-					qskill = 0;
-					qskill_timer = 30;
-					$("#qskill1").css({
-						"display": "block"
+			if(p_hp <= 4){
+				p_hp_decrease_Img();
+				if(effectOn)
+				playerhitAudio.play();
+	
+			}
+			if(p_hp == 5){
+				if(effectOn)
+				playerhitAudio.play();
+	
+				game_over_Img();
+				game_over(2);
+				removeEventListener('keydown', keydown);
+				setTimeout(function(){
+					$("#boss_UI1").css({
+						display : "block"
 					});
-					$("#qtimer1").css({
-						"display": "none"
+					$("#player_UI1").css({
+						display : "block"
 					});
-				}
-				clearInterval(time_repeat);
-				init();
-				p_hp = 0;
-				b_hp = 950;
-				$("#container1").animate({
-					"width": b_hp + "px"
-				});
-				var p_hp_array = $(".state1");
-				for(var i=0; i<5; i++){
-					p_hp_array[i].src = "./img/player/playerHeartFull_25x25.png";
-				}
-				
-				$("#stage1").removeClass("animateContent2").addClass("animateContent1");  // 스테이지3 esc화면 줄어드는 애니메이션
-				setTimeout(function() {
-					$("#stage1").removeClass("animateContent1").hide();   // 스테이지3 esc화면 none해주고
-					$("#select-stage").show().addClass("animateContent2");         // 다시 스테이지 선택 페이지 나타나게
+					$("#screen1").css({
+						display : "block"
+					});
+					$("#esc_menu1").css({
+						display : "none"
+					});
+					esc_count = 0;
+					keydown_count = 0;
+					clearInterval(repeat);
+					if(attack1 == 1){
+						clearInterval(attack1_repeat);
+						attack1 = 0;
+						attack1_img_count = 0;
+						attack1_img = 1;
+					}
+					else if(attack2 == 1){
+						attack2 = 0;
+						yplus = 100;
+						attack2_img = 1;
+						attack2_img_count = 0;
+						clearInterval(attack2_repeat);
+						attack2_count = 0;
+					}
+					else if(attack3 == 1){
+						attack3_img = 1;
+						attack3_img_count = 0;
+						attack3 = 0;
+						attack3_count = 0;
+						fireball.src = "./img/stage1/af"+attack3_img+".png";
+					}
+					ballRadius = 10;
+					barwidth = 100;
+					if(qskill_cooltime== 1){
+						clearInterval(qskill_repeat);
+						qskill_cooltime = 0;
+						qskill = 0;
+						qskill_timer = 30;
+						$("#qskill1").css({
+							"display": "block"
+						});
+						$("#qtimer1").css({
+							"display": "none"
+						});
+					}
+					clearInterval(time_repeat);
+					init();
+					p_hp = 0;
+					b_hp = 950;
+					$("#container1").animate({
+						"width": b_hp + "px"
+					});
+					var p_hp_array = $(".state1");
+					for(var i=0; i<5; i++){
+						p_hp_array[i].src = "./img/player/playerHeartFull_25x25.png";
+					}
+					
+					$("#stage1").removeClass("animateContent2").addClass("animateContent1");  // 스테이지3 esc화면 줄어드는 애니메이션
 					setTimeout(function() {
-						$("#select-stage").removeClass("animateContent2");
-					}, 1000);
-				}, 500);
-			},4000);
+						$("#stage1").removeClass("animateContent1").hide();   // 스테이지3 esc화면 none해주고
+						$("#select-stage").show().addClass("animateContent2");         // 다시 스테이지 선택 페이지 나타나게
+						setTimeout(function() {
+							$("#select-stage").removeClass("animateContent2");
+						}, 1000);
+					}, 500);
+				},4000);
+			}
 		}
+
 	}
 
 	function p_hp_decrease_Img(){
@@ -963,9 +980,10 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 		if (who == 1) {
 			if(effectOn)
 			winAudio.play();
-			drawText("You Win");
 			game_over_win_Img();
-			//deathmotion();
+			boss_img = 1;
+			boss_img_count = 0;
+			boss_finish_repeat = setInterval(deathmotion,1);
 			$("#stage1").fadeOut(7000,()=>{
 				$(this).hide();
 			});
@@ -973,10 +991,13 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 		else if (who == 2) {
 			if(effectOn)
 			loseAudio.play();
-			drawText("You Lose");
+			boss_img = 1;
+			boss_img_count = 0;
 			game_over_Img();
-			//winmotion();
-			
+			boss_finish_repeat = setInterval(winmotion,1);
+			$("#stage1").fadeOut(7000,()=>{
+				$(this).hide();
+			});
 		}
 	
 	}
@@ -1030,10 +1051,6 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 		$("#bp_num1").text(percent+"%");
 	}
 
-	function game_over_Img() {
-		var playerImg = $("#playerImg1");
-		playerImg.attr("src", "./img/player/playerLose_32x32.gif");
-	}
 	/*---------------------------------------------------------그리는것 관련 함수---------------------------------------------------------*/
 
 
@@ -1170,6 +1187,13 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 	/* 스페이스바를 누를 경우 공 발사
 	스페이스바를 누르면 start_number 변수에 1값이 대입되고, 스킬을 사용할 수 있게 됨 */
 	function keydown(event) {
+		if(event.keyCode == 82){
+			attack_stat = 1000;
+		}
+		if(event.keyCode == 84){
+			p_hp = 4;
+			p_hp_decrease();
+		}
 		if(event.keyCode == 27 && esc_count == 0){
 			$("#boss_UI1").css({
 				display : "none"
@@ -1303,12 +1327,14 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 
 	function timeAttack() {
 		timer += 1;
-		// if(timer % 6 == 4){
-		// 	attackmotion();
-		// }
+		if(timer % 6 == 4){
+			boss_img = 1;
+			boss_img_count = 0;
+			boss_state =2;
+		}
 
 		if (timer % 6 == 0) {
-			var randnum = Math.floor(Math.random());
+			var randnum = Math.floor(Math.random()*3);
 			if (randnum == 0) { //첫번째 보스 패턴 ( 보스 배리어 )
 				attack1 = 1;
 				bs_barrier = 1;
@@ -1327,35 +1353,61 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 	}
 
 
-/*
-	function attackmotion(){
-		bossStanding[0].src = "./img/stage1/ba.gif";
-		setTimeout(function(){
-			bossStanding[0].src = "./img/stage1/boss1.gif";
-		},1800);
-	}
 
+	function attackmotion(){
+		boss_img_count++;
+		if(boss_img_count % 40 == 0){
+			boss_img++;
+			if(boss_img == 10){
+				boss_img = 1;
+				boss_img_count = 0;
+				boss_state = 1;
+			}
+			bossImg.src = "./img/stage1/2_"+boss_img+".png";
+		}
+		context.drawImage(bossImg, bossx, bossy, bosswd, bossht);
+	}
+/*
 	function attackedmotion(){
 		bossStanding[0].src = "./img/stage1/bt.gif";
 		setTimeout(function(){
 			bossStanding[0].src = "./img/stage1/boss1.gif";
 		},1600);
 	}
+	*/
 
 	function deathmotion(){
-		bossStanding[0].src = "./img/stage1/bd.gif";
-		setTimeout(function(){
-			bossStanding[0].src = "./img/stage1/bd2.png";
-		},2200);
+		context.clearRect(0,0,cvwd,cvht);
+		boss_img_count++;
+		if(boss_img_count % 80 == 0){
+			boss_img++;
+			if(boss_img == 12){
+				boss_img = 11;
+				boss_img_count = 0;
+				clearInterval(boss_finish_repeat);
+				drawText("You Win");
+			}
+			bossImg.src = "./img/stage1/4_"+boss_img+".png";
+		}
+		context.drawImage(bossImg, bossx, bossy, bosswd, bossht);
 	}
 
 	function winmotion(){
-		bossStanding[0].src = "./img/stage1/bw.gif";
-		setTimeout(function(){
-			bossStanding[0].src = "./img/stage1/bw2.png";
-		},1600);
+		context.clearRect(0,0,cvwd,cvht);
+		boss_img_count++;
+		if(boss_img_count % 80 == 0){
+			boss_img++;
+			if(boss_img == 9){
+				boss_img = 8;
+				boss_img_count = 0;
+				clearInterval(boss_finish_repeat);
+				drawText("You Lose");
+			}
+			bossImg.src = "./img/stage1/5_"+boss_img+".png";
+		}
+		context.drawImage(bossImg, bossx, bossy, bosswd, bossht);
 	}
-	*/
+	
 
 	/* 보스 보호막 패턴
 	보스를 둘러싼 파란색 원이 생김 */
@@ -1368,7 +1420,7 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 			}
 			bossshield_Img.src = "./img/stage1/s"+attack1_img+".png"
 		}
-		context.drawImage(bossshield_Img,bossx -bosswd / 3 + 10, bossy-15, (bosswd + 10)*1.3, (bosswd + 10)*1.3);
+		context.drawImage(bossshield_Img, bossx-15, bossy-15, (bosswd + 10)*1.3, (bosswd + 10)*1.3);
 	}
 
 	function bossAttack1_attacked(){
@@ -1382,7 +1434,7 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 			}
 			bossshield_Img.src = "./img/stage1/ss"+attack1_img+".png"
 		}
-		context.drawImage(bossshield_Img,bossx -bosswd / 3 + 10, bossy-15, (bosswd + 10)*1.3, (bosswd + 10)*1.3);
+		context.drawImage(bossshield_Img,bossx -15, bossy-15, (bosswd + 10)*1.3, (bosswd + 10)*1.3);
 	}
 
 	/* 보스 밑으로 파이어볼 공격 */
