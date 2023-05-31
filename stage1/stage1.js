@@ -138,7 +138,7 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 		$("#playerImg1").attr("src", pDefaultStdsrc);
 		playerColor = "default";
 		player.src = "./img/player/pd1.gif";
-		attack_stat = 50;
+		attack_stat = 5000;
 	}
 	else if ($("#pRed").hasClass("equip")) {
 		$("#playerImg1").attr("src", pRedStdsrc);
@@ -205,6 +205,8 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 
 
 	function pageLoad(){
+		
+
 		if(effectOn)
 			setTimeout(() => {
 				countdownAudio.play();
@@ -902,7 +904,10 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 			winAudio.play();
 			drawText("You Win");
 			game_over_win_Img();
-			deathmotion();
+			//deathmotion();
+			$("#stage1").fadeOut(7000,()=>{
+				$(this).hide();
+			});
 		}
 		else if (who == 2) {
 			if(effectOn)
