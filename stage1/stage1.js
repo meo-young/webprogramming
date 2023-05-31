@@ -1,4 +1,4 @@
-export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potion3Num) {
+export function stageStart1(currentGold, effectOn,bgmOn, potion1Num, potion2Num, potion3Num) {
 	/* 플레이어 스킬 변수 */
 	var qskill = 0;
 	var qskill_timer = 30;
@@ -233,6 +233,7 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 	const winAudio = new Audio('./audio/win_7s.mp3');
 	const loseAudio = new Audio('./audio/lose_7s.mp3');
 	var keyboardAudio = new Audio("./storyimg/키보드소리.mp3");
+	const bgm=new Audio("./audio/boss1.mp3");
 
 	pageLoad();
 	wait();
@@ -252,6 +253,10 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 			setTimeout(() => {
 				countdownAudio.play();
 			}, 1000);
+		if(bgmOn)
+			setTimeout(() => {
+				bgm.play();
+			}, 5500);
 		var play_button = document.getElementById("play1");
 		play_button.onclick = play;
 		var exit_button = document.getElementById("exit1");
@@ -353,6 +358,7 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 		init();
 		p_hp = 0;
 		b_hp = 948;
+		bgm.pause();
 		$("#container1").animate({
 			"width": b_hp + "px"
 		});
@@ -1034,6 +1040,7 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 		context.clearRect(0, 0, cvwd, cvht);
 		if (who == 1) {
 			$(".gold").html(gold);//골드 추가 부분
+			bgm.pause();
 			if (effectOn)
 				winAudio.play();
 			game_over_win_Img();
@@ -1059,6 +1066,7 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 			}, 12000);
 		}
 		else if (who == 2) {
+			bgm.pause();
 			if (effectOn)
 				loseAudio.play();
 			boss_img = 1;

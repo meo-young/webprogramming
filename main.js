@@ -147,7 +147,7 @@ $(document).ready(function () {
                 }, 500);
                 currentGold = parseInt($(".gold").eq(0).text());
                 potion1Num = parseInt($("#p1Num").eq(0).text()); 
-                stageStart1(currentGold, effectOn, potion1Num, potion2Num, potion3Num);
+                stageStart1(currentGold, effectOn,bgmOn, potion1Num, potion2Num, potion3Num);
             }, 5100)
         });
         // 두번째 보스 캔버스
@@ -167,7 +167,7 @@ $(document).ready(function () {
                 }, 500);
                 currentGold = parseInt($(".gold").eq(0).text());
                 potion2Num = parseInt($("#p2Num").eq(0).text()); 
-                stageStart2(currentGold, effectOn, potion1Num, potion2Num, potion3Num);
+                stageStart2(currentGold, effectOn,bgmOn, potion1Num, potion2Num, potion3Num);
             }, 5100);
         });
         // 세번째 보스 캔버스
@@ -187,7 +187,7 @@ $(document).ready(function () {
                 }, 500);
                 currentGold = parseInt($(".gold").eq(0).text());
                 potion3Num = parseInt($("#p3Num").eq(0).text()); 
-                stageStart3(currentGold, effectOn, potion1Num, potion2Num, potion3Num);
+                stageStart3(currentGold, effectOn,bgmOn, potion1Num, potion2Num, potion3Num);
             }, 5100);
         });
         // 뒤로가기 버튼 클릭 시 스테이지 화면과 메인 메뉴 애니메이션

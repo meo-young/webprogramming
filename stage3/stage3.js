@@ -1,5 +1,5 @@
 
-export function stageStart3(mainGold, effectOn, potion1Num, potion2Num, potion3Num) {
+export function stageStart3(mainGold, effectOn,bgmOn, potion1Num, potion2Num, potion3Num) {
 	/* 플레이어 스킬 변수 */
 	var qskill = 0;
 	var qskill_timer = 30;
@@ -263,6 +263,7 @@ export function stageStart3(mainGold, effectOn, potion1Num, potion2Num, potion3N
 	const winAudio = new Audio('./audio/win_7s.mp3');
 	const loseAudio = new Audio('./audio/lose_7s.mp3');
 	var keyboardAudio = new Audio("./storyimg/키보드소리.mp3");
+	const bgm=new Audio("./audio/boss3.mp3");
 
 	wait();
 	windowsize();
@@ -391,6 +392,7 @@ export function stageStart3(mainGold, effectOn, potion1Num, potion2Num, potion3N
 				"display": "none"
 			});
 		}
+		bgm.pause();
 		clearInterval(time_repeat);
 		init();
 		p_hp = 0;
@@ -438,6 +440,10 @@ export function stageStart3(mainGold, effectOn, potion1Num, potion2Num, potion3N
 			setTimeout(() => {
 				countdownAudio.play();
 			}, 1000);
+		if(bgmOn)
+			setTimeout(() => {
+				bgm.play();
+		}, 5500);
 		repeat = setInterval(start, 1000);
 	}
 
@@ -1202,6 +1208,7 @@ export function stageStart3(mainGold, effectOn, potion1Num, potion2Num, potion3N
 		context.clearRect(0, 0, cvwd, cvht);
 		if (who == 1) {
 			drawText("You Win");
+		bgm.pause();
 			$(".gold").html(gold);//골드 추가 부분
 			if (effectOn) {
 				winAudio.play();
@@ -1226,6 +1233,7 @@ export function stageStart3(mainGold, effectOn, potion1Num, potion2Num, potion3N
 
 		}
 		else if (who == 2) {
+		bgm.pause();
 			drawText("You Lose");
 			if (effectOn)
 				loseAudio.play();
