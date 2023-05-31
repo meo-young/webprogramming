@@ -154,7 +154,7 @@ export function stageStart2(mainGold, effectOn, potion1Num, potion2Num, potion3N
 	if ($("#pDefault").hasClass("equip")) {
 		$("#playerImg2").attr("src", pDefaultStdsrc);
 		playerColor = "default";
-		attack_stat = 5000;
+		attack_stat = 50;
 		player_num = 1;
 	}
 	else if ($("#pRed").hasClass("equip")) {
