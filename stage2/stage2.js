@@ -1161,7 +1161,7 @@ export function stageStart2(mainGold, effectOn, potion1Num, potion2Num, potion3N
 			dxf = -dxf;
 		}
 		if (attack4 == 1) {
-			if (x > attack4_brick_x - ballRadius && x < attack4_brick_x + 20 + ballRadius && y < attack4_brick_y + 20 + ballRadius && y > attack4_brick_y + 20) {
+			if (x > attack4_brick_x - ballRadius && x < attack4_brick_x + 60 + ballRadius && y < attack4_brick_y + 60 + ballRadius && y > attack4_brick_y + 60) {
 				//공이 보스패턴4로 소환된 첫번째 벽의 밑면에 맞는 경우
 				dy = -dy;
 				attack4 = 0;
@@ -1170,7 +1170,7 @@ export function stageStart2(mainGold, effectOn, potion1Num, potion2Num, potion3N
 				b_hp_decrease(attack_stat);
 				fishdie();
 			}
-			else if (x > attack4_brick_x - ballRadius && x < attack4_brick_x + 20 + ballRadius && y > attack4_brick_y - ballRadius && y < attack4_brick_y) {
+			else if (x > attack4_brick_x - ballRadius && x < attack4_brick_x + 60 + ballRadius && y > attack4_brick_y - ballRadius && y < attack4_brick_y) {
 				//공이 윗면에 맞는경우
 				dy = -dy;
 				attack4 = 0;
@@ -1179,7 +1179,7 @@ export function stageStart2(mainGold, effectOn, potion1Num, potion2Num, potion3N
 				b_hp_decrease(attack_stat);
 				fishdie();
 			}
-			else if (x > attack4_brick_x - ballRadius && x < attack4_brick_x && y > attack4_brick_y - ballRadius && y < attack4_brick_y + 20 + ballRadius) {
+			else if (x > attack4_brick_x - ballRadius && x < attack4_brick_x && y > attack4_brick_y - ballRadius && y < attack4_brick_y + 60 + ballRadius) {
 				//공이 왼쪽 면에 맞는경우
 				dx = -dx;
 				attack4 = 0;
@@ -1188,7 +1188,7 @@ export function stageStart2(mainGold, effectOn, potion1Num, potion2Num, potion3N
 				b_hp_decrease(attack_stat);
 				fishdie();
 			}
-			else if (x < attack4_brick_x + 20 + ballRadius && x > attack4_brick_x + 20 && y > attack4_brick_y - ballRadius && y < attack4_brick_y + 20 + ballRadius) {
+			else if (x < attack4_brick_x + 60 + ballRadius && x > attack4_brick_x + 60 && y > attack4_brick_y - ballRadius && y < attack4_brick_y + 60 + ballRadius) {
 				//공이 오른쪽 면에 맞는 경우
 				dx = -dx;
 				attack4 = 0;
@@ -1642,8 +1642,8 @@ export function stageStart2(mainGold, effectOn, potion1Num, potion2Num, potion3N
 			}
 			else if (randnum == 2) {
 				attack4 = 1;
-				var num = Math.floor(Math.random() * 3);
-				attack4_brick_x = 250 * (num + 1);
+				var num = Math.floor(Math.random() * 9);
+				attack4_brick_x = 100 * (num + 1);
 				bossAttack4();
 			}
 
@@ -1695,9 +1695,15 @@ export function stageStart2(mainGold, effectOn, potion1Num, potion2Num, potion3N
 
 
 	function bossAttack4() {
-		context.drawImage(littlebrick_Img, 250, attack4_brick_y, 45, 45);
-		context.drawImage(littlebrick_Img, 500, attack4_brick_y, 45, 45);
-		context.drawImage(littlebrick_Img, 750, attack4_brick_y, 45, 45);
+		context.drawImage(littlebrick_Img, 100, attack4_brick_y, 60, 60);
+		context.drawImage(littlebrick_Img, 200, attack4_brick_y, 60, 60);
+		context.drawImage(littlebrick_Img, 300, attack4_brick_y, 60, 60);
+		context.drawImage(littlebrick_Img, 400, attack4_brick_y, 60, 60);
+		context.drawImage(littlebrick_Img, 500, attack4_brick_y, 60, 60);
+		context.drawImage(littlebrick_Img, 600, attack4_brick_y, 60, 60);
+		context.drawImage(littlebrick_Img, 700, attack4_brick_y, 60, 60);
+		context.drawImage(littlebrick_Img, 800, attack4_brick_y, 60, 60);
+		context.drawImage(littlebrick_Img, 900, attack4_brick_y, 60, 60);
 
 	}
 	
