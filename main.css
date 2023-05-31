@@ -36,6 +36,11 @@ body {
     height: 800px;
     text-align: center;
     color: white;
+    background: url("./backimg/back1.jpg");
+    background-size: cover;
+}
+
+#select-stage{
     background: url("./backimg/back1.gif");
     background-size: cover;
 }

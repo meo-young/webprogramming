@@ -639,14 +639,16 @@ export function stageStart3(mainGold,effectOn) {
 		context.beginPath();
 		context.rect(bossx, bossy, bosswd, bossht);
 		if (eskill == 1) {
-			context.fillStyle = "blue";
+			context.fillStyle = "transparent";
+			bossImg.src="./img/stage3/bossfrzImg.png";
 		}
 		else {
 			context.fillStyle = "transparent";
+			bossImg.src="./img/stage3/boss3.gif";
 		}
-		context.fill();
+			context.fill();
 
-
+		
 		context.drawImage(bossImg, bossx, bossy, bosswd, bossht);
 
 	}
