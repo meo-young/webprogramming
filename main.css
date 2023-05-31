@@ -164,15 +164,16 @@ body {
 }
 @keyframes animate1 {   /* 애니메이션이 0~100% 진행됨에 따라 scale(가로비율, 세로비율) 변경 */
     10% {
-        transform: scale(1, 0.002);
+        transform: scale(1, 0.009);
+        background-color: white;
     }
     50% {
         transform: scale(0.2, 0.002);
-        opacity: 1;
+        background-color: white;
     }
     100% {
         transform: scale(0.2, 0.002);
-        opacity: 0;
+        background-color: white;
     }
 }
 .animateContent2 {  /* 페이지 전환 시 다음 페이지가 커지는 효과 애니메이션 animate2를 2초간 실행 */
@@ -181,13 +182,15 @@ body {
 @keyframes animate2 {
     0% {
         transform: scale(0.2, 0.002);
-        opacity: 1;
+        background-color: white;
     }
     30% {
         transform: scale(0.2, 0.002);
+        background-color: white;
     }
     90% {
-        transform: scale(1, 0.002);
+        transform: scale(1, 0.009);
+        background-color: white;
     }
 }
 
@@ -200,9 +203,14 @@ body {
     margin: 0 50px;
     margin-top: 10px;
 }
+.pThirdRow {
+    display: inline-block;
+    margin: 0 50px;
+    margin-top: 2px;
+}
 .pChar {
-    width: 96px;
-    height: 96px;
+    width: 64px;
+    height: 64px;
     padding: 50px;
     border: 2px solid yellow;
     background-color: black;
@@ -212,6 +220,12 @@ body {
 }
 .equip {    /*캐릭터 착용 중*/
     background-color: crimson;
+}
+.potion {
+    width: 32px;
+    height: 32px;
+    margin-top: 10px;
+    border: 2px solid blue;
 }
 
 #myImage {

@@ -282,6 +282,39 @@ $(document).ready(function () {
                 }
             }
         });
+        
+        // 물약 개수 변수
+        var potion1Num = 0;
+        var potion2Num = 0;
+        var potion3Num = 0;
+        $("#p1Num").html(potion1Num);
+        $("#p2Num").html(potion2Num);
+        $("#p3Num").html(potion3Num);
+
+        // 1번 물약 클릭시
+        $("#potion1").click(function() {
+            currentGold = parseInt($(".gold").eq(0).text());
+            potion1Num++;
+            currentGold -= 10;
+            $("#p1Num").html(potion1Num);
+            $(".gold").html(currentGold);
+        });
+        // 2번 물약 클릭시
+        $("#potion2").click(function() {
+            currentGold = parseInt($(".gold").eq(0).text());
+            potion2Num++;
+            currentGold -= 20;
+            $("#p2Num").html(potion2Num);
+            $(".gold").html(currentGold);
+        });
+        // 3번 물약 클릭시
+        $("#potion3").click(function() {
+            currentGold = parseInt($(".gold").eq(0).text());
+            potion3Num++;
+            currentGold -= 30;
+            $("#p3Num").html(potion3Num);
+            $(".gold").html(currentGold);
+        });
 
         // 뒤로가기
         $("#shop-to-main").click(function () {
