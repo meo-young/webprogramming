@@ -361,7 +361,6 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 				$("#select-stage").removeClass("animateContent2");
 			}, 1000);
 		}, 500);
-		$(".gold").html(gold);//골드 추가 부분
 	}
 
 	/* window size 변경 해주는 함수 */
@@ -1018,6 +1017,7 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 		clearInterval(time_repeat);
 		context.clearRect(0, 0, cvwd, cvht);
 		if (who == 1) {
+			$(".gold").html(gold);//골드 추가 부분
 			if (effectOn)
 				winAudio.play();
 			game_over_win_Img();
@@ -1589,7 +1589,26 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 		}
 	}
 
-	/* 호출시 원래 공 반지름 길이로 복구 */
+	function clearAllInterval() {
+		clearInterval(draw);
+		clearInterval(timeAttack);
+		clearInterval(bossAttack2_timer);
+		clearInterval(skill_timer1);
+		clearInterval(repeat);
+		clearInterval(attack1_repeat);
+		clearInterval(attack2_repeat);
+		clearInterval(qskill_repeat);
+		clearInterval(time_repeat);
+		clearInterval(start);
+		clearInterval(shield_repeat);
+		clearInterval(p_ImgBlankInterval);
+		clearInterval(deathmotion);
+		clearInterval(winmotion);
+		clearInterval(bossAttack1_attacked);
+		clearInterval(bossAttack2_timer);
+		clearInterval(attacked_shield);
+		clearInterval(boss_finish_repeat);
+	}
 
 
 
