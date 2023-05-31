@@ -506,12 +506,6 @@ export function stageStart3(mainGold, effectOn, potion1Num, potion2Num, potion3N
 		}
 
 		/* 스킬 관련 조건문 */
-		if (qskill == 1) {
-			drawshield();
-		}
-		if (wskill == 1) {
-			drawsword();
-		}
 		if (bs_state == 1) {
 			boss();
 		}
@@ -521,6 +515,13 @@ export function stageStart3(mainGold, effectOn, potion1Num, potion2Num, potion3N
 		drawBall();
 		drawPaddle();
 		collision();
+
+		if (qskill == 1) {
+			drawshield();
+		}
+		if (wskill == 1) {
+			drawsword();
+		}
 
 		if (damage_state >= 1) {
 			if (damage_state == 1) {

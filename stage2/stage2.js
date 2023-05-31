@@ -157,7 +157,7 @@ export function stageStart2(mainGold, effectOn, potion1Num, potion2Num, potion3N
 	if ($("#pDefault").hasClass("equip")) {
 		$("#playerImg2").attr("src", pDefaultStdsrc);
 		playerColor = "default";
-		attack_stat = 5000;
+		attack_stat = 50;
 		player_num = 1;
 	}
 	else if ($("#pRed").hasClass("equip")) {
@@ -460,17 +460,19 @@ export function stageStart2(mainGold, effectOn, potion1Num, potion2Num, potion3N
 		}
 
 		/* 스킬 관련 조건문 */
+
+
+		boss();
+		drawBall();
+		drawPaddle();
+		collision();
+
 		if (qskill == 1) {
 			drawshield();
 		}
 		if (wskill == 1) {
 			drawsword();
 		}
-
-		boss();
-		drawBall();
-		drawPaddle();
-		collision();
 
 		/* 보스 공격 관련 조건문 */
 		if (attack1 == 1) {
