@@ -240,6 +240,7 @@ export function stageStart3(mainGold,effectOn,potion1Num, potion2Num, potion3Num
 	const eskillonAudio=new Audio('./오디오/player/e스킬.mp3');
 	const winAudio=new Audio('./audio/win_7s.mp3');
 	const loseAudio=new Audio('./audio/lose_7s.mp3');
+    var keyboardAudio=new Audio("./storyimg/키보드소리.mp3");
 
 	wait();
 	windowsize();
@@ -1118,8 +1119,20 @@ export function stageStart3(mainGold,effectOn,potion1Num, potion2Num, potion3Num
 		if (who == 1) {
 			drawText("You Win");
 			$(".gold").html(mainGold+gold);//골드 추가 부분
-			if(effectOn)
+			if(effectOn){
 				winAudio.play();
+			}
+				$("#stage3").fadeOut(7000,()=>{
+					$("#stageStoryImg").attr("src", "./storyimg/stage3B.gif");
+					$("#stage-story").fadeIn(1,()=>{
+						keyboardAudio.play();
+						setTimeout(()=>{
+							keyboardAudio.pause();
+							$("#stage-story").hide(500);
+						},3500);
+					});
+					setTimeout(()=>{$("#start-btn").trigger('click');},4000);
+				});
 		}
 		else if (who == 2) {
 			drawText("You Lose");

@@ -126,37 +126,45 @@ $(document).ready(function () {
             if (effectOn) {
                 clickSound.play();   // 버튼 클릭 효과음
             }
-            $("#select-stage").removeClass("animateContent2").addClass("animateContent1");    // 스테이지 선택 페이지 전환 효과 (작아지는)
-            setTimeout(function() {
-                $("#select-stage").removeClass("animateContent1").hide();
-            }, 500);
-            setTimeout(function() {
-                $("#stage1").addClass("animateContent2").css({ "display": "inline-block" });
-            }, 500);
-            currentGold=parseInt($(".gold").eq(0).text());
-            stageStart1(currentGold, effectOn, potion1Num, potion2Num, potion3Num);
+            showGif('./storyimg/stage1A.gif');
+            setTimeout(()=>{
+                $("#select-stage").removeClass("animateContent2").addClass("animateContent1");    // 스테이지 선택 페이지 전환 효과 (작아지는)
+                setTimeout(function() {
+                    $("#select-stage").removeClass("animateContent1").hide();
+                }, 500);
+                setTimeout(function() {
+                    $("#stage1").addClass("animateContent2").css({ "display": "inline-block" });
+                }, 500);
+                currentGold=parseInt($(".gold").eq(0).text());
+                stageStart1(currentGold, effectOn, potion1Num, potion2Num, potion3Num);
+            },5000)
         });
         // 두번째 보스 캔버스
         $("#stgbtn2").off('click').on('click', function() {
             if (effectOn) {
                 clickSound.play();   // 버튼 클릭 효과음
             }
-            $("#select-stage").removeClass("animateContent2").addClass("animateContent1");    // 스테이지 선택 페이지 전환 효과 (작아지는)
-            setTimeout(function() {
-                $("#select-stage").removeClass("animateContent1").hide();
-            }, 500);
-            setTimeout(function() {
-                $("#stage2").addClass("animateContent2").css({ "display": "inline-block" });
-            }, 500);
-            currentGold=parseInt($(".gold").eq(0).text());
-            stageStart2(currentGold, effectOn, potion1Num, potion2Num, potion3Num);
+            showGif('./storyimg/stage2A.gif');
+            setTimeout(()=>{
+                $("#select-stage").removeClass("animateContent2").addClass("animateContent1");    // 스테이지 선택 페이지 전환 효과 (작아지는)
+                setTimeout(function() {
+                    $("#select-stage").removeClass("animateContent1").hide();
+                }, 500);
+                setTimeout(function() {
+                    $("#stage2").addClass("animateContent2").css({ "display": "inline-block" });
+                }, 500);
+                currentGold=parseInt($(".gold").eq(0).text());
+                stageStart2(currentGold, effectOn, potion1Num, potion2Num, potion3Num);
+            },5000);
         });
         // 세번째 보스 캔버스
         $("#stgbtn3").off('click').on('click', function() {
             if (effectOn) {
                 clickSound.play();   // 버튼 클릭 효과음
             }
-            $("#select-stage").removeClass("animateContent2").addClass("animateContent1");    // 스테이지 선택 페이지 전환 효과 (작아지는)
+            showGif('./storyimg/stage3A.gif');
+            setTimeout(()=>{
+                $("#select-stage").removeClass("animateContent2").addClass("animateContent1");    // 스테이지 선택 페이지 전환 효과 (작아지는)
             setTimeout(function() {
                 $("#select-stage").removeClass("animateContent1").hide();
             }, 500);
@@ -165,6 +173,7 @@ $(document).ready(function () {
             }, 500);
             currentGold=parseInt($(".gold").eq(0).text());
             stageStart3(currentGold, effectOn, potion1Num, potion2Num, potion3Num);
+            },5000);
         });
         // 뒤로가기 버튼 클릭 시 스테이지 화면과 메인 메뉴 애니메이션
         $("#stage-to-main").off('click').on('click', function() {
@@ -560,12 +569,14 @@ $(document).ready(function () {
         }, 500);
     });
     function showGif(gifsrc){
-        $("#stage-story").fadeIn(1000,()=>{
-            $("#stageStoryImg").attr("src", gifsrc);
+        $("#select-stage").hide();
+        $("#stageStoryImg").attr("src", gifsrc);
+        $("#stage-story").fadeIn(1,()=>{
             keyboardAudio.play();
             setTimeout(()=>{
                 keyboardAudio.pause();
-            },5000);
+            },4000);
         })
+        setTimeout(()=>{$("#stage-story").fadeOut(2000);},3000);
     }
 });
