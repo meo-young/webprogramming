@@ -47,11 +47,15 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 	var damagex;
 	var damagey;
 
-	var attack_stat;
+	var attack_stat = 0;
 	var firedot = 0;
 	var dot_count = 0;
 	var white = 0;
-	var yellow = 1;
+	var yellow = 0;
+	var purple = 1;
+	var poison_damage = 0;
+	var poison_count = 0;
+	var ps_count = 0;
 
 	var player_img = 1;
 	var player_img_count=0;
@@ -166,6 +170,8 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 	else if ($("#pPurple").hasClass("equip")) {
 		$("#playerImg1").attr("src", pPurplestdsrc);
 		playerColor = "purple"; //중독데미지 중첩 가능
+		attack_stat = 50;
+		purple = 1;
 	}
 	var fireball = new Image();
 	fireball.src = "./img/stage1/af1.png";
@@ -457,6 +463,23 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 			}
 			drawDamage(damage,damagex,damagey);
 		}
+		if(poison_count == 1){
+			ps_count++;
+			if(ps_count % 100 == 0){
+				poison();
+				b_hp -= poison_damage;
+				hp();
+				$("#container1").animate({
+					"width": b_hp + "px"
+				});
+				if (b_hp < 0 || b_hp == 0) {
+					game_over(1);
+				}
+				else {
+					b_hp_decrease_Img();
+				}
+			}
+		}
 	}
 
 	/* 공 그리는 함수 */
@@ -494,6 +517,13 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 		context.font = "30px Chakra-Petch";
 		context.fillStyle = 'red';
 		context.fillText(text, x, y);
+	}
+
+	function poison(){
+		var text2 = "-"+poison_damage;
+		context.font = "bold 30px Chakra-Petch";
+		context.fillStyle = 'purple';
+		context.fillText(text2, bossx+30, bossy+30);
 	}
 
 	/* 벽돌 그려주는 함수 */
@@ -552,6 +582,10 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 						bossdieAudio2.play();
 				}
 			},300);
+		}
+		if(purple == 1){
+			poison_damage++;
+			poison_count = 1;
 		}
 		if(effectOn){
 			let randtemp=Math.floor(Math.random() * 4)
