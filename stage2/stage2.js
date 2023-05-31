@@ -58,6 +58,8 @@ export function stageStart2(mainGold,effectOn) {
 	var attack_stat;
 	var firedot = 0;
 	var dot_count = 0;
+	var white = 0;
+	var yellow = 0;
 
 	var player_img = 1;
 	var player_img_count=0;
@@ -159,10 +161,14 @@ export function stageStart2(mainGold,effectOn) {
 		else if ($("#pWhite").hasClass("equip")) {
 			$("#playerImg2").attr("src", pWhitestdsrc);
 			playerColor = "white";
+			attack_stat = 100;
+			white = 1;
 		}
 		else if ($("#pYellow").hasClass("equip")) {
 			$("#playerImg2").attr("src", pYellowstdsrc);
 			playerColor = "yellow";
+			yellow = 1;
+			attack_stat = 50;
 		}
 		else if ($("#pPurple").hasClass("equip")) {
 			$("#playerImg2").attr("src", pPurplestdsrc);
@@ -757,6 +763,97 @@ export function stageStart2(mainGold,effectOn) {
 				});
 			},4000);
 		}
+		if(white == 1){
+			p_hp_array[p_hp].src = "./img/player/playerHeartEmpty_25x25.png";
+			p_hp++;
+		}
+		if(p_hp <= 4){
+			p_hp_decrease_Img();
+			if(effectOn)
+			playerhitAudio.play();
+
+		}
+		if(p_hp == 5){
+			if(effectOn)
+			playerhitAudio.play();
+
+			game_over_Img();
+			game_over(2);
+			removeEventListener('keydown', keydown);
+			removeEventListener('mousemove', mousemove);
+			setTimeout(function(){
+				$("#boss_UI1").css({
+					display : "block"
+				});
+				$("#player_UI1").css({
+					display : "block"
+				});
+				$("#screen1").css({
+					display : "block"
+				});
+				$("#esc_menu1").css({
+					display : "none"
+				});
+				esc_count = 0;
+				keydown_count = 0;
+				clearInterval(repeat);
+				if(attack1 == 1){
+					clearInterval(attack1_repeat);
+					attack1 = 0;
+					attack1_img_count = 0;
+					attack1_img = 1;
+				}
+				else if(attack2 == 1){
+					attack2 = 0;
+					yplus = 100;
+					attack2_img = 1;
+					attack2_img_count = 0;
+					clearInterval(attack2_repeat);
+					attack2_count = 0;
+				}
+				else if(attack3 == 1){
+					attack3_img = 1;
+					attack3_img_count = 0;
+					attack3 = 0;
+					attack3_count = 0;
+					fireball.src = "./img/stage1/af"+attack3_img+".png";
+				}
+				ballRadius = 10;
+				barwidth = 100;
+				if(qskill_cooltime== 1){
+					clearInterval(qskill_repeat);
+					qskill_cooltime = 0;
+					qskill = 0;
+					qskill_timer = 30;
+					$("#qskill1").css({
+						"display": "block"
+					});
+					$("#qtimer1").css({
+						"display": "none"
+					});
+				}
+				clearInterval(time_repeat);
+				init();
+				p_hp = 0;
+				b_hp = 950;
+				$("#container1").animate({
+					"width": b_hp + "px"
+				});
+				var p_hp_array = $(".state1");
+				for(var i=0; i<5; i++){
+					p_hp_array[i].src = "./img/player/playerHeartFull_25x25.png";
+				}
+				
+				$("#stage1").removeClass("animateContent2").addClass("animateContent1");  // 스테이지3 esc화면 줄어드는 애니메이션
+				setTimeout(function() {
+					$("#stage1").removeClass("animateContent1").hide();   // 스테이지3 esc화면 none해주고
+					$("#select-stage").show().addClass("animateContent2");         // 다시 스테이지 선택 페이지 나타나게
+					setTimeout(function() {
+						$("#select-stage").removeClass("animateContent2");
+					}, 1000);
+				}, 500);
+			},4000);
+		}
 	}
 	function p_hp_decrease_Img() {
 		var playerImg = $("#playerImg2");
@@ -1000,6 +1097,12 @@ export function stageStart2(mainGold,effectOn) {
 		}
 		else if (y < ballRadius) { //위쪽 벽면에 부딪히는 경우
 			dy = -dy;
+			if(yellow == 1){
+				init();
+				draw();
+				keydown_count = 0;
+				start_number = 0;
+			}
 		}
 
 		if (x < ballRadius) { // 왼쪽 벽면에 부딪히는 경우
