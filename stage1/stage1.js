@@ -172,11 +172,11 @@ export function stageStart1(mainGold,effectOn) {
 	const bossAudio2=new Audio('./오디오/boss/bosshit2.mp3');
 	const bossAudio3=new Audio('./오디오/boss/bosshit3.mp3');
 	const playerhitAudio=new Audio('./오디오/player/플래이어 피격 (1).wav');
-	const bossskillAudio=new Audio('./오디오/stage1/보스스킬쓰고기합.wav');
+	const bossskillAudio=new Audio('./오디오/stage1/보스기합.wav');
 	const bossskillAudio2=new Audio('./오디오/stage1/폭발공격.wav');
 	const countdownAudio=new Audio('./오디오/Interface/카운트다운.mp3');
 	const bossdieAudio=new Audio('./오디오/stage1/보스피격.wav');
-	const bossdieAudio2=new Audio('./오디오/stage1/보스사망2.wav');
+	const bossdieAudio2=new Audio('./오디오/stage1/보스사망.wav');
 	const qskillonAudio=new Audio('./오디오/player/q스킬쉴드장착.mp3');
 	const winAudio=new Audio('./audio/win_7s.mp3');
 	const loseAudio=new Audio('./audio/lose_7s.mp3');
@@ -194,7 +194,7 @@ export function stageStart1(mainGold,effectOn) {
 
 	function pageLoad(){
 		if(effectOn)
-			countdownAudio.play();
+			setTimeout(countdownAudio.play(),1000);
 		var play_button = document.getElementById("play1");
 		play_button.onclick = play;
 		var exit_button = document.getElementById("exit1");
@@ -485,17 +485,17 @@ export function stageStart1(mainGold,effectOn) {
 	function b_hp_decrease() {
 		b_hp--;
 		if(effectOn){
-			let randtemp=Math.floor(Math.random() * 3)
+			let randtemp=Math.floor(Math.random() * 4)
 			if(randtemp==0)
 				bossAudio.play();
 			else if(randtemp==1)
 				bossAudio2.play();
-			else
+			else if(randtemp==2)
 				bossAudio3.play();
+			else
+				bossdieAudio.play();
 			if(b_hp==1)
 				bossdieAudio2.play();
-			else if(randtemp==1)
-				bossdieAudio.play();
 
 		}
 		hp();

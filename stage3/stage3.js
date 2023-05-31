@@ -204,8 +204,10 @@ export function stageStart3(mainGold,effectOn) {
 	const playerhitAudio=new Audio('./오디오/player/플래이어 피격 (1).wav');
 	const razerAudio1=new Audio('./오디오/stage3/레이저장전.mp3');
 	const razerAudio2=new Audio('./오디오/stage3/레이저발사.mp3');
+	const boomAudio2=new Audio('./오디오/stage3/폭발.wav');
 	const countdownAudio=new Audio('./오디오/Interface/카운트다운.mp3');
-	const bossdieAudio=new Audio('./오디오/stage1/보스피격.wav');
+	const bossdieAudio=new Audio('./오디오/stage3/보스피격.mp3');
+	const bossdieAudio2=new Audio('./오디오/stage3/보스사망.mp3');
 	const qskillonAudio=new Audio('./오디오/player/q스킬쉴드장착.mp3');
 	const wskillonAudio=new Audio('./오디오/player/w스킬.mp3');
 	const eskillonAudio=new Audio('./오디오/player/e스킬.mp3');
@@ -399,7 +401,7 @@ export function stageStart3(mainGold,effectOn) {
 	/* 게임시작 버튼 눌렀을 때 동작하는 함수 */
 	function wait() {
 		if(effectOn)
-			countdownAudio.play();
+			setTimeout(countdownAudio.play(),1000);
 		repeat = setInterval(start, 1000);
 	}
 
@@ -640,17 +642,18 @@ export function stageStart3(mainGold,effectOn) {
 			"height": num + "px"
 		});
 		if(effectOn){
-			let randtemp=Math.floor(Math.random() * 3)
+			let randtemp=Math.floor(Math.random() * 4)
 			if(randtemp==0)
 				bossAudio.play();
 			else if(randtemp==1)
 				bossAudio2.play();
-			else
+			else if(randtemp==2)
 				bossAudio3.play();
+			else{
+				bossdieAudio.play();
+			}
 			if(b_hp==1)
 				bossdieAudio2.play();
-			else if(randtemp==1)
-				bossdieAudio.play();
 		}
 		if (b_hp < 0 || b_hp == 0) {
 			game_over(1);
@@ -1454,6 +1457,8 @@ export function stageStart3(mainGold,effectOn) {
 						attack_bricks[i] = 1;
 					}
 					drawbrick2();
+					if(effectOn)
+						boomAudio2.play();
 					attack4_timer = setInterval(bossAttack4_timer, 200);
 				}
 

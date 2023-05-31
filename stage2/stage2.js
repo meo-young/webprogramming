@@ -186,12 +186,14 @@ export function stageStart2(mainGold,effectOn) {
 	const bossskillAudio=new Audio('./오디오/stage2/splash water.wav');
 	const countdownAudio=new Audio('./오디오/Interface/카운트다운.mp3');
 	const bossdieAudio2=new Audio('./오디오/stage2/보스사망.wav');
-	const bossdieAudio=new Audio('./오디오/stage2/보스피격.wav');
+	const bossdieAudio=new Audio('./오디오/stage2/보스피격.mp3');
 	const qskillonAudio=new Audio('./오디오/player/q스킬쉴드장착.mp3');
 	const wskillonAudio=new Audio('./오디오/player/w스킬.mp3');
 	const winAudio=new Audio('./audio/win_7s.mp3');
 	const loseAudio=new Audio('./audio/lose_7s.mp3');
 	const fishAudio=new Audio('./오디오/stage2/물고기 나올때.mp3');
+	const iceAudio=new Audio('./오디오/stage2/얼음.mp3');
+
 
 
 
@@ -208,7 +210,8 @@ export function stageStart2(mainGold,effectOn) {
 
 	function pageLoad(){
 		if(effectOn)
-			countdownAudio.play();
+			setTimeout(countdownAudio.play(),1000);
+
 		var play_button = document.getElementById("play2");
 		play_button.onclick = play;
 		var exit_button = document.getElementById("exit2");
@@ -493,18 +496,18 @@ export function stageStart2(mainGold,effectOn) {
 		} else {
 			b_hp--;
 			if(effectOn){
-				let randtemp=Math.floor(Math.random() * 3)
+				let randtemp=Math.floor(Math.random() * 4)
 				if(randtemp==0)
 					bossAudio.play();
 				else if(randtemp==1)
 					bossAudio2.play();
-				else
+				else if(randtemp==2)
 					bossAudio3.play();
+				else if(randtemp==3)
+					bossdieAudio.play();
 				if(b_hp==1)
 					bossdieAudio2.play();
-				else if(randtemp==1)
-					bossdieAudio.play();
-				}
+			}
 			hp();
 			var num = b_hp * 20;
 			$("#container2").animate({
@@ -1254,6 +1257,8 @@ export function stageStart2(mainGold,effectOn) {
 			else if (randnum == 2) {
 				removeEventListener('mousemove', mousemove);
 				setTimeout(bossAttack3, 1000);
+				if(effectOn)
+					iceAudio.play();
 				bar_state = 1;
 			}
 			else if (randnum == 3) {
