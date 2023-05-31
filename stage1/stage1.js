@@ -222,6 +222,9 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 	const winAudio = new Audio('./audio/win_7s.mp3');
 	const loseAudio = new Audio('./audio/lose_7s.mp3');
 	var keyboardAudio = new Audio("./storyimg/키보드소리.mp3");
+	var potion1Audio = new Audio("./오디오/player/potion1.mp3");
+	var potion2Audio = new Audio("./오디오/player/potion2.mp3");
+	var potion3Audio = new Audio("./오디오/player/potion3.mp3");
 
 	pageLoad();
 	wait();
@@ -358,7 +361,6 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 				$("#select-stage").removeClass("animateContent2");
 			}, 1000);
 		}, 500);
-		$(".gold").html(currentGold + gold);//골드 추가 부분
 	}
 
 	/* window size 변경 해주는 함수 */
@@ -1020,6 +1022,7 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 		clearInterval(time_repeat);
 		context.clearRect(0, 0, cvwd, cvht);
 		if (who == 1) {
+			$(".gold").html(gold);//골드 추가 부분
 			if (effectOn)
 				winAudio.play();
 			game_over_win_Img();
@@ -1309,7 +1312,36 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 			}
 			stop_pattern = 0;
 		}
-		if (keydown_count == 0) {
+		else if(event.keyCode == 49 && potion1Num>= 1){// 1번 눌렀을 때 포션 사용
+			
+			if(p_hp > 0 && p_hp < 5){
+				potion1Num--;
+				p_hp--;
+				$("#p1Num").html(potion1Num); 
+				var p_hp_array = $(".state1");
+				p_hp_array[p_hp].src = "./img/player/playerHeartFull_25x25.png";
+				if (effectOn)
+					potion1Audio.play();
+			}
+		}
+		else if(event.keyCode == 50 && potion2Num>= 1){//2번 눌렀을 때 포션 사용
+			potion2Num--;
+			$("#p2Num").html(potion2Num); 
+			if (effectOn)
+				potion2Audio.play();
+			
+				
+		}
+		else if(event.keyCode == 51 && potion3Num>= 1){//3번 눌렀을 때 포션 사용
+			potion3Num--;
+			$("#p3Num").html(potion3Num); 
+			if (effectOn)
+				potion3Audio.play();
+		}
+
+
+		
+		if(keydown_count == 0){
 			if (start_number == 0) {
 				//스페이스바를 누를경우
 				if (event.keyCode == 32) {
@@ -1565,7 +1597,26 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 		}
 	}
 
-	/* 호출시 원래 공 반지름 길이로 복구 */
+	function clearAllInterval() {
+		clearInterval(draw);
+		clearInterval(timeAttack);
+		clearInterval(bossAttack2_timer);
+		clearInterval(skill_timer1);
+		clearInterval(repeat);
+		clearInterval(attack1_repeat);
+		clearInterval(attack2_repeat);
+		clearInterval(qskill_repeat);
+		clearInterval(time_repeat);
+		clearInterval(start);
+		clearInterval(shield_repeat);
+		clearInterval(p_ImgBlankInterval);
+		clearInterval(deathmotion);
+		clearInterval(winmotion);
+		clearInterval(bossAttack1_attacked);
+		clearInterval(bossAttack2_timer);
+		clearInterval(attacked_shield);
+		clearInterval(boss_finish_repeat);
+	}
 
 
 

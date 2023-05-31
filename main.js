@@ -12,6 +12,12 @@ $(document).ready(function () {
     var potion2Num = 3;
     var potion3Num = 3;
 
+    
+    $("#p1Num").html(potion1Num);
+    $("#p2Num").html(potion2Num);
+    $("#p3Num").html(potion3Num);
+
+
     // 현재 배경 img
     var currentIMG = $("#b1").attr("src");
 
@@ -34,6 +40,10 @@ $(document).ready(function () {
     var keyboardAudio = new Audio("./storyimg/키보드소리.mp3");
     var keyboardAudio2 = new Audio("./storyimg/키보드소리.mp3");
     var thunderAudio = new Audio("./storyimg/펑소리.mp3");
+    var buySkin = new Audio("./audio/구매성공.mp3");
+    var buyCant = new Audio("./audio/구매실패.mp3");
+    var buyPotion = new Audio("./audio/포션구매.mp3");
+    var changeSkin = new Audio("./audio/스킨전환.mp3");
 
     var currentBGM = mainBgm;    // 현재 재생/중지 상태의 음악파일, 환경설정에서 변경 가능
     var storyimgflag = 0;
@@ -137,6 +147,7 @@ $(document).ready(function () {
                     $("#stage1").addClass("animateContent2").css({ "display": "inline-block" });
                 }, 500);
                 currentGold = parseInt($(".gold").eq(0).text());
+                potion1Num = parseInt($("#p1Num").eq(0).text()); 
                 stageStart1(currentGold, effectOn, potion1Num, potion2Num, potion3Num);
             }, 5100)
         });
@@ -156,6 +167,7 @@ $(document).ready(function () {
                     $("#stage2").addClass("animateContent2").css({ "display": "inline-block" });
                 }, 500);
                 currentGold = parseInt($(".gold").eq(0).text());
+                potion2Num = parseInt($("#p2Num").eq(0).text()); 
                 stageStart2(currentGold, effectOn, potion1Num, potion2Num, potion3Num);
             }, 5100);
         });
@@ -175,6 +187,7 @@ $(document).ready(function () {
                     $("#stage3").addClass("animateContent2").css({ "display": "inline-block" });
                 }, 500);
                 currentGold = parseInt($(".gold").eq(0).text());
+                potion3Num = parseInt($("#p3Num").eq(0).text()); 
                 stageStart3(currentGold, effectOn, potion1Num, potion2Num, potion3Num);
             }, 5100);
         });
@@ -328,6 +341,8 @@ $(document).ready(function () {
                 if ($(".pChar").hasClass("equip"))
                     $(".pChar").removeClass("equip");
                 $(this).addClass("equip"); // 착용중으로 변경
+                if (effectOn)
+                    changeSkin.play();
             }
             else if ($(this).hasClass("equip")) {
                 $(this).removeClass("equip");
@@ -338,56 +353,71 @@ $(document).ready(function () {
                         currentGold -= 100;
                         $(".gold").html(currentGold);
                         $(this).addClass("owned");
+                        if (effectOn)
+                            buySkin.play();
                     }
                     else {
                         alert("골드가 부족합니다!");
+                        if (effectOn)
+                            buyCant.play();
                     }
                 }
             }
         });
 
 
-        $("#p1Num").html(potion1Num);
-        $("#p2Num").html(potion2Num);
-        $("#p3Num").html(potion3Num);
-
         // 1번 물약 클릭시
         $("#potion1").off('click').on('click', function () {
             currentGold = parseInt($(".gold").eq(0).text());
+            potion1Num = parseInt($("#p1Num").eq(0).text()); 
             if (currentGold >= 10) {
                 potion1Num++;
                 currentGold -= 10;
                 $("#p1Num").html(potion1Num);
                 $(".gold").html(currentGold);
+                if (effectOn)
+                    buyPotion.play();
             }
             else {
-                alert("골드가 부족합니다!")
+                alert("골드가 부족합니다!");
+                if (effectOn)
+                    buyCant.play();
             }
         });
         // 2번 물약 클릭시
         $("#potion2").off('click').on('click', function () {
             currentGold = parseInt($(".gold").eq(0).text());
+            potion2Num = parseInt($("#p2Num").eq(0).text());
             if (currentGold >= 20) {
                 potion2Num++;
                 currentGold -= 20;
                 $("#p2Num").html(potion2Num);
                 $(".gold").html(currentGold);
+                if (effectOn)
+                    buyPotion.play();
             }
             else {
-                alert("골드가 부족합니다!")
+                alert("골드가 부족합니다!");
+                if (effectOn)
+                    buyCant.play();
             }
         });
         // 3번 물약 클릭시
         $("#potion3").off('click').on('click', function () {
             currentGold = parseInt($(".gold").eq(0).text());
+            potion3Num = parseInt($("#p3Num").eq(0).text());
             if (currentGold >= 30) {
                 potion3Num++;
                 currentGold -= 30;
                 $("#p3Num").html(potion3Num);
                 $(".gold").html(currentGold);
+                if (effectOn)
+                    buyPotion.play();
             }
             else {
-                alert("골드가 부족합니다!")
+                alert("골드가 부족합니다!");
+                if (effectOn)
+                    buyCant.play();
             }
         });
 

@@ -60,7 +60,7 @@ export function stageStart3(mainGold, effectOn, potion1Num, potion2Num, potion3N
 	var qstop_pattern;
 	var wstop_pattern;
 	var estop_pattern;
-	var gold = 0;
+	var gold = mainGold;
 	var damage_state = 0;
 	var damage;
 	var damage_count = 0;
@@ -1197,7 +1197,7 @@ export function stageStart3(mainGold, effectOn, potion1Num, potion2Num, potion3N
 		context.clearRect(0, 0, cvwd, cvht);
 		if (who == 1) {
 			drawText("You Win");
-			$(".gold").html(mainGold + gold);//골드 추가 부분
+			$(".gold").html(gold);//골드 추가 부분
 			if (effectOn) {
 				winAudio.play();
 			}
@@ -1535,6 +1535,34 @@ export function stageStart3(mainGold, effectOn, potion1Num, potion2Num, potion3N
 			}
 			stop_pattern = 0;
 		}
+		else if(event.keyCode == 49 && potion1Num>= 1){//포션 1 먹기
+			
+			if(p_hp > 0 && p_hp < 5){
+				potion1Num--;
+				p_hp--;
+				$("#p1Num").html(potion1Num); 
+				var p_hp_array = $(".state3");
+				p_hp_array[p_hp].src = "./img/player/playerHeartFull_25x25.png";
+				if (effectOn)
+					potion1Audio.play();
+				
+			}
+		}
+		else if(event.keyCode == 50 && potion2Num>= 1){//포션 2먹기
+			potion2Num--;
+			$("#p2Num").html(potion2Num); 
+			if (effectOn)
+				potion2Audio.play();
+				
+		}
+		else if(event.keyCode == 51 && potion3Num>= 1){//포션 3 먹기
+			
+			potion3Num--;
+			$("#p3Num").html(potion3Num); 
+			if (effectOn)
+				potion3Audio.play();
+		}
+
 		if (keydown_count == 0) {
 			if (start_number == 0) {
 				//스페이스바를 누를경우
