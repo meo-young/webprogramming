@@ -1022,7 +1022,7 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 			boss_img_count = 0;
 			boss_finish_repeat = setInterval(deathmotion, 1);
 			$("#stageStoryImg").attr("src", "./storyimg/stage1B.gif");
-			$("#stage1").fadeOut(6000);
+			$("#stage1").fadeOut(5500);
 			setTimeout(() => {
 				$("#stage-story").fadeIn(1000);
 			}, 6000);
