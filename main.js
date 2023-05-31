@@ -498,4 +498,13 @@ $(document).ready(function () {
             }, 1000);
         }, 500);
     });
+    function showGif(gifsrc){
+        $("#stage-story").fadeIn(1000,()=>{
+            $("#stageStoryImg").attr("src", gifsrc);
+            keyboardAudio.play();
+            setTimeout(()=>{
+                keyboardAudio.pause();
+            },5000);
+        })
+    }
 });
