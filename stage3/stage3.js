@@ -1,5 +1,5 @@
 
-export function stageStart3(mainGold) {
+export function stageStart3(mainGold,effectOn) {
 	/* 플레이어 스킬 변수 */
 	var qskill = 0;
 	var qskill_timer = 30;
@@ -141,6 +141,9 @@ export function stageStart3(mainGold) {
 
 	
 	var playerColor ="";
+	var razerflag=false;
+	var razerflag2=false;
+
 	// 착용중인 캐릭터 이미지로 변경
 	if ($("#pDefault").hasClass("equip")) {
 		$("#playerImg3").attr("src", pDefaultStdsrc);
@@ -194,8 +197,20 @@ export function stageStart3(mainGold) {
 
 	//오디오들
 	const brickAudio = new Audio('./audio/brickbreak.mp3');
-	const swingAudio = new Audio('./audio/swing.mp3');
-	const bossAudio=new Audio('./audio/bosshit.mp3');
+	const swingAudio = new Audio('./오디오/player/칼휘두르는소리.mp3');
+	const bossAudio=new Audio('./오디오/boss/bosshit.mp3');
+	const bossAudio2=new Audio('./오디오/boss/bosshit2.mp3');
+	const bossAudio3=new Audio('./오디오/boss/bosshit3.mp3');
+	const playerhitAudio=new Audio('./오디오/player/플래이어 피격 (1).wav');
+	const razerAudio1=new Audio('./오디오/stage3/레이저장전.mp3');
+	const razerAudio2=new Audio('./오디오/stage3/레이저발사.mp3');
+	const countdownAudio=new Audio('./오디오/Interface/카운트다운.mp3');
+	const bossdieAudio=new Audio('./오디오/stage1/보스피격.wav');
+	const qskillonAudio=new Audio('./오디오/player/q스킬쉴드장착.mp3');
+	const wskillonAudio=new Audio('./오디오/player/w스킬.mp3');
+	const eskillonAudio=new Audio('./오디오/player/e스킬.mp3');
+	const winAudio=new Audio('./audio/win_7s.mp3');
+	const loseAudio=new Audio('./audio/lose_7s.mp3');
 
 	wait();
 	windowsize();
@@ -359,7 +374,6 @@ export function stageStart3(mainGold) {
 			$(".screen").css({
 				"background" : "url(./backimg/back1.gif)"
 			});
-			$(".gold").html(mainGold+gold);//골드 추가 부분
 	}
 
 
@@ -384,6 +398,8 @@ export function stageStart3(mainGold) {
 	/*---------------------------------------------------------게임시작 관련 함수---------------------------------------------------------*/
 	/* 게임시작 버튼 눌렀을 때 동작하는 함수 */
 	function wait() {
+		if(effectOn)
+			countdownAudio.play();
 		repeat = setInterval(start, 1000);
 	}
 
@@ -623,7 +639,19 @@ export function stageStart3(mainGold) {
 		$("#container3").animate({
 			"height": num + "px"
 		});
-		bossAudio.play();
+		if(effectOn){
+			let randtemp=Math.floor(Math.random() * 3)
+			if(randtemp==0)
+				bossAudio.play();
+			else if(randtemp==1)
+				bossAudio2.play();
+			else
+				bossAudio3.play();
+			if(b_hp==1)
+				bossdieAudio2.play();
+			else if(randtemp==1)
+				bossdieAudio.play();
+		}
 		if (b_hp < 0 || b_hp == 0) {
 			game_over(1);
 			game_over_win_Img();
@@ -687,6 +715,8 @@ export function stageStart3(mainGold) {
 
 		if (p_hp == 1 || p_hp == 2) {
 			p_hp_decrease_Img();
+			if(effectOn)
+				playerhitAudio.play();
 		}
 		if (p_hp == 3) {
 			game_over_Img();
@@ -902,9 +932,12 @@ export function stageStart3(mainGold) {
 		if (who == 1) {
 			drawText("You Win");
 			$(".gold").html(mainGold+gold);//골드 추가 부분
+			if(effectOn)
+				winAudio.play();
 		}
 		else if (who == 2) {
 			drawText("You Lose");
+				loseAudio.play();
 		}
 	}
 	/* 플레이어, 보스 체력 출력해주는 함수 */
@@ -995,28 +1028,32 @@ export function stageStart3(mainGold) {
 						context.clearRect(brickx, bricky, BRICKWIDTH, BRICKHEIGHT);
 						bricks[i] = 0;
 						dy = -dy;
-						brickAudio.play();
+						if(effectOn)
+							brickAudio.play();
 						blood(brickx);
 					}
 					if (x > brickx - ballRadius - dxf && x < brickx && y < bricky + BRICKHEIGHT + ballRadius && y > bricky - ballRadius) { //벽돌의 왼쪽 부분과 충돌
 						context.clearRect(brickx, bricky, BRICKWIDTH, BRICKHEIGHT);
 						bricks[i] = 0;
 						dx = -dx;
-						brickAudio.play();
+						if(effectOn)
+							brickAudio.play();
 						blood(brickx);
 					}
 					if (x < brickx + BRICKWIDTH + ballRadius + dxf && x > brickx + BRICKWIDTH && y < bricky + BRICKHEIGHT + ballRadius && y > bricky - ballRadius) { // 벽돌의 오른쪽 부분과 충돌
 						context.clearRect(brickx, bricky, BRICKWIDTH, BRICKHEIGHT);
 						bricks[i] = 0;
 						dx = -dx;
-						brickAudio.play();		
+						if(effectOn)
+							brickAudio.play();
 						blood(brickx);
 					}
 					if (brickx + BRICKWIDTH > x && brickx < x && y > bricky - ballRadius && y < bricky) { // 벽돌의 윗 부분과 충돌
 						context.clearRect(brickx, bricky, BRICKWIDTH, BRICKHEIGHT);
 						bricks[i] = 0;
 						dy = -dy;
-						brickAudio.play();				
+						if(effectOn)
+							brickAudio.play();
 						blood(brickx);
 					}
 				}
@@ -1231,6 +1268,8 @@ export function stageStart3(mainGold) {
 					$("#qtimer3").text(qskill_timer); //쿨타임 글씨 활성화
 					qskill_repeat = setInterval(skill_timer1, 1000);
 					qskill_cooltime = 1;
+					if(effectOn)
+						qskillonAudio.play();
 				}
 				else if (wskill_cooltime == 0 && wskill == 0 && event.keyCode == 87) {
 					wskill = 1; //이 변수가 1일 때 보호막 활성화
@@ -1246,6 +1285,9 @@ export function stageStart3(mainGold) {
 					wskill_repeat = setInterval(skill_timer2, 1000);
 					wskill_cooltime = 1;
 					wskill_repeat2 = setInterval(wskill_time, 1);
+					if(effectOn)
+					wskillonAudio.play();
+
 				}
 				else if (event.keyCode == 69 && eskill == 0 && eskill_cooltime == 15) {
 					eskill = 1;
@@ -1260,6 +1302,9 @@ export function stageStart3(mainGold) {
 						"display": "block"
 					});
 					$("#etimer3").text(eskill_cooltime); //쿨타임 글씨 활성
+					if(effectOn)
+					eskillonAudio.play();
+
 				}
 			}
 		}
@@ -1382,6 +1427,8 @@ export function stageStart3(mainGold) {
 				var randnum = Math.floor(Math.random()*4);
 				if (randnum == 0) {
 					attack1 = 1;
+					razerflag=true;
+					razerflag2=true;
 					attack1_repeat = setInterval(bossAttack1_timer, 1000);
 				}
 				else if (randnum == 1) {
@@ -1450,13 +1497,27 @@ export function stageStart3(mainGold) {
 
 	/* 레이저 공격 */
 	function bossAttack1() {
+		if(razerflag){
+			razerflag=false;
+			razerAudio1.play();
+			setTimeout(function() {
+				razerAudio1.pause();
+			  }, 3000); // 3초를 밀리초로 변환한 값입니다.
+			  
+		}
 		if (attack1_timer == 3) { //3초 후에 사용자의 직전의 x좌표에 1초동안 머무름.
 			context.drawImage(bsimg,coordinate,100,60,72);
 			if(attack1_img_count == 1){
 				context.drawImage(razer_Img,coordinate,150,60,cvht-150);
 			}
+
 		}
 		else if (attack1_timer == 4) { //1초 경과시 패들이 위치에 존재하면 사용자의 hp --
+			if(razerflag2){
+				razerflag2=false;
+				razerAudio2.play();
+			}
+	
 			context.drawImage(bsimg,coordinate,100,60,72);
 			context.drawImage(razer_Img ,coordinate, 150, 60, cvht-150);
 			if (check == 0 && barx - barwidth / 2 < coordinate && barx + barwidth / 2 > coordinate) {
