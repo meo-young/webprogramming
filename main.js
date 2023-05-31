@@ -38,7 +38,6 @@ $(document).ready(function () {
     var bAttack = new Audio();  // 보스 공격 효과음
     var pSkill = new Audio();  // 플레이어 스킬 효과음
     var keyboardAudio = new Audio("./storyimg/키보드소리.mp3");
-    var keyboardAudio2 = new Audio("./storyimg/키보드소리.mp3");
     var thunderAudio = new Audio("./storyimg/펑소리.mp3");
     var buySkin = new Audio("./audio/구매성공.mp3");
     var buyCant = new Audio("./audio/구매실패.mp3");
@@ -498,26 +497,31 @@ $(document).ready(function () {
             setTimeout(() => {
                 if(storyimgflag == 1)
                 keyboardAudio.play();
-            }, 1000);
+            }, 800);
             setTimeout(() => {
-                if(storyimgflag == 1)
                 keyboardAudio.pause();
-            }, 4000);
+            }, 2300);
             setTimeout(() => {
                 if(storyimgflag == 1)
                 thunderAudio.play();
-            }, 5500);
+            }, 4500);
             setTimeout(() => {
                 thunderAudio.pause();
-            }, 8000);
+            }, 7200);
             setTimeout(() => {
                 if(storyimgflag == 1)
                 keyboardAudio.play();
-            }, 10000);
+            }, 8500);
+            setTimeout(() => {
+                keyboardAudio.pause();
+            }, 9700);
             setTimeout(() => {
                 if(storyimgflag == 1)
                 keyboardAudio.play();
-            }, 16000);
+            }, 12000);
+            setTimeout(() => {
+                keyboardAudio.pause();
+            }, 15200);
 
             $(this).fadeOut(500, function () {
                 // fadeOut() 메서드로 천천히 사라지고, 애니메이션 완료 후 콜백 함수 실행
