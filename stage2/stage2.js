@@ -1643,8 +1643,7 @@ export function stageStart2(mainGold, effectOn, potion1Num, potion2Num, potion3N
 			else if (randnum == 2) {
 				attack4 = 1;
 				var num = Math.floor(Math.random() * 3);
-				attack4_brick_x = 150 * (num + 1);
-				//fly_repeat = setInterval(fishflying,1);
+				attack4_brick_x = 250 * (num + 1);
 				bossAttack4();
 			}
 
@@ -1696,21 +1695,12 @@ export function stageStart2(mainGold, effectOn, potion1Num, potion2Num, potion3N
 
 
 	function bossAttack4() {
-		context.drawImage(littlebrick_Img, attack4_brick_x, attack4_brick_y, 45, 45);
+		context.drawImage(littlebrick_Img, 250, attack4_brick_y, 45, 45);
+		context.drawImage(littlebrick_Img, 500, attack4_brick_y, 45, 45);
+		context.drawImage(littlebrick_Img, 750, attack4_brick_y, 45, 45);
+
 	}
-	/*
-		function fishflying(){
-			fly += 1;
-			if(fly % 10 == 0){
-				fly_count++;
-				if(fly_count == 13){
 	
-				}
-				fishfly.src = "./img/stage2/pf"+fly_count+".png";
-			}
-			context.drawImage(fishfly,attack4_brick_x,fly,45,45);
-		}
-	*/
 
 	/*---------------------------------------------------------보스 공격패턴 함수---------------------------------------------------------*/
 }
