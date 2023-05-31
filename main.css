@@ -40,6 +40,21 @@ body {
     background-size: cover;
 }
 
+.videoscreen {   /* 모든 화면 1000x600 사이즈 */
+    position: relative;
+    display: none;
+    overflow: visible;
+    border-radius: 20px 20px 20px 20px;
+    width: 1000px;
+    height: 600px;
+    text-align: center;
+    color: white;
+    /*background: url("./backimg/back1.gif");*/
+    background-color: black;
+    background-size: cover;
+}
+
+
 #story-menu {
     display: inline-block;
 }
@@ -48,6 +63,12 @@ body {
     height: 600px;
     border: none;
 }
+#stageStoryImg{
+    width: 1000px;
+    height: 600px;
+    border: none;
+}
+
 
 #main-menu {
     display: none;
@@ -237,4 +258,3 @@ body {
     opacity: 0; /* 초기에 투명하게 설정 */
     transition: opacity 0.5s; /* 페이드 인 효과를 위한 transition 설정 */
   }
-  

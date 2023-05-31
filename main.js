@@ -33,7 +33,7 @@ $(document).ready(function () {
     var pSkill = new Audio();  // 플레이어 스킬 효과음
 
     var currentBGM = mainBgm;    // 현재 재생/중지 상태의 음악파일, 환경설정에서 변경 가능
-    var storyimgcount=1;
+    var storyimgflag=false;
     currentBGM.play();
     currentBGM.loop = true;   // 반복재생
 
@@ -386,8 +386,8 @@ $(document).ready(function () {
     
     // 게임 시작시 등장하는 스토리
     $("#storyImg").click(function() {
-        storyimgcount++;
-        if(storyimgcount==4) {
+        if(storyimgflag) {//두번째 클릭
+            //오디오 종료
             $("#story-menu").addClass("animateContent1");
             setTimeout(function() {
                 $("#story-menu").removeClass("animateContent1").hide();
@@ -397,14 +397,21 @@ $(document).ready(function () {
                 }, 1000);
             }, 500);
         }
-        else {
-            let str="./storyimg/스토리"+storyimgcount.toString()+".png";
+        else {//처음 화면 클릭
+            storyimgflag=true;
             $(this).fadeOut(500, function() {
                 // fadeOut() 메서드로 천천히 사라지고, 애니메이션 완료 후 콜백 함수 실행
-                $(this).attr("src", str).fadeIn(1000); // fadeIn() 메서드로 천천히 나타남
+                $(this).attr("src", "./storyimg/프롤로그.gif"); // fadeIn() 메서드로 천천히 나타남
+                setTimeout(() => {
+                    $(this).trigger('click');
+                }, 20000);
+                //오디오 재생
             });
         }  
+        storyimgflag=true;
     });
+
+
 
     // 스테이지1 esc 환경설정
     $("#set1").click(function() {
