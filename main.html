@@ -7,7 +7,8 @@
     <link rel="stylesheet" href="./stage2/stage2.css">
     <link rel="stylesheet" href="./stage3/stage3.css">
     <link href="https://fonts.googleapis.com/css2?family=Gugi&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@1,300&family=Nanum+Gothic&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@1,300&family=Nanum+Gothic&display=swap"
+        rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
@@ -41,39 +42,39 @@
         <!-- 스테이지1 환경설정 -->
         <div id="set1-menu" class="screen">
             <div id="settings"></div><br>
-            <div id="setting-bgMusic" class="setting">
+            <div id="setting-bgMusic1" class="setting">
                 <label>배경음악</label><br>
-                <button id="BGM"></button>
+                <button id="BGM1"></button>
             </div>
-            <div id="setting-effect" class="setting">
+            <div id="setting-effect1" class="setting">
                 <label>효과음</label><br>
-                <button id="effectSound"></button>
+                <button id="effectSound1"></button>
             </div>
             <button class="go-back-btn" id="settings-to-esc1"></button>
         </div>
         <!-- 스테이지2 환경설정 -->
         <div id="set2-menu" class="screen">
             <div id="settings"></div><br>
-            <div id="setting-bgMusic" class="setting">
+            <div id="setting-bgMusic2" class="setting">
                 <label>배경음악</label><br>
-                <button id="BGM"></button>
+                <button id="BGM2"></button>
             </div>
-            <div id="setting-effect" class="setting">
+            <div id="setting-effect2" class="setting">
                 <label>효과음</label><br>
-                <button id="effectSound"></button>
+                <button id="effectSoun2d"></button>
             </div>
             <button class="go-back-btn" id="settings-to-esc2"></button>
         </div>
         <!-- 스테이지3 환경설정 -->
         <div id="set3-menu" class="screen">
             <div id="settings"></div><br>
-            <div id="setting-bgMusic" class="setting">
+            <div id="setting-bgMusic3" class="setting">
                 <label>배경음악</label><br>
-                <button id="BGM"></button>
+                <button id="BGM3"></button>
             </div>
-            <div id="setting-effect" class="setting">
+            <div id="setting-effect3" class="setting">
                 <label>효과음</label><br>
-                <button id="effectSound"></button>
+                <button id="effectSound3"></button>
             </div>
             <button class="go-back-btn" id="settings-to-esc3"></button>
         </div>
@@ -88,31 +89,30 @@
                 <input id="exit1" type="button">
             </div>
             <div id="canvas_screen">
-            <div id="boss_UI1">
-                <div id="boss_img1">
-                    <img class="character" src="./img/stage1/boss.png" width="50px" height="50px">
+                <div id="boss_UI1">
+                    <div id="boss_img1">
+                        <img class="character" src="./img/stage1/boss.png" width="50px" height="50px">
+                    </div>
+                    <div id="boss_bar1">
+                        <div id="container1"></div>
+                        <div id="bp_num1">100%</div>
+                    </div>
                 </div>
-                <div id="boss_bar1">
-                    <div id="container1"></div>
-                    <div id="bp_num1">100%</div>
-                </div>
-            </div>
-    
                 <canvas id="screen1" width="1000" height="600"></canvas>
             </div>
-
             <div id="player_UI1">
                 <div id="player_img1">
                     <img class="character" id="playerImg1" src="./img/player/playerStanding_32x32.gif" width="100px"
                         height="100px">
                 </div>
                 <div id="player_state1">
-                    <div> 
+                    <div>
                         <img src="./img/player/playerHeartFull_25x25.png" class="state1" width="40px" height="40px">
                         <img src="./img/player/playerHeartFull_25x25.png" class="state1" width="40px" height="40px">
                         <img src="./img/player/playerHeartFull_25x25.png" class="state1" width="40px" height="40px">
                         <img src="./img/player/playerHeartFull_25x25.png" class="state1" width="40px" height="40px">
-                        <img src="./img/player/playerHeartFull_25x25.png" class="state1" width="40px" height="40px"></div>
+                        <img src="./img/player/playerHeartFull_25x25.png" class="state1" width="40px" height="40px">
+                    </div>
                     <div id="skill1">
                         <div>
                             <p>Q</p>
@@ -274,7 +274,7 @@
             <br>
             <div class="pThirdRow">
                 <span>10 gold</span>
-                <img src="./img/potion/poiton1.png" alt="물약1" id="potion1" class="potion">
+                <img src="./img/potion/potion1.png" alt="물약1" id="potion1" class="potion">
                 <span>X </span>
                 <span id="p1Num"></span>
             </div>
