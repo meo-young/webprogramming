@@ -382,7 +382,7 @@ export function stageStart2(mainGold, effectOn, potion1Num, potion2Num, potion3N
 		p_hp = 0;
 		b_hp = 1422;
 		$("#container2").animate({
-			"width": b_hp / 2 * 3 + "px"
+			"width": b_hp / 3 * 2 + "px"
 		});
 		var p_hp_array = $(".state2");
 		for (var i = 0; i < 5; i++) {
@@ -517,7 +517,7 @@ export function stageStart2(mainGold, effectOn, potion1Num, potion2Num, potion3N
 				b_hp -= poison_damage;
 				hp();
 				$("#container1").animate({
-					"width": b_hp / 2 * 3 + "px"
+					"width": b_hp / 3 * 2 + "px"
 				});
 				if (b_hp < 0 || b_hp == 0) {
 					game_over(1);
@@ -657,7 +657,7 @@ export function stageStart2(mainGold, effectOn, potion1Num, potion2Num, potion3N
 			damage_state = 1;
 			hp();
 			$("#container2").animate({
-				"width": b_hp / 2 * 3 + "px"
+				"width": b_hp / 3 * 2 + "px"
 			});
 			if (firedot == 1) {
 				setTimeout(function () {
@@ -754,7 +754,7 @@ export function stageStart2(mainGold, effectOn, potion1Num, potion2Num, potion3N
 			b_hp++;
 			hp();
 			$("#container2").animate({
-				"width": b_hp / 2 * 3 + "px"
+				"width": b_hp / 3 * 2 + "px"
 			});
 		}
 	}
@@ -849,7 +849,7 @@ export function stageStart2(mainGold, effectOn, potion1Num, potion2Num, potion3N
 				p_hp = 0;
 				b_hp = 1422;
 				$("#container2").animate({
-					"width": b_hp / 2 * 3 + "px"
+					"width": b_hp / 3 * 2 + "px"
 				});
 				var p_hp_array = $(".state2");
 				for (var i = 0; i < 5; i++) {
@@ -943,7 +943,7 @@ export function stageStart2(mainGold, effectOn, potion1Num, potion2Num, potion3N
 				p_hp = 0;
 				b_hp = 1422;
 				$("#container1").animate({
-					"width": b_hp / 2 * 3 + "px"
+					"width": b_hp / 3 * 2 + "px"
 				});
 				var p_hp_array = $(".state1");
 				for (var i = 0; i < 5; i++) {
