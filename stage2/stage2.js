@@ -124,6 +124,8 @@ export function stageStart2(mainGold, effectOn, potion1Num, potion2Num, potion3N
 	/*플레이어, 보스 체력 */
 	var p_hp = 0;
 	var b_hp = 1422;
+	var potion_count = 0;
+	var memory;
 
 	//플레이어 이미지
 	var pDefaultStdsrc = "./img/player/playerStanding_32x32.gif";
@@ -881,61 +883,68 @@ export function stageStart2(mainGold, effectOn, potion1Num, potion2Num, potion3N
 
 		}
 		if (p_hp == 5) {
-			if (effectOn)
-				playerhitAudio.play();
-
 			game_over_Img();
 			game_over(2);
 			removeEventListener('keydown', keydown);
 			removeEventListener('mousemove', mousemove);
+			clearInterval(repeat);
 			setTimeout(function () {
-				$("#boss_UI1").css({
+				$("#boss_UI2").css({
 					display: "block"
 				});
-				$("#player_UI1").css({
+				$("#player_UI2").css({
 					display: "block"
 				});
-				$("#screen1").css({
+				$("#screen2").css({
 					display: "block"
 				});
-				$("#esc_menu1").css({
+				$("#esc_menu2").css({
 					display: "none"
 				});
 				esc_count = 0;
 				keydown_count = 0;
-				clearInterval(repeat);
 				if (attack1 == 1) {
-					clearInterval(attack1_repeat);
 					attack1 = 0;
-					attack1_img_count = 0;
-					attack1_img = 1;
 				}
 				else if (attack2 == 1) {
+					attack2_timer = 0;
 					attack2 = 0;
-					yplus = 100;
+					attack2_count = 0;
 					attack2_img = 1;
 					attack2_img_count = 0;
-					clearInterval(attack2_repeat);
-					attack2_count = 0;
+					bottom_attack_Img.src = "./img/stage2/a" + attack2_img + ".png";
 				}
-				else if (attack3 == 1) {
-					attack3_img = 1;
-					attack3_img_count = 0;
-					attack3 = 0;
-					attack3_count = 0;
-					fireball.src = "./img/stage1/af" + attack3_img + ".png";
+				else if (attack4 == 1) {
+					attack4 = 0;
 				}
-				ballRadius = 10;
-				barwidth = 100;
+				bar_state = 0;
 				if (qskill_cooltime == 1) {
 					clearInterval(qskill_repeat);
 					qskill_cooltime = 0;
 					qskill = 0;
 					qskill_timer = 30;
-					$("#qskill1").css({
+					$("#qskill2").css({
 						"display": "block"
 					});
-					$("#qtimer1").css({
+					$("#qtimer2").css({
+						"display": "none"
+					});
+				}
+
+				if (wskill_cooltime == 1) {
+					clearInterval(wskill_repeat);
+					clearInterval(wskill_repeat2);
+					wskill_cooltime = 0;
+					wskill = 0;
+					wskill_count = 0;
+					wskill_timer = 10;
+					wskill_Img.src = "./img/stage2/blast1.png";
+					wskill_img_count = 0;
+					wskill_img = 1;
+					$("#wskill2").css({
+						"display": "block"
+					});
+					$("#wtimer2").css({
 						"display": "none"
 					});
 				}
@@ -943,22 +952,25 @@ export function stageStart2(mainGold, effectOn, potion1Num, potion2Num, potion3N
 				init();
 				p_hp = 0;
 				b_hp = 1422;
-				$("#container1").animate({
+				$("#container2").animate({
 					"width": b_hp / 3 * 2 + "px"
 				});
-				var p_hp_array = $(".state1");
+				var p_hp_array = $(".state2");
 				for (var i = 0; i < 5; i++) {
 					p_hp_array[i].src = "./img/player/playerHeartFull_25x25.png";
 				}
 
-				$("#stage1").removeClass("animateContent2").addClass("animateContent1");  // 스테이지3 esc화면 줄어드는 애니메이션
+				$("#stage2").removeClass("animateContent2").addClass("animateContent1");  // 스테이지3 esc화면 줄어드는 애니메이션
 				setTimeout(function () {
-					$("#stage1").removeClass("animateContent1").hide();   // 스테이지3 esc화면 none해주고
+					$("#stage2").removeClass("animateContent1").hide();   // 스테이지3 esc화면 none해주고
 					$("#select-stage").show().addClass("animateContent2");         // 다시 스테이지 선택 페이지 나타나게
 					setTimeout(function () {
 						$("#select-stage").removeClass("animateContent2");
 					}, 1000);
 				}, 500);
+				$(".screen").css({
+					"background": "url(./backimg/back1.gif)"
+				});
 			}, 4000);
 		}
 	}
@@ -1404,15 +1416,49 @@ export function stageStart2(mainGold, effectOn, potion1Num, potion2Num, potion3N
 				
 			}
 		}
-		else if(event.keyCode == 50 && potion2Num>= 1){// 포션 2 먹을 때
+		else if(event.keyCode == 50 && potion2Num>= 1 && potion_count ==0){// 포션 2 먹을 때
+			memory = attack_stat;
+			potion_count = 1;
 			potion2Num--;
-			$("#p2Num").html(potion2Num); 
+			$("#p2Num").html(potion2Num);
+			attack_stat += 20;
+			setTimeout(function(){
+				attack_stat = memory;
+				potion_count = 0;
+			},10000); 
 			if (effectOn)
 				potion2Audio.play();
-				
 		}
 		else if(event.keyCode == 51 && potion3Num>= 1){// 포션 3 먹을 때
-			
+			if(qskill_cooltime == 1){
+				qskill = 0;
+				qskill_cooltime = 0;
+				qskill_timer = 30;
+				clearInterval(qskill_repeat);
+				$("#qskill2").css({
+					"display": "block"
+				});
+				$("#qtimer2").css({
+					"display": "none"
+				});
+			}
+			if(wskill_cooltime == 1){
+				clearInterval(wskill_repeat);
+				clearInterval(wskill_repeat2);
+				wskill_cooltime = 0;
+				wskill = 0;
+				wskill_count = 0;
+				wskill_timer = 10;
+				wskill_Img.src = "./img/stage2/blast1.png";
+				wskill_img_count = 0;
+				wskill_img = 1;
+				$("#wskill2").css({
+					"display": "block"
+				});
+				$("#wtimer2").css({
+					"display": "none"
+				});
+			}
 			potion3Num--;
 			$("#p3Num").html(potion3Num); 
 			if (effectOn)

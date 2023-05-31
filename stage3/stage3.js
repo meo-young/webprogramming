@@ -133,6 +133,8 @@ export function stageStart3(mainGold, effectOn, potion1Num, potion2Num, potion3N
 	/*플레이어, 보스 체력 */
 	var p_hp = 0;
 	var b_hp = 1896;
+	var potion_count = 0;
+	var memory;
 
 	//플레이어 이미지
 	var pDefaultStdsrc = "./img/player/playerStanding_32x32.gif";
@@ -1549,14 +1551,63 @@ export function stageStart3(mainGold, effectOn, potion1Num, potion2Num, potion3N
 			}
 		}
 		else if(event.keyCode == 50 && potion2Num>= 1){//포션 2먹기
+			memory = attack_stat;
+			potion_count = 1;
 			potion2Num--;
-			$("#p2Num").html(potion2Num); 
+			$("#p2Num").html(potion2Num);
+			attack_stat += 20;
+			setTimeout(function(){
+				attack_stat = memory;
+				potion_count = 0;
+			},10000); 
 			if (effectOn)
 				potion2Audio.play();
 				
 		}
 		else if(event.keyCode == 51 && potion3Num>= 1){//포션 3 먹기
-			
+			if(qskill_cooltime == 1){
+				qskill = 0;
+				qskill_cooltime = 0;
+				qskill_timer = 30;
+				clearInterval(qskill_repeat);
+				$("#qskill3").css({
+					"display": "block"
+				});
+				$("#qtimer3").css({
+					"display": "none"
+				});
+			}
+			if(wskill_cooltime == 1){
+				clearInterval(wskill_repeat);
+				clearInterval(wskill_repeat2);
+				wskill_cooltime = 0;
+				wskill = 0;
+				wskill_count = 0;
+				wskill_timer = 10;
+				wskill_Img.src = "./img/stage2/blast1.png";
+				wskill_img_count = 0;
+				wskill_img = 1;
+				$("#wskill3").css({
+					"display": "block"
+				});
+				$("#wtimer3").css({
+					"display": "none"
+				});
+			}
+			if (eskill_state == 1) {
+				clearInterval(eskill_repeat);
+				clearInterval(eskill_timer);
+				eskill = 0;
+				eskill_count = 0;
+				eskill_cooltime = 15;
+				eskill_state = 0;
+				$("#eskill3").css({
+					"display": "block"
+				});
+				$("#etimer3").css({
+					"display": "none"
+				});
+			}
 			potion3Num--;
 			$("#p3Num").html(potion3Num); 
 			if (effectOn)
