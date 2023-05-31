@@ -752,12 +752,12 @@ export function stageStart2(mainGold, effectOn, potion1Num, potion2Num, potion3N
 
 
 	//보스 체력 회복 해주는 함수
-	function b_hp_increase() {
+	function b_hp_increase(att) {
 		if (b_hp == 1422) {
 			return;
 		}
 		else {
-			b_hp++;
+			b_hp += att;
 			hp();
 			$("#container2").animate({
 				"width": b_hp / 3 * 2 + "px"
@@ -1200,7 +1200,7 @@ export function stageStart2(mainGold, effectOn, potion1Num, potion2Num, potion3N
 		}
 		if ((x < bossx & x > bossx - ballRadius - dxf & y < bossy + bossht + ballRadius & y > bossy - ballRadius) || (x < bossx + bosswd + ballRadius + dxf & x > bossx + bosswd & y < bossy + bossht + ballRadius & y > bossy - ballRadius)) { //보스의 왼쪽, 오른쪽에 충돌
 			if (attack1 == 1) { //보스가 회복 배리어를 친 상태면 체력 회복
-				b_hp_increase();
+				b_hp_increase(attack_stat);
 			}
 			else {
 				b_hp_decrease(attack_stat);
@@ -1209,7 +1209,7 @@ export function stageStart2(mainGold, effectOn, potion1Num, potion2Num, potion3N
 		}
 		else if ((y > bossy + bossht & y < bossy + bossht + ballRadius + yvelocity & x > bossx - ballRadius & x < bossx + bosswd + ballRadius) || (y < bossy & y > bossy - ballRadius - yvelocity & x > bossx - ballRadius & x < bossx + bosswd + ballRadius)) { //보스의 위, 아래에 충돌
 			if (attack1 == 1) { //보스가 회복 배리어를 친 상태면 체력 회복
-				b_hp_increase();
+				b_hp_increase(attack_stat);
 			}
 			else {
 				b_hp_decrease(attack_stat);
@@ -1621,7 +1621,7 @@ export function stageStart2(mainGold, effectOn, potion1Num, potion2Num, potion3N
 	function timeAttack() {
 		timer += 1;
 
-		if (timer % 6 == 0) {
+		if (timer % 8 == 0) {
 			var randnum
 			if (attack4 == 1) {
 				randnum = Math.floor(Math.random() * 2);

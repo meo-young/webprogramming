@@ -1022,7 +1022,7 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 	function game_over(who) {
 		keydown_count = 1;
 		removeEventListener('mousemove', mousemove);
-		
+		removeEventListener("keydown",keydown);
 		b_hp = 950;
 		$("#container1").animate({
 			"width": b_hp + "px"
