@@ -398,14 +398,20 @@ $(document).ready(function () {
             }, 500);
         }
         else {//처음 화면 클릭
+            storyimgflag=true;
             $(this).fadeOut(500, function() {
                 // fadeOut() 메서드로 천천히 사라지고, 애니메이션 완료 후 콜백 함수 실행
                 $(this).attr("src", "./storyimg/프롤로그.gif"); // fadeIn() 메서드로 천천히 나타남
+                setTimeout(() => {
+                    $(this).trigger('click');
+                }, 20000);
                 //오디오 재생
             });
         }  
         storyimgflag=true;
     });
+
+
 
     // 스테이지1 esc 환경설정
     $("#set1").click(function() {

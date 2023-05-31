@@ -63,6 +63,12 @@ body {
     height: 600px;
     border: none;
 }
+#stageStoryImg{
+    width: 1000px;
+    height: 600px;
+    border: none;
+}
+
 
 #main-menu {
     display: none;
@@ -252,4 +258,3 @@ body {
     opacity: 0; /* 초기에 투명하게 설정 */
     transition: opacity 0.5s; /* 페이드 인 효과를 위한 transition 설정 */
   }
-  
