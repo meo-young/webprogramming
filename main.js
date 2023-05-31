@@ -446,7 +446,6 @@ $(document).ready(function () {
         if(storyimgflag==2) {//두번째 클릭
             //오디오 종료
             keyboardAudio.pause();
-            keyboardAudio2.pause();
             thunderAudio.pause();
             //메인메뉴 브금 넣기
             $("#story-menu").addClass("animateContent1");
