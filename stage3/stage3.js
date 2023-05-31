@@ -172,6 +172,8 @@ export function stageStart3(mainGold,effectOn) {
 	else if ($("#pCyan").hasClass("equip")) {
 		$("#playerImg3").attr("src", pCyanstdsrc);
 		playerColor = "cyan";
+		attack_stat = 50;
+		ballRadius = 20;
 	}
 	else if ($("#pWhite").hasClass("equip")) {
 		$("#playerImg3").attr("src", pWhitestdsrc);

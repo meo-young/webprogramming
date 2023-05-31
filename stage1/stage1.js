@@ -153,7 +153,8 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 	else if ($("#pCyan").hasClass("equip")) {
 		$("#playerImg1").attr("src", pCyanstdsrc);
 		playerColor = "cyan"; //
-
+		ballRadius = 20;
+		attack_stat = 50;
 	}
 	else if ($("#pWhite").hasClass("equip")) {
 		$("#playerImg1").attr("src", pWhitestdsrc);

@@ -161,6 +161,8 @@ export function stageStart2(mainGold,effectOn) {
 		else if ($("#pCyan").hasClass("equip")) {
 			$("#playerImg2").attr("src", pCyanstdsrc);
 			playerColor = "cyan";
+			attack_stat = 50;
+			ballRadius = 20;
 		}
 		else if ($("#pWhite").hasClass("equip")) {
 			$("#playerImg2").attr("src", pWhitestdsrc);
@@ -1406,7 +1408,7 @@ export function stageStart2(mainGold,effectOn) {
 				attack4 = 0;
 				wskill = 0;
 				wskill_count = 1;
-				b_hp_decrease();
+				b_hp_decrease(attack_stat*2);
 				fishdie();
 			}
 		}
