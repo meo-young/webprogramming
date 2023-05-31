@@ -504,24 +504,15 @@ $(document).ready(function () {
             setTimeout(() => {
                 if(storyimgflag == 1)
                 thunderAudio.play();
-            }, 4500);
-            setTimeout(() => {
-                thunderAudio.pause();
-            }, 7200);
+            }, 5400);
             setTimeout(() => {
                 if(storyimgflag == 1)
                 keyboardAudio.play();
             }, 8500);
             setTimeout(() => {
-                keyboardAudio.pause();
-            }, 9700);
-            setTimeout(() => {
                 if(storyimgflag == 1)
                 keyboardAudio.play();
             }, 12000);
-            setTimeout(() => {
-                keyboardAudio.pause();
-            }, 15200);
 
             $(this).fadeOut(500, function () {
                 // fadeOut() 메서드로 천천히 사라지고, 애니메이션 완료 후 콜백 함수 실행
