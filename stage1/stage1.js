@@ -1,4 +1,4 @@
-export function stageStart1(mainGold,effectOn) {
+export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potion3Num) {
 	/* 플레이어 스킬 변수 */
 	var qskill = 0;
 	var qskill_timer = 30;
@@ -39,17 +39,17 @@ export function stageStart1(mainGold,effectOn) {
 	var esc_count = 0;
 	var stop_pattern;
 	var qstop_pattern;
-	var gold = 0;
+	var gold = currentGold;
 	var drawinterval;
 	var damage_state = 0;
 	var damage;
 	var damage_count=0;
-	var damagex = bossx+bosswd;
-	var damagey = bossy + bossht;
+	var damagex;
+	var damagey;
 
 	var attack_stat;
 
-	var player_img = 1;;
+	var player_img = 1;
 	var player_img_count=0;
 
 	/*canvas 너비, 높이 */
@@ -129,9 +129,6 @@ export function stageStart1(mainGold,effectOn) {
 	var playerColor ="";
 	var player = new Image();
 
-	var paddle = new Image();
-	paddle.src = "./img/interface/sword.png";
-
 		// 착용중인 캐릭터 이미지로 변경
 	if ($("#pDefault").hasClass("equip")) {
 		$("#playerImg1").attr("src", pDefaultStdsrc);
@@ -167,8 +164,7 @@ export function stageStart1(mainGold,effectOn) {
 	bossshield_Img.src="./img/stage1/s1.png";
 	var sword_Img=new Image();
 	sword_Img.src="./img/stage1/a1.png";
-	var paddleImg = new Image();
-	paddleImg.src = "./img/player/paddle.png";
+
 
 	//오디오 소스
 	const brickAudio = new Audio('./오디오/player/벽돌.wav');
@@ -204,7 +200,7 @@ export function stageStart1(mainGold,effectOn) {
 		play_button.onclick = play;
 		var exit_button = document.getElementById("exit1");
 		exit_button.onclick = exit;
-		$("#canvas_screen").css({
+		$("#canvas_screen1").css({
 			"background" : "url(./backimg/back2.gif)"
 		});
 	}
@@ -283,7 +279,6 @@ export function stageStart1(mainGold,effectOn) {
 			fireball.src = "./img/stage1/af"+attack3_img+".png";
 		}
 		ballRadius = 10;
-		barwidth = 100;
 		if(qskill_cooltime== 1){
 			clearInterval(qskill_repeat);
 			qskill_cooltime = 0;
@@ -299,12 +294,12 @@ export function stageStart1(mainGold,effectOn) {
 		clearInterval(time_repeat);
 		init();
 		p_hp = 0;
-		b_hp = 950;
+		b_hp = 948;
 		$("#container1").animate({
 			"width": b_hp + "px"
 		});
 		var p_hp_array = $(".state1");
-		for(var i=0; i<3; i++){
+		for(var i=0; i<5; i++){
 			p_hp_array[i].src = "./img/player/playerHeartFull_25x25.png";
 		}
 		
@@ -326,10 +321,8 @@ export function stageStart1(mainGold,effectOn) {
 		var playerui = document.getElementById("player_UI1");
 		wdht = (window.outerHeight - cvht) / 4;
 		wdwd = (window.innerWidth - cvwd) / 2;
-		//var buwd = ((window.outerWidth) / 2);
 		screen.style.top = wdht + "px";
 		screen.style.left = wdwd + "px";
-		//button.style.left = buwd - 150 + "px";
 		bossui.style.left = (wdwd - 200) + "px";
 		bossui.style.top = wdht + "px";
 		playerui.style.left = (wdwd + cvwd) + "px";
@@ -377,7 +370,10 @@ export function stageStart1(mainGold,effectOn) {
 
 	function draw() {
 		context.clearRect(0, 0, cvwd, cvht);
-		$("#gold1").text("gold : "+gold);
+		$("#gold1").text("gold : " + gold);
+		$("#red1").text(potion1Num);
+		$("#blue1").text(potion2Num);
+		$("#green1").text(potion3Num);
 
 		/* 보스 공격 관련 조건문 */
 

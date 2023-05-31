@@ -49,9 +49,19 @@ export function stageStart2(mainGold,effectOn) {
 	var wstop_pattern;
 	var gold = 0;
 	var drawinterval;
+	var damage_state = 0;
+	var damage;
+	var damage_count=0;
+	var damagex;
+	var damagey;
+
+	var attack_stat;
+
+	var player_img = 1;
+	var player_img_count=0;
 
 	/*canvas 너비, 높이 */
-	var cvwd = 600;
+	var cvwd = 1000;
 	var cvht = 600;
 
 	/* 벽돌의 x,y좌표 */
@@ -84,8 +94,8 @@ export function stageStart2(mainGold,effectOn) {
 
 	/* 바(bar)의 x좌표 */
 	var barx = cvwd / 2;
-	var barwidth = 100;
-	var barheight = 10;
+	var barwidth = 80;
+	var barheight = 80;
 	var bar_state = 0;
 
 	/* window 높이 ,너비 */
@@ -102,7 +112,7 @@ export function stageStart2(mainGold,effectOn) {
 
 	/*플레이어, 보스 체력 */
 	var p_hp = 0;
-	var b_hp = 15;
+	var b_hp = 948;
 
 		//플레이어 이미지
 		var pDefaultStdsrc = "./img/player/playerStanding_32x32.gif";
@@ -132,6 +142,7 @@ export function stageStart2(mainGold,effectOn) {
 		if ($("#pDefault").hasClass("equip")) {
 			$("#playerImg2").attr("src", pDefaultStdsrc);
 			playerColor = "default";
+			attack_stat = 50;
 		}
 		else if ($("#pRed").hasClass("equip")) {
 			$("#playerImg2").attr("src", pRedStdsrc);
@@ -154,6 +165,7 @@ export function stageStart2(mainGold,effectOn) {
 			playerColor = "purple";
 		}
 	
+	var player = new Image();
 
 
 
@@ -216,7 +228,7 @@ export function stageStart2(mainGold,effectOn) {
 		play_button.onclick = play;
 		var exit_button = document.getElementById("exit2");
 		exit_button.onclick = exit;
-		$(".screen").css({
+		$("#canvas_screen2").css({
 			"background" : "url(./backimg/back4.gif)"
 		});
 	}
@@ -254,7 +266,7 @@ export function stageStart2(mainGold,effectOn) {
 		var bossui = document.getElementById("boss_UI2");
 		var playerui = document.getElementById("player_UI2");
 		wdht = (window.outerHeight - cvht) / 4;
-		wdwd = (window.outerWidth - cvwd) / 2;
+		wdwd = (window.innerWidth - cvwd) / 2;
 		screen.style.top = wdht + "px";
 		screen.style.left = wdwd + "px";
 		bossui.style.left = (wdwd - 200) + "px";
@@ -329,12 +341,12 @@ export function stageStart2(mainGold,effectOn) {
 		clearInterval(time_repeat);
 		init();
 		p_hp = 0;
-		b_hp = 20;
+		b_hp = 948;
 		$("#container2").animate({
-			"height": b_hp*15 + "px"
+			"width": b_hp + "px"
 		});
 		var p_hp_array = $(".state2");
-		for(var i=0; i<3; i++){
+		for(var i=0; i<5; i++){
 			p_hp_array[i].src = "./img/player/playerHeartFull_25x25.png";
 		}
 		
@@ -386,7 +398,7 @@ export function stageStart2(mainGold,effectOn) {
 		screen = document.getElementById("screen2");
 		context = screen.getContext("2d");
 		x = barx;
-		y = cvht - 20 - ballRadius;
+		y = cvht - 80 - ballRadius;
 		dx = 0;
 		dy = 0;
 	}
@@ -432,6 +444,26 @@ export function stageStart2(mainGold,effectOn) {
 		if (attack4 == 1) {
 			bossAttack4();
 		}
+		if(damage_state >= 1){
+			if(damage_state == 1){
+				if(damage_count != 0){
+					damage_count =0;
+				}
+				damagex = bossx+bosswd;
+				damagey = bossy + bossht;
+				damagex -= Math.floor(Math.random()*bosswd);
+				damagey -= Math.floor(Math.random()*bossht);
+				damage_state = 2;
+			}
+			else{
+				damage_count++;
+				if(damage_count % 80 == 0){
+					damage_state = 0;
+					damage_count = 0;
+				}
+			}
+			drawDamage(damage,damagex,damagey);
+		}
 	}
 
 	/* 공 그리는 함수 */
@@ -444,18 +476,15 @@ export function stageStart2(mainGold,effectOn) {
 
 	/* 바(bar) 그리는 함수 */
 	function drawPaddle() {
-		context.beginPath();
-		
-		if (bar_state == 0) {
-			context.fillStyle = "transparent";
-			context.rect((barx - barwidth / 2), cvht - 20, barwidth, barheight);
-			context.drawImage(paddleImg, (barx - barwidth / 2), cvht - 20, barwidth, barheight);
+		player_img_count++;
+		if(player_img_count % 20 == 0){
+			player_img++;
+			if(player_img == 5){
+				player_img =1;
+			}
+			player.src = "./img/player/pd"+player_img+".gif";
 		}
-		else if (bar_state == 1) {
-			context.fillStyle = "transparente";
-			context.drawImage(barice_Img,(barx - barwidth / 2)-barwidth/2, cvht - 20-barheight/2, barwidth*1.5, barheight*1.5)
-		}
-		context.fill();
+		context.drawImage(player, (barx - 40), cvht - 80, 80, 80);
 	}
 
 	/* 글씨 기본 설정 해주는 함수 */
@@ -467,7 +496,12 @@ export function stageStart2(mainGold,effectOn) {
 		context.fillText(text, cvwd / 2, cvht / 2);
 	}
 
-
+	function drawDamage(dm, x, y){
+		var text = "-"+dm;
+		context.font = "30px Chakra-Petch";
+		context.fillStyle = 'red';
+		context.fillText(text, x, y);
+	}
 
 	function drawshield() {
 		context.beginPath();
@@ -490,11 +524,10 @@ export function stageStart2(mainGold,effectOn) {
 	}
 
 	//보스 체력 감소 해주는 함수
-	function b_hp_decrease() {
+	function b_hp_decrease(att) {
 		if (attack4 == 1) {
 			return;
 		} else {
-			b_hp--;
 			if(effectOn){
 				let randtemp=Math.floor(Math.random() * 4)
 				if(randtemp==0)
@@ -508,10 +541,11 @@ export function stageStart2(mainGold,effectOn) {
 				if(b_hp==1)
 					bossdieAudio2.play();
 			}
-			hp();
-			var num = b_hp * 20;
+			damage = att - Math.floor(Math.random()*20);
+			b_hp -= damage;
+			damage_state = 1;
 			$("#container2").animate({
-				"height": num + "px"
+				"width": b_hp + "px"
 			});
 			if (b_hp < 0 || b_hp == 0) {
 				game_over(1);
@@ -578,15 +612,14 @@ export function stageStart2(mainGold,effectOn) {
 
 	//보스 체력 회복 해주는 함수
 	function b_hp_increase() {
-		if (b_hp == 20) {
+		if (b_hp == 948) {
 			return;
 		}
 		else {
 			b_hp++;
 			hp();
-			var num = b_hp * 15;
 			$("#container2").animate({
-				"height": num + "px"
+				"width": b_hp + "px"
 			});
 		}
 	}
@@ -602,12 +635,12 @@ export function stageStart2(mainGold,effectOn) {
 			p_hp_array[p_hp].src = "./img/player/playerHeartEmpty_25x25.png";
 			p_hp++;
 		}
-		if(p_hp == 1 || p_hp == 2){
+		if(p_hp <= 4){
 			p_hp_decrease_Img();
 			if(effectOn)
 				playerhitAudio.play();
 		}
-		if(p_hp == 3){
+		if(p_hp == 5){
 			game_over_Img();
 			game_over(2);
 			removeEventListener('keydown', keydown);
@@ -676,12 +709,12 @@ export function stageStart2(mainGold,effectOn) {
 				clearInterval(time_repeat);
 				init();
 				p_hp = 0;
-				b_hp = 20;
+				b_hp = 948;
 				$("#container2").animate({
-					"height": b_hp*15 + "px"
+					"width": b_hp + "px"
 				});
 				var p_hp_array = $(".state2");
-				for(var i=0; i<3; i++){
+				for(var i=0; i<5; i++){
 					p_hp_array[i].src = "./img/player/playerHeartFull_25x25.png";
 				}
 				
@@ -795,7 +828,8 @@ export function stageStart2(mainGold,effectOn) {
 	}
 	/* 플레이어, 보스 체력 출력해주는 함수 */
 	function hp() {
-		$("#bp_num2").text(b_hp);
+		var percent = parseInt(b_hp/948*100);
+		$("#bp_num2").text(percent+"%");
 	}
 
 	function game_over_Img() {
@@ -864,7 +898,7 @@ export function stageStart2(mainGold,effectOn) {
 				dy = -dy;
 				attack4 = 0;
 				brickAudio.play();
-				b_hp_decrease();
+				b_hp_decrease(attack_stat);
 				fishdie();
 			}
 			else if (x > attack4_brick_x - ballRadius && x < attack4_brick_x + 20 + ballRadius && y > attack4_brick_y - ballRadius && y < attack4_brick_y) {
@@ -872,7 +906,7 @@ export function stageStart2(mainGold,effectOn) {
 				dy = -dy;
 				attack4 = 0;
 				brickAudio.play();
-				b_hp_decrease();
+				b_hp_decrease(attack_stat);
 				fishdie();
 			}
 			else if (x > attack4_brick_x - ballRadius && x < attack4_brick_x && y > attack4_brick_y - ballRadius && y < attack4_brick_y + 20 + ballRadius) {
@@ -880,7 +914,7 @@ export function stageStart2(mainGold,effectOn) {
 				dx = -dx;
 				attack4 = 0;
 				brickAudio.play();
-				b_hp_decrease();
+				b_hp_decrease(attack_stat);
 				fishdie();
 			}
 			else if (x < attack4_brick_x + 20 + ballRadius && x > attack4_brick_x + 20 && y > attack4_brick_y - ballRadius && y < attack4_brick_y + 20 + ballRadius) {
@@ -888,7 +922,7 @@ export function stageStart2(mainGold,effectOn) {
 				dx = -dx;
 				attack4 = 0;
 				brickAudio.play();
-				b_hp_decrease();
+				b_hp_decrease(attack_stat);
 				fishdie();
 			}
 		}
@@ -897,7 +931,7 @@ export function stageStart2(mainGold,effectOn) {
 				b_hp_increase();
 			}
 			else {
-				b_hp_decrease();
+				b_hp_decrease(attack_stat);
 			}
 			dx = -dx;
 		}
@@ -906,15 +940,15 @@ export function stageStart2(mainGold,effectOn) {
 				b_hp_increase();
 			}
 			else {
-				b_hp_decrease();
+				b_hp_decrease(attack_stat);
 			}
 			dy = -dy;
 		}
 
 
-		if ((y > (cvht - 20 - ballRadius - yvelocity))) {
+		if ((y > (cvht - 80 - ballRadius - yvelocity))) {
 			if (x > barx + (barwidth / 2 + ballRadius) || x < barx - (barwidth / 2 + ballRadius)) { //바의 영역에서 벗어난 경우
-				if (y > (cvht - 20 - yvelocity)) {
+				if (y > (cvht - 80 - yvelocity)) {
 					ballRadius = 10;
 					init();
 					draw();
@@ -1270,7 +1304,6 @@ export function stageStart2(mainGold,effectOn) {
 			}
 
 		}
-		$("#timer2").text(timer);
 	}
 
 	//보스 캐릭터 주변에 초록색 원을 그려주는 함수

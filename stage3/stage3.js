@@ -644,7 +644,7 @@ export function stageStart3(mainGold,effectOn) {
 		if(effectOn){
 			let randtemp=Math.floor(Math.random() * 4)
 			if(randtemp==0)
-				bossAudio.play();
+		bossAudio.play();
 			else if(randtemp==1)
 				bossAudio2.play();
 			else if(randtemp==2)
@@ -1032,7 +1032,7 @@ export function stageStart3(mainGold,effectOn) {
 						bricks[i] = 0;
 						dy = -dy;
 						if(effectOn)
-							brickAudio.play();
+						brickAudio.play();
 						blood(brickx);
 					}
 					if (x > brickx - ballRadius - dxf && x < brickx && y < bricky + BRICKHEIGHT + ballRadius && y > bricky - ballRadius) { //벽돌의 왼쪽 부분과 충돌
@@ -1040,7 +1040,7 @@ export function stageStart3(mainGold,effectOn) {
 						bricks[i] = 0;
 						dx = -dx;
 						if(effectOn)
-							brickAudio.play();
+						brickAudio.play();
 						blood(brickx);
 					}
 					if (x < brickx + BRICKWIDTH + ballRadius + dxf && x > brickx + BRICKWIDTH && y < bricky + BRICKHEIGHT + ballRadius && y > bricky - ballRadius) { // 벽돌의 오른쪽 부분과 충돌
@@ -1048,7 +1048,7 @@ export function stageStart3(mainGold,effectOn) {
 						bricks[i] = 0;
 						dx = -dx;
 						if(effectOn)
-							brickAudio.play();
+						brickAudio.play();		
 						blood(brickx);
 					}
 					if (brickx + BRICKWIDTH > x && brickx < x && y > bricky - ballRadius && y < bricky) { // 벽돌의 윗 부분과 충돌
@@ -1056,7 +1056,7 @@ export function stageStart3(mainGold,effectOn) {
 						bricks[i] = 0;
 						dy = -dy;
 						if(effectOn)
-							brickAudio.play();
+						brickAudio.play();				
 						blood(brickx);
 					}
 				}
