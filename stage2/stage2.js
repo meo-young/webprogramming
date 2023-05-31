@@ -50,7 +50,7 @@ export function stageStart2(mainGold, effectOn, potion1Num, potion2Num, potion3N
 	var stop_pattern;
 	var qstop_pattern;
 	var wstop_pattern;
-	var gold = 0;
+	var gold = mainGold;
 	var drawinterval;
 	var damage_state = 0;
 	var damage;
@@ -397,7 +397,7 @@ export function stageStart2(mainGold, effectOn, potion1Num, potion2Num, potion3N
 				$("#select-stage").removeClass("animateContent2");
 			}, 1000);
 		}, 500);
-		$(".gold").html(mainGold + gold);//골드 추가 부분
+		$(".gold").html(gold);//골드 추가 부분
 	}
 
 	/*---------------------------------------------------------게임시작 관련 함수---------------------------------------------------------*/
