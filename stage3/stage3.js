@@ -1207,11 +1207,13 @@ export function stageStart3(mainGold, effectOn, potion1Num, potion2Num, potion3N
 				$("#stage-story").fadeIn(1000);
 			}, 6000);
 			setTimeout(() => {
-				keyboardAudio.play();
+				if (effectOn)
+					keyboardAudio.play();
 			}, 7000);
 			setTimeout(() => {
 				$("#stage-story").fadeOut(1000);
-				keyboardAudio.pause();
+				if (effectOn)
+					keyboardAudio.pause();
 			}, 10000);
 			setTimeout(() => {
 				$("#start-btn").trigger('click');
