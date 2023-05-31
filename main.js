@@ -7,6 +7,11 @@ $(document).ready(function () {
     var currentGold = 200;
     $(".gold").html(currentGold);
 
+    // 물약 개수 변수
+    var potion1Num = 0;
+    var potion2Num = 0;
+    var potion3Num = 0;
+
     // 현재 배경 img
     var currentIMG = $("#b1").attr("src");
 
@@ -111,7 +116,7 @@ $(document).ready(function () {
                 $("#stage1").addClass("animateContent2").css({ "display": "inline-block" });
             }, 500);
             currentGold=parseInt($(".gold").eq(0).text());
-            stageStart1(currentGold);
+            stageStart1(currentGold, effectOn, potion1Num, potion2Num, potion3Num);
         });
         // 두번째 보스 캔버스
         $("#stgbtn2").click(function() {
@@ -119,7 +124,7 @@ $(document).ready(function () {
                 $("#stage2").addClass("animateContent2").css({ "display": "inline-block" });
             }, 500);
             currentGold=parseInt($(".gold").eq(0).text());
-            stageStart2(currentGold);
+            stageStart2(currentGold, effectOn, potion1Num, potion2Num, potion3Num);
         });
         // 세번째 보스 캔버스
         $("#stgbtn3").click(function() {
@@ -127,7 +132,7 @@ $(document).ready(function () {
                 $("#stage3").addClass("animateContent2").css({ "display": "inline-block" });
             }, 500);
             currentGold=parseInt($(".gold").eq(0).text());
-            stageStart3(currentGold);
+            stageStart3(currentGold, effectOn, potion1Num, potion2Num, potion3Num);
         });
         // 뒤로가기 버튼 클릭 시 스테이지 화면과 메인 메뉴 애니메이션
         $("#stage-to-main").click(function () {
@@ -283,10 +288,7 @@ $(document).ready(function () {
             }
         });
         
-        // 물약 개수 변수
-        var potion1Num = 0;
-        var potion2Num = 0;
-        var potion3Num = 0;
+        
         $("#p1Num").html(potion1Num);
         $("#p2Num").html(potion2Num);
         $("#p3Num").html(potion3Num);
@@ -294,26 +296,41 @@ $(document).ready(function () {
         // 1번 물약 클릭시
         $("#potion1").click(function() {
             currentGold = parseInt($(".gold").eq(0).text());
-            potion1Num++;
-            currentGold -= 10;
-            $("#p1Num").html(potion1Num);
-            $(".gold").html(currentGold);
+            if (currentGold >= 10) {
+                potion1Num++;
+                currentGold -= 10;
+                $("#p1Num").html(potion1Num);
+                $(".gold").html(currentGold);
+            }
+            else {
+                alert("골드가 부족합니다!")
+            }
         });
         // 2번 물약 클릭시
         $("#potion2").click(function() {
             currentGold = parseInt($(".gold").eq(0).text());
-            potion2Num++;
-            currentGold -= 20;
-            $("#p2Num").html(potion2Num);
-            $(".gold").html(currentGold);
+            if (currentGold >= 20) {
+                potion2Num++;
+                currentGold -= 20;
+                $("#p2Num").html(potion2Num);
+                $(".gold").html(currentGold);
+            }
+            else {
+                alert("골드가 부족합니다!")
+            }
         });
         // 3번 물약 클릭시
         $("#potion3").click(function() {
             currentGold = parseInt($(".gold").eq(0).text());
-            potion3Num++;
-            currentGold -= 30;
-            $("#p3Num").html(potion3Num);
-            $(".gold").html(currentGold);
+            if (currentGold >= 30) {
+                potion3Num++;
+                currentGold -= 30;
+                $("#p3Num").html(potion3Num);
+                $(".gold").html(currentGold);
+            }
+            else {
+                alert("골드가 부족합니다!")
+            }
         });
 
         // 뒤로가기
