@@ -71,9 +71,12 @@ body {
     margin-right: 20px;
 }
 
+#title {
+    transform: scale(1.5);
+}
 #start-btn {    /* 스테이지 선택 화면으로 이동하는 버튼 */
     display: inline-block;
-    margin: 50px;
+    margin: 5px;
     width: 463px;
     height: 100px;
     background: url("./img/interface/start_463x100.png");
