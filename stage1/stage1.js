@@ -136,6 +136,7 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 
 	var playerColor ="";
 	var player = new Image();
+	var player_num;
 
 		// 착용중인 캐릭터 이미지로 변경
 	if ($("#pDefault").hasClass("equip")) {
@@ -143,36 +144,42 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 		playerColor = "default";
 		player.src = "./img/player/pd1.gif";
 		attack_stat = 50;
+		player_num = 1;
 	}
 	else if ($("#pRed").hasClass("equip")) {
 		$("#playerImg1").attr("src", pRedStdsrc);
 		playerColor = "red"; //도트데미지
 		firedot = 1;
 		attack_stat = 50;
+		player_num = 2;
 	}
 	else if ($("#pCyan").hasClass("equip")) {
 		$("#playerImg1").attr("src", pCyanstdsrc);
 		playerColor = "cyan"; //
 		ballRadius = 20;
 		attack_stat = 50;
+		player_num = 3;
 	}
 	else if ($("#pWhite").hasClass("equip")) {
 		$("#playerImg1").attr("src", pWhitestdsrc);
 		playerColor = "white"; //공격력 2배, 입는 피해2배
 		attack_stat = 100;
 		white = 1;
+		player_num = 4;
 	}
 	else if ($("#pYellow").hasClass("equip")) {
 		$("#playerImg1").attr("src", pYellowstdsrc);
 		playerColor = "yellow"; //공 즉시 회수
 		attack_stat = 50;
 		yellow = 1;
+		player_num = 5;
 	}
 	else if ($("#pPurple").hasClass("equip")) {
 		$("#playerImg1").attr("src", pPurplestdsrc);
 		playerColor = "purple"; //중독데미지 중첩 가능
 		attack_stat = 50;
 		purple = 1;
+		player_num = 6;
 	}
 	var fireball = new Image();
 	fireball.src = "./img/stage1/af1.png";
@@ -504,7 +511,24 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 			if(player_img == 5){
 				player_img =1;
 			}
-			player.src = "./img/player/pd"+player_img+".gif";
+			if(player_num == 1){
+				player.src = "./img/player/pd"+player_img+".gif";
+			}
+			else if(player_num == 2){
+				player.src = "./img/player/pr"+player_img+".gif";
+			}
+			else if(player_num == 3){
+				player.src = "./img/player/pc"+player_img+".gif";
+			}
+			else if(player_num == 4){
+				player.src = "./img/player/pw"+player_img+".gif";
+			}
+			else if(player_num == 5){
+				player.src = "./img/player/py"+player_img+".gif";
+			}
+			else if(player_num == 6){
+				player.src = "./img/player/pp"+player_img+".gif";
+			}
 		}
 		context.drawImage(player, (barx - 40), cvht - 80, 80, 80);
 	}
@@ -1292,7 +1316,7 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 		// }
 
 		if (timer % 6 == 0) {
-			var randnum = Math.floor(Math.random()*3);
+			var randnum = Math.floor(Math.random());
 			if (randnum == 0) { //첫번째 보스 패턴 ( 보스 배리어 )
 				attack1 = 1;
 				bs_barrier = 1;
@@ -1356,14 +1380,11 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 	}
 
 	function bossAttack1_attacked(){
-		attack1_img_count = 0;
-		attack1_img = 1;
 		attack1_img_count++;
 		if(attack1_img_count % 50 == 0){
 			attack1_img++;
 			if(attack1_img == 4){
 				clearInterval(attack1_repeat);
-				attack1 = 0;
 				attack1_img_count = 0;
 				attack1_img = 1;
 			}
