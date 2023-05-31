@@ -438,6 +438,9 @@ export function stageStart2(mainGold, effectOn, potion1Num, potion2Num, potion3N
 		y = cvht - 80 - ballRadius;
 		dx = 0;
 		dy = 0;
+		potion1Num=parseInt($("#p1Num").text());
+		potion2Num=parseInt($("#p2Num").text());
+		potion3Num=parseInt($("#p3Num").text());
 	}
 
 	function draw() {
