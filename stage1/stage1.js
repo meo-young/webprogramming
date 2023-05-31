@@ -1,4 +1,4 @@
-export function stageStart1(mainGold,effectOn) {
+export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potion3Num) {
 	/* 플레이어 스킬 변수 */
 	var qskill = 0;
 	var qskill_timer = 30;
@@ -39,7 +39,7 @@ export function stageStart1(mainGold,effectOn) {
 	var esc_count = 0;
 	var stop_pattern;
 	var qstop_pattern;
-	var gold = 0;
+	var gold = currentGold;
 	var drawinterval;
 	var damage_state = 0;
 	var damage;
@@ -370,7 +370,10 @@ export function stageStart1(mainGold,effectOn) {
 
 	function draw() {
 		context.clearRect(0, 0, cvwd, cvht);
-		$("#gold1").text("gold : "+gold);
+		$("#gold1").text("gold : " + gold);
+		$("#red1").text(potion1Num);
+		$("#blue1").text(potion2Num);
+		$("#green1").text(potion3Num);
 
 		/* 보스 공격 관련 조건문 */
 
