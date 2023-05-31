@@ -1315,20 +1315,23 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 				$("#p1Num").html(potion1Num); 
 				var p_hp_array = $(".state1");
 				p_hp_array[p_hp].src = "./img/player/playerHeartFull_25x25.png";
-				potion1Audio.play();
+				if (effectOn)
+					potion1Audio.play();
 			}
 		}
 		else if(event.keyCode == 50 && potion2Num>= 1){//2번 눌렀을 때 포션 사용
 			potion2Num--;
 			$("#p2Num").html(potion2Num); 
-			potion2Audio.play();
+			if (effectOn)
+				potion2Audio.play();
 			
 				
 		}
 		else if(event.keyCode == 51 && potion3Num>= 1){//3번 눌렀을 때 포션 사용
 			potion3Num--;
 			$("#p3Num").html(potion3Num); 
-			potion3Audio.play();
+			if (effectOn)
+				potion3Audio.play();
 		}
 
 

@@ -1394,21 +1394,24 @@ export function stageStart2(mainGold, effectOn, potion1Num, potion2Num, potion3N
 				$("#p1Num").html(potion1Num); 
 				var p_hp_array = $(".state2");
 				p_hp_array[p_hp].src = "./img/player/playerHeartFull_25x25.png";
-				potion1Audio.play();
+				if (effectOn)
+					potion1Audio.play();
 				
 			}
 		}
 		else if(event.keyCode == 50 && potion2Num>= 1){// 포션 2 먹을 때
 			potion2Num--;
 			$("#p2Num").html(potion2Num); 
-			potion2Audio.play();
+			if (effectOn)
+				potion2Audio.play();
 				
 		}
 		else if(event.keyCode == 51 && potion3Num>= 1){// 포션 3 먹을 때
 			
 			potion3Num--;
 			$("#p3Num").html(potion3Num); 
-			potion3Audio.play();
+			if (effectOn)
+				potion3Audio.play();
 		}
 
 		if (keydown_count == 0) {

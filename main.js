@@ -341,7 +341,8 @@ $(document).ready(function () {
                 if ($(".pChar").hasClass("equip"))
                     $(".pChar").removeClass("equip");
                 $(this).addClass("equip"); // 착용중으로 변경
-                changeSkin.play();
+                if (effectOn)
+                    changeSkin.play();
             }
             else if ($(this).hasClass("equip")) {
                 $(this).removeClass("equip");
@@ -352,11 +353,13 @@ $(document).ready(function () {
                         currentGold -= 100;
                         $(".gold").html(currentGold);
                         $(this).addClass("owned");
-                        buySkin.play();
+                        if (effectOn)
+                            buySkin.play();
                     }
                     else {
                         alert("골드가 부족합니다!");
-                        buyCant.play();
+                        if (effectOn)
+                            buyCant.play();
                     }
                 }
             }
@@ -372,11 +375,13 @@ $(document).ready(function () {
                 currentGold -= 10;
                 $("#p1Num").html(potion1Num);
                 $(".gold").html(currentGold);
-                buyPotion.play();
+                if (effectOn)
+                    buyPotion.play();
             }
             else {
                 alert("골드가 부족합니다!");
-                buyCant.play();
+                if (effectOn)
+                    buyCant.play();
             }
         });
         // 2번 물약 클릭시
@@ -388,11 +393,13 @@ $(document).ready(function () {
                 currentGold -= 20;
                 $("#p2Num").html(potion2Num);
                 $(".gold").html(currentGold);
-                buyPotion.play();
+                if (effectOn)
+                    buyPotion.play();
             }
             else {
                 alert("골드가 부족합니다!");
-                buyCant.play();
+                if (effectOn)
+                    buyCant.play();
             }
         });
         // 3번 물약 클릭시
@@ -404,11 +411,13 @@ $(document).ready(function () {
                 currentGold -= 30;
                 $("#p3Num").html(potion3Num);
                 $(".gold").html(currentGold);
-                buyPotion.play();
+                if (effectOn)
+                    buyPotion.play();
             }
             else {
                 alert("골드가 부족합니다!");
-                buyCant.play();
+                if (effectOn)
+                    buyCant.play();
             }
         });
 
