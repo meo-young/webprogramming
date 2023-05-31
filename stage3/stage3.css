@@ -1,93 +1,88 @@
 body {
     margin: 0;
     padding: 0;
+    background-size: cover;
 }
 
-#esc_menu3 {
-    display: none;
-}
-#play3 {
-    width: 179px;
-    height: 49px;
-    background: url("../img/interface/esc_play.png");
-    border: none;
-}
-#set3 {
-    width: 289px;
-    height: 43px;
-    background: url("../img/interface/settings_289x43.png");
-    border: none;
-}
-#exit3 {
-    width: 160px;
-    height: 51px;
-    background: url("../img/interface/esc_exit.png");
-    border: none;
-}
 
-/* 캔버스 */
-#screen3 {
-    float: left;
-}
-
-#gamestart3 {
-    position: fixed;
-    width: 300px;
-    height: 50px;
-    font-size: 20px;
-}
-
-/* 왼쪽 보스 */
 #boss_UI3 {
-    float: left;
-    width: 200px;
-    height: 600px;
-}
-
-/* 오른쪽 플레이어 */
-#player_UI3 {
-    float: left;
-    width: 200px;
-    height: 600px;
-}
-
-/* 플레이어 hp */
-#player_state3 {
-    margin-top: 100px;
-}
-/* 골드 */
-#gold3 {
-    margin-top: 100px;
-}
-/* 보스 hp */
-#boss_bar3 {
-    margin: 50px 90px;
-}
-#container3 {
-    width: 20px;
-    height: 300px;
-    background-color: red;
-}
-/* 플레이어 스킬 */
-#skill3 {
-    margin-top: 70px;
-    margin-left: 10px;
-}
-
-#skill3 div p {
-    text-align: center;
     margin: 0;
-    padding: 0;
+    width: 1000px;
+    height: 50px;
+}
+
+#boss_img3 {
+    position: relative;
+    float: left;
+    top: 0;
+    left: 0;
+}
+
+#boss_bar3 {
+    float: left;
+}
+
+
+#player_UI3 {
+    width: 1000px;
+    height: 150px;
+    background: url("../img/interface/player_bar.png");
+}
+
+#player_img3 {
+    position: relative;
+    float: left;
+    margin-left: 30px;
+    margin-top: 20px;
+    margin-right: 20px;
+}
+
+#player_state3 {
+    margin-top: 15px;
+    position: relative;
+    float: left;
+    height: 50px;
+}
+
+#container3 {
+    width: 948px;
+    height: 15px;
+    background-color: red;
+    border-image: url("./img/interface/bar.png") 27;
+    border-radius: 5px;
+    border: 1px gray solid;
+}
+
+#bp_num3 {
+    width: 940px;
+    height: 20px;
+    text-align: left;
+    padding-left: 10px;
+    padding-top: 10px;
+}
+
+#skill3 {
+    float: left;
+    height: 100px;
+    width: 270px;
 }
 
 #skill3 div {
+    width: 70px;
+    height: 30px;
     float: left;
 }
 
-#skill3 img {
-    border: 1px solid black;
-    margin: 5px;
+#skill3 div:nth-of-type(1){
+    margin-left: 15px;
+    margin-right: 15px;
 }
+
+#skill3 div:nth-of-type(3){
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
 
 #qtimer3 {
     border: 1px solid black;
@@ -120,5 +115,28 @@ body {
     line-height: 50px;
     font-size: 25px;
     text-align: center;
+}
+
+
+#esc_menu3 {
+    display: none;
+}
+#play3 {
+    width: 179px;
+    height: 49px;
+    background: url("../img/interface/esc_play.png");
+    border: none;
+}
+#set3 {
+    width: 289px;
+    height: 43px;
+    background: url("../img/interface/settings_289x43.png");
+    border: none;
+}
+#exit3 {
+    width: 160px;
+    height: 51px;
+    background: url("../img/interface/esc_exit.png");
+    border: none;
 }
 
