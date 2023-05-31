@@ -504,7 +504,11 @@ $(document).ready(function () {
             setTimeout(() => {
                 if(storyimgflag == 1)
                 thunderAudio.play();
+<<<<<<< HEAD
             }, 5500);
+=======
+            }, 5400);
+>>>>>>> f29b4f7b317d98d651dd01d38bd7ee2dfbdd2797
             setTimeout(() => {
                 if(storyimgflag == 1)
                 keyboardAudio.play();
