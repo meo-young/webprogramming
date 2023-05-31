@@ -154,7 +154,7 @@ export function stageStart2(mainGold,effectOn, potion1Num, potion2Num, potion3Nu
 		if ($("#pDefault").hasClass("equip")) {
 			$("#playerImg2").attr("src", pDefaultStdsrc);
 			playerColor = "default";
-			attack_stat = 50;
+			attack_stat = 5000;
 			player_num = 1;
 		}
 		else if ($("#pRed").hasClass("equip")) {
@@ -1020,15 +1020,21 @@ export function stageStart2(mainGold,effectOn, potion1Num, potion2Num, potion3Nu
 			if(effectOn)
 				winAudio.play();
 			drawText("You Win");
-			$("#stage2").fadeOut(7000,()=>{
-				$("#stageStoryImg").attr("src", "./storyimg/stage2B.gif");
-				$("#stage-story").fadeIn(1,()=>{
-					keyboardAudio.play();
-					setTimeout(()=>{
-						keyboardAudio.pause();
-					},4000);
-				});
-				setTimeout(()=>{$("#stgbtn3").trigger('click');},4000);});
+			$("#stageStoryImg").attr("src", "./storyimg/stage2B.gif");
+			$("#stage2").fadeOut(6000);
+			setTimeout(()=>{
+				$("#stage-story").fadeIn(1000);
+			},6000);
+			setTimeout(()=>{
+				keyboardAudio.play();
+			},7000);
+			setTimeout(()=>{
+				$("#stage-story").fadeOut(1000);
+				keyboardAudio.pause();
+			},10000);
+			setTimeout(()=>{
+				$("#stgbtn3").trigger('click');
+			},12000);
 		}
 		else if (who == 2) {
 			if(effectOn)

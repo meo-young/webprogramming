@@ -996,16 +996,21 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 			boss_img = 1;
 			boss_img_count = 0;
 			boss_finish_repeat = setInterval(deathmotion,1);
-			$("#stage1").fadeOut(7000,()=>{
-				$("#stageStoryImg").attr("src", "./storyimg/stage1B.gif");
-				$("#stage-story").fadeIn(1,()=>{
-					keyboardAudio.play();
-					setTimeout(()=>{
-						keyboardAudio.pause();
-					},4000);
-				});
-				setTimeout(()=>{$("#stgbtn2").trigger('click');},4000);
-			});
+			$("#stageStoryImg").attr("src", "./storyimg/stage1B.gif");
+			$("#stage1").fadeOut(6000);
+			setTimeout(()=>{
+				$("#stage-story").fadeIn(1000);
+			},6000);
+			setTimeout(()=>{
+				keyboardAudio.play();
+			},7000);
+			setTimeout(()=>{
+				$("#stage-story").fadeOut(1000);
+				keyboardAudio.pause();
+			},10000);
+			setTimeout(()=>{
+				$("#stgbtn2").trigger('click');
+			},12000);
 		}
 		else if (who == 2) {
 			if(effectOn)

@@ -1158,17 +1158,22 @@ export function stageStart3(mainGold,effectOn,potion1Num, potion2Num, potion3Num
 			if(effectOn){
 				winAudio.play();
 			}
-				$("#stage3").fadeOut(7000,()=>{
-					$("#stageStoryImg").attr("src", "./storyimg/stage3B.gif");
-					$("#stage-story").fadeIn(1,()=>{
-						keyboardAudio.play();
-						setTimeout(()=>{
-							keyboardAudio.pause();
-							$("#stage-story").hide(500);
-						},3500);
-					});
-					setTimeout(()=>{$("#start-btn").trigger('click');},4000);
-				});
+			$("#stageStoryImg").attr("src", "./storyimg/stage3B.gif");
+			$("#stage3").fadeOut(6000);
+			setTimeout(()=>{
+				$("#stage-story").fadeIn(1000);
+			},6000);
+			setTimeout(()=>{
+				keyboardAudio.play();
+			},7000);
+			setTimeout(()=>{
+				$("#stage-story").fadeOut(1000);
+				keyboardAudio.pause();
+			},10000);
+			setTimeout(()=>{
+				$("#start-btn").trigger('click');
+			},12000);
+
 		}
 		else if (who == 2) {
 			drawText("You Lose");
