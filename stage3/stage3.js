@@ -1185,6 +1185,11 @@ export function stageStart3(mainGold, effectOn, potion1Num, potion2Num, potion3N
 	function game_over(who) {
 		keydown_count = 1;
 		removeEventListener('mousemove', mousemove);
+		removeEventListener('keydown',keydown);
+		b_hp = 1896;
+		$("#container1").animate({
+			"width": b_hp + "px"
+		});
 		clearInterval(repeat);
 		clearInterval(attack1_repeat);
 		clearInterval(attack4_timer);

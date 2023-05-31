@@ -142,6 +142,8 @@ body {
 
 #esc_menu3 {
     display: none;
+    line-height: 250px;
+
 }
 #play3 {
     width: 300px;
