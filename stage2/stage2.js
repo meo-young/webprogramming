@@ -91,8 +91,8 @@ export function stageStart2(mainGold,effectOn, potion1Num, potion2Num, potion3Nu
 	var ballRadius = 10;
 
 	/* 공의 이동속도 */
-	var xvelocity = 3;
-	var yvelocity = 3;
+	var xvelocity = 2;
+	var yvelocity = 2;
 	var dx;
 	var dy;
 
@@ -120,7 +120,7 @@ export function stageStart2(mainGold,effectOn, potion1Num, potion2Num, potion3Nu
 
 	/*플레이어, 보스 체력 */
 	var p_hp = 0;
-	var b_hp = 948;
+	var b_hp = 1422;
 
 		//플레이어 이미지
 		var pDefaultStdsrc = "./img/player/playerStanding_32x32.gif";
@@ -375,9 +375,9 @@ export function stageStart2(mainGold,effectOn, potion1Num, potion2Num, potion3Nu
 		clearInterval(time_repeat);
 		init();
 		p_hp = 0;
-		b_hp = 948;
+		b_hp = 1422;
 		$("#container2").animate({
-			"width": b_hp + "px"
+			"width": b_hp/2*3 + "px"
 		});
 		var p_hp_array = $(".state2");
 		for(var i=0; i<5; i++){
@@ -512,7 +512,7 @@ export function stageStart2(mainGold,effectOn, potion1Num, potion2Num, potion3Nu
 				b_hp -= poison_damage;
 				hp();
 				$("#container1").animate({
-					"width": b_hp + "px"
+					"width": b_hp/2*3 + "px"
 				});
 				if (b_hp < 0 || b_hp == 0) {
 					game_over(1);
@@ -529,7 +529,7 @@ export function stageStart2(mainGold,effectOn, potion1Num, potion2Num, potion3Nu
 		if(player_num == 1){
 			context.beginPath();
 			context.arc(x, y, ballRadius, 0, Math.PI * 2);
-			context.fillStyle = "black";
+			context.fillStyle = "white";
 			context.fill();
 		}
 		else {
@@ -605,7 +605,7 @@ export function stageStart2(mainGold,effectOn, potion1Num, potion2Num, potion3Nu
 	/* 보스를 그려주는 함수 */
 	function boss() {
 		bossx = (cvwd - bosswd) / 2;
-		bossy = 10;
+		bossy = 0;
 		context.drawImage(bossImg, bossx, bossy, bosswd, bossht);
 	}
 
@@ -632,7 +632,7 @@ export function stageStart2(mainGold,effectOn, potion1Num, potion2Num, potion3Nu
 			damage_state = 1;
 			hp();
 			$("#container2").animate({
-				"width": b_hp + "px"
+				"width": b_hp/2*3 + "px"
 			});
 			if(firedot == 1){
 				setTimeout(function(){
@@ -722,14 +722,14 @@ export function stageStart2(mainGold,effectOn, potion1Num, potion2Num, potion3Nu
 
 	//보스 체력 회복 해주는 함수
 	function b_hp_increase() {
-		if (b_hp == 948) {
+		if (b_hp == 1422) {
 			return;
 		}
 		else {
 			b_hp++;
 			hp();
 			$("#container2").animate({
-				"width": b_hp + "px"
+				"width": b_hp/2*3 + "px"
 			});
 		}
 	}
@@ -819,9 +819,9 @@ export function stageStart2(mainGold,effectOn, potion1Num, potion2Num, potion3Nu
 				clearInterval(time_repeat);
 				init();
 				p_hp = 0;
-				b_hp = 948;
+				b_hp = 1422;
 				$("#container2").animate({
-					"width": b_hp + "px"
+					"width": b_hp/2*3 + "px"
 				});
 				var p_hp_array = $(".state2");
 				for(var i=0; i<5; i++){
@@ -913,9 +913,9 @@ export function stageStart2(mainGold,effectOn, potion1Num, potion2Num, potion3Nu
 				clearInterval(time_repeat);
 				init();
 				p_hp = 0;
-				b_hp = 950;
+				b_hp = 1422;
 				$("#container1").animate({
-					"width": b_hp + "px"
+					"width": b_hp/2*3 + "px"
 				});
 				var p_hp_array = $(".state1");
 				for(var i=0; i<5; i++){
@@ -1044,7 +1044,7 @@ export function stageStart2(mainGold,effectOn, potion1Num, potion2Num, potion3Nu
 	}
 	/* 플레이어, 보스 체력 출력해주는 함수 */
 	function hp() {
-		var percent = parseInt(b_hp/948*100);
+		var percent = parseInt(b_hp/1422*100);
 		$("#bp_num2").text(percent+"%");
 	}
 
@@ -1281,6 +1281,13 @@ export function stageStart2(mainGold,effectOn, potion1Num, potion2Num, potion3Nu
 	/* 스페이스바를 누를 경우 공 발사
 	스페이스바를 누르면 start_number 변수에 1값이 대입되고, 스킬을 사용할 수 있게 됨 */
 	function keydown(event) {
+		if(event.keyCode == 82){
+			attack_stat = 1500;
+		}
+		if(event.keyCode == 84){
+			p_hp = 4;
+			p_hp_decrease();
+		}
 		if(event.keyCode == 27 && esc_count == 0){
 			$("#boss_UI2").css({
 				display : "none"

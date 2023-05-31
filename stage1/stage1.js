@@ -83,8 +83,8 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 	var ballRadius = 10;
 
 	/* 공의 이동속도 */
-	var xvelocity = 3;
-	var yvelocity = 3;
+	var xvelocity = 2;
+	var yvelocity = 2;
 	var dx;
 	var dy;
 
@@ -516,7 +516,7 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 		if(player_num == 1){
 			context.beginPath();
 			context.arc(x, y, ballRadius, 0, Math.PI * 2);
-			context.fillStyle = "black";
+			context.fillStyle = "white";
 			context.fill();
 		}
 		else {
@@ -607,7 +607,7 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 	/* 보스를 그려주는 함수 */
 	function boss() {
 		bossx = (cvwd - bosswd) / 2;
-		bossy = 10;
+		bossy = 0;
 		boss_img_count++;
 		if(boss_img_count % 50 == 0){
 			boss_img++;
