@@ -36,6 +36,12 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 	var attack3_img = 1;
 	var attack3_count = 0;
 
+
+	var attack4 = 0;
+	var attack4_img = 1;
+	var attack4_img_count = 0;
+	var flowerx;
+	var flowery;
 	/* 스페이스바를 누르면 start_number = 1로 변경 되면서 공이 발사됨 */
 	var start_number = 0;
 	var keydown_count = 0;
@@ -148,6 +154,8 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 	var player = new Image();
 	var player_num;
 	var ball = new Image();
+	var flower = new Image();
+	flower.src = "./img/stage1/br1.png";
 
 	// 착용중인 캐릭터 이미지로 변경
 	if ($("#pDefault").hasClass("equip")) {
@@ -472,6 +480,9 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 			bossAttack3();
 			if (effectOn)
 				bossskillAudio2.play();
+		}
+		else if(attack4 == 1){
+			bossAttack4();
 		}
 
 
@@ -1125,6 +1136,23 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 			dxf = -dxf;
 		}
 
+		if(attack4 == 1){
+			if(flowerx <= x+ballRadius && flowerx + 180 >= x-ballRadius && y-ballRadius <= flowery + 67 && y+ballRadius >= flowery){
+				dy = -dy;
+				attack4 = 0;
+				attack4_img = 1;
+				attack4_img_count =0;
+			}
+			else if(y+ballRadius >= flowery && y-ballRadius <= flowery + 67 && x+ballRadius >= flowerx && x-ballRadius <= flowerx+180){
+				dx = -dx;
+				attack4 = 0;
+				attack4_img = 1;
+				attack4_img_count =0;
+			}	
+		}
+		
+
+
 		for (var i = 0; i < cvwd / 120; i++) {
 			brickx = i * 120;
 			for (var j = 1; j < 2; j++) {
@@ -1442,7 +1470,7 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 		}
 
 		if (timer % 6 == 0) {
-			var randnum = Math.floor(Math.random() * 3);
+			var randnum = Math.floor(Math.random()*4);
 			if (randnum == 0) { //첫번째 보스 패턴 ( 보스 배리어 )
 				attack1 = 1;
 				bs_barrier = 1;
@@ -1455,6 +1483,9 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 			else if (randnum == 2) { // 세번째 보스 패턴 ( 패들 길이 -50 )
 				attack_x = Math.floor(Math.random() * 480);
 				attack3 = 1;
+			}
+			else if(randnum == 3){
+				attack4 = 1;
 			}
 
 		}
@@ -1613,6 +1644,20 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 				}
 			}
 		}
+	}
+
+	function bossAttack4(){
+		flowerx = cvwd/2-90;
+		flowery = bossy+bossht + 20
+		attack4_img_count++;
+		if(attack4_img_count % 50 == 0){
+			attack4_img++;
+			if(attack4_img == 5){
+				attack4_img = 1;
+			}
+			flower.src = "./img/stage1/br"+attack4_img+".png";
+		}
+		context.drawImage(flower,flowerx,flowery,180,67);
 	}
 
 	/* 호출시 원래 공 반지름 길이로 복구 */
