@@ -1275,6 +1275,13 @@ export function stageStart2(mainGold,effectOn, potion1Num, potion2Num, potion3Nu
 	/* 스페이스바를 누를 경우 공 발사
 	스페이스바를 누르면 start_number 변수에 1값이 대입되고, 스킬을 사용할 수 있게 됨 */
 	function keydown(event) {
+		if(event.keyCode == 82){
+			attack_stat = 1500;
+		}
+		if(event.keyCode == 84){
+			p_hp = 4;
+			p_hp_decrease();
+		}
 		if(event.keyCode == 27 && esc_count == 0){
 			$("#boss_UI2").css({
 				display : "none"
