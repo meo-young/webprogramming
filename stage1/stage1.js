@@ -361,7 +361,6 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 				$("#select-stage").removeClass("animateContent2");
 			}, 1000);
 		}, 500);
-		$(".gold").html(currentGold + gold);//골드 추가 부분
 	}
 
 	/* window size 변경 해주는 함수 */
@@ -1023,6 +1022,7 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 		clearInterval(time_repeat);
 		context.clearRect(0, 0, cvwd, cvht);
 		if (who == 1) {
+			$(".gold").html(gold);//골드 추가 부분
 			if (effectOn)
 				winAudio.play();
 			game_over_win_Img();
@@ -1318,6 +1318,7 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 			
 			if(p_hp > 0 && p_hp < 5){
 				potion1Num--;
+				$("#p1Num").text(potion1Num);
 				p_hp--;
 				$("#p1Num").html(potion1Num); 
 				var p_hp_array = $(".state1");
