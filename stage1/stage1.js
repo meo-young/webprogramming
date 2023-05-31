@@ -1,4 +1,4 @@
-export function stageStart1() {
+export function stageStart1(mainGold,effectOn) {
 	/* 플레이어 스킬 변수 */
 	var qskill = 0;
 	var qskill_timer = 30;
@@ -167,9 +167,20 @@ export function stageStart1() {
 
 
 	//오디오 소스
-	const brickAudio = new Audio('./audio/brickbreak.mp3');
-	const swingAudio = new Audio('./audio/swing.mp3');
-	const bossAudio=new Audio('./audio/bosshit.mp3');
+	const brickAudio = new Audio('./오디오/player/벽돌.wav');
+	const swingAudio = new Audio('./오디오/player/칼휘두르는소리.mp3');
+	const bossAudio=new Audio('./오디오/boss/bosshit.mp3');
+	const bossAudio2=new Audio('./오디오/boss/bosshit2.mp3');
+	const bossAudio3=new Audio('./오디오/boss/bosshit3.mp3');
+	const playerhitAudio=new Audio('./오디오/player/플래이어 피격 (1).wav');
+	const bossskillAudio=new Audio('./오디오/stage1/보스기합.wav');
+	const bossskillAudio2=new Audio('./오디오/stage1/폭발공격.wav');
+	const countdownAudio=new Audio('./오디오/Interface/카운트다운.mp3');
+	const bossdieAudio=new Audio('./오디오/stage1/보스피격.wav');
+	const bossdieAudio2=new Audio('./오디오/stage1/보스사망.wav');
+	const qskillonAudio=new Audio('./오디오/player/q스킬쉴드장착.mp3');
+	const winAudio=new Audio('./audio/win_7s.mp3');
+	const loseAudio=new Audio('./audio/lose_7s.mp3');
 
 	pageLoad();
 	wait();
@@ -183,6 +194,8 @@ export function stageStart1() {
 
 
 	function pageLoad(){
+		if(effectOn)
+			setTimeout(countdownAudio.play(),1000);
 		var play_button = document.getElementById("play1");
 		play_button.onclick = play;
 		var exit_button = document.getElementById("exit1");
@@ -357,6 +370,8 @@ export function stageStart1() {
 
 	function draw() {
 		context.clearRect(0, 0, cvwd, cvht);
+		$("#gold1").text("gold : "+gold);
+
 		/* 보스 공격 관련 조건문 */
 
 		/* drawPaddle 관련 위치 조건문 */
@@ -384,12 +399,21 @@ export function stageStart1() {
 		collision();
 		if (attack1 == 1) {
 			bossAttack1();
+			if(effectOn)
+			bossskillAudio.play();
+
 		}
 		else if (attack2 == 1) {
 			bossAttack2();
+			if(effectOn)
+			bossskillAudio.play();
+
 		}
 		else if(attack3 == 1){
 			bossAttack3();
+			if(effectOn)
+			bossskillAudio2.play();
+
 		}
 
 		if(damage_state >= 1){
@@ -489,7 +513,20 @@ export function stageStart1() {
 		damage = att - Math.floor(Math.random()*20);
 		b_hp -= damage;
 		damage_state = 1;
-		bossAudio.play();
+		if(effectOn){
+			let randtemp=Math.floor(Math.random() * 4)
+			if(randtemp==0)
+				bossAudio.play();
+			else if(randtemp==1)
+				bossAudio2.play();
+			else if(randtemp==2)
+				bossAudio3.play();
+			else
+				bossdieAudio.play();
+			if(b_hp==1)
+				bossdieAudio2.play();
+
+		}
 		hp();
 		$("#container1").animate({
 			"width": b_hp + "px"
@@ -556,8 +593,14 @@ export function stageStart1() {
 
 		if(p_hp <= 4){
 			p_hp_decrease_Img();
+			if(effectOn)
+			playerhitAudio.play();
+
 		}
 		if(p_hp == 5){
+			if(effectOn)
+			playerhitAudio.play();
+
 			game_over_Img();
 			game_over(2);
 			removeEventListener('keydown', keydown);
@@ -724,11 +767,15 @@ export function stageStart1() {
 		clearInterval(time_repeat);
 		context.clearRect(0, 0, cvwd, cvht);
 		if (who == 1) {
+			if(effectOn)
+			winAudio.play();
 			drawText("You Win");
 			game_over_win_Img();
 			deathmotion();
 		}
 		else if (who == 2) {
+			if(effectOn)
+			loseAudio.play();
 			drawText("You Lose");
 			game_over_Img();
 			winmotion();
@@ -813,25 +860,29 @@ export function stageStart1() {
 						context.clearRect(brickx, bricky, BRICKWIDTH, BRICKHEIGHT);
 						bricks[i] = 0;
 						dy = -dy;
-						brickAudio.play();
+						if(effectOn)
+							brickAudio.play();
 					}
 					if (x > brickx - ballRadius - dxf && x < brickx && y < bricky + BRICKHEIGHT + ballRadius && y > bricky - ballRadius) { //벽돌의 왼쪽 부분과 충돌
 						context.clearRect(brickx, bricky, BRICKWIDTH, BRICKHEIGHT);
 						bricks[i] = 0;
 						dx = -dx;
-						brickAudio.play();
+						if(effectOn)
+							brickAudio.play();
 					}
 					if (x < brickx + BRICKWIDTH + ballRadius + dxf && x > brickx + BRICKWIDTH && y < bricky + BRICKHEIGHT + ballRadius && y > bricky - ballRadius) { // 벽돌의 오른쪽 부분과 충돌
 						context.clearRect(brickx, bricky, BRICKWIDTH, BRICKHEIGHT);
 						bricks[i] = 0;
 						dx = -dx;
-						brickAudio.play();
+						if(effectOn)
+							brickAudio.play();
 					}
 					if (brickx + BRICKWIDTH > x && brickx < x && y > bricky - ballRadius && y < bricky) { // 벽돌의 윗 부분과 충돌
 						context.clearRect(brickx, bricky, BRICKWIDTH, BRICKHEIGHT);
 						bricks[i] = 0;
 						dy = -dy;
-						brickAudio.play();
+						if(effectOn)
+							brickAudio.play();
 					}
 				}
 			}
@@ -876,14 +927,16 @@ export function stageStart1() {
 			} else if (x > barx - (barwidth / 2 + ballRadius) && x < barx + (barwidth / 2 + ballRadius)) { //바의 영역에 있는 경우	
 				if(dy > 0){
 					gold += 5;
-					swingAudio.play();
+					if(effectOn)
+						swingAudio.play();
 				}
 				dx = xvelocity * (x - barx) / (barwidth + ballRadius / 2);
 				dy = -dy;
 			} else { //바의 영역의 마지노선에 맞닿는 경우
 				if(dy > 0){
 					gold += 5;
-					swingAudio.play();
+					if(effectOn)
+						swingAudio.play();
 				}
 				dy = -dy;
 				dx = -dx;
@@ -1000,6 +1053,9 @@ export function stageStart1() {
 					$("#qtimer1").text(qskill_timer); //쿨타임 글씨 활성화
 					qskill_repeat = setInterval(skill_timer1, 1000);
 					qskill_cooltime = 1;
+					if(effectOn){
+						qskillonAudio.play();
+					}
 				}
 			}
 		}
