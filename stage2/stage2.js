@@ -1,4 +1,4 @@
-export function stageStart2(mainGold,effectOn) {
+export function stageStart2(mainGold,effectOn, potion1Num, potion2Num, potion3Num) {
 	/* 플레이어 스킬 변수 */
 	var qskill = 0;
 	var qskill_timer = 30;
@@ -420,6 +420,10 @@ export function stageStart2(mainGold,effectOn) {
 	function draw() {
 		context.clearRect(0, 0, cvwd, cvht);
 		$("#gold2").text("gold : "+gold);
+		$("#red2").text(potion1Num);
+		$("#blue2").text(potion2Num);
+		$("#green2").text(potion3Num);
+		
 		/* drawPaddle 관련 위치 조건문 */
 		if (barx > (cvwd - barwidth / 2)) {
 			barx = cvwd - barwidth / 2;
