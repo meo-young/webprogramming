@@ -160,6 +160,8 @@ export function stageStart3(mainGold,effectOn) {
 	else if ($("#pRed").hasClass("equip")) {
 		$("#playerImg3").attr("src", pRedStdsrc);
 		playerColor = "red";
+		attack_stat = 3;
+		firedot = 1;
 	}
 	else if ($("#pCyan").hasClass("equip")) {
 		$("#playerImg3").attr("src", pCyanstdsrc);

@@ -150,6 +150,7 @@ export function stageStart2(mainGold,effectOn) {
 			$("#playerImg2").attr("src", pRedStdsrc);
 			playerColor = "red";
 			firedot = 1;
+			attack_stat = 50;
 		}
 		else if ($("#pCyan").hasClass("equip")) {
 			$("#playerImg2").attr("src", pCyanstdsrc);

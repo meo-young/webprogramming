@@ -142,6 +142,7 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 		$("#playerImg1").attr("src", pRedStdsrc);
 		playerColor = "red"; //도트데미지
 		firedot = 1;
+		attack_stat = 50;
 	}
 	else if ($("#pCyan").hasClass("equip")) {
 		$("#playerImg1").attr("src", pCyanstdsrc);
