@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="./stage2/stage2.css">
     <link rel="stylesheet" href="./stage3/stage3.css">
     <link href="https://fonts.googleapis.com/css2?family=Gugi&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@1,300&family=Nanum+Gothic&display=swap" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
@@ -21,7 +22,7 @@
             <button id="audioVol"></button> <!-- bgm 온/오프 버튼 -->
             <p class="gold"></p> <!-- 골드 수급 상황 표시 -->
             <br><br><br><br>
-            <img src="./img/interface/title.gif" width="671px" height="166px" id="title">
+            <img src="./img/interface/title_734x93.png" width="734px" height="93px">
             <button id="start-btn" class="main-btn"></button>
             <br><br>
             <button id="settings-btn" class="main-btn"></button>
@@ -86,45 +87,45 @@
                 <br>
                 <input id="exit1" type="button">
             </div>
+            <div id="canvas_screen">
             <div id="boss_UI1">
                 <div id="boss_img1">
                     <img class="character" src="./img/stage1/boss.png" width="50px" height="50px">
                 </div>
                 <div id="boss_bar1">
                     <div id="container1"></div>
-                    <div id="bp_num1">20</div>
+                    <div id="bp_num1">100%</div>
                 </div>
             </div>
-        
-            <div id="canvas_screen">
+    
                 <canvas id="screen1" width="1000" height="600"></canvas>
             </div>
 
             <div id="player_UI1">
                 <div id="player_img1">
-                    <img class="character" id="playerImg1" src="./img/player/playerStanding_32x32.gif" width="180px"
-                        height="150px">
+                    <img class="character" id="playerImg1" src="./img/player/playerStanding_32x32.gif" width="100px"
+                        height="100px">
                 </div>
                 <div id="player_state1">
                     <div> 
-                        <img src="./img/player/playerHeartFull_25x25.png" class="state1" width="50px" height="50px">
-                        <img src="./img/player/playerHeartFull_25x25.png" class="state1" width="50px" height="50px">
-                        <img src="./img/player/playerHeartFull_25x25.png" class="state1" width="50px" height="50px">
-                        <img src="./img/player/playerHeartFull_25x25.png" class="state1" width="50px" height="50px">
-                        <img src="./img/player/playerHeartFull_25x25.png" class="state1" width="50px" height="50px"></div>
+                        <img src="./img/player/playerHeartFull_25x25.png" class="state1" width="40px" height="40px">
+                        <img src="./img/player/playerHeartFull_25x25.png" class="state1" width="40px" height="40px">
+                        <img src="./img/player/playerHeartFull_25x25.png" class="state1" width="40px" height="40px">
+                        <img src="./img/player/playerHeartFull_25x25.png" class="state1" width="40px" height="40px">
+                        <img src="./img/player/playerHeartFull_25x25.png" class="state1" width="40px" height="40px"></div>
                     <div id="skill1">
                         <div>
                             <p>Q</p>
                             <div id="qtimer1"></div>
-                            <img id="qskill1" src="./img/player/qskill.png" width="70px" height="70px">
+                            <img id="qskill1" src="./img/player/qskill.jpg" width="50px" height="50px">
                         </div>
                         <div>
                             <p>W</p>
-                            <img id="wskill1" src="./img/interface/lock.png" width="70px" height="70px">
+                            <img id="wskill1" src="./img/interface/lock.png" width="50px" height="50px">
                         </div>
                         <div>
                             <p>E</p>
-                            <img id="eskill1" src="./img/interface/lock.png" width="70px" height="70px">
+                            <img id="eskill1" src="./img/interface/lock.png" width="50px" height="50px">
                         </div>
                     </div>
                 </div>

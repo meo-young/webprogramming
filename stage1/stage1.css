@@ -1,3 +1,9 @@
+@font-face{
+    font-family: 'bitbit';
+    src:url('//cdn.df.nexon.com/img/common/font/DNFBitBit-Regular.woff'),url('//cdn.df.nexon.com/img/common/font/DNFBitBit-Regular.woff2')
+    format("woff");
+  }
+
 body {
     margin: 0;
     padding: 0;
@@ -9,7 +15,6 @@ body {
     margin: 0;
     width: 1000px;
     height: 50px;
-    background-color: white;
 }
 
 #boss_img1 {
@@ -27,31 +32,39 @@ body {
 #player_UI1 {
     width: 1000px;
     height: 150px;
-    background-color: white;
+    background: url("../img/interface/player_bar.png");
 }
 
 #player_img1 {
     position: relative;
     float: left;
-    top: 0;
-    left: 0;
+    margin-left: 30px;
+    margin-top: 20px;
+    margin-right: 20px;
 }
 
 #player_state1 {
+    margin-top: 15px;
     position: relative;
     float: left;
     height: 50px;
 }
 
 #container1 {
-    width: 950px;
+    width: 948px;
     height: 15px;
     background-color: red;
+    border-image: url("./img/interface/bar.png") 27;
+    border-radius: 5px;
+    border: 1px gray solid;
 }
 
 #bp_num1 {
-    width: 950px;
-    height: 35px;
+    width: 940px;
+    height: 20px;
+    text-align: left;
+    padding-left: 10px;
+    padding-top: 10px;
 }
 
 #skill1 {
@@ -75,19 +88,6 @@ body {
     margin-left: 15px;
     margin-right: 15px;
 }
-/* #player_state1 {
-    margin-top: 100px;
-}
-
-#boss_bar1 {
-    margin: 50px 90px;
-}
-
-
-#skill1 img {
-    border: 1px solid black;
-    margin: 5px;
-} */
 
 #qtimer1 {
     border: 1px solid black;
@@ -101,10 +101,11 @@ body {
 }
 
 
-
-/* #gold1 {
-    margin-top: 100px;
-} */
+ #gold1 {
+    width: 50px;
+    height: 50px;
+    float: left;
+}
 
 #esc_menu1 {
     

@@ -111,7 +111,7 @@ $(document).ready(function () {
                 $("#stage1").addClass("animateContent2").css({ "display": "inline-block" });
             }, 500);
             currentGold=parseInt($(".gold").eq(0).text());
-            stageStart1(currentGold,effectOn);
+            stageStart1(currentGold);
         });
         // 두번째 보스 캔버스
         $("#stgbtn2").click(function() {
@@ -119,7 +119,7 @@ $(document).ready(function () {
                 $("#stage2").addClass("animateContent2").css({ "display": "inline-block" });
             }, 500);
             currentGold=parseInt($(".gold").eq(0).text());
-            stageStart2(currentGold,effectOn);
+            stageStart2(currentGold);
         });
         // 세번째 보스 캔버스
         $("#stgbtn3").click(function() {
@@ -127,7 +127,7 @@ $(document).ready(function () {
                 $("#stage3").addClass("animateContent2").css({ "display": "inline-block" });
             }, 500);
             currentGold=parseInt($(".gold").eq(0).text());
-            stageStart3(currentGold,effectOn);
+            stageStart3(currentGold);
         });
         // 뒤로가기 버튼 클릭 시 스테이지 화면과 메인 메뉴 애니메이션
         $("#stage-to-main").click(function () {

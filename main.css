@@ -1,3 +1,8 @@
+@font-face{
+    font-family: bitbit;
+    src:url('//cdn.df.nexon.com/img/common/font/DNFBitBit-Regular.woff'),url('//cdn.df.nexon.com/img/common/font/DNFBitBit-Regular.woff2') ;
+  }
+
 * {
     margin: 0;
     padding: 0;
@@ -71,12 +76,9 @@ body {
     margin-right: 20px;
 }
 
-#title {
-    transform: scale(1.5);
-}
 #start-btn {    /* 스테이지 선택 화면으로 이동하는 버튼 */
     display: inline-block;
-    margin: 5px;
+    margin: 50px;
     width: 463px;
     height: 100px;
     background: url("./img/interface/start_463x100.png");
