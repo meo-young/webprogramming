@@ -504,7 +504,7 @@ $(document).ready(function () {
             setTimeout(() => {
                 if(storyimgflag == 1)
                 thunderAudio.play();
-            }, 4500);
+            }, 5400);
             setTimeout(() => {
                 thunderAudio.pause();
             }, 7200);
