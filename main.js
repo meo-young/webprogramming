@@ -40,6 +40,9 @@ $(document).ready(function () {
     var keyboardAudio = new Audio("./storyimg/키보드소리.mp3");
     var keyboardAudio2 = new Audio("./storyimg/키보드소리.mp3");
     var thunderAudio = new Audio("./storyimg/펑소리.mp3");
+    var buySkin = new Audio("./audio/구매성공.mp3");
+    var buyCant = new Audio("./audio/구매실패.mp3");
+    var buyPotion = new Audio("./audio/포션구매.mp3");
 
     var currentBGM = mainBgm;    // 현재 재생/중지 상태의 음악파일, 환경설정에서 변경 가능
     var storyimgflag = 0;
@@ -347,9 +350,11 @@ $(document).ready(function () {
                         currentGold -= 100;
                         $(".gold").html(currentGold);
                         $(this).addClass("owned");
+                        buySkin.play();
                     }
                     else {
                         alert("골드가 부족합니다!");
+                        buyCant.play();
                     }
                 }
             }
@@ -365,9 +370,11 @@ $(document).ready(function () {
                 currentGold -= 10;
                 $("#p1Num").html(potion1Num);
                 $(".gold").html(currentGold);
+                buyPotion.play();
             }
             else {
-                alert("골드가 부족합니다!")
+                alert("골드가 부족합니다!");
+                buyCant.play();
             }
         });
         // 2번 물약 클릭시
@@ -379,9 +386,11 @@ $(document).ready(function () {
                 currentGold -= 20;
                 $("#p2Num").html(potion2Num);
                 $(".gold").html(currentGold);
+                buyPotion.play();
             }
             else {
-                alert("골드가 부족합니다!")
+                alert("골드가 부족합니다!");
+                buyCant.play();
             }
         });
         // 3번 물약 클릭시
@@ -393,9 +402,11 @@ $(document).ready(function () {
                 currentGold -= 30;
                 $("#p3Num").html(potion3Num);
                 $(".gold").html(currentGold);
+                buyPotion.play();
             }
             else {
-                alert("골드가 부족합니다!")
+                alert("골드가 부족합니다!");
+                buyCant.play();
             }
         });
 
