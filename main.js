@@ -7,6 +7,7 @@ $(document).ready(function () {
     var currentGold = 200;
     $(".gold").html(currentGold);
 
+    var counttt = 0;
     // 물약 개수 변수
     var potion1Num = 0;
     var potion2Num = 0;
@@ -119,7 +120,10 @@ $(document).ready(function () {
                 $("#stage1").addClass("animateContent2").css({ "display": "inline-block" });
             }, 500);
             currentGold=parseInt($(".gold").eq(0).text());
-            stageStart1(currentGold, effectOn, potion1Num, potion2Num, potion3Num);
+            if(counttt == 0){
+                counttt = 1;
+                stageStart1(currentGold, effectOn, potion1Num, potion2Num, potion3Num);
+            }
         });
         // 두번째 보스 캔버스
         $("#stgbtn2").click(function() {
