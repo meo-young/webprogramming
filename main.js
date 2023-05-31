@@ -126,6 +126,7 @@ $(document).ready(function () {
             if (effectOn) {
                 clickSound.play();   // 버튼 클릭 효과음
             }
+            currentBGM.pause();
             showGif('./storyimg/stage1A.gif');
             setTimeout(()=>{
                 $("#select-stage").removeClass("animateContent2").addClass("animateContent1");    // 스테이지 선택 페이지 전환 효과 (작아지는)
@@ -462,18 +463,26 @@ $(document).ready(function () {
             }, 500);
         }
         else if(storyimgflag==1){//처음 화면 클릭
-            storyimgflag=true;
             currentBGM.pause();
             setTimeout(() => {
                 keyboardAudio.play();
-            keyboardAudio.addEventListener('ended',function(){
-                keyboardAudio.removeEventListener('ended',$(this));
-                thunderAudio.play();
-                thunderAudio.addEventListener('ended',()=>{
-                    keyboardAudio2.play();
-                })
-            })
             }, 1000);
+            setTimeout(() => {
+                keyboardAudio.pause();
+            }, 4000);
+            setTimeout(() => {
+                thunderAudio.play();
+            }, 5500);
+            setTimeout(() => {
+                thunderAudio.pause();
+            }, 8000);
+            setTimeout(() => {
+                keyboardAudio.play();
+            }, 10000);
+            setTimeout(() => {
+                keyboardAudio.play();
+            }, 16000);
+
             $(this).fadeOut(500, function() {
                 // fadeOut() 메서드로 천천히 사라지고, 애니메이션 완료 후 콜백 함수 실행
                 $(this).attr("src", "./storyimg/prologe.gif").fadeIn(500); // fadeIn() 메서드로 천천히 나타남
