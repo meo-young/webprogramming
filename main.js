@@ -12,6 +12,12 @@ $(document).ready(function () {
     var potion2Num = 3;
     var potion3Num = 3;
 
+    
+    $("#p1Num").html(potion1Num);
+    $("#p2Num").html(potion2Num);
+    $("#p3Num").html(potion3Num);
+
+
     // 현재 배경 img
     var currentIMG = $("#b1").attr("src");
 
@@ -137,6 +143,7 @@ $(document).ready(function () {
                     $("#stage1").addClass("animateContent2").css({ "display": "inline-block" });
                 }, 500);
                 currentGold = parseInt($(".gold").eq(0).text());
+                potion1Num = parseInt($("#p1Num").eq(0).text()); 
                 stageStart1(currentGold, effectOn, potion1Num, potion2Num, potion3Num);
             }, 5100)
         });
@@ -156,6 +163,7 @@ $(document).ready(function () {
                     $("#stage2").addClass("animateContent2").css({ "display": "inline-block" });
                 }, 500);
                 currentGold = parseInt($(".gold").eq(0).text());
+                potion2Num = parseInt($("#p2Num").eq(0).text()); 
                 stageStart2(currentGold, effectOn, potion1Num, potion2Num, potion3Num);
             }, 5100);
         });
@@ -175,6 +183,7 @@ $(document).ready(function () {
                     $("#stage3").addClass("animateContent2").css({ "display": "inline-block" });
                 }, 500);
                 currentGold = parseInt($(".gold").eq(0).text());
+                potion3Num = parseInt($("#p3Num").eq(0).text()); 
                 stageStart3(currentGold, effectOn, potion1Num, potion2Num, potion3Num);
             }, 5100);
         });
@@ -347,13 +356,10 @@ $(document).ready(function () {
         });
 
 
-        $("#p1Num").html(potion1Num);
-        $("#p2Num").html(potion2Num);
-        $("#p3Num").html(potion3Num);
-
         // 1번 물약 클릭시
         $("#potion1").off('click').on('click', function () {
             currentGold = parseInt($(".gold").eq(0).text());
+            potion1Num = parseInt($("#p1Num").eq(0).text()); 
             if (currentGold >= 10) {
                 potion1Num++;
                 currentGold -= 10;
@@ -367,6 +373,7 @@ $(document).ready(function () {
         // 2번 물약 클릭시
         $("#potion2").off('click').on('click', function () {
             currentGold = parseInt($(".gold").eq(0).text());
+            potion2Num = parseInt($("#p2Num").eq(0).text());
             if (currentGold >= 20) {
                 potion2Num++;
                 currentGold -= 20;
@@ -380,6 +387,7 @@ $(document).ready(function () {
         // 3번 물약 클릭시
         $("#potion3").off('click').on('click', function () {
             currentGold = parseInt($(".gold").eq(0).text());
+            potion3Num = parseInt($("#p3Num").eq(0).text());
             if (currentGold >= 30) {
                 potion3Num++;
                 currentGold -= 30;

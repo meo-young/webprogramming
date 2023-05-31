@@ -1530,6 +1530,28 @@ export function stageStart3(mainGold, effectOn, potion1Num, potion2Num, potion3N
 			}
 			stop_pattern = 0;
 		}
+		else if(event.keyCode == 49 && potion1Num>= 1){
+			
+			if(p_hp > 0 && p_hp < 5){
+				potion1Num--;
+				p_hp--;
+				$("#p1Num").html(potion1Num); 
+				var p_hp_array = $(".state3");
+				p_hp_array[p_hp].src = "./img/player/playerHeartFull_25x25.png";
+				
+			}
+		}
+		else if(event.keyCode == 50 && potion2Num>= 1){
+			potion2Num--;
+			$("#p2Num").html(potion2Num); 
+				
+		}
+		else if(event.keyCode == 51 && potion3Num>= 1){
+			
+			potion3Num--;
+			$("#p3Num").html(potion3Num); 
+		}
+
 		if (keydown_count == 0) {
 			if (start_number == 0) {
 				//스페이스바를 누를경우
