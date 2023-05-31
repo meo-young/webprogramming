@@ -40,14 +40,6 @@ export function stageStart3(mainGold,effectOn) {
 
 	var attack2 = 0;
 
-	var attack3 = 0;
-	var xmemory;
-	var ymemory;
-	var attack3_timer = 0;
-	var attack3_repeat;
-	var attack3_count = 0;
-	var stop_state = 0;
-
 
 	var attack4 = 0;
 	var attack_bricks = [0, 0, 0, 0, 0];
@@ -306,12 +298,6 @@ export function stageStart3(mainGold,effectOn) {
 				razer_Img.src = "./img/stage3/l2.png";
 				clearInterval(attack1_repeat);
 			}
-			else if(attack3 == 1){
-				attack3 = 0;
-				clearInterval(attack3_repeat);
-				attack3_timer = 0;
-				attack3_count = 0;
-			}
 			else if (attack4 == 1){
 				attack4 = 0;
 				attack4_count = 0;
@@ -387,9 +373,7 @@ export function stageStart3(mainGold,effectOn) {
 					$("#select-stage").removeClass("animateContent2");
 				}, 1000);
 			}, 500);
-			$(".screen").css({
-				"background" : "url(./backimg/back1.gif)"
-			});
+
 	}
 
 
@@ -399,11 +383,9 @@ export function stageStart3(mainGold,effectOn) {
 		var bossui = document.getElementById("boss_UI3");
 		var playerui = document.getElementById("player_UI3");
 		wdht = (window.outerHeight - cvht) / 4;
-		wdwd = (window.outerWidth - cvwd) / 2;
-		//var buwd = ((window.outerWidth) / 2);
+		wdwd = (window.innerWidth - cvwd) / 2;
 		screen.style.top = wdht + "px";
 		screen.style.left = wdwd + "px";
-		//button.style.left = buwd - 150 + "px";
 		bossui.style.left = (wdwd - 200) + "px";
 		bossui.style.top = wdht + "px";
 		playerui.style.left = (wdwd + cvwd) + "px";
@@ -520,13 +502,7 @@ export function stageStart3(mainGold,effectOn) {
 	function drawBall() {
 		context.beginPath();
 		context.arc(x, y, ballRadius, 0, Math.PI * 2);
-		if (attack3_count == 1) {
-			context.fillStyle = "blue";
-			context.drawImage(iceball_Img,x-ballRadius*2, y-ballRadius*2, ballRadius*5, ballRadius*5);
-		}
-		else {
-			context.fillStyle = "black";
-		}
+		context.fillStyle = "black";
 		context.fill();
 	}
 
@@ -563,7 +539,7 @@ export function stageStart3(mainGold,effectOn) {
 		var brickx;
 		var bricky;
 		for (var i = 0; i < cvwd / 120; i++) {
-			brickx = i * 120;
+			brickx = i * 200;
 			for (var j = 1; j < 2; j++) {
 				bricky = j * 220;
 				if (bricks[i] == 1) {
@@ -580,18 +556,18 @@ export function stageStart3(mainGold,effectOn) {
 	function drawbrick2() {
 		var brickx;
 		var bricky;
-		var wd = 120;
-		var ht = 70;
+		var wd = 200;
+		var ht = 140;
 		for (var i = 0; i < cvwd / 120; i++) {
 			if (i == rand) {
 				continue;
 			}
-			brickx = i * 120;
+			brickx = i * 200;
 			for (var j = 1; j < 2; j++) {
 				bricky = j * 300 + yplus;
 				if (bricky > cvht) {
 					if (rand == 0) {
-						if (barx + barwidth / 2 < 120) {
+						if (barx + barwidth / 2 < 200) {
 						}
 						else {
 							if (qskill == 1) {
@@ -602,7 +578,7 @@ export function stageStart3(mainGold,effectOn) {
 							}
 						}
 					} else if (rand == 4) {
-						if (barx - barwidth / 2 > 120 * (rand - 1) + wd) {
+						if (barx - barwidth / 2 > 200 * (rand - 1) + wd) {
 						}
 						else {
 							if (qskill == 1) {
@@ -614,7 +590,7 @@ export function stageStart3(mainGold,effectOn) {
 						}
 					}
 					else {
-						if (barx - barwidth / 2 > (rand - 1) * 120 + wd && barx + barwidth / 2 < (rand + 1) * 120) {
+						if (barx - barwidth / 2 > (rand - 1) * 200 + wd && barx + barwidth / 2 < (rand + 1) * 200) {
 						} else {
 							if (qskill == 1) {
 								qskill = 0;
@@ -799,12 +775,6 @@ export function stageStart3(mainGold,effectOn) {
 					razer_Img.src = "./img/stage3/l2.png";
 					clearInterval(attack1_repeat);
 				}
-				else if(attack3 == 1){
-					attack3 = 0;
-					clearInterval(attack3_repeat);
-					attack3_timer = 0;
-					attack3_count = 0;
-				}
 				else if (attack4 == 1){
 					attack4 = 0;
 					attack4_count = 0;
@@ -975,7 +945,6 @@ export function stageStart3(mainGold,effectOn) {
 		removeEventListener('mousemove', mousemove);
 		clearInterval(repeat);
 		clearInterval(attack1_repeat);
-		clearInterval(attack3_repeat);
 		clearInterval(attack4_timer);
 		clearInterval(time_repeat);
 		context.clearRect(0, 0, cvwd, cvht);
@@ -1054,7 +1023,7 @@ export function stageStart3(mainGold,effectOn) {
 		}
 
 		for (var i = 0; i < cvwd / 120; i++) {
-			brickx = i * 120;
+			brickx = i * 200;
 			for (var j = 1; j < 2; j++) {
 				bricky = j * 220;
 				if (bricks[i] == 1) {
@@ -1225,10 +1194,6 @@ export function stageStart3(mainGold,effectOn) {
 				clearInterval(attack1_repeat);
 				stop_pattern = 1;
 			}
-			else if(attack3 == 1){
-				clearInterval(attack3_repeat);
-				stop_pattern = 3;
-			}
 			else if (attack4 == 1){
 				clearInterval(attack4_timer);
 				stop_pattern = 4;
@@ -1271,9 +1236,6 @@ export function stageStart3(mainGold,effectOn) {
 			if(stop_pattern == 1){	
 				attack1_repeat = setInterval(bossAttack1_timer, 1000);
 			}
-			else if(stop_pattern == 3){
-				attack3_repeat = setInterval(bossAttack3_timer, 1000); 
-			}
 			else if(stop_pattern == 4){
 				attack4_timer = setInterval(bossAttack4_timer, 200);
 			}
@@ -1298,7 +1260,7 @@ export function stageStart3(mainGold,effectOn) {
 				//스페이스바를 누를경우
 				if (event.keyCode == 32) {
 					start_number = 1;
-					dy = -yvelocity;
+					dy = yvelocity;
 					if (drawinterval == 0) {
 						repeat = setInterval(draw, 1);
 					}
@@ -1424,7 +1386,7 @@ export function stageStart3(mainGold,effectOn) {
 			}
 		}
 		if (wskill_count == 0 && ypl < bossy + bossht && attack_x + 30 >= bossx && attack_x <= bossx + bosswd) {
-			b_hp_decrease();
+			b_hp_decrease(attack_stat*2);
 			wskill_count = 1;
 			wskill = 0;
 			wskill_Img.src = "./img/stage3/blast1.png";
@@ -1473,7 +1435,7 @@ export function stageStart3(mainGold,effectOn) {
 		if (eskill != 1) {
 			timer += 1;
 			if (timer % 6 == 0) {
-				var randnum = Math.floor(Math.random()*4);
+				var randnum = Math.floor(Math.random()*3);
 				if (randnum == 0) {
 					attack1 = 1;
 					razerflag=true;
@@ -1487,12 +1449,6 @@ export function stageStart3(mainGold,effectOn) {
 					attack2 = 1;
 				}
 				else if (randnum == 2) {
-					attack3 = 1;
-					bossAttack3();
-					attack3_repeat = setInterval(bossAttack3_timer, 1000);
-					attack3_count = 1;
-				}
-				else if (randnum == 3) {
 					attack4 = 1;
 					attack4_count = 0;
 					rand = Math.floor(Math.random() * 5);
@@ -1520,12 +1476,6 @@ export function stageStart3(mainGold,effectOn) {
 				bsimg.src = "./img/stage3/ba"+attack1_img+".png";
 				razer_Img.src = "./img/stage3/l2.png";
 				clearInterval(attack1_repeat);
-			}
-			else if (attack3 == 1) {
-				attack3 = 0;
-				clearInterval(attack3_repeat);
-				attack3_timer = 0;
-				attack3_count = 0;
 			}
 			else if (attack4 == 1) {
 				attack4 = 0;
@@ -1620,26 +1570,6 @@ export function stageStart3(mainGold,effectOn) {
 		drawbrick();
 	}
 
-	/* 공 정지 공격 */
-	function bossAttack3_timer() {
-		attack3_timer += 1;
-		if (attack3_timer == 3) {
-			attack3_timer = 0;
-			dx = xmemory;
-			dy = ymemory;
-			attack3 = 0;
-			attack3_count = 0;
-			clearInterval(attack3_repeat);
-		}
-	}
-
-	function bossAttack3() {
-			xmemory = dx;
-			ymemory = dy;
-			dx = 0;
-			dy = 0;
-			stop_state = 1;
-	}
 
 	/* 벽돌 내려오면서 공격 */
 	function bossAttack4_timer() {

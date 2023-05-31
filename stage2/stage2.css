@@ -109,9 +109,12 @@ body {
 
 
 #gold2 {
-    margin-top: 100px;
+    width: 100px;
+    height: 50px;
+    margin-top: 70px;
+    margin-left: 50px;
+    float: left;
 }
-
 #esc_menu2 {
     
     display: none;
