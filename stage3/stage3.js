@@ -737,7 +737,7 @@ export function stageStart3(mainGold,effectOn) {
 		if(effectOn){
 			let randtemp=Math.floor(Math.random() * 4)
 			if(randtemp==0)
-		bossAudio.play();
+				bossAudio.play();
 			else if(randtemp==1)
 				bossAudio2.play();
 			else if(randtemp==2)
@@ -1117,6 +1117,7 @@ export function stageStart3(mainGold,effectOn) {
 		}
 		else if (who == 2) {
 			drawText("You Lose");
+			if(effectOn)
 				loseAudio.play();
 		}
 	}
@@ -1267,14 +1268,16 @@ export function stageStart3(mainGold,effectOn) {
 			} else if (x > barx - (barwidth / 2 + ballRadius) && x < barx + (barwidth / 2 + ballRadius)&&start_number == 1) { //바의 영역에 있는 경우	
 				if(dy > 0){
 					gold += 5;
-					swingAudio.play();
+					if(effectOn)
+						swingAudio.play();
 				}
 				dx = xvelocity * (x - barx) / (barwidth + ballRadius / 2);
 				dy = -dy;
 			} else { //바의 영역의 마지노선에 맞닿는 경우
 				if(dy > 0){
 					gold += 5;
-					swingAudio.play();
+					if(effectOn)
+						swingAudio.play();
 				}
 				dy = -dy;
 				dx = -dx;
@@ -1666,7 +1669,8 @@ export function stageStart3(mainGold,effectOn) {
 	function bossAttack1() {
 		if(razerflag){
 			razerflag=false;
-			razerAudio1.play();
+			if(effectOn)
+				razerAudio1.play();
 			setTimeout(function() {
 				razerAudio1.pause();
 			  }, 3000); // 3초를 밀리초로 변환한 값입니다.
@@ -1682,7 +1686,8 @@ export function stageStart3(mainGold,effectOn) {
 		else if (attack1_timer == 4) { //1초 경과시 패들이 위치에 존재하면 사용자의 hp --
 			if(razerflag2){
 				razerflag2=false;
-				razerAudio2.play();
+				if(effectOn)
+					razerAudio2.play();
 			}
 	
 			context.drawImage(bsimg,coordinate,100,60,72);
