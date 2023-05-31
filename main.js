@@ -497,22 +497,22 @@ $(document).ready(function () {
             setTimeout(() => {
                 if(storyimgflag == 1)
                 keyboardAudio.play();
-            }, 800);
+            }, 750);
             setTimeout(() => {
                 keyboardAudio.pause();
             }, 2300);
             setTimeout(() => {
                 if(storyimgflag == 1)
                 thunderAudio.play();
-            }, 4500);
+            }, 5500);
             setTimeout(() => {
                 if(storyimgflag == 1)
                 keyboardAudio.play();
-            }, 8500);
+            }, 10750);
             setTimeout(() => {
                 if(storyimgflag == 1)
                 keyboardAudio.play();
-            }, 12000);
+            }, 15000);
 
             $(this).fadeOut(500, function () {
                 // fadeOut() 메서드로 천천히 사라지고, 애니메이션 완료 후 콜백 함수 실행
