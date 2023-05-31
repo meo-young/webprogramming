@@ -1035,11 +1035,13 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 				$("#stage-story").fadeIn(1000);
 			}, 6000);
 			setTimeout(() => {
-				keyboardAudio.play();
+				if (effectOn)
+					keyboardAudio.play();
 			}, 7000);
 			setTimeout(() => {
 				$("#stage-story").fadeOut(1000);
-				keyboardAudio.pause();
+				if (effectOn)
+					keyboardAudio.pause();
 			}, 10000);
 			setTimeout(() => {
 				$("#stgbtn2").trigger('click');
