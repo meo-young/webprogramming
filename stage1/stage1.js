@@ -4,6 +4,9 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 	var qskill_timer = 30;
 	var qskill_repeat;
 	var qskill_cooltime = 0;
+	var shield_img = 1;
+	var shield_img_count = 0;
+	var shield_repeat;
 
 	/* 보스의 공격이 일정시간마다 진행되기위해 필요한 변수 */
 	var timer = 0;
@@ -199,6 +202,8 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 	bossshield_Img.src = "./img/stage1/s1.png";
 	var sword_Img = new Image();
 	sword_Img.src = "./img/stage1/a1.png";
+	var player_sh = new Image();
+	player_sh.src = "./img/player/s1.png";
 
 
 	//오디오 소스
@@ -435,9 +440,6 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 		}
 
 		/* 스킬 관련 조건문 */
-		if (qskill == 1) {
-			drawshield();
-		}
 		if (boss_state == 1) {
 			boss();
 		}
@@ -448,6 +450,10 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 		drawBall();
 		drawPaddle();
 		collision();
+		if (qskill == 1) {
+			drawshield();
+		}
+
 		if (attack1 == 1) {
 			bossAttack1();
 			if (effectOn)
@@ -465,6 +471,7 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 			if (effectOn)
 				bossskillAudio2.play();
 		}
+
 
 		if (damage_state >= 1) {
 			if (damage_state == 1) {
@@ -597,12 +604,30 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 
 
 	function drawshield() {
-		context.beginPath();
-		context.arc(barx, cvht - 20, barwidth / 2, Math.PI, 0);
-		context.strokeStyle = "yellow";
-		context.stroke();
+		shield_img_count++;
+		if(shield_img_count % 30 == 0){
+			shield_img++;
+			if(shield_img == 14){
+				shield_img = 8;
+			}
+			player_sh.src ="./img/player/s"+shield_img+".png";
+		}
+		context.drawImage(player_sh,(barx-60),cvht-100,120,120);
 	}
 
+	function attacked_shield(){
+		shield_img_count++;
+		if(shield_img_count % 30 == 0){
+			shield_img--;
+			if(shield_img == 0){
+				shield_img = 1;
+				shield_img_count = 0;
+				clearInterval(shield_repeat);
+			}
+			player_sh.src ="./img/player/s"+shield_img+".png";
+		}
+		context.drawImage(player_sh,(barx-60),cvht-100,120,120);
+	}
 
 	/* 보스를 그려주는 함수 */
 	function boss() {
@@ -1315,6 +1340,10 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 		qskill_timer--;
 		if (qskill_timer == 28) {
 			qskill = 0;
+			shield_img =8;
+			shield_img_count =0;
+			shield_repeat = setInterval(attacked_shield, 1);
+			
 		}
 		else if (qskill_timer == -1) {
 			qskill_timer = 30;
@@ -1480,6 +1509,9 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 		if (attack2_count == 0 && yplus > cvht - 20 && attack_x + barwidth / 2 - 15 + 80 > barx - barwidth / 2 && attack_x + barwidth / 2 - 15 < barx + barwidth / 2) {
 			if (qskill == 1) { //플레이어 보호막이 활성되어 있다면 보호막이 깨짐
 				qskill = 0;
+				shield_img =8;
+				shield_img_count =0;
+				shield_repeat = setInterval(attacked_shield, 1);
 			}
 			else {
 				p_hp_decrease(); // 플레이어 보호막이 없다면 체력 1칸 감소
@@ -1514,6 +1546,9 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 			if (attack_x <= barx + barwidth / 2 && attack_x + 120 >= barx - barwidth / 2) {
 				if (qskill == 1) {
 					qskill = 0;
+					shield_img =8;
+					shield_img_count =0;
+					shield_repeat = setInterval(attacked_shield, 1);
 				}
 				else {
 					if (attack3_count == 0) {
