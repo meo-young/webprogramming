@@ -1274,6 +1274,18 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 			}
 			stop_pattern = 0;
 		}
+		else if(event.keyCode == 49 && potion1Num>= 1){
+			
+			if(p_hp > 0 && p_hp < 5){
+				potion1Num--;
+				p_hp--;
+				var p_hp_array = $(".state1");
+				p_hp_array[p_hp].src = "./img/player/playerHeartFull_25x25.png";
+				$("#p1Num").html(potion1Num); 
+			}
+
+
+		}
 		if(keydown_count == 0){
 			if (start_number == 0) {
 				//스페이스바를 누를경우
