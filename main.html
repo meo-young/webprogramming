@@ -197,48 +197,53 @@
                 <br>
                 <input id="exit3" type="button">
             </div>
-            <div id="boss_UI3">
-                <div id="boss_img3">
-                    <img class="character" src="./img/stage3/boss3.gif" width="180px" height="150px">
+            <div id="canvas_screen3">
+                <div id="boss_UI3">
+                    <div id="boss_img3">
+                        <img class="character" src="./img/stage3/boss3.gif" width="50px" height="50px">
+                    </div>
+                    <div id="boss_bar3">
+                        <div id="container3"></div>
+                        <div id="bp_num3">20</div>
+                    </div>
                 </div>
-                <div id="boss_bar3">
-                    <div id="container3"></div>
-                    <div id="bp_num3">20</div>
-                </div>
+                <canvas id="screen3" width="1000" height="600"></canvas>
             </div>
-            <canvas id="screen3" width="600" height="600"></canvas>
             <div id="player_UI3">
                 <div id="player_img3">
-                    <img id="playerImg3" class="character" src="./img/player/playerStanding_32x32.gif" width="180px"
-                        height="150px">
+                    <img id="playerImg3" class="character" src="./img/player/playerStanding_32x32.gif" width="100px"
+                        height="100px">
                 </div>
                 <div id="player_state3">
-                    <img src="./img/player/playerHeartFull_25x25.png" class="state3" width="50px" height="50px">
-                    <img src="./img/player/playerHeartFull_25x25.png" class="state3" width="50px" height="50px">
-                    <img src="./img/player/playerHeartFull_25x25.png" class="state3" width="50px" height="50px">
+                    <div>
+                        <img src="./img/player/playerHeartFull_25x25.png" class="state3" width="40px" height="40px">
+                        <img src="./img/player/playerHeartFull_25x25.png" class="state3" width="40px" height="40px">
+                        <img src="./img/player/playerHeartFull_25x25.png" class="state3" width="40px" height="40px">
+                        <img src="./img/player/playerHeartFull_25x25.png" class="state3" width="40px" height="40px">
+                        <img src="./img/player/playerHeartFull_25x25.png" class="state3" width="40px" height="40px">
+                    </div>
+                    <div id="skill3">
+                        <div>
+                            <p>Q</p>
+                            <div id="qtimer3"></div>
+                            <img id="qskill3" src="./img/player/qskill.jpg" width="50px" height="50px">
+                        </div>
+                        <div>
+                            <p>W</p>
+                            <div id="wtimer3"></div>
+                            <img id="wskill3" src="./img/player/wskill.jpg" width="50px" height="50px">
+                        </div>
+                        <div>
+                            <p>E</p>
+                            <div id="etimer3"></div>
+                            <img id="eskill3" src="./img/player/eskill.jpg" width="50px" height="50px">
+                        </div>
+                    </div>
                 </div>
                 <div id="gold3">
                     gold :
                 </div>
-                <div id="skill3">
-                    <div>
-                        <p>Q</p>
-                        <div id="qtimer3"></div>
-                        <img id="qskill3" src="./img/player/qskill.png" width="50px" height="50px">
-                    </div>
-                    <div>
-                        <p>W</p>
-                        <div id="wtimer3"></div>
-                        <img id="wskill3" src="./img/player/wskill.png" width="50px" height="50px">
-                    </div>
-                    <div>
-                        <p>E</p>
-                        <div id="etimer3"></div>
-                        <img id="eskill3" src="./img/player/eskill.png" width="50px" height="50px">
-                    </div>
-                </div>
             </div>
-            <div id="timer3"></div>
         </div>
 
         <!-- 환경설정 -->

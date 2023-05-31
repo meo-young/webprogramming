@@ -524,7 +524,7 @@ export function stageStart2(mainGold,effectOn) {
 	}
 
 	//보스 체력 감소 해주는 함수
-	function b_hp_decrease() {
+	function b_hp_decrease(att) {
 		if (attack4 == 1) {
 			return;
 		} else {
