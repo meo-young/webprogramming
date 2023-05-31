@@ -42,8 +42,13 @@ export function stageStart1() {
 	var gold = 0;
 	var drawinterval;
 
+	var attack_stat;
+
+	var player_img = 1;;
+	var player_img_count=0;
+
 	/*canvas 너비, 높이 */
-	var cvwd = 600;
+	var cvwd = 1000;
 	var cvht = 600;
 
 	/* 벽돌의 x,y좌표 */
@@ -65,8 +70,8 @@ export function stageStart1() {
 	var ballRadius = 10;
 
 	/* 공의 이동속도 */
-	var xvelocity = 2;
-	var yvelocity = 2;
+	var xvelocity = 3;
+	var yvelocity = 3;
 	var dx;
 	var dy;
 
@@ -91,10 +96,9 @@ export function stageStart1() {
 
 	/*플레이어, 보스 체력 */
 	var p_hp = 0;
-	var b_hp = 10;
+	var b_hp = 950;
 	//플레이어 이미지
 
-	var bossStanding = document.getElementsByClassName("character");
 	var pDefaultStdsrc = "./img/player/playerStanding_32x32.gif";
 	var pRedStdsrc = "./img/player/playerStanding_red_32x32.gif";
 	var pCyanstdsrc = "./img/player/playerStanding_cyan_32x32.gif";
@@ -118,33 +122,38 @@ export function stageStart1() {
 
 
 	var playerColor ="";
+	var player = new Image();
+
+	var paddle = new Image();
+	paddle.src = "./img/interface/sword.png";
 
 		// 착용중인 캐릭터 이미지로 변경
 	if ($("#pDefault").hasClass("equip")) {
 		$("#playerImg1").attr("src", pDefaultStdsrc);
 		playerColor = "default";
+		player.src = "./img/player/pd1.gif";
+		attack_stat = 50;
 	}
 	else if ($("#pRed").hasClass("equip")) {
 		$("#playerImg1").attr("src", pRedStdsrc);
-		playerColor = "red";
+		playerColor = "red"; //도트데미지
 	}
 	else if ($("#pCyan").hasClass("equip")) {
 		$("#playerImg1").attr("src", pCyanstdsrc);
-		playerColor = "cyan";
+		playerColor = "cyan"; //
 	}
 	else if ($("#pWhite").hasClass("equip")) {
 		$("#playerImg1").attr("src", pWhitestdsrc);
-		playerColor = "white";
+		playerColor = "white"; //공격력 2배, 입는 피해2배
 	}
 	else if ($("#pYellow").hasClass("equip")) {
 		$("#playerImg1").attr("src", pYellowstdsrc);
-		playerColor = "yellow";
+		playerColor = "yellow"; //공 즉시 회수
 	}
 	else if ($("#pPurple").hasClass("equip")) {
 		$("#playerImg1").attr("src", pPurplestdsrc);
-		playerColor = "purple";
+		playerColor = "purple"; //중독데미지 중첩 가능
 	}
-
 	var fireball = new Image();
 	fireball.src = "./img/stage1/af1.png";
 	var bossImg = new Image(); // in canvas
@@ -177,7 +186,7 @@ export function stageStart1() {
 		play_button.onclick = play;
 		var exit_button = document.getElementById("exit1");
 		exit_button.onclick = exit;
-		$(".screen").css({
+		$("#canvas_screen").css({
 			"background" : "url(./backimg/back2.gif)"
 		});
 	}
@@ -272,9 +281,9 @@ export function stageStart1() {
 		clearInterval(time_repeat);
 		init();
 		p_hp = 0;
-		b_hp = 10;
+		b_hp = 950;
 		$("#container1").animate({
-			"height": b_hp*30 + "px"
+			"width": b_hp + "px"
 		});
 		var p_hp_array = $(".state1");
 		for(var i=0; i<3; i++){
@@ -298,7 +307,7 @@ export function stageStart1() {
 		var bossui = document.getElementById("boss_UI1");
 		var playerui = document.getElementById("player_UI1");
 		wdht = (window.outerHeight - cvht) / 4;
-		wdwd = (window.outerWidth - cvwd) / 2;
+		wdwd = (window.innerWidth - cvwd) / 2;
 		//var buwd = ((window.outerWidth) / 2);
 		screen.style.top = wdht + "px";
 		screen.style.left = wdwd + "px";
@@ -396,11 +405,15 @@ export function stageStart1() {
 
 	/* 바(bar) 그리는 함수 */
 	function drawPaddle() {
-		context.beginPath();
-		context.rect((barx - barwidth / 2), cvht - 20, barwidth, barheight);
-		context.fillStyle = "transparent";
-		context.fill();
-		context.drawImage(paddleImg, (barx - barwidth / 2), cvht - 20, barwidth, barheight);
+		player_img_count++;
+		if(player_img_count %20 == 0){
+			player_img++;
+			if(player_img == 5){
+				player_img =1;
+			}
+			player.src = "./img/player/pd"+player_img+".gif";
+		}
+		context.drawImage(player, (barx - 40), cvht - 80, 80, 80);
 	}
 
 	/* 글씨 기본 설정 해주는 함수 */
@@ -450,9 +463,8 @@ export function stageStart1() {
 		b_hp--;
 		bossAudio.play();
 		hp();
-		var num = b_hp * 30;
 		$("#container1").animate({
-			"height": num + "px"
+			"width": b_hp + "px"
 		});
 		if (b_hp < 0 || b_hp == 0) {
 			game_over(1);
@@ -740,10 +752,10 @@ export function stageStart1() {
 
 	}
 
-/* 플레이어, 보스 체력 출력해주는 함수 */
-function hp() {
-	$("#bp_num1").text(b_hp);
-}
+	/* 플레이어, 보스 체력 출력해주는 함수 */
+	function hp() {
+		$("#bp_num1").text(b_hp);
+	}
 
 	function game_over_Img() {
 		var playerImg = $("#playerImg1");
@@ -1030,11 +1042,10 @@ function hp() {
 			}
 
 		}
-		$("#timer1").text(timer);
 	}
 
 
-
+/*
 	function attackmotion(){
 		bossStanding[0].src = "./img/stage1/ba.gif";
 		setTimeout(function(){
@@ -1062,6 +1073,7 @@ function hp() {
 			bossStanding[0].src = "./img/stage1/bw2.png";
 		},1600);
 	}
+	*/
 
 	/* 보스 보호막 패턴
 	보스를 둘러싼 파란색 원이 생김 */
