@@ -145,45 +145,53 @@ export function stageStart2(mainGold,effectOn, potion1Num, potion2Num, potion3Nu
 		var pPurpleHitsrc = "./img/player/playerHit_purple.png";
 	
 		
+		var player = new Image();
+		var player_num;
 		var playerColor ="";
+
 		// 착용중인 캐릭터 이미지로 변경
 		if ($("#pDefault").hasClass("equip")) {
 			$("#playerImg2").attr("src", pDefaultStdsrc);
 			playerColor = "default";
 			attack_stat = 50;
+			player_num = 1;
 		}
 		else if ($("#pRed").hasClass("equip")) {
 			$("#playerImg2").attr("src", pRedStdsrc);
 			playerColor = "red";
 			firedot = 1;
 			attack_stat = 50;
+			player_num = 2;
 		}
 		else if ($("#pCyan").hasClass("equip")) {
 			$("#playerImg2").attr("src", pCyanstdsrc);
 			playerColor = "cyan";
 			attack_stat = 50;
 			ballRadius = 20;
+			player_num =3;
 		}
 		else if ($("#pWhite").hasClass("equip")) {
 			$("#playerImg2").attr("src", pWhitestdsrc);
 			playerColor = "white";
 			attack_stat = 100;
 			white = 1;
+			player_num = 4;
 		}
 		else if ($("#pYellow").hasClass("equip")) {
 			$("#playerImg2").attr("src", pYellowstdsrc);
 			playerColor = "yellow";
 			yellow = 1;
 			attack_stat = 50;
+			player_num = 5;
 		}
 		else if ($("#pPurple").hasClass("equip")) {
 			$("#playerImg2").attr("src", pPurplestdsrc);
 			playerColor = "purple";
 			purple = 1;
 			attack_stat =50;
+			player_num = 6;
 		}
 	
-	var player = new Image();
 
 
 
@@ -520,12 +528,29 @@ export function stageStart2(mainGold,effectOn, potion1Num, potion2Num, potion3Nu
 	/* 바(bar) 그리는 함수 */
 	function drawPaddle() {
 		player_img_count++;
-		if(player_img_count % 20 == 0){
+		if(player_img_count %20 == 0){
 			player_img++;
 			if(player_img == 5){
 				player_img =1;
 			}
-			player.src = "./img/player/pd"+player_img+".gif";
+			if(player_num == 1){
+				player.src = "./img/player/pd"+player_img+".gif";
+			}
+			else if(player_num == 2){
+				player.src = "./img/player/pr"+player_img+".gif";
+			}
+			else if(player_num == 3){
+				player.src = "./img/player/pc"+player_img+".gif";
+			}
+			else if(player_num == 4){
+				player.src = "./img/player/pw"+player_img+".gif";
+			}
+			else if(player_num == 5){
+				player.src = "./img/player/py"+player_img+".gif";
+			}
+			else if(player_num == 6){
+				player.src = "./img/player/pp"+player_img+".gif";
+			}
 		}
 		context.drawImage(player, (barx - 40), cvht - 80, 80, 80);
 	}
