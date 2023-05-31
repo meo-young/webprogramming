@@ -183,9 +183,9 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 	const bossAudio=new Audio('./오디오/boss/bosshit.mp3');
 	const bossAudio2=new Audio('./오디오/boss/bosshit2.mp3');
 	const bossAudio3=new Audio('./오디오/boss/bosshit3.mp3');
-	const playerhitAudio=new Audio('./오디오/player/플래이어 피격 (1).wav');
+	const playerhitAudio=new Audio('./오디오/player/플레이어 피격 (1).wav');
 	const bossskillAudio=new Audio('./오디오/stage1/보스기합.wav');
-	const bossskillAudio2=new Audio('./오디오/stage1/폭발공격.wav');
+	const bossskillAudio2=new Audio('./오디오/stage1/폭발공격.mp3');
 	const countdownAudio=new Audio('./오디오/Interface/카운트다운.mp3');
 	const bossdieAudio=new Audio('./오디오/stage1/보스피격.wav');
 	const bossdieAudio2=new Audio('./오디오/stage1/보스사망.wav');
@@ -326,7 +326,7 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 				$("#select-stage").removeClass("animateContent2");
 			}, 1000);
 		}, 500);
-		$(".gold").html(mainGold+gold);//골드 추가 부분
+		$(".gold").html(currentGold+gold);//골드 추가 부분
 }
 
 	/* window size 변경 해주는 함수 */
@@ -431,7 +431,6 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 			bossAttack3();
 			if(effectOn)
 			bossskillAudio2.play();
-
 		}
 
 		if(damage_state >= 1){
