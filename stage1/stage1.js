@@ -52,7 +52,7 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 	var dot_count = 0;
 	var white = 0;
 	var yellow = 0;
-	var purple = 1;
+	var purple = 0;
 	var poison_damage = 0;
 	var poison_count = 0;
 	var ps_count = 0;
@@ -142,7 +142,7 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 		$("#playerImg1").attr("src", pDefaultStdsrc);
 		playerColor = "default";
 		player.src = "./img/player/pd1.gif";
-		attack_stat = 5000;
+		attack_stat = 50;
 	}
 	else if ($("#pRed").hasClass("equip")) {
 		$("#playerImg1").attr("src", pRedStdsrc);
@@ -467,8 +467,10 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 		}
 		if(poison_count == 1){
 			ps_count++;
-			if(ps_count % 100 == 0){
+			if(ps_count % 200 >= 0 && ps_count % 200 <= 100){
 				poison();
+			}
+			if(ps_count % 200 == 0){
 				b_hp -= poison_damage;
 				hp();
 				$("#container1").animate({
@@ -565,6 +567,10 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 	function b_hp_decrease(att) {
 		damage = att - Math.floor(Math.random()*20);
 		b_hp -= damage;
+		hp();
+		$("#container1").animate({
+			"width": b_hp + "px"
+		});
 		damage_state = 1;
 		if(firedot == 1){
 			setTimeout(function(){
@@ -602,10 +608,6 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 			if(b_hp==1)
 				bossdieAudio2.play();
 		}
-		hp();
-		$("#container1").animate({
-			"width": b_hp + "px"
-		});
 		if (b_hp < 0 || b_hp == 0) {
 			game_over(1);
 		}
@@ -1281,7 +1283,7 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 		// }
 
 		if (timer % 6 == 0) {
-			var randnum = Math.floor(Math.random())+2;
+			var randnum = Math.floor(Math.random()*3);
 			if (randnum == 0) { //첫번째 보스 패턴 ( 보스 배리어 )
 				attack1 = 1;
 				bs_barrier = 1;
@@ -1294,10 +1296,6 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 			else if (randnum == 2) { // 세번째 보스 패턴 ( 패들 길이 -50 )
 				attack_x = Math.floor(Math.random() * 480);
 				attack3 = 1;
-			}
-			else if (randnum == 3) { // 네번째 보스 패턴 ( 공 반지름 -5 )
-				ballRadius = 5;
-				setTimeout(bossAttack4, 3000);
 			}
 
 		}
@@ -1356,6 +1354,7 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 			attack1_img++;
 			if(attack1_img == 4){
 				clearInterval(attack1_repeat);
+				attack1 = 0;
 				attack1_img_count = 0;
 				attack1_img = 1;
 			}

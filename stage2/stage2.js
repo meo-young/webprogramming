@@ -60,6 +60,10 @@ export function stageStart2(mainGold,effectOn) {
 	var dot_count = 0;
 	var white = 0;
 	var yellow = 0;
+	var purple = 0;
+	var poison_damage = 0;
+	var poison_count = 0;
+	var ps_count = 0;
 
 	var player_img = 1;
 	var player_img_count=0;
@@ -173,6 +177,8 @@ export function stageStart2(mainGold,effectOn) {
 		else if ($("#pPurple").hasClass("equip")) {
 			$("#playerImg2").attr("src", pPurplestdsrc);
 			playerColor = "purple";
+			purple = 1;
+			attack_stat =50;
 		}
 	
 	var player = new Image();
@@ -476,6 +482,25 @@ export function stageStart2(mainGold,effectOn) {
 			}
 			drawDamage(damage,damagex,damagey);
 		}
+		if(poison_count == 1){
+			ps_count++;
+			if(ps_count % 200 >= 0 && ps_count % 200 <= 100){
+				poison();
+			}
+			if(ps_count % 200 == 0){
+				b_hp -= poison_damage;
+				hp();
+				$("#container1").animate({
+					"width": b_hp + "px"
+				});
+				if (b_hp < 0 || b_hp == 0) {
+					game_over(1);
+				}
+				else {
+					b_hp_decrease_Img();
+				}
+			}
+		}
 	}
 
 	/* 공 그리는 함수 */
@@ -513,6 +538,12 @@ export function stageStart2(mainGold,effectOn) {
 		context.font = "30px Chakra-Petch";
 		context.fillStyle = 'red';
 		context.fillText(text, x, y);
+	}
+	function poison(){
+		var text2 = "-"+poison_damage;
+		context.font = "bold 30px Chakra-Petch";
+		context.fillStyle = 'purple';
+		context.fillText(text2, bossx+30, bossy+30);
 	}
 
 	function drawshield() {
@@ -556,6 +587,10 @@ export function stageStart2(mainGold,effectOn) {
 			damage = att - Math.floor(Math.random()*20);
 			b_hp -= damage;
 			damage_state = 1;
+			hp();
+			$("#container2").animate({
+				"width": b_hp + "px"
+			});
 			if(firedot == 1){
 				setTimeout(function(){
 					b_hp -= 30;
@@ -575,10 +610,10 @@ export function stageStart2(mainGold,effectOn) {
 					}
 				},300);
 			}
-			hp();
-			$("#container2").animate({
-				"width": b_hp + "px"
-			});
+			if(purple == 1){
+				poison_damage++;
+				poison_count = 1;
+			}
 			if (b_hp < 0 || b_hp == 0) {
 				game_over(1);
 				game_over_win_Img();
