@@ -147,7 +147,7 @@ $(document).ready(function () {
                 }, 500);
                 currentGold = parseInt($(".gold").eq(0).text());
                 potion1Num = parseInt($("#p1Num").eq(0).text()); 
-                stageStart1(currentGold, effectOn, potion1Num, potion2Num, potion3Num);
+                stageStart1(currentGold, effectOn,bgmOn, potion1Num, potion2Num, potion3Num);
             }, 5100)
         });
         // 두번째 보스 캔버스
@@ -167,7 +167,7 @@ $(document).ready(function () {
                 }, 500);
                 currentGold = parseInt($(".gold").eq(0).text());
                 potion2Num = parseInt($("#p2Num").eq(0).text()); 
-                stageStart2(currentGold, effectOn, potion1Num, potion2Num, potion3Num);
+                stageStart2(currentGold, effectOn,bgmOn, potion1Num, potion2Num, potion3Num);
             }, 5100);
         });
         // 세번째 보스 캔버스
@@ -187,7 +187,7 @@ $(document).ready(function () {
                 }, 500);
                 currentGold = parseInt($(".gold").eq(0).text());
                 potion3Num = parseInt($("#p3Num").eq(0).text()); 
-                stageStart3(currentGold, effectOn, potion1Num, potion2Num, potion3Num);
+                stageStart3(currentGold, effectOn,bgmOn, potion1Num, potion2Num, potion3Num);
             }, 5100);
         });
         // 뒤로가기 버튼 클릭 시 스테이지 화면과 메인 메뉴 애니메이션
@@ -497,22 +497,26 @@ $(document).ready(function () {
             setTimeout(() => {
                 if(storyimgflag == 1)
                 keyboardAudio.play();
-            }, 800);
+            }, 750);
             setTimeout(() => {
                 keyboardAudio.pause();
             }, 2300);
             setTimeout(() => {
                 if(storyimgflag == 1)
                 thunderAudio.play();
+<<<<<<< HEAD
+            }, 5500);
+=======
             }, 5400);
+>>>>>>> f29b4f7b317d98d651dd01d38bd7ee2dfbdd2797
             setTimeout(() => {
                 if(storyimgflag == 1)
                 keyboardAudio.play();
-            }, 8500);
+            }, 10750);
             setTimeout(() => {
                 if(storyimgflag == 1)
                 keyboardAudio.play();
-            }, 12000);
+            }, 15000);
 
             $(this).fadeOut(500, function () {
                 // fadeOut() 메서드로 천천히 사라지고, 애니메이션 완료 후 콜백 함수 실행

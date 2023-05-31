@@ -1,4 +1,4 @@
-export function stageStart2(mainGold, effectOn, potion1Num, potion2Num, potion3Num) {
+export function stageStart2(mainGold, effectOn,bgmOn, potion1Num, potion2Num, potion3Num) {
 	/* 플레이어 스킬 변수 */
 	var qskill = 0;
 	var qskill_timer = 30;
@@ -244,6 +244,7 @@ export function stageStart2(mainGold, effectOn, potion1Num, potion2Num, potion3N
 	const loseAudio = new Audio('./audio/lose_7s.mp3');
 	const fishAudio = new Audio('./오디오/stage2/물고기 나올때.mp3');
 	var keyboardAudio = new Audio("./storyimg/키보드소리.mp3");
+	const bgm=new Audio("./audio/boss2.mp3");
 
 
 
@@ -264,7 +265,10 @@ export function stageStart2(mainGold, effectOn, potion1Num, potion2Num, potion3N
 			setTimeout(() => {
 				countdownAudio.play();
 			}, 1000);
-
+		if(bgmOn)
+			setTimeout(() => {
+				bgm.play();
+		}, 5500);
 		var play_button = document.getElementById("play2");
 		play_button.onclick = play;
 		var exit_button = document.getElementById("exit2");
@@ -320,6 +324,7 @@ export function stageStart2(mainGold, effectOn, potion1Num, potion2Num, potion3N
 		// if (effectOn) {
 		// 	clickSound.play();   // 버튼 클릭 효과음
 		// }
+		bgm.pause();
 		$("#boss_UI2").css({
 			display: "block"
 		});
@@ -1066,6 +1071,7 @@ export function stageStart2(mainGold, effectOn, potion1Num, potion2Num, potion3N
 		clearInterval(time_repeat);
 		context.clearRect(0, 0, cvwd, cvht);
 		if (who == 1) {
+			bgm.pause();
 			$(".gold").html(gold);//골드 추가 부분
 			if (effectOn)
 				winAudio.play();
@@ -1089,6 +1095,7 @@ export function stageStart2(mainGold, effectOn, potion1Num, potion2Num, potion3N
 			}, 12000);
 		}
 		else if (who == 2) {
+			bgm.pause();
 			if (effectOn)
 				loseAudio.play();
 			drawText("You Lose");
