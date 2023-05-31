@@ -145,13 +145,14 @@ $(document).ready(function () {
                 currentGold = parseInt($(".gold").eq(0).text());
                 potion1Num = parseInt($("#p1Num").eq(0).text()); 
                 stageStart1(currentGold, effectOn, potion1Num, potion2Num, potion3Num);
-            }, 5000)
+            }, 5100)
         });
         // 두번째 보스 캔버스
         $("#stgbtn2").off('click').on('click', function () {
             if (effectOn) {
                 clickSound.play();   // 버튼 클릭 효과음
             }
+            currentBGM.pause();
             showGif('./storyimg/stage2A.gif');
             setTimeout(() => {
                 $("#select-stage").removeClass("animateContent2").addClass("animateContent1");    // 스테이지 선택 페이지 전환 효과 (작아지는)
@@ -164,13 +165,14 @@ $(document).ready(function () {
                 currentGold = parseInt($(".gold").eq(0).text());
                 potion2Num = parseInt($("#p2Num").eq(0).text()); 
                 stageStart2(currentGold, effectOn, potion1Num, potion2Num, potion3Num);
-            }, 5000);
+            }, 5100);
         });
         // 세번째 보스 캔버스
         $("#stgbtn3").off('click').on('click', function () {
             if (effectOn) {
                 clickSound.play();   // 버튼 클릭 효과음
             }
+            currentBGM.pause();
             showGif('./storyimg/stage3A.gif');
             setTimeout(() => {
                 $("#select-stage").removeClass("animateContent2").addClass("animateContent1");    // 스테이지 선택 페이지 전환 효과 (작아지는)
@@ -183,7 +185,7 @@ $(document).ready(function () {
                 currentGold = parseInt($(".gold").eq(0).text());
                 potion3Num = parseInt($("#p3Num").eq(0).text()); 
                 stageStart3(currentGold, effectOn, potion1Num, potion2Num, potion3Num);
-            }, 5000);
+            }, 5100);
         });
         // 뒤로가기 버튼 클릭 시 스테이지 화면과 메인 메뉴 애니메이션
         $("#stage-to-main").off('click').on('click', function () {
@@ -472,21 +474,26 @@ $(document).ready(function () {
         else if (storyimgflag == 1) {//처음 화면 클릭
             currentBGM.pause();
             setTimeout(() => {
+                if(storyimgflag == 1)
                 keyboardAudio.play();
             }, 1000);
             setTimeout(() => {
+                if(storyimgflag == 1)
                 keyboardAudio.pause();
             }, 4000);
             setTimeout(() => {
+                if(storyimgflag == 1)
                 thunderAudio.play();
             }, 5500);
             setTimeout(() => {
                 thunderAudio.pause();
             }, 8000);
             setTimeout(() => {
+                if(storyimgflag == 1)
                 keyboardAudio.play();
             }, 10000);
             setTimeout(() => {
+                if(storyimgflag == 1)
                 keyboardAudio.play();
             }, 16000);
 
