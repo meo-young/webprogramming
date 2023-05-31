@@ -48,6 +48,8 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 	var damagey;
 
 	var attack_stat;
+	var firedot = 0;
+	var dot_count = 0;
 
 	var player_img = 1;
 	var player_img_count=0;
@@ -139,10 +141,12 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 	else if ($("#pRed").hasClass("equip")) {
 		$("#playerImg1").attr("src", pRedStdsrc);
 		playerColor = "red"; //도트데미지
+		firedot = 1;
 	}
 	else if ($("#pCyan").hasClass("equip")) {
 		$("#playerImg1").attr("src", pCyanstdsrc);
 		playerColor = "cyan"; //
+
 	}
 	else if ($("#pWhite").hasClass("equip")) {
 		$("#playerImg1").attr("src", pWhitestdsrc);
@@ -437,7 +441,11 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 				if(damage_count % 80 == 0){
 					damage_state = 0;
 					damage_count = 0;
+					dot_count = 0;
 				}
+			}
+			if(dot_count == 1){
+				drawDamage(30,bossx+30,bossy+30);
 			}
 			drawDamage(damage,damagex,damagey);
 		}
@@ -518,6 +526,25 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 		damage = att - Math.floor(Math.random()*20);
 		b_hp -= damage;
 		damage_state = 1;
+		if(firedot == 1){
+			setTimeout(function(){
+				b_hp -= 30;
+				dot_count = 1;
+				if(effectOn){
+					let randtemp=Math.floor(Math.random() * 4)
+					if(randtemp==0)
+						bossAudio.play();
+					else if(randtemp==1)
+						bossAudio2.play();
+					else if(randtemp==2)
+						bossAudio3.play();
+					else
+						bossdieAudio.play();
+					if(b_hp==1)
+						bossdieAudio2.play();
+				}
+			},300);
+		}
 		if(effectOn){
 			let randtemp=Math.floor(Math.random() * 4)
 			if(randtemp==0)
@@ -530,7 +557,6 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 				bossdieAudio.play();
 			if(b_hp==1)
 				bossdieAudio2.play();
-
 		}
 		hp();
 		$("#container1").animate({
@@ -545,6 +571,7 @@ export function stageStart1(currentGold, effectOn, potion1Num, potion2Num, potio
 
 
 	}
+
 
 
 

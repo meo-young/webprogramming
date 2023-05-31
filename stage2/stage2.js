@@ -56,6 +56,8 @@ export function stageStart2(mainGold,effectOn) {
 	var damagey;
 
 	var attack_stat;
+	var firedot = 0;
+	var dot_count = 0;
 
 	var player_img = 1;
 	var player_img_count=0;
@@ -147,6 +149,7 @@ export function stageStart2(mainGold,effectOn) {
 		else if ($("#pRed").hasClass("equip")) {
 			$("#playerImg2").attr("src", pRedStdsrc);
 			playerColor = "red";
+			firedot = 1;
 		}
 		else if ($("#pCyan").hasClass("equip")) {
 			$("#playerImg2").attr("src", pCyanstdsrc);
@@ -457,7 +460,11 @@ export function stageStart2(mainGold,effectOn) {
 				if(damage_count % 80 == 0){
 					damage_state = 0;
 					damage_count = 0;
+					dot_count = 0;
 				}
+			}
+			if(dot_count == 1){
+				drawDamage(30,bossx+30,bossy+30);
 			}
 			drawDamage(damage,damagex,damagey);
 		}
@@ -541,6 +548,25 @@ export function stageStart2(mainGold,effectOn) {
 			damage = att - Math.floor(Math.random()*20);
 			b_hp -= damage;
 			damage_state = 1;
+			if(firedot == 1){
+				setTimeout(function(){
+					b_hp -= 30;
+					dot_count = 1;
+					if(effectOn){
+						let randtemp=Math.floor(Math.random() * 4)
+						if(randtemp==0)
+							bossAudio.play();
+						else if(randtemp==1)
+							bossAudio2.play();
+						else if(randtemp==2)
+							bossAudio3.play();
+						else
+							bossdieAudio.play();
+						if(b_hp==1)
+							bossdieAudio2.play();
+					}
+				},300);
+			}
 			hp();
 			$("#container2").animate({
 				"width": b_hp + "px"
