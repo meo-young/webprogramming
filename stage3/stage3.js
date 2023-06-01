@@ -1200,9 +1200,6 @@ export function stageStart3(mainGold, effectOn,bgmOn, potion1Num, potion2Num, po
 		b_hp = 1896;
 		bgm.pause();
 		clearInterval(repeat);
-		$("#container3").animate({
-			"width": b_hp/2 + "px"
-		});
 		clearInterval(attack1_repeat);
 		clearInterval(attack4_timer);
 		clearInterval(time_repeat);

@@ -487,6 +487,8 @@ export function stageStart1(currentGold, effectOn,bgmOn, potion1Num, potion2Num,
 				bossskillAudio2.play();
 		}
 		else if(attack4 == 1){
+			if (effectOn)
+				bossskillAudio.play();
 			bossAttack4();
 		}
 
@@ -1147,12 +1149,16 @@ export function stageStart1(currentGold, effectOn,bgmOn, potion1Num, potion2Num,
 				attack4 = 0;
 				attack4_img = 1;
 				attack4_img_count =0;
+				if(effectOn)
+					bossAudio3.play();
 			}
 			else if(y+ballRadius >= flowery && y-ballRadius <= flowery + 67 && x+ballRadius >= flowerx && x-ballRadius <= flowerx+180){
 				dx = -dx;
 				attack4 = 0;
 				attack4_img = 1;
 				attack4_img_count =0;
+				if(effectOn)
+					bossAudio3.play();
 			}	
 		}
 		
