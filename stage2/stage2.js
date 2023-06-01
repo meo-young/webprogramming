@@ -244,7 +244,8 @@ export function stageStart2(mainGold, effectOn,bgmOn, potion1Num, potion2Num, po
 	const loseAudio = new Audio('./audio/lose_7s.mp3');
 	const fishAudio = new Audio('./오디오/stage2/물고기 나올때.mp3');
 	var keyboardAudio = new Audio("./storyimg/키보드소리.mp3");
-	const bgm=new Audio("./audio/boss2.mp3");
+	const bgm= document.getElementById("myAudio2");
+	const mbm = document.getElementById("myAudio0");
 
 
 
@@ -259,16 +260,11 @@ export function stageStart2(mainGold, effectOn,bgmOn, potion1Num, potion2Num, po
 	hp();
 	init();
 	draw();
+	$("#container2").animate({
+		"width": b_hp/3*2 + "px"
+	});
 
 	function pageLoad() {
-		if (effectOn)
-			setTimeout(() => {
-				countdownAudio.play();
-			}, 1000);
-		if(bgmOn)
-			setTimeout(() => {
-				bgm.play();
-		}, 5500);
 		var play_button = document.getElementById("play2");
 		play_button.onclick = play;
 		var exit_button = document.getElementById("exit2");
@@ -325,6 +321,7 @@ export function stageStart2(mainGold, effectOn,bgmOn, potion1Num, potion2Num, po
 		// 	clickSound.play();   // 버튼 클릭 효과음
 		// }
 		bgm.pause();
+		mbm.play();
 		$("#boss_UI2").css({
 			display: "block"
 		});
@@ -625,6 +622,7 @@ export function stageStart2(mainGold, effectOn,bgmOn, potion1Num, potion2Num, po
 				shield_img = 1;
 				shield_img_count = 0;
 				clearInterval(shield_repeat);
+				qskill = 0;
 			}
 			player_sh.src ="./img/player/s"+shield_img+".png";
 		}
@@ -1059,19 +1057,16 @@ export function stageStart2(mainGold, effectOn,bgmOn, potion1Num, potion2Num, po
 		}, 500);
 	}
 	function game_over(who) {
+		bgm.pause();
+
 		keydown_count = 1;
 		removeEventListener('mousemove', mousemove);
 		removeEventListener('keydown',keydown);
-		b_hp = 1422;
-		$("#container1").animate({
-			"width": b_hp + "px"
-		});
 		clearInterval(repeat);
 		clearInterval(attack2_repeat);
 		clearInterval(time_repeat);
 		context.clearRect(0, 0, cvwd, cvht);
 		if (who == 1) {
-			bgm.pause();
 			$(".gold").html(gold);//골드 추가 부분
 			if (effectOn)
 				winAudio.play();
@@ -1095,7 +1090,7 @@ export function stageStart2(mainGold, effectOn,bgmOn, potion1Num, potion2Num, po
 			}, 12000);
 		}
 		else if (who == 2) {
-			bgm.pause();
+			mbm.play();
 			if (effectOn)
 				loseAudio.play();
 			drawText("You Lose");

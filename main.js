@@ -26,11 +26,10 @@ $(document).ready(function () {
 
     // 배경음악, 배경음악 버튼, 배경음악 선택
     var bgmOn = true;
-    var mainBgm = new Audio("./audio/main.mp3");    // 메인브금
-    var shopBgm = new Audio("./audio/shop.mp3");    // 상점브금
-    var bgm1 = new Audio("./audio/boss1.mp3");   // 보스1 브금
-    var bgm2 = new Audio("./audio/boss2.mp3");   // 보스2 브금
-    var bgm3 = new Audio("./audio/boss3.mp3");   // 보스3 브금
+    var mainBgm = document.getElementById("myAudio0");    // 메인브금
+    var bgm1 = document.getElementById("myAudio1");   // 보스1 브금
+    var bgm2 = document.getElementById("myAudio2");   // 보스2 브금
+    var bgm3 = document.getElementById("myAudio3");   // 보스3 브금
     var clickSound = new Audio("./audio/clickEffect.mp3");   // 버튼 클릭시 효과음
     var winBgm = new Audio("./audio/win_7s.mp3");  // 승리브금
     var loseBgm = new Audio("./audio/lose_7s.mp3");  // 패배브금
@@ -93,7 +92,6 @@ $(document).ready(function () {
         if (effectOn) {
             clickSound.play();   // 버튼 클릭 효과음
         }
-
         $("#main-menu").addClass("animateContent1");    // 메인 메뉴 페이지 전환 효과 (작아지는)
         setTimeout(function () {
             $("#main-menu").removeClass("animateContent1").hide();  // 1초 후 메인 메뉴 디스플레이 none
@@ -136,6 +134,8 @@ $(document).ready(function () {
                 clickSound.play();   // 버튼 클릭 효과음
             }
             currentBGM.pause();
+            currentBGM.currentTime = 0;
+            bgm1.play();
             showGif('./storyimg/stage1A.gif');
             setTimeout(() => {
                 $("#select-stage").removeClass("animateContent2").addClass("animateContent1");    // 스테이지 선택 페이지 전환 효과 (작아지는)
@@ -147,7 +147,7 @@ $(document).ready(function () {
                 }, 500);
                 currentGold = parseInt($(".gold").eq(0).text());
                 potion1Num = parseInt($("#p1Num").eq(0).text()); 
-                stageStart1(currentGold, effectOn,bgmOn, potion1Num, potion2Num, potion3Num);
+                stageStart1(currentGold, effectOn, potion1Num, potion2Num, potion3Num);
             }, 5100)
         });
         // 두번째 보스 캔버스
@@ -156,6 +156,8 @@ $(document).ready(function () {
                 clickSound.play();   // 버튼 클릭 효과음
             }
             currentBGM.pause();
+            currentBGM.currentTime = 0;
+            bgm2.play();
             showGif('./storyimg/stage2A.gif');
             setTimeout(() => {
                 $("#select-stage").removeClass("animateContent2").addClass("animateContent1");    // 스테이지 선택 페이지 전환 효과 (작아지는)
@@ -167,7 +169,7 @@ $(document).ready(function () {
                 }, 500);
                 currentGold = parseInt($(".gold").eq(0).text());
                 potion2Num = parseInt($("#p2Num").eq(0).text()); 
-                stageStart2(currentGold, effectOn,bgmOn, potion1Num, potion2Num, potion3Num);
+                stageStart2(currentGold, effectOn, potion1Num, potion2Num, potion3Num);
             }, 5100);
         });
         // 세번째 보스 캔버스
@@ -176,6 +178,8 @@ $(document).ready(function () {
                 clickSound.play();   // 버튼 클릭 효과음
             }
             currentBGM.pause();
+            currentBGM.currentTime = 0;
+            bgm3.play();
             showGif('./storyimg/stage3A.gif');
             setTimeout(() => {
                 $("#select-stage").removeClass("animateContent2").addClass("animateContent1");    // 스테이지 선택 페이지 전환 효과 (작아지는)
@@ -187,7 +191,7 @@ $(document).ready(function () {
                 }, 500);
                 currentGold = parseInt($(".gold").eq(0).text());
                 potion3Num = parseInt($("#p3Num").eq(0).text()); 
-                stageStart3(currentGold, effectOn,bgmOn, potion1Num, potion2Num, potion3Num);
+                stageStart3(currentGold, effectOn, potion1Num, potion2Num, potion3Num);
             }, 5100);
         });
         // 뒤로가기 버튼 클릭 시 스테이지 화면과 메인 메뉴 애니메이션
@@ -279,14 +283,7 @@ $(document).ready(function () {
         if (effectOn) {
             clickSound.play();   // 버튼 클릭 효과음
         }
-        // 상점 브금
-        if (bgmOn) {
-            currentBGM.pause();
-            currentBGM = shopBgm;
-            currentBGM.currentTime = 0;
-            currentBGM.play();
-            currentBGM.loop = true;
-        }
+       
         $("#main-menu").addClass("animateContent1");    // 메인 메뉴 페이지 전환 효과 (작아지는)
         setTimeout(function () {
             $("#main-menu").removeClass("animateContent1").hide();  // 1초 후 메인 메뉴 디스플레이 none
@@ -433,13 +430,7 @@ $(document).ready(function () {
                     $("#main-menu").removeClass("animateContent2");
                 }, 1000);
             }, 500);
-            if (bgmOn) {
-                currentBGM.pause();
-                currentBGM = mainBgm;
-                currentBGM.currentTime = 0;
-                currentBGM.play();
-                currentBGM.loop = true;
-            }
+
         });
     });
 
@@ -497,26 +488,22 @@ $(document).ready(function () {
             setTimeout(() => {
                 if(storyimgflag == 1)
                 keyboardAudio.play();
-            }, 750);
+            }, 800);
             setTimeout(() => {
                 keyboardAudio.pause();
             }, 2300);
             setTimeout(() => {
                 if(storyimgflag == 1)
                 thunderAudio.play();
-<<<<<<< HEAD
-            }, 5500);
-=======
             }, 5400);
->>>>>>> f29b4f7b317d98d651dd01d38bd7ee2dfbdd2797
             setTimeout(() => {
                 if(storyimgflag == 1)
                 keyboardAudio.play();
-            }, 10750);
+            }, 8500);
             setTimeout(() => {
                 if(storyimgflag == 1)
                 keyboardAudio.play();
-            }, 15000);
+            }, 12000);
 
             $(this).fadeOut(500, function () {
                 // fadeOut() 메서드로 천천히 사라지고, 애니메이션 완료 후 콜백 함수 실행

@@ -233,7 +233,10 @@ export function stageStart1(currentGold, effectOn,bgmOn, potion1Num, potion2Num,
 	const winAudio = new Audio('./audio/win_7s.mp3');
 	const loseAudio = new Audio('./audio/lose_7s.mp3');
 	var keyboardAudio = new Audio("./storyimg/키보드소리.mp3");
-	const bgm=new Audio("./audio/boss1.mp3");
+	var bgm = document.getElementById("myAudio1");
+    var bgm2 = new Audio("./audio/stage2.mp3");   // 보스2 브금
+    var bgm3 = new Audio("./audio/stage3.mp3");   // 보스3 브금
+	var mbm = document.getElementById("myAudio0");
 
 	pageLoad();
 	wait();
@@ -244,19 +247,12 @@ export function stageStart1(currentGold, effectOn,bgmOn, potion1Num, potion2Num,
 	hp();
 	init();
 	draw();
+	$("#container1").animate({
+		"width": b_hp + "px"
+	});
 
 
 	function pageLoad() {
-
-
-		if (effectOn)
-			setTimeout(() => {
-				countdownAudio.play();
-			}, 1000);
-		if(bgmOn)
-			setTimeout(() => {
-				bgm.play();
-			}, 5500);
 		var play_button = document.getElementById("play1");
 		play_button.onclick = play;
 		var exit_button = document.getElementById("exit1");
@@ -301,6 +297,9 @@ export function stageStart1(currentGold, effectOn,bgmOn, potion1Num, potion2Num,
 		// if (effectOn) {
 		// 	clickSound.play();   // 버튼 클릭 효과음
 		// }
+		bgm.pause();
+		bgm.currentTime = 0;
+		mbm.play();
 		$("#boss_UI1").css({
 			display: "block"
 		});
@@ -642,6 +641,7 @@ export function stageStart1(currentGold, effectOn,bgmOn, potion1Num, potion2Num,
 				shield_img = 1;
 				shield_img_count = 0;
 				clearInterval(shield_repeat);
+				qskill = 0;
 			}
 			player_sh.src ="./img/player/s"+shield_img+".png";
 		}
@@ -835,7 +835,7 @@ export function stageStart1(currentGold, effectOn,bgmOn, potion1Num, potion2Num,
 				clearInterval(time_repeat);
 				init();
 				p_hp = 0;
-				b_hp = 950;
+				b_hp = 948;
 				$("#container1").animate({
 					"width": b_hp + "px"
 				});
@@ -924,7 +924,7 @@ export function stageStart1(currentGold, effectOn,bgmOn, potion1Num, potion2Num,
 					clearInterval(time_repeat);
 					init();
 					p_hp = 0;
-					b_hp = 950;
+					b_hp = 948;
 					$("#container1").animate({
 						"width": b_hp + "px"
 					});
@@ -1026,21 +1026,18 @@ export function stageStart1(currentGold, effectOn,bgmOn, potion1Num, potion2Num,
 
 
 	function game_over(who) {
+		bgm.pause();
 		keydown_count = 1;
 		removeEventListener('mousemove', mousemove);
 		removeEventListener("keydown",keydown);
-		b_hp = 950;
-		$("#container1").animate({
-			"width": b_hp + "px"
-		});
 		clearInterval(repeat);
+
 		clearInterval(attack1_repeat);
 		clearInterval(attack2_repeat);
 		clearInterval(time_repeat);
 		context.clearRect(0, 0, cvwd, cvht);
 		if (who == 1) {
 			$(".gold").html(gold);//골드 추가 부분
-			bgm.pause();
 			if (effectOn)
 				winAudio.play();
 			game_over_win_Img();
@@ -1066,7 +1063,7 @@ export function stageStart1(currentGold, effectOn,bgmOn, potion1Num, potion2Num,
 			}, 12000);
 		}
 		else if (who == 2) {
-			bgm.pause();
+			mbm.play();
 			if (effectOn)
 				loseAudio.play();
 			boss_img = 1;
