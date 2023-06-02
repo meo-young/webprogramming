@@ -1,5 +1,5 @@
 
-export function stageStart3(mainGold, effectOn,bgmOn, potion1Num, potion2Num, potion3Num) {
+export function stageStart3(mainGold, effectOn, bgmOn, potion1Num, potion2Num, potion3Num) {
 	/* 플레이어 스킬 변수 */
 	var qskill = 0;
 	var qskill_timer = 30;
@@ -315,8 +315,10 @@ export function stageStart3(mainGold, effectOn,bgmOn, potion1Num, potion2Num, po
 	}
 
 	function exit() {
-		bgm.pause();
-		mbm.play();
+		if(bgmOn) {
+			bgm.pause();
+			mbm.play();
+		}
 		$("#boss_UI3").css({
 			display: "block"
 		});
@@ -1198,7 +1200,8 @@ export function stageStart3(mainGold, effectOn,bgmOn, potion1Num, potion2Num, po
 		removeEventListener('mousemove', mousemove);
 		removeEventListener('keydown',keydown);
 		b_hp = 1896;
-		bgm.pause();
+		if (bgmOn)
+			bgm.pause();
 		clearInterval(repeat);
 		clearInterval(attack1_repeat);
 		clearInterval(attack4_timer);
@@ -1227,7 +1230,8 @@ export function stageStart3(mainGold, effectOn,bgmOn, potion1Num, potion2Num, po
 			setTimeout(() => {
 				$("#start-btn").trigger('click');
 			}, 12000);
-			mbm.play();
+			if(bgmOn)
+				mbm.play();
 
 		}
 		else if (who == 2) {
@@ -1235,7 +1239,8 @@ export function stageStart3(mainGold, effectOn,bgmOn, potion1Num, potion2Num, po
 			if (effectOn)
 				loseAudio.play();
 		}
-		mbm.play();
+		if (bgmOn)
+			mbm.play();
 
 	}
 	/* 플레이어, 보스 체력 출력해주는 함수 */

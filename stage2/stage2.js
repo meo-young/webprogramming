@@ -1,4 +1,4 @@
-export function stageStart2(mainGold, effectOn,bgmOn, potion1Num, potion2Num, potion3Num) {
+export function stageStart2(mainGold, effectOn, bgmOn, potion1Num, potion2Num, potion3Num) {
 	/* 플레이어 스킬 변수 */
 	var qskill = 0;
 	var qskill_timer = 30;
@@ -320,8 +320,10 @@ export function stageStart2(mainGold, effectOn,bgmOn, potion1Num, potion2Num, po
 		// if (effectOn) {
 		// 	clickSound.play();   // 버튼 클릭 효과음
 		// }
-		bgm.pause();
-		mbm.play();
+		if (bgmOn) {
+			bgm.pause();
+			mbm.play();
+		}
 		$("#boss_UI2").css({
 			display: "block"
 		});
@@ -1057,7 +1059,8 @@ export function stageStart2(mainGold, effectOn,bgmOn, potion1Num, potion2Num, po
 		}, 500);
 	}
 	function game_over(who) {
-		bgm.pause();
+		if (bgmOn)
+			bgm.pause();
 
 		keydown_count = 1;
 		removeEventListener('mousemove', mousemove);
@@ -1090,7 +1093,8 @@ export function stageStart2(mainGold, effectOn,bgmOn, potion1Num, potion2Num, po
 			}, 12000);
 		}
 		else if (who == 2) {
-			mbm.play();
+			if(bgmOn)
+				mbm.play();
 			if (effectOn)
 				loseAudio.play();
 			drawText("You Lose");

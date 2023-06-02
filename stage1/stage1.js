@@ -1,4 +1,4 @@
-export function stageStart1(currentGold, effectOn,bgmOn, potion1Num, potion2Num, potion3Num) {
+export function stageStart1(currentGold, effectOn, bgmOn, potion1Num, potion2Num, potion3Num) {
 	/* 플레이어 스킬 변수 */
 	var qskill = 0;
 	var qskill_timer = 30;
@@ -297,9 +297,12 @@ export function stageStart1(currentGold, effectOn,bgmOn, potion1Num, potion2Num,
 		// if (effectOn) {
 		// 	clickSound.play();   // 버튼 클릭 효과음
 		// }
-		bgm.pause();
-		bgm.currentTime = 0;
-		mbm.play();
+		if (bgmOn) {
+			bgm.pause();
+			bgm.currentTime = 0;
+			mbm.play();
+		}
+		
 		$("#boss_UI1").css({
 			display: "block"
 		});
@@ -357,7 +360,8 @@ export function stageStart1(currentGold, effectOn,bgmOn, potion1Num, potion2Num,
 		init();
 		p_hp = 0;
 		b_hp = 948;
-		bgm.pause();
+		if(bgmOn)
+			bgm.pause();
 		$("#container1").animate({
 			"width": b_hp + "px"
 		});
@@ -1028,7 +1032,8 @@ export function stageStart1(currentGold, effectOn,bgmOn, potion1Num, potion2Num,
 
 
 	function game_over(who) {
-		bgm.pause();
+		if (bgmOn)
+			bgm.pause();
 		keydown_count = 1;
 		removeEventListener('mousemove', mousemove);
 		removeEventListener("keydown",keydown);
@@ -1065,7 +1070,8 @@ export function stageStart1(currentGold, effectOn,bgmOn, potion1Num, potion2Num,
 			}, 12000);
 		}
 		else if (who == 2) {
-			mbm.play();
+			if(bgmOn)
+				mbm.play();
 			if (effectOn)
 				loseAudio.play();
 			boss_img = 1;

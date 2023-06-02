@@ -133,9 +133,11 @@ $(document).ready(function () {
             if (effectOn) {
                 clickSound.play();   // 버튼 클릭 효과음
             }
-            currentBGM.pause();
-            currentBGM.currentTime = 0;
-            bgm1.play();
+            if (bgmOn) {
+                currentBGM.pause();
+                currentBGM.currentTime = 0;
+                bgm1.play();
+            }
             showGif('./storyimg/stage1A.gif');
             setTimeout(() => {
                 $("#select-stage").removeClass("animateContent2").addClass("animateContent1");    // 스테이지 선택 페이지 전환 효과 (작아지는)
@@ -147,7 +149,9 @@ $(document).ready(function () {
                 }, 500);
                 currentGold = parseInt($(".gold").eq(0).text());
                 potion1Num = parseInt($("#p1Num").eq(0).text()); 
-                stageStart1(currentGold, effectOn, potion1Num, potion2Num, potion3Num);
+                potion2Num = parseInt($("#p2Num").eq(0).text()); 
+                potion3Num = parseInt($("#p3Num").eq(0).text()); 
+                stageStart1(currentGold, effectOn, bgmOn, potion1Num, potion2Num, potion3Num);
             }, 5100)
         });
         // 두번째 보스 캔버스
@@ -155,9 +159,11 @@ $(document).ready(function () {
             if (effectOn) {
                 clickSound.play();   // 버튼 클릭 효과음
             }
-            currentBGM.pause();
-            currentBGM.currentTime = 0;
-            bgm2.play();
+            if (bgmOn) {
+                currentBGM.pause();
+                currentBGM.currentTime = 0;
+                bgm2.play();
+            }
             showGif('./storyimg/stage2A.gif');
             setTimeout(() => {
                 $("#select-stage").removeClass("animateContent2").addClass("animateContent1");    // 스테이지 선택 페이지 전환 효과 (작아지는)
@@ -168,8 +174,10 @@ $(document).ready(function () {
                     $("#stage2").addClass("animateContent2").css({ "display": "inline-block" });
                 }, 500);
                 currentGold = parseInt($(".gold").eq(0).text());
+                potion1Num = parseInt($("#p1Num").eq(0).text()); 
                 potion2Num = parseInt($("#p2Num").eq(0).text()); 
-                stageStart2(currentGold, effectOn, potion1Num, potion2Num, potion3Num);
+                potion3Num = parseInt($("#p3Num").eq(0).text()); 
+                stageStart2(currentGold, effectOn, bgmOn, potion1Num, potion2Num, potion3Num);
             }, 5100);
         });
         // 세번째 보스 캔버스
@@ -177,9 +185,12 @@ $(document).ready(function () {
             if (effectOn) {
                 clickSound.play();   // 버튼 클릭 효과음
             }
-            currentBGM.pause();
-            currentBGM.currentTime = 0;
-            bgm3.play();
+            if (bgmOn) {
+                currentBGM.pause();
+                currentBGM.currentTime = 0;
+                bgm3.play();
+            }
+            
             showGif('./storyimg/stage3A.gif');
             setTimeout(() => {
                 $("#select-stage").removeClass("animateContent2").addClass("animateContent1");    // 스테이지 선택 페이지 전환 효과 (작아지는)
@@ -190,8 +201,10 @@ $(document).ready(function () {
                     $("#stage3").addClass("animateContent2").css({ "display": "inline-block" });
                 }, 500);
                 currentGold = parseInt($(".gold").eq(0).text());
+                potion1Num = parseInt($("#p1Num").eq(0).text()); 
+                potion2Num = parseInt($("#p2Num").eq(0).text()); 
                 potion3Num = parseInt($("#p3Num").eq(0).text()); 
-                stageStart3(currentGold, effectOn, potion1Num, potion2Num, potion3Num);
+                stageStart3(currentGold, effectOn, bgmOn, potion1Num, potion2Num, potion3Num);
             }, 5100);
         });
         // 뒤로가기 버튼 클릭 시 스테이지 화면과 메인 메뉴 애니메이션
@@ -479,30 +492,41 @@ $(document).ready(function () {
                 }, 1000);
                 currentBGM = mainBgm;    // 현재 재생/중지 상태의 음악파일, 환경설정에서 변경 가능
                 var storyimgflag = 0;
-                currentBGM.play();
-                currentBGM.loop = true;
+                if(bgmOn) {
+                    currentBGM.play();
+                    currentBGM.loop = true;
+                }
             }, 500);
         }
         else if (storyimgflag == 1) {//처음 화면 클릭
             currentBGM.pause();
             setTimeout(() => {
-                if(storyimgflag == 1)
-                keyboardAudio.play();
+                if(storyimgflag == 1) {
+                    if(effectOn)
+                        keyboardAudio.play();
+                }   
             }, 800);
             setTimeout(() => {
-                keyboardAudio.pause();
+                if(effectOn)
+                    keyboardAudio.pause();
             }, 2300);
             setTimeout(() => {
-                if(storyimgflag == 1)
-                thunderAudio.play();
+                if(storyimgflag == 1) {
+                    if(effectOn)
+                        thunderAudio.play();
+                }
             }, 5400);
             setTimeout(() => {
-                if(storyimgflag == 1)
-                keyboardAudio.play();
+                if(storyimgflag == 1) {
+                    if (effectOn)
+                        keyboardAudio.play();
+                }
             }, 8500);
             setTimeout(() => {
-                if(storyimgflag == 1)
-                keyboardAudio.play();
+                if(storyimgflag == 1) {
+                    if (effectOn)
+                        keyboardAudio.play();
+                }
             }, 12000);
 
             $(this).fadeOut(500, function () {
@@ -523,7 +547,8 @@ $(document).ready(function () {
         $("#select-stage").hide();
         $("#stageStoryImg").attr("src", gifsrc);
         $("#stage-story").fadeIn(1, () => {
-            keyboardAudio.play();
+            if(effectOn)
+                keyboardAudio.play();
             setTimeout(() => {
                 keyboardAudio.pause();
             }, 4000);
